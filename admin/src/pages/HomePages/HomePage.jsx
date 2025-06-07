@@ -46,7 +46,7 @@ const HomePage = () => {
         <span className="font-semibold text-yellow-600">
           Statue Of Unity Admin Panel
         </span>
-        . We're excited to have you here!
+        . We're excited to have you here! JAINIK HERE
       </motion.p>
     </div>
   );
