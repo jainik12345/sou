@@ -1,0 +1,54 @@
+@import url("https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playwrite+DK+Loopet:wght@100..400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Yellowtail&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap");
+@import "tailwindcss";
+
+* {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  text-decoration: none;
+  list-style-type: none;
+  /* font-family: "Kumbh Sans", sans-serif; */
+  scroll-behavior: smooth;
+}
+
+@theme {
+  --color-orange-color: #f68121;
+  --color-grey-text: #93939a;
+  --color-green-btn: #62ab65;
+  --font-footer-font: "Oswald", sans-serif;
+  --font-text-font: "Quicksand", sans-serif;
+  --font-title-font: "Dancing Script", cursive;
+  --font-heading-font: "Yellowtail", cursive;
+  --font-layer-font: "Poetsen One", sans-serif;
+  --color-green-color: #128116;
+  --color-section-background-color: #ededed;
+}
+
+/* Custom Gradient Text Animation */
+@keyframes gradient-text {
+  0%,
+  100% {
+    color: red;
+  }
+  33% {
+    color: green;
+  }
+  66% {
+    color: yellow;
+  }
+  76% {
+    color: blue;
+  }
+}
+
+.animate-gradient-text {
+  animation: gradient-text 3s linear infinite;
+}

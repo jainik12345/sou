@@ -1,0 +1,10 @@
+
+
+footer{
+
+    background-image: linear-gradient(rgb(34, 37, 43), rgba(31, 31, 34, 0.7)), url("../../assets/images/ss4.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.9;
+}
