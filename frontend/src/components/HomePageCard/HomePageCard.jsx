@@ -152,6 +152,7 @@
 // };
 
 
+// /* test design code */
 
 import { NavLink } from "react-router-dom";
 import { FaHome } from "react-icons/fa";
@@ -162,91 +163,169 @@ import { KnowMore } from "../Buttons/KnowMore";
 import { BookOnline } from "../Buttons/BookOnline";
 import * as motion from "motion/react-client";
 
+// New color palette
+const COLORS = {
+  accent: "#9F7AEA", // purple
+  accent2: "#FEE140", // yellow
+  text: "#22223B",
+  descBg: "rgba(159, 122, 234, 0.07)",
+  cardShadow: "0 6px 24px 0 rgba(159, 122, 234, 0.09)",
+  border: "#FEE140",
+};
+
 export const HomePageCard = ({ CardImgs }) => {
   return (
-    <div className="flex flex-wrap gap-8 justify-center">
+    <>
       {CardImgs.map((Val, Idx) => {
         const isLastCard = Val.CardName === "SOU Tickets";
 
         return (
           <motion.div
-            whileHover={{ scale: 1.04, boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.2)" }}
-            transition={{ duration: 0.3 }}
-            className={`relative bg-white/80 backdrop-blur-xl border border-neutral-200 rounded-3xl shadow-2xl p-7 flex flex-col items-center gap-6 w-[340px] md:w-[370px] hover:border-orange-400 transition-all duration-300 ${isLastCard
-                ? "border-2 border-gradient-to-br from-orange-400 via-yellow-400 to-pink-400 "
-                : ""
-              }`}
-            key={Idx}>
+            key={Idx}
+            className="card-cont flex flex-col justify-center items-center gap-7 p-6 w-fit rounded-3xl shadow-xl bg-white relative group"
+            style={{
+            
+              minWidth: 330,
+              maxWidth: 370,
+              transition: "box-shadow 0.4s cubic-bezier(.4,2,.6,1)",
+            }}
+            // Card entrance and hover motion
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
 
-            <div className="card-img w-full flex justify-center">
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: Idx * 0.1 }}>
+            <motion.div
+              className="card-img rounded-xl overflow-hidden shadow-lg"
+              whileHover={{ scale: 1.05, rotate: 2 }}
+              transition={{ duration: 0.4, type: "spring" }}
+              style={{
+                background: "#fff",
+                padding: 0,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                minHeight: 180,
+                maxHeight: 200,
+                width: "100%",
+              }}
+            >
               <motion.img
                 src={Val.UrlImg}
                 alt="IMG"
-                className="rounded-xl shadow-lg object-cover h-44 w-full transition-transform"
+                className="h-44 w-full object-cover rounded-xl"
                 whileHover={{ scale: 0.97 }}
                 transition={{ duration: 0.3 }}
               />
-            </div>
+            </motion.div>
 
             <div className="card-title text-center">
-              <h3 className="text-orange-500 text-xl font-semibold tracking-wide">
-                <NavLink to={Val.path} className="hover:underline hover:text-orange-600 transition">{Val.CardName}</NavLink>
+              <h3
+                className="text-[1.25rem] font-extrabold tracking-wide"
+                style={{ color: COLORS.accent, textShadow: "0 2px 12px #fee14033" }}
+              >
+                <NavLink to={Val.path}>{Val.CardName}</NavLink>
               </h3>
             </div>
 
             {isLastCard ? (
-              // SOU TICKETS CARD
-              <div className="sou-ticket-features w-full">
-                <ul className="flex flex-col gap-4">
-                  {[
-                    "Viewing gallery (chest level by lift)",
-                    "Jungle Safari by Golf Cart",
-                    "Valley of Flowers",
-                    "Sardar Sarovar Dam View Point",
-                    "Projection Mapping (Laser Show)",
-                    "Transportation by SOU Buses",
-                  ].map((item, i) => (
-                    <li key={i} className="flex items-start gap-3 text-base text-neutral-800">
-                      <TfiLayoutLineSolid className="text-orange-500 text-xl mt-1" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <>
+                <div
+                  className="sou-ticket-features border-l-4 w-full ps-5 pb-3"
+                  style={{ borderColor: COLORS.accent }}
+                >
+                  <ul className="list-none font-medium flex flex-col gap-4 relative text-[1rem] text-[#3a2c74]">
+                    {[
+                      "Viewing gallery (chest level by lift)",
+                      "Jungle Safari by Golf Cart",
+                      "Valley of Flowers",
+                      "Sardar Sarovar Dam View Point",
+                      "Projection Mapping (Laser Show)",
+                      "Transportation by SOU Buses",
+                    ].map((item, i) => (
+                      <li key={i} className="relative pl-5">
+                        <TfiLayoutLineSolid
+                          className="absolute left-[-22px] top-[2px] text-[1.2rem]"
+                          style={{ color: COLORS.accent }}
+                        />
+                        <motion.span
+                          initial={{ opacity: 0, x: -12 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.1 * i, duration: 0.5, type: "spring" }}
+                        >
+                          {item}
+                        </motion.span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </>
             ) : (
-              // DEFAULT CARDS
-              <div className="card-desc flex flex-col gap-5 w-full">
-                <div className="flex items-start gap-3 rounded-lg bg-orange-50/60 p-3 shadow-sm">
-                  <FaHome className="bg-orange-400 text-white text-2xl p-1 rounded-full" />
-                  <div>
-                    <h4 className="font-semibold text-neutral-800">Accommodation</h4>
-                    <p className="text-neutral-500 text-sm mt-1">{Val.Accommodation}</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3 rounded-lg bg-orange-50/60 p-3 shadow-sm">
-                  <CgNotes className="bg-orange-400 text-white text-2xl p-1 rounded-full" />
-                  <div>
-                    <h4 className="font-semibold text-neutral-800">Package</h4>
-                    <p className="text-neutral-500 text-sm mt-1">{Val.Packages}</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3 rounded-lg bg-orange-50/60 p-3 shadow-sm">
-                  <FaLocationDot className="bg-orange-400 text-white text-2xl p-1 rounded-full" />
-                  <div>
-                    <h4 className="font-semibold text-neutral-800">Location</h4>
-                    <p className="text-neutral-500 text-sm mt-1">{Val.Location}</p>
-                  </div>
+              <div
+                className="card-desc flex gap-5 border-l-4 w-full"
+                style={{
+                  background: COLORS.descBg,
+                  borderColor: COLORS.accent,
+                  borderRadius: 18,
+                  padding: "1.1rem 0 1.1rem 1.2rem",
+                }}
+              >
+                <div className="location-description flex flex-col gap-4 w-full">
+                  <motion.div
+                    className="Accommodation-cont flex flex-col gap-1 relative"
+                    initial={{ opacity: 0, x: -18 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.09, duration: 0.4, type: "spring" }}
+                  >
+                    <TfiLayoutLineSolid className="absolute top-[5px] left-[-22px] text-[1.2rem]" style={{ color: COLORS.accent }} />
+                    <h4 className="font-bold flex items-center gap-2 text-[1.07rem]" style={{ color: COLORS.text }}>
+                      <FaHome className="bg-[#9F7AEA] text-[1.25rem] p-1 rounded-md text-white" />
+                      Accommodation
+                    </h4>
+                    <p className="text-[#635985] text-[.92rem] font-[400] pl-10">{Val.Accommodation}</p>
+                  </motion.div>
+                  <motion.div
+                    className="Package-cont flex flex-col gap-1 relative"
+                    initial={{ opacity: 0, x: -18 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.17, duration: 0.4, type: "spring" }}
+                  >
+                    <TfiLayoutLineSolid className="absolute top-[5px] left-[-22px] text-[1.2rem]" style={{ color: COLORS.accent }} />
+                    <h4 className="font-bold flex items-center gap-2 text-[1.07rem]" style={{ color: COLORS.text }}>
+                      <CgNotes className="bg-[#FEE140] text-[1.25rem] p-1 rounded-md text-[#9F7AEA]" />
+                      Package
+                    </h4>
+                    <p className="text-[#635985] text-[.92rem] font-[400] pl-10">{Val.Packages}</p>
+                  </motion.div>
+                  <motion.div
+                    className="Location-cont flex flex-col gap-1 relative"
+                    initial={{ opacity: 0, x: -18 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.25, duration: 0.4, type: "spring" }}
+                  >
+                    <TfiLayoutLineSolid className="absolute top-[5px] left-[-22px] text-[1.2rem]" style={{ color: COLORS.accent }} />
+                    <h4 className="font-bold flex items-center gap-2 text-[1.07rem]" style={{ color: COLORS.text }}>
+                      <FaLocationDot className="bg-[#9F7AEA] text-[1.25rem] p-1 rounded-md text-white" />
+                      Location
+                    </h4>
+                    <p className="text-[#635985] text-[.92rem] font-[400] pl-10">{Val.Location}</p>
+                  </motion.div>
                 </div>
               </div>
             )}
 
-            <div className="card-btns flex gap-4 mt-2 w-full justify-center">
+            <motion.div
+              className="card-btns flex gap-4 mt-2"
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.21, duration: 0.4, type: "spring" }}
+            >
               <KnowMore KnowMoreLink={Val.path} Text={"Know More"} />
               <BookOnline BookOnlineLink="#" />
-            </div>
+            </motion.div>
           </motion.div>
         );
       })}
-    </div>
+    </>
   );
 };

@@ -95,26 +95,38 @@ export const HomePageTestimonial = () => {
                     </div>
                 </div>
 
-                <div className="ExploreCardDots flex justify-center items-center mt-6 gap-2 px-5">
-
-                    {Array.from({ length: TotalTestimonialSlides }).map((_, idx) => (
-                        <div
-                            key={idx}
-                            className={`h-3 w-3 cursor-pointer transition-all duration-300 ${idx === CurrentTestimonialSlides ? "bg-orange-color scale-110" : "bg-gray-300"
-                                }`} 
-                            onClick={() => {
-                                setFade(false);
-                                setTimeout(() => {
-                                    setCurrentTestimonialIdx(idx * TestimonialCardsPerPage);
-                                    setFade(true);
-                                }, 300);
-                            }}
-                        />
-                    ))}
+                <div className="ExploreCardDots flex justify-center items-center mt-6 gap-3 px-5">
+                    {Array.from({ length: TotalTestimonialSlides }).map((_, idx) => {
+                        const isActive = idx === CurrentTestimonialSlides;
+                        return (
+                            <div
+                                key={idx}
+                                className="cursor-pointer transition-all duration-300 flex items-center justify-center"
+                                style={{
+                                    height: "0.85rem",
+                                    width: isActive ? "2.1rem" : "0.85rem",
+                                    background: isActive ? "#ff8800" : "#fff",
+                                    borderRadius: "999px",
+                                    border: isActive ? "none" : "2px solid #ff8800",
+                                    boxShadow: isActive ? "0 0 8px 0 #ff880088" : "0 0 0 0 transparent",
+                                    transition: "all 0.3s cubic-bezier(.4,2,.6,1)",
+                                }}
+                                onClick={() => {
+                                    setFade(false);
+                                    setTimeout(() => {
+                                        setCurrentTestimonialIdx(idx * TestimonialCardsPerPage);
+                                        setFade(true);
+                                    }, 300);
+                                }}
+                            />
+                        );
+                    })}
                 </div>
             </div>
 
         </>
     )
 }
+
+
 

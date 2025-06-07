@@ -1,5 +1,5 @@
-import { HomePageCard } from "../../../components/HomePageCard/HomePageCard.jsx";
 import { CardImgs } from "../HomeData.js"
+import {HomePageCard} from "../../../components/HomePageCard/HomePageCard.jsx"
 
 export const HomePageStayPackages = () => {
     return (
