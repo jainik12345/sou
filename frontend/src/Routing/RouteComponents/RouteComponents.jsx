@@ -235,7 +235,7 @@ const AppLayOut = () => {
       <Header />
       <Outlet />
       <WaytoConatct />
-      <Footer />
+      {/* <Footer />  */}
     </>
   );
 };
