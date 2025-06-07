@@ -36,15 +36,20 @@ const homeTestimonial = require("./routes/home/homeTestimonial");
 const homeCertificate = require("./routes/home/homeCertificate");
 const homeImageSlider = require("./routes/home/homeImageSlider");
 const homeNearAttractions = require("./routes/home/homeNearAttractions");
-const homeOnlineBookingContent = require("./routes/home/homeOnlineBookingContent")
-
+const homeOnlineBookingContent = require("./routes/home/homeOnlineBookingContent");
 
 /**--------------------------------------------------About-------------------------------------------------- */
 
-// const aboutHeroSection = require("./routes/about/aboutHeroSection")
-// const aboutIntrestingFaqs = require("./routes/about/aboutIntrestingFaqs")
-// const aboutWhyChooseSection = require("./routes/about/aboutWhyChooseSection")
-// const aboutAttractionsSection = require("./routes/about/aboutAttractionsSection")
+const aboutHeroSection = require("./routes/about/aboutHeroSection");
+const aboutIntrestingFaqs = require("./routes/about/aboutIntrestingFaqs");
+const aboutWhyChooseSection = require("./routes/about/aboutWhyChooseSection");
+const aboutAttractionsSection = require("./routes/about/aboutAttractionsSection");
+const aboutActivitiesSection = require("./routes/about/aboutActivitiesSection");
+
+/**--------------------------------------------------Contact-------------------------------------------------- */
+
+const contactForm = require("./routes/contact/contactForm");
+const contactPage = require("./routes/contact/contactPage")
 
 app.use("/admin", admin);
 app.use("/privatePolicy", privatePolicy);
@@ -55,16 +60,20 @@ app.use("/homeTestimonial", homeTestimonial);
 app.use("/homeCertificate", homeCertificate);
 app.use("/homeImageSlider", homeImageSlider);
 app.use("/homeNearAttractions", homeNearAttractions);
-app.use("/homeOnlineBookingContent", homeOnlineBookingContent)
-
+app.use("/homeOnlineBookingContent", homeOnlineBookingContent);
 
 /**--------------------------------------------------About-------------------------------------------------- */
 
-// app.use("/aboutHeroSection", aboutHeroSection)
-// app.use("/aboutIntrestingFaqs", aboutIntrestingFaqs)
-// app.use("/aboutWhyChooseSection", aboutWhyChooseSection)
-// app.use("/aboutAttractionsSection", aboutAttractionsSection)
+app.use("/aboutHeroSection", aboutHeroSection);
+app.use("/aboutIntrestingFaqs", aboutIntrestingFaqs);
+app.use("/aboutWhyChooseSection", aboutWhyChooseSection);
+app.use("/aboutAttractionsSection", aboutAttractionsSection);
+app.use("/aboutActivitiesSection", aboutActivitiesSection);
 
+/**--------------------------------------------------Contact-------------------------------------------------- */
+
+app.use("/contactForm", contactForm);
+app.use("/contactPage", contactPage)
 
 // Static Images
 /**--------------------------------------------------Home-------------------------------------------------- */
@@ -90,7 +99,20 @@ app.use(
 
 /**--------------------------------------------------About-------------------------------------------------- */
 
+app.use(
+  "/Images/AboutImages/Activities",
+  express.static(path.join(__dirname, "Images/AboutImages/Activities"))
+);
 
+app.use(
+  "/Images/AboutImages/Attractions",
+  express.static(path.join(__dirname, "Images/AboutImages/Attractions"))
+);
+
+app.use(
+  "/Images/AboutImages/Hero",
+  express.static(path.join(__dirname, "Images/AboutImages/Hero"))
+);
 
 /**---------------Start Server ---------------*/
 // app.listen(port, () => {

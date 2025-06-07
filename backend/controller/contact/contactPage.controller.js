@@ -1,9 +1,9 @@
 const db = require("../../config/db");
 
-// GET all active
-exports.getAboutIntrestingFaqs = (req, res) => {
+// GET all active contact page entries
+exports.getContactPages = (req, res) => {
   db.query(
-    "SELECT * FROM about_intresting_faqs WHERE deleted_at = 0",
+    "SELECT * FROM contact_page WHERE deleted_at = 0",
     (err, results) => {
       if (err) return res.status(500).json({ error: err.message });
       res.status(200).json({ status: "success", data: results });
@@ -11,11 +11,11 @@ exports.getAboutIntrestingFaqs = (req, res) => {
   );
 };
 
-// GET by ID
-exports.getAboutIntrestingFaqsById = (req, res) => {
+// GET contact page by ID
+exports.getContactPageById = (req, res) => {
   const { id } = req.params;
   db.query(
-    "SELECT * FROM about_intresting_faqs WHERE id = ? AND deleted_at = 0",
+    "SELECT * FROM contact_page WHERE id = ? AND deleted_at = 0",
     [id],
     (err, results) => {
       if (err) return res.status(500).json({ error: err.message });
@@ -25,13 +25,13 @@ exports.getAboutIntrestingFaqsById = (req, res) => {
   );
 };
 
-// POST insert
-exports.insertAboutIntrestingFaqs = (req, res) => {
-  const { questions, answer } = req.body;
+// POST insert new contact page entry
+exports.insertContactPage = (req, res) => {
+  const { address, email, phone_number, map_link } = req.body;
 
   db.query(
-    "INSERT INTO about_intresting_faqs (questions, answer) VALUES (?, ?)",
-    [questions || null, answer || null],
+    "INSERT INTO contact_page (address, email, phone_number, map_link, created_at, updated_at, deleted_at) VALUES (?, ?, ?, ?, NOW(), NOW(), 0)",
+    [address || null, email || null, phone_number || null, map_link || null],
     (err, result) => {
       if (err) return res.status(500).json({ error: err.message });
       res.status(201).json({
@@ -43,13 +43,20 @@ exports.insertAboutIntrestingFaqs = (req, res) => {
   );
 };
 
-exports.updateAboutIntrestingFaqs = (req, res) => {
+// PUT update contact page entry
+exports.updateContactPage = (req, res) => {
   const { id } = req.params;
-  const { questions, answer } = req.body;
+  const { address, email, phone_number, map_link } = req.body;
 
   db.query(
-    "UPDATE about_intresting_faqs SET questions = ?, answer = ? WHERE id = ? AND deleted_at = 0",
-    [questions || null, answer || null, id],
+    "UPDATE contact_page SET address = ?, email = ?, phone_number = ?, map_link = ?, updated_at = NOW() WHERE id = ? AND deleted_at = 0",
+    [
+      address || null,
+      email || null,
+      phone_number || null,
+      map_link || null,
+      id,
+    ],
     (err) => {
       if (err) return res.status(500).json({ error: err.message });
       res.status(200).json({ status: "success", message: "Updated" });
@@ -57,11 +64,11 @@ exports.updateAboutIntrestingFaqs = (req, res) => {
   );
 };
 
-// DELETE soft
-exports.deleteAboutIntrestingFaqs = (req, res) => {
+// DELETE soft delete contact page entry
+exports.deleteContactPage = (req, res) => {
   const { id } = req.params;
   db.query(
-    "UPDATE about_intresting_faqs SET deleted_at = 1 WHERE id = ?",
+    "UPDATE contact_page SET deleted_at = 1 WHERE id = ?",
     [id],
     (err) => {
       if (err) return res.status(500).json({ error: err.message });
@@ -70,10 +77,10 @@ exports.deleteAboutIntrestingFaqs = (req, res) => {
   );
 };
 
-// GET trashed
-exports.getTrashedAboutIntrestingFaqs = (req, res) => {
+// GET trashed contact pages
+exports.getTrashedContactPages = (req, res) => {
   db.query(
-    "SELECT * FROM about_intresting_faqs WHERE deleted_at = 1",
+    "SELECT * FROM contact_page WHERE deleted_at = 1",
     (err, results) => {
       if (err) return res.status(500).json({ error: err.message });
       res.status(200).json({ status: "success", data: results });
@@ -81,11 +88,11 @@ exports.getTrashedAboutIntrestingFaqs = (req, res) => {
   );
 };
 
-// PATCH restore
-exports.restoreAboutIntrestingFaqs = (req, res) => {
+// PATCH restore soft-deleted contact page entry
+exports.restoreContactPage = (req, res) => {
   const { id } = req.params;
   db.query(
-    "UPDATE about_intresting_faqs SET deleted_at = 0 WHERE id = ?",
+    "UPDATE contact_page SET deleted_at = 0 WHERE id = ?",
     [id],
     (err) => {
       if (err) return res.status(500).json({ error: err.message });
