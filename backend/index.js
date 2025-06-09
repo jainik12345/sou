@@ -49,7 +49,11 @@ const aboutActivitiesSection = require("./routes/about/aboutActivitiesSection");
 /**--------------------------------------------------Contact-------------------------------------------------- */
 
 const contactForm = require("./routes/contact/contactForm");
-const contactPage = require("./routes/contact/contactPage")
+const contactPage = require("./routes/contact/contactPage");
+
+/**------------------------------------------Gujarat Package-------------------------------------------------- */
+
+const gujaratPackage = require("./routes/gujaratPackage/gujaratPackage");
 
 app.use("/admin", admin);
 app.use("/privatePolicy", privatePolicy);
@@ -73,7 +77,11 @@ app.use("/aboutActivitiesSection", aboutActivitiesSection);
 /**--------------------------------------------------Contact-------------------------------------------------- */
 
 app.use("/contactForm", contactForm);
-app.use("/contactPage", contactPage)
+app.use("/contactPage", contactPage);
+
+/**------------------------------------------Gujarat Package-------------------------------------------------- */
+
+app.use("/gujaratPackage", gujaratPackage);
 
 // Static Images
 /**--------------------------------------------------Home-------------------------------------------------- */

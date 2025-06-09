@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import {
   Table,
@@ -10,80 +9,78 @@ import {
   Paper,
   Pagination,
 } from "@mui/material";
-import { FaEdit, FaTrash } from "react-icons/fa";
-import Add from "../../components/Buttons/Add";
-import Trace from "../../components/Buttons/Trace";
-import DeleteData from "../../components/Popup/DeleteData";
+import { FaRecycle } from "react-icons/fa";
+import Back from "../../../components/Buttons/Back";
+import RestoreData from "../../../components/Popup/RestoreData";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import BE_URL from "../../config";
+import BE_URL from "../../../config";
 
-const PrivatePolicy = () => {
+const GujaratPackagesNameTrace = () => {
   const [page, setPage] = useState(1);
   const rowsPerPage = 10;
-  const [showDeletePopup, setShowDeletePopup] = useState(false);
+  const [showRestorePopup, setShowRestorePopup] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
   const [data, setData] = useState([]);
   const navigate = useNavigate();
 
-  const fetchData = async () => {
+  const fetchDeletedData = async () => {
     try {
-      const res = await axios.get(`${BE_URL}/privatePolicy`);
-      setData(res.data.data);
+      const res = await axios.get(`${BE_URL}/gujaratPackage/trashed`);
+      setData(res.data.data || []);
     } catch (err) {
-      console.error("Error fetching data:", err);
+      console.error("Error fetching deleted data:", err);
     }
   };
 
   useEffect(() => {
-    fetchData();
+    fetchDeletedData();
   }, []);
+
+  const handleRestoreClick = async (id) => {
+    try {
+      await axios.patch(`${BE_URL}/gujaratPackage/restore/${id}`);
+      setSelectedId(id);
+      setShowRestorePopup(true);
+      fetchDeletedData();
+    } catch (err) {
+      console.error("Error restoring data:", err);
+    }
+  };
+
+  const handleBackClick = () => {
+    navigate("/gujarat-package-name");
+  };
 
   const displayedRows = data.slice(
     (page - 1) * rowsPerPage,
     page * rowsPerPage
   );
 
-  const handleAddClick = () => {
-    navigate("/private-policy/insert");
-  };
-
-  const handleTraceClick = () => {
-    navigate("/private-policy/trace");
-  };
-
-  const handleEditClick = (row) => {
-    navigate("/private-policy/update", { state: { rowData: row } });
-  };
-
-  const handleDelete = async (id) => {
-    try {
-      await axios.delete(`${BE_URL}/privatePolicy/${id}`);
-      setShowDeletePopup(true);
-      setSelectedId(id);
-      fetchData();
-    } catch (err) {
-      console.error("Error deleting:", err);
-    }
-  };
-
   return (
     <div className="p-4 rounded-xl bg-white">
-      {showDeletePopup && (
-        <DeleteData onClose={() => setShowDeletePopup(false)} />
+      {/* Restore Popup */}
+      {showRestorePopup && (
+        <RestoreData
+          onClose={() => {
+            setShowRestorePopup(false);
+            setSelectedId(null);
+          }}
+          id={selectedId}
+        />
       )}
 
+      {/* Header and Back */}
       <div className="flex justify-between mb-4">
-        <Trace onClick={handleTraceClick} />
-        <Add
-          text="Add Private Policy"
-          width="w-[200px]"
-          onClick={handleAddClick}
-        />
+        <h2 className="text-left font-semibold text-xl">
+          Gujarat Packages Trace
+        </h2>
+        <Back onClick={handleBackClick} />
       </div>
 
       <hr className="border-gray-300 mb-6" />
 
+      {/* Table */}
       <TableContainer component={Paper} className="shadow-md">
         <Table className="border border-gray-300">
           <TableHead>
@@ -92,10 +89,10 @@ const PrivatePolicy = () => {
                 ID
               </TableCell>
               <TableCell className="border-r !font-extrabold text-base text-left">
-                Policy Text
+                Package Name
               </TableCell>
               <TableCell className="!font-extrabold text-base text-left">
-                Action
+                Restore
               </TableCell>
             </TableRow>
           </TableHead>
@@ -112,29 +109,22 @@ const PrivatePolicy = () => {
                   className="border-r text-left"
                   style={{ maxWidth: 400, whiteSpace: "pre-wrap" }}
                 >
-                  {row.text}
+                  {`Gujarat Tour ${row.Nights} Nights ${row.Days} Days`}
                 </TableCell>
                 <TableCell className="text-left">
-                  <div className="flex space-x-4">
-                    <button
-                      className="text-green-600 cursor-pointer hover:text-green-800"
-                      onClick={() => handleEditClick(row)}
-                    >
-                      <FaEdit size={22} />
-                    </button>
-                    <button
-                      className="text-red-600 cursor-pointer hover:text-red-800"
-                      onClick={() => handleDelete(row.id)}
-                    >
-                      <FaTrash size={22} />
-                    </button>
-                  </div>
+                  <button
+                    className="text-blue-600 cursor-pointer hover:text-blue-800"
+                    onClick={() => handleRestoreClick(row.id)}
+                  >
+                    <FaRecycle size={22} />
+                  </button>
                 </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
 
+        {/* Pagination */}
         <div className="flex justify-end p-4">
           <Pagination
             count={Math.ceil(data.length / rowsPerPage)}
@@ -148,4 +138,4 @@ const PrivatePolicy = () => {
   );
 };
 
-export default PrivatePolicy;
+export default GujaratPackagesNameTrace;

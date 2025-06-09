@@ -60,6 +60,17 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
       ],
     },
 
+        {
+      path: "/gujarat-package",
+      name: "Gujarat Package",
+      icon: <FaInfoCircle />,
+      children: [
+        { path: "/gujarat-packages-name", name: "Gujarat Package Name" }, 
+        { path: "/gujarat-Packages-data", name: "Gujarat Package Data" }, 
+        
+      ],
+    },
+
     { path: "/private-policy", name: "Private Policy", icon: <FaLock /> },
 
     {

@@ -1,17 +1,3 @@
-// import React from 'react'
-
-// const PrivatePolicyTrace = () => {
-//   return (
-//     <div>
-//       PrivatePolicy Trace
-//     </div>
-//   )
-// }
-
-// export default PrivatePolicyTrace
-
-/** */
-
 import React, { useEffect, useState } from "react";
 import {
   Table,

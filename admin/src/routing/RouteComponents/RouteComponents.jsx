@@ -57,6 +57,17 @@ import TermsConditions from './../../pages/TermsConditions/TermsConditions';
 import TermsConditionsInsert from './../../pages/TermsConditions/TermsConditionsInsert';
 import TermsConditionsUpdate from './../../pages/TermsConditions/TermsConditionsUpdate';
 import TermsConditionsTrace from './../../pages/TermsConditions/TermsConditionsTrace';
+import GujaratPackagesNameInsert from "../../pages/GujaratPackage/GujaratPackagesName/GujaratPackagesNameInsert";
+import GujaratPackagesName from './../../pages/GujaratPackage/GujaratPackagesName/GujaratPackagesName';
+import GujaratPackagesNameUpdate from './../../pages/GujaratPackage/GujaratPackagesName/GujaratPackagesNameUpdate';
+import GujaratPackagesNameTrace from './../../pages/GujaratPackage/GujaratPackagesName/GujaratPackagesNameTrace';
+import GujaratPackagesData from "../../pages/GujaratPackage/GujaratPackagesData/GujaratPackagesData";
+import GujaratPackagesDataInsert from "../../pages/GujaratPackage/GujaratPackagesData/GujaratPackagesDataInsert";
+import GujaratPackagesDataUpdate from "../../pages/GujaratPackage/GujaratPackagesData/GujaratPackagesDataUpdate";
+import GujaratPackagesDataTrace from "../../pages/GujaratPackage/GujaratPackagesData/GujaratPackagesDataTrace";
+
+
+
 const RouteComponents = () => {
   return (
     <>
@@ -139,6 +150,19 @@ const RouteComponents = () => {
           <Route path="/contact-form-details/trace" element={<ContactFormDetailsTrace/>} />
 
 
+
+          {/*------------------------------------------------- Gujarat Package------------------------------------------- */}
+
+          <Route path="/gujarat-packages-name" element={<GujaratPackagesName/>} />
+          <Route path="/gujarat-packages-name/insert" element={<GujaratPackagesNameInsert/>} />
+          <Route path="/gujarat-packages-name/update" element={<GujaratPackagesNameUpdate/>} />
+          <Route path="/gujarat-packages-name/trace" element={<GujaratPackagesNameTrace/>} />
+
+
+          <Route path="/gujarat-Packages-data" element={<GujaratPackagesData/>} />
+          <Route path="/gujarat-Packages-data/insert" element={<GujaratPackagesDataInsert/>} />
+          <Route path="/gujarat-Packages-data/update" element={<GujaratPackagesDataUpdate/>} />
+          <Route path="/gujarat-Packages-data/trace" element={<GujaratPackagesDataTrace/>} />
 
 
 

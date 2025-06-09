@@ -11,14 +11,14 @@ import {
   Pagination,
 } from "@mui/material";
 import { FaEdit, FaTrash } from "react-icons/fa";
-import Add from "../../components/Buttons/Add";
-import Trace from "../../components/Buttons/Trace";
-import DeleteData from "../../components/Popup/DeleteData";
+import Add from "../../../components/Buttons/Add";
+import Trace from "../../../components/Buttons/Trace";
+import DeleteData from "../../../components/Popup/DeleteData";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import BE_URL from "../../config";
+import BE_URL from "../../../config";
 
-const PrivatePolicy = () => {
+const GujaratPackagesName = () => {
   const [page, setPage] = useState(1);
   const rowsPerPage = 10;
   const [showDeletePopup, setShowDeletePopup] = useState(false);
@@ -28,7 +28,7 @@ const PrivatePolicy = () => {
 
   const fetchData = async () => {
     try {
-      const res = await axios.get(`${BE_URL}/privatePolicy`);
+      const res = await axios.get(`${BE_URL}/gujaratPackage`);
       setData(res.data.data);
     } catch (err) {
       console.error("Error fetching data:", err);
@@ -45,20 +45,20 @@ const PrivatePolicy = () => {
   );
 
   const handleAddClick = () => {
-    navigate("/private-policy/insert");
+    navigate("/gujarat-package-name/insert");
   };
 
   const handleTraceClick = () => {
-    navigate("/private-policy/trace");
+    navigate("/gujarat-package-name/trace");
   };
 
   const handleEditClick = (row) => {
-    navigate("/private-policy/update", { state: { rowData: row } });
+    navigate("/gujarat-package-name/update", { state: { rowData: row } });
   };
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`${BE_URL}/privatePolicy/${id}`);
+      await axios.delete(`${BE_URL}/gujaratPackage/${id}`);
       setShowDeletePopup(true);
       setSelectedId(id);
       fetchData();
@@ -76,8 +76,8 @@ const PrivatePolicy = () => {
       <div className="flex justify-between mb-4">
         <Trace onClick={handleTraceClick} />
         <Add
-          text="Add Private Policy"
-          width="w-[200px]"
+          text="Add Gujarat Package"
+          width="w-[230px]"
           onClick={handleAddClick}
         />
       </div>
@@ -92,7 +92,7 @@ const PrivatePolicy = () => {
                 ID
               </TableCell>
               <TableCell className="border-r !font-extrabold text-base text-left">
-                Policy Text
+                Package Name
               </TableCell>
               <TableCell className="!font-extrabold text-base text-left">
                 Action
@@ -112,7 +112,7 @@ const PrivatePolicy = () => {
                   className="border-r text-left"
                   style={{ maxWidth: 400, whiteSpace: "pre-wrap" }}
                 >
-                  {row.text}
+                  {`Gujarat Tour ${row.Nights} Nights ${row.Days} Days`}
                 </TableCell>
                 <TableCell className="text-left">
                   <div className="flex space-x-4">
@@ -148,4 +148,4 @@ const PrivatePolicy = () => {
   );
 };
 
-export default PrivatePolicy;
+export default GujaratPackagesName;
