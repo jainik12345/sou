@@ -22,18 +22,3 @@ export const GujaratPackages = () => {
     )
 }
 
-
-
-// //jainik code
-// import { useParams } from "react-router-dom";
-
-// export const GujaratPackages = () => {
-//   const { PathName } = useParams();
-
-//   return (
-//     <>
-//       <h1>{PathName.replace(/-/g, " ").toUpperCase()}</h1>
-//       <p>This is the {PathName.replace(/-/g, " ")} </p>
-//     </>
-//   );
-// };

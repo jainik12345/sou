@@ -46,7 +46,7 @@ export const AboutFAQ = () => {
 
 
 
-                                    <div className="fact-cont relative border border-gray-400 p-5 select-none"
+                                    <div className="fact-cont relative border border-gray-400 p-3 select-none"
                                         key={Idx} onClick={() => { HandleFAQClick(Idx) }}>
 
                                         <motion.div
