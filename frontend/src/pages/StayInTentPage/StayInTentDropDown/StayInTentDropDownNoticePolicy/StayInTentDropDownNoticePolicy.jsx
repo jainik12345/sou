@@ -79,7 +79,7 @@ export const StayInTentDropDownNoticePolicy = () => {
     const FormattedData = StayInTentDropDownData[FormattedPath];
 
     return (
-        <div className="max-w-screen-xl mx-auto py-12 px-4 flex flex-row gap-10">
+        <div className="max-w-screen-xl mx-auto py-12 px-4 grid md:grid-cols-2 grid-cols-1 gap-10">
             {/* Notice Section */}
             {FormattedData?.Notice?.NoticeData && (
                 <section className="bg-orange-50 shadow-lg rounded-xl p-8 flex flex-col gap-6 border-t-4 border-orange-400">

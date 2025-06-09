@@ -137,7 +137,7 @@ export const StayInTentDropDownFaq = () => {
   };
 
   return (
-    <section className="w-full py-16 bg-white min-h-[60vh]">
+    <section className="w-full py-16 bg-white ">
       <div className="max-w-screen-xl mx-auto px-4">
         <div className="text-center mb-10">
           <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-3">

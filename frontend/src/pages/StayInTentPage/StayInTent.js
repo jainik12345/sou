@@ -121,6 +121,88 @@ export const StayInTentDropDownData = {
         "We provide the best experience while visiting Statue of Unity. You can get familiar with the amenities that give you a better feel.",
       ],
     },
+
+    itineraryData: [
+      {
+        label: "1 Night/2 Days",
+        days: [
+          {
+            title: "Day 1",
+            events: [
+              "12:00 PM – Welcome & Check-in.",
+              "12:30 PM to 02:30 PM Lunch at the Dining Area.",
+              "02:30 PM to 04:00 PM – Guided Tour to Sardar Sarovar Dam View and Selfie Point, Valley of Flowers on SIC (Seat-in-Coach) Basis.",
+              "04:00 PM to 06:00 PM – Visit to The Statue Of Unity on SIC (Seat-in-Coach) basis (only entry ticket is included & This ticket does not include access to viewing gallery).",
+              "06:00 PM to 06:45 PM – Light Refreshment.",
+              "06:50 PM to 08:00 PM – The Statue of Unity Laser Show on SIC (Seat-in-Coach) Basis (Subject to show/ticket availability).",
+              "08:00 PM to 08:30 PM – Illumination Tour Around The Statue of Unity.",
+              "08:30 PM to 10:30 PM – Dinner at the Dining Area.",
+            ],
+          },
+          {
+            title: "Day 2",
+            events: [
+              "06:00 AM to 06:30 AM – Morning Tea",
+              "06:30 AM to 07:30 AM – Guided Khalwani Sunrise Walking Tour (Optional – To be notified at the time of check in).",
+              "07:30 AM to 09:30 AM – Breakfast at Dining Area.",
+              "09:30 AM – Check-out from Tent City.",
+            ],
+          },
+        ],
+      },
+      {
+        label: "2 Nights/3 Days",
+        days: [
+          {
+            title: "Day 1",
+            events: [
+              "12:00 PM – Welcome & Check-in.",
+              "Lunch at the Dining Area.",
+              "Guided Tour and Activities.",
+              "Dinner at the Dining Area.",
+            ],
+          },
+          {
+            title: "Day 2",
+            events: [
+              "Morning Tea.",
+              "Tour Activities.",
+              "Dinner at the Dining Area.",
+            ],
+          },
+          {
+            title: "Day 3",
+            events: ["Morning Tea.", "Check-out from Tent City."],
+          },
+        ],
+      },
+      {
+        label: "3 Nights/4 Days",
+        days: [
+          {
+            title: "Day 1",
+            events: [
+              "12:00 PM – Welcome & Check-in.",
+              "Lunch at the Dining Area.",
+              "Guided Tour and Activities.",
+              "Dinner at the Dining Area.",
+            ],
+          },
+          {
+            title: "Day 2",
+            events: ["Full-day Activities and Meals."],
+          },
+          {
+            title: "Day 3",
+            events: ["Full-day Activities and Meals."],
+          },
+          {
+            title: "Day 4",
+            events: ["Morning Tea.", "Check-out from Tent City."],
+          },
+        ],
+      },
+    ],
   },
 
   "soil-to-soul-resort": {
@@ -234,6 +316,40 @@ export const StayInTentDropDownData = {
         "Pet Policy: Pets are not allowed in the tent.",
       ],
     },
+    mealPlans: [
+      {
+        type: "CP",
+        title: "Meal Plan - CP",
+        subtitle: "(Stay + Breakfast)",
+        color: "text-orange-600",
+        buttonColor: "bg-green-600 hover:bg-green-700",
+        table: [
+          { category: "Ac Cottage", double: "₹ 7,000/-*", extra: "₹ 1,000/-*" },
+          { category: "Ac Tent", double: "₹ 8,000/-*", extra: "₹ 1,000/-*" },
+          {
+            category: "Cottage With Privet Pool",
+            double: "₹ 9,000/-*",
+            extra: "₹ 1,000/-*",
+          },
+        ],
+      },
+      {
+        type: "MAP",
+        title: "Meal Plan - MAP",
+        subtitle: "(Stay + Breakfast + Dinner)",
+        color: "text-orange-600",
+        buttonColor: "bg-green-600 hover:bg-green-700",
+        table: [
+          { category: "Ac Cottage", double: "₹ 8,000/-*", extra: "₹ 1,500/-*" },
+          { category: "Ac Tent", double: "₹ 9,000/-*", extra: "₹ 1,500/-*" },
+          {
+            category: "Cottage With Privet Pool",
+            double: "₹ 10,000/-*",
+            extra: "₹ 1,500/-*",
+          },
+        ],
+      },
+    ],
   },
 
   "unity-village-resort": {
@@ -491,6 +607,40 @@ export const StayInTentDropDownData = {
         "Pet Policy: Pets are not allowed in the tent.",
       ],
     },
+    mealPlans: [
+      {
+        type: "CP",
+        title: "Meal Plan - CP",
+        subtitle: "(Stay + Breakfast)",
+        color: "text-orange-600",
+        buttonColor: "bg-green-600 hover:bg-green-700",
+        table: [
+          { category: "Ac Cottage", double: "₹ 7,000/-*", extra: "₹ 1,000/-*" },
+          { category: "Ac Tent", double: "₹ 8,000/-*", extra: "₹ 1,000/-*" },
+          {
+            category: "Cottage With Privet Pool",
+            double: "₹ 9,000/-*",
+            extra: "₹ 1,000/-*",
+          },
+        ],
+      },
+      {
+        type: "MAP",
+        title: "Meal Plan - MAP",
+        subtitle: "(Stay + Breakfast + Dinner)",
+        color: "text-orange-600",
+        buttonColor: "bg-green-600 hover:bg-green-700",
+        table: [
+          { category: "Ac Cottage", double: "₹ 8,000/-*", extra: "₹ 1,500/-*" },
+          { category: "Ac Tent", double: "₹ 9,000/-*", extra: "₹ 1,500/-*" },
+          {
+            category: "Cottage With Privet Pool",
+            double: "₹ 10,000/-*",
+            extra: "₹ 1,500/-*",
+          },
+        ],
+      },
+    ],
   },
 
   "nirvana-resort-restaurant": {
@@ -992,7 +1142,7 @@ export const StayInTentDropDownData = {
               ],
             },
           },
-        ],  
+        ],
       },
     ],
 
@@ -1012,5 +1162,40 @@ export const StayInTentDropDownData = {
         "Pet Policy: Pets are not allowed in the tent.",
       ],
     },
+
+    mealPlans: [
+      {
+        type: "CP",
+        title: "Meal Plan - CP",
+        subtitle: "(Stay + Breakfast)",
+        color: "text-orange-600",
+        buttonColor: "bg-green-600 hover:bg-green-700",
+        table: [
+          { category: "Ac Cottage", double: "₹ 7,000/-*", extra: "₹ 1,000/-*" },
+          { category: "Ac Tent", double: "₹ 8,000/-*", extra: "₹ 1,000/-*" },
+          {
+            category: "Cottage With Privet Pool",
+            double: "₹ 9,000/-*",
+            extra: "₹ 1,000/-*",
+          },
+        ],
+      },
+      {
+        type: "MAP",
+        title: "Meal Plan - MAP",
+        subtitle: "(Stay + Breakfast + Dinner)",
+        color: "text-orange-600",
+        buttonColor: "bg-green-600 hover:bg-green-700",
+        table: [
+          { category: "Ac Cottage", double: "₹ 8,000/-*", extra: "₹ 1,500/-*" },
+          { category: "Ac Tent", double: "₹ 9,000/-*", extra: "₹ 1,500/-*" },
+          {
+            category: "Cottage With Privet Pool",
+            double: "₹ 10,000/-*",
+            extra: "₹ 1,500/-*",
+          },
+        ],
+      },
+    ],
   },
 };
