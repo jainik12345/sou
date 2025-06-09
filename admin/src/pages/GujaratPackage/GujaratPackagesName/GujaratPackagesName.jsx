@@ -1,3 +1,157 @@
+// /* eslint-disable no-unused-vars */
+// import React, { useEffect, useState } from "react";
+// import {
+//   Table,
+//   TableBody,
+//   TableCell,
+//   TableContainer,
+//   TableHead,
+//   TableRow,
+//   Paper,
+//   Pagination,
+// } from "@mui/material";
+// import { FaEdit, FaTrash } from "react-icons/fa";
+// import Add from "../../../components/Buttons/Add";
+// import Trace from "../../../components/Buttons/Trace";
+// import DeleteData from "../../../components/Popup/DeleteData";
+// import { useNavigate } from "react-router-dom";
+// import axios from "axios";
+// import BE_URL from "../../../config";
+
+// const GujaratPackagesName = () => {
+//   const [page, setPage] = useState(1);
+//   const rowsPerPage = 10;
+//   const [showDeletePopup, setShowDeletePopup] = useState(false);
+//   const [selectedId, setSelectedId] = useState(null);
+//   const [data, setData] = useState([]);
+//   const navigate = useNavigate();
+
+//   const fetchData = async () => {
+//     try {
+//       const res = await axios.get(`${BE_URL}/gujaratPackage`);
+//       setData(res.data.data);
+//     } catch (err) {
+//       console.error("Error fetching data:", err);
+//     }
+//   };
+
+//   useEffect(() => {
+//     fetchData();
+//   }, []);
+
+//   const displayedRows = data.slice(
+//     (page - 1) * rowsPerPage,
+//     page * rowsPerPage
+//   );
+
+//   const handleAddClick = () => {
+//     navigate("/gujarat-packages-name/insert");
+//   };
+
+//   const handleTraceClick = () => {
+//     navigate("/gujarat-packages-name/trace");
+//   };
+
+//   const handleEditClick = (row) => {
+//     navigate("/gujarat-packages-name/update", { state: { rowData: row } });
+//   };
+
+//   const handleDelete = async (id) => {
+//     try {
+//       await axios.delete(`${BE_URL}/gujaratPackage/${id}`);
+//       setShowDeletePopup(true);
+//       setSelectedId(id);
+//       fetchData();
+//     } catch (err) {
+//       console.error("Error deleting:", err);
+//     }
+//   };
+
+//   return (
+//     <div className="p-4 rounded-xl bg-white">
+//       {showDeletePopup && (
+//         <DeleteData onClose={() => setShowDeletePopup(false)} />
+//       )}
+
+//       <div className="flex justify-between mb-4">
+//         <Trace onClick={handleTraceClick} />
+//         <Add
+//           text="Add Gujarat Package"
+//           width="w-[230px]"
+//           onClick={handleAddClick}
+//         />
+//       </div>
+
+//       <hr className="border-gray-300 mb-6" />
+
+//       <TableContainer component={Paper} className="shadow-md">
+//         <Table className="border border-gray-300">
+//           <TableHead>
+//             <TableRow className="bg-gray-100">
+//               <TableCell className="border-r !font-extrabold text-base text-left">
+//                 ID
+//               </TableCell>
+//               <TableCell className="border-r !font-extrabold text-base text-left">
+//                 Package Name
+//               </TableCell>
+//               <TableCell className="!font-extrabold text-base text-left">
+//                 Action
+//               </TableCell>
+//             </TableRow>
+//           </TableHead>
+//           <TableBody>
+//             {displayedRows.map((row, index) => (
+//               <TableRow
+//                 key={row.id}
+//                 className="hover:bg-gray-100 transition-all duration-300 border-t border-gray-300"
+//               >
+//                 <TableCell className="border-r">
+//                   {(page - 1) * rowsPerPage + index + 1}
+//                 </TableCell>
+//                 <TableCell
+//                   className="border-r text-left"
+//                   style={{ maxWidth: 400, whiteSpace: "pre-wrap" }}
+//                 >
+//                   {`Gujarat Tour ${row.Nights} Nights ${row.Days} Days`}
+//                 </TableCell>
+//                 <TableCell className="text-left">
+//                   <div className="flex space-x-4">
+//                     <button
+//                       className="text-green-600 cursor-pointer hover:text-green-800"
+//                       onClick={() => handleEditClick(row)}
+//                     >
+//                       <FaEdit size={22} />
+//                     </button>
+//                     <button
+//                       className="text-red-600 cursor-pointer hover:text-red-800"
+//                       onClick={() => handleDelete(row.id)}
+//                     >
+//                       <FaTrash size={22} />
+//                     </button>
+//                   </div>
+//                 </TableCell>
+//               </TableRow>
+//             ))}
+//           </TableBody>
+//         </Table>
+
+//         <div className="flex justify-end p-4">
+//           <Pagination
+//             count={Math.ceil(data.length / rowsPerPage)}
+//             page={page}
+//             onChange={(e, value) => setPage(value)}
+//             color="primary"
+//           />
+//         </div>
+//       </TableContainer>
+//     </div>
+//   );
+// };
+
+// export default GujaratPackagesName;
+
+/** */
+
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import {
@@ -9,6 +163,7 @@ import {
   TableRow,
   Paper,
   Pagination,
+  Tooltip,
 } from "@mui/material";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import Add from "../../../components/Buttons/Add";
@@ -45,15 +200,15 @@ const GujaratPackagesName = () => {
   );
 
   const handleAddClick = () => {
-    navigate("/gujarat-package-name/insert");
+    navigate("/gujarat-packages-name/insert");
   };
 
   const handleTraceClick = () => {
-    navigate("/gujarat-package-name/trace");
+    navigate("/gujarat-packages-name/trace");
   };
 
   const handleEditClick = (row) => {
-    navigate("/gujarat-package-name/update", { state: { rowData: row } });
+    navigate("/gujarat-packages-name/update", { state: { rowData: row } });
   };
 
   const handleDelete = async (id) => {
@@ -65,6 +220,22 @@ const GujaratPackagesName = () => {
     } catch (err) {
       console.error("Error deleting:", err);
     }
+  };
+
+  // Helper to format places_name as a list, if available
+  const formatPlaces = (places_name) => {
+    if (!places_name) return "-";
+    let places = [];
+    try {
+      if (places_name.startsWith("[") && places_name.endsWith("]")) {
+        places = JSON.parse(places_name);
+      } else {
+        places = places_name.split(",").map((p) => p.trim());
+      }
+    } catch {
+      places = [places_name];
+    }
+    return places.join(", ");
   };
 
   return (
@@ -89,10 +260,16 @@ const GujaratPackagesName = () => {
           <TableHead>
             <TableRow className="bg-gray-100">
               <TableCell className="border-r !font-extrabold text-base text-left">
-                ID
+                S.No.
               </TableCell>
               <TableCell className="border-r !font-extrabold text-base text-left">
                 Package Name
+              </TableCell>
+              <TableCell className="border-r !font-extrabold text-base text-left">
+                Places
+              </TableCell>
+              <TableCell className="border-r !font-extrabold text-base text-left">
+                Images
               </TableCell>
               <TableCell className="!font-extrabold text-base text-left">
                 Action
@@ -112,7 +289,43 @@ const GujaratPackagesName = () => {
                   className="border-r text-left"
                   style={{ maxWidth: 400, whiteSpace: "pre-wrap" }}
                 >
-                  {`Gujarat Tour ${row.Nights} Nights ${row.Days} Days`}
+                  Gujarat Tour {row.Nights} Nights {row.Days} Days
+                </TableCell>
+                <TableCell
+                  className="border-r text-left"
+                  style={{ maxWidth: 300, whiteSpace: "pre-wrap" }}
+                >
+                  {formatPlaces(row.places_name)}
+                </TableCell>
+                <TableCell className="border-r text-left">
+                  {/* Show images as thumbnails if available */}
+                  {(() => {
+                    let images = [];
+                    try {
+                      images = row.image ? JSON.parse(row.image) : [];
+                    } catch {
+                      images = typeof row.image === "string" ? [row.image] : [];
+                    }
+                    if (!images.length) return "-";
+                    return (
+                      <div className="flex flex-wrap gap-1">
+                        {images.map((img, i) => (
+                          <Tooltip key={i} title={img}>
+                            <img
+                              src={`${BE_URL}/Images/GujaratPackage/GujaratPackageImage/${img}`}
+                              alt={`img-${i + 1}`}
+                              style={{
+                                width: 40,
+                                height: 40,
+                                objectFit: "cover",
+                                borderRadius: 4,
+                              }}
+                            />
+                          </Tooltip>
+                        ))}
+                      </div>
+                    );
+                  })()}
                 </TableCell>
                 <TableCell className="text-left">
                   <div className="flex space-x-4">

@@ -115,7 +115,7 @@ const GujaratPackagesDataInsert = () => {
       images,
       imagePreviews,
     }));
-    setError(null); // clear image error on image select
+    setError(null);
   };
 
   // FAQs
@@ -267,9 +267,9 @@ const GujaratPackagesDataInsert = () => {
               </label>
               <div className="border border-blue-200 rounded-md p-4 bg-gray-50">
                 {/* Assignment Parts */}
-                <div className="flex flex-wrap gap-2 mb-2 items-center">
-                  {assignment.assignmentParts.map((part, pidx) => {
-                    // For the last part, max option is the remaining nights
+
+                {/* <div className="flex flex-wrap gap-2 mb-2 items-center">
+                  {assignment.assignmentParts.map((part, pidx) => { 
                     const maxNights = Math.max(
                       1,
                       nights -
@@ -347,6 +347,100 @@ const GujaratPackagesDataInsert = () => {
                           </span>
                         )}
                       </React.Fragment>
+                    );
+                  })}
+                 
+                  {totalAssignedNights < nights && (
+                    <button
+                      type="button"
+                      title="Add area part"
+                      className="ml-2 text-green-600 border border-green-300 px-2 py-1 rounded"
+                      onClick={handleAddAssignmentPart}
+                    >
+                      +
+                    </button>
+                  )}
+                </div> */}
+
+                <div className="space-y-3 mb-2">
+                  {assignment.assignmentParts.map((part, pidx) => {
+                    const maxNights = Math.max(
+                      1,
+                      nights -
+                        assignment.assignmentParts.reduce(
+                          (sum, part2, idx) =>
+                            idx === pidx
+                              ? sum
+                              : sum + (parseInt(part2.nights) || 0),
+                          0
+                        )
+                    );
+                    const maxSelectable = Math.min(
+                      maxNights,
+                      nights -
+                        assignment.assignmentParts.reduce(
+                          (sum, part2, idx) =>
+                            idx === pidx
+                              ? sum
+                              : sum + (parseInt(part2.nights) || 0),
+                          0
+                        )
+                    );
+                    return (
+                      <div key={pidx} className="flex items-center gap-2">
+                        <select
+                          style={{ width: 60 }}
+                          className="border border-blue-400 rounded-md p-2"
+                          value={part.nights}
+                          onChange={(e) =>
+                            handleAssignmentPartChange(
+                              pidx,
+                              "nights",
+                              e.target.value
+                            )
+                          }
+                        >
+                          {Array.from(
+                            { length: maxSelectable },
+                            (_, i) => i + 1
+                          ).map((i) => (
+                            <option key={i} value={String(i)}>
+                              {i}
+                            </option>
+                          ))}
+                        </select>
+                        <span className="text-gray-700 font-semibold">N</span>
+                        <input
+                          type="text"
+                          style={{ width: 120 }}
+                          className="border border-blue-400 rounded-md p-2"
+                          value={part.area}
+                          onChange={(e) =>
+                            handleAssignmentPartChange(
+                              pidx,
+                              "area",
+                              e.target.value
+                            )
+                          }
+                          placeholder="Area"
+                          required
+                        />
+                        {assignment.assignmentParts.length > 1 && (
+                          <button
+                            type="button"
+                            title="Remove part"
+                            className="ml-1 text-red-600 border border-red-300 px-2 py-1 rounded"
+                            onClick={() => handleRemoveAssignmentPart(pidx)}
+                          >
+                            &minus;
+                          </button>
+                        )}
+                        {pidx < assignment.assignmentParts.length - 1 && (
+                          <span className="mx-2 text-gray-600 font-bold">
+                            –
+                          </span>
+                        )}
+                      </div>
                     );
                   })}
                   {/* Add part */}

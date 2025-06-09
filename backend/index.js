@@ -127,6 +127,13 @@ app.use(
 /**--------------------------------------------------GujaratPackage-------------------------------------------------- */
 
 app.use(
+  "/Images/GujaratPackage/GujaratPackageImage",
+  express.static(
+    path.join(__dirname, "Images/GujaratPackage/GujaratPackageImage")
+  )
+);
+
+app.use(
   "/Images/GujaratPackage/GujaratPackageDataImage",
   express.static(
     path.join(__dirname, "Images/GujaratPackage/GujaratPackageDataImage")
