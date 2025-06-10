@@ -93,24 +93,24 @@ module.exports.sendOtp = (req, res) => {
     });
 
     const mailOptions = {
-      from: `"Renest Hotels Admin" <${process.env.EMAIL_USER}>`,
+      from: `"Statue Of Unity Admin" <${process.env.EMAIL_USER}>`,
       to: email,
-      subject: "🔐 OTP for Password Reset - Renest Admin Panel",
+      subject: "🔐 OTP for Password Reset - Statue Of Unity Panel",
       html: `
         <div style="max-width:600px;margin:0 auto;font-family:'Segoe UI',Roboto,sans-serif;color:#333;background-color:#f4f6f8;padding:20px;border-radius:10px;">
           <div style="text-align:center;margin-bottom:30px;">
-            <h2 style="color:#1976d2;">Renest Hotels & Resorts</h2>
+            <h2 style="color:#1976d2;">Statue Of Unity & Resorts</h2>
             <h3 style="color:#333;">Password Reset OTP</h3>
           </div>
           <p>Hi there,</p>
-          <p>You recently requested to reset your password for the <b>Renest Admin Panel</b>. Use the OTP below to proceed:</p>
+          <p>You recently requested to reset your password for the <b>Statue Of Unity Admin Panel</b>. Use the OTP below to proceed:</p>
           <div style="background-color:#e3f2fd;padding:15px;text-align:center;border-radius:8px;margin:20px 0;">
             <span style="font-size:28px;font-weight:bold;color:#0d47a1;">${otp}</span>
           </div>
           <p>This OTP is valid for <b>10 minutes</b>. If you didn’t request a password reset, please ignore this email or contact support.</p>
           <br/>
           <p>Regards,</p>
-          <p><b>Renest Hotels Admin Team</b></p>
+          <p><b>Statue Of Unity Admin Team</b></p>
           <hr style="border:none;border-top:1px solid #ccc;margin-top:30px;">
           <p style="font-size:12px;color:#888;text-align:center;">
             This is an automated message. Please do not reply directly to this email.

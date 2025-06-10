@@ -31,9 +31,11 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
         { path: "/home-image-slider", name: "Home Image Slider" },
         { path: "/home-near-attractions", name: "Home Near Attractions" },
         { path: "/home-testimonial", name: "Home Testimonial" },
-        { path: "/home-online-booking-content", name: "Home Online Booking Content" },
+        {
+          path: "/home-online-booking-content",
+          name: "Home Online Booking Content",
+        },
         { path: "/home-certificate", name: "home Certificate" },
-
       ],
     },
     {
@@ -44,9 +46,11 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
         { path: "/about-hero-section", name: "About Hero Section" },
         { path: "/about-intresting-faqs", name: "About Intresting Faqs" },
         { path: "/about-why-choose-section", name: "About Why Choose Section" },
-        { path: "/about-attractions-section", name: "About Attractions Section" },
+        {
+          path: "/about-attractions-section",
+          name: "About Attractions Section",
+        },
         { path: "/about-activities-section", name: "About Activities Section" },
-        
       ],
     },
     {
@@ -56,18 +60,26 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
       children: [
         { path: "/contact-page-section", name: "Contact Page Section" },
         { path: "/contact-form-details", name: "Contact Form Details" },
-        
       ],
     },
 
-        {
+    {
       path: "/gujarat-package",
       name: "Gujarat Package",
       icon: <FaInfoCircle />,
       children: [
-        { path: "/gujarat-packages-name", name: "Gujarat Package Name" }, 
-        { path: "/gujarat-Packages-data", name: "Gujarat Package Data" }, 
-        
+        { path: "/gujarat-packages-name", name: "Gujarat Package Name" },
+        { path: "/gujarat-Packages-data", name: "Gujarat Package Data" },
+      ],
+    },
+
+    {
+      path: "/sou-package",
+      name: "SOU Package",
+      icon: <FaInfoCircle />,
+      children: [
+        { path: "/sou-package-name", name: "SOU Package Name" },
+        { path: "/sou-package-gallery", name: "SOU Package Gallery" },
       ],
     },
 

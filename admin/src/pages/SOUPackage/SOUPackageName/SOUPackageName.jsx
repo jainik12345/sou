@@ -1,3 +1,17 @@
+// import React from 'react'
+
+// const SOUPackageName = () => {
+//   return (
+//     <div>
+//       SOUPackageName
+//     </div>
+//   )
+// }
+
+// export default SOUPackageName
+
+/** */
+
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import {
@@ -9,7 +23,6 @@ import {
   TableRow,
   Paper,
   Pagination,
-  Tooltip,
 } from "@mui/material";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import Add from "../../../components/Buttons/Add";
@@ -19,7 +32,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import BE_URL from "../../../config";
 
-const GujaratPackagesName = () => {
+const SOUPackageName = () => {
   const [page, setPage] = useState(1);
   const rowsPerPage = 10;
   const [showDeletePopup, setShowDeletePopup] = useState(false);
@@ -29,7 +42,7 @@ const GujaratPackagesName = () => {
 
   const fetchData = async () => {
     try {
-      const res = await axios.get(`${BE_URL}/gujaratPackage`);
+      const res = await axios.get(`${BE_URL}/souPackageName`);
       setData(res.data.data);
     } catch (err) {
       console.error("Error fetching data:", err);
@@ -46,42 +59,26 @@ const GujaratPackagesName = () => {
   );
 
   const handleAddClick = () => {
-    navigate("/gujarat-packages-name/insert");
+    navigate("/sou-package-name/insert");
   };
 
   const handleTraceClick = () => {
-    navigate("/gujarat-packages-name/trace");
+    navigate("/sou-package-name/trace");
   };
 
   const handleEditClick = (row) => {
-    navigate("/gujarat-packages-name/update", { state: { rowData: row } });
+    navigate("/sou-package-name/update", { state: { rowData: row } });
   };
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`${BE_URL}/gujaratPackage/${id}`);
+      await axios.delete(`${BE_URL}/souPackageName/${id}`);
       setShowDeletePopup(true);
       setSelectedId(id);
       fetchData();
     } catch (err) {
       console.error("Error deleting:", err);
     }
-  };
-
-  // Helper to format places_name as a list, if available
-  const formatPlaces = (places_name) => {
-    if (!places_name) return "-";
-    let places = [];
-    try {
-      if (places_name.startsWith("[") && places_name.endsWith("]")) {
-        places = JSON.parse(places_name);
-      } else {
-        places = places_name.split(",").map((p) => p.trim());
-      }
-    } catch {
-      places = [places_name];
-    }
-    return places.join(", ");
   };
 
   return (
@@ -93,8 +90,8 @@ const GujaratPackagesName = () => {
       <div className="flex justify-between mb-4">
         <Trace onClick={handleTraceClick} />
         <Add
-          text="Add Gujarat Package"
-          width="w-[230px]"
+          text="Add SOU Package Name"
+          width="w-[250px]"
           onClick={handleAddClick}
         />
       </div>
@@ -109,13 +106,7 @@ const GujaratPackagesName = () => {
                 S.No.
               </TableCell>
               <TableCell className="border-r !font-extrabold text-base text-left">
-                Package Name
-              </TableCell>
-              <TableCell className="border-r !font-extrabold text-base text-left">
-                Places
-              </TableCell>
-              <TableCell className="border-r !font-extrabold text-base text-left">
-                Images
+                SOU Package Name
               </TableCell>
               <TableCell className="!font-extrabold text-base text-left">
                 Action
@@ -131,47 +122,8 @@ const GujaratPackagesName = () => {
                 <TableCell className="border-r">
                   {(page - 1) * rowsPerPage + index + 1}
                 </TableCell>
-                <TableCell
-                  className="border-r text-left"
-                  style={{ maxWidth: 400, whiteSpace: "pre-wrap" }}
-                >
-                  Gujarat Tour {row.Nights} Nights {row.Days} Days
-                </TableCell>
-                <TableCell
-                  className="border-r text-left"
-                  style={{ maxWidth: 300, whiteSpace: "pre-wrap" }}
-                >
-                  {formatPlaces(row.places_name)}
-                </TableCell>
                 <TableCell className="border-r text-left">
-                  {/* Show images as thumbnails if available */}
-                  {(() => {
-                    let images = [];
-                    try {
-                      images = row.image ? JSON.parse(row.image) : [];
-                    } catch {
-                      images = typeof row.image === "string" ? [row.image] : [];
-                    }
-                    if (!images.length) return "-";
-                    return (
-                      <div className="flex flex-wrap gap-1">
-                        {images.map((img, i) => (
-                          <Tooltip key={i} title={img}>
-                            <img
-                              src={`${BE_URL}/Images/GujaratPackage/GujaratPackageImage/${img}`}
-                              alt={`img-${i + 1}`}
-                              style={{
-                                width: 40,
-                                height: 40,
-                                objectFit: "cover",
-                                borderRadius: 4,
-                              }}
-                            />
-                          </Tooltip>
-                        ))}
-                      </div>
-                    );
-                  })()}
+                  {row.sou_package_name}
                 </TableCell>
                 <TableCell className="text-left">
                   <div className="flex space-x-4">
@@ -207,4 +159,4 @@ const GujaratPackagesName = () => {
   );
 };
 
-export default GujaratPackagesName;
+export default SOUPackageName;

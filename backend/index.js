@@ -56,6 +56,13 @@ const contactPage = require("./routes/contact/contactPage");
 const gujaratPackage = require("./routes/gujaratPackage/gujaratPackage");
 const gujaratPackageData = require("./routes/gujaratPackage/gujaratPackageData");
 
+
+/**------------------------------------------Gujarat Package-------------------------------------------------- */
+
+const souPackageName = require("./routes/souPackage/souPackageName")
+
+
+
 app.use("/admin", admin);
 app.use("/privatePolicy", privatePolicy);
 app.use("/termsConditions", termsConditions);
@@ -84,6 +91,14 @@ app.use("/contactPage", contactPage);
 
 app.use("/gujaratPackage", gujaratPackage);
 app.use("/gujaratPackageData", gujaratPackageData);
+
+
+
+/**------------------------------------------Gujarat Package-------------------------------------------------- */
+
+app.use("/souPackageName", souPackageName)
+
+
 
 // Static Images
 /**--------------------------------------------------Home-------------------------------------------------- */

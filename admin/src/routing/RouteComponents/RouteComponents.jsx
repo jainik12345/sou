@@ -65,6 +65,14 @@ import GujaratPackagesData from "../../pages/GujaratPackage/GujaratPackagesData/
 import GujaratPackagesDataInsert from "../../pages/GujaratPackage/GujaratPackagesData/GujaratPackagesDataInsert";
 import GujaratPackagesDataUpdate from "../../pages/GujaratPackage/GujaratPackagesData/GujaratPackagesDataUpdate";
 import GujaratPackagesDataTrace from "../../pages/GujaratPackage/GujaratPackagesData/GujaratPackagesDataTrace";
+import SOUPackageName from './../../pages/SOUPackage/SOUPackageName/SOUPackageName';
+import SOUPackageNameInsert from './../../pages/SOUPackage/SOUPackageName/SOUPackageNameInsert';
+import SOUPackageNameUpdate from './../../pages/SOUPackage/SOUPackageName/SOUPackageNameUpdate';
+import SOUPackageNameTrace from './../../pages/SOUPackage/SOUPackageName/SOUPackageNameTrace';
+import SOUPackageGallery from './../../pages/SOUPackage/SOUPackageGallery/SOUPackageGallery';
+import SOUPackageGalleryInsert from './../../pages/SOUPackage/SOUPackageGallery/SOUPackageGalleryInsert';
+import SOUPackageGalleryUpdate from './../../pages/SOUPackage/SOUPackageGallery/SOUPackageGalleryUpdate';
+import SOUPackageGalleryTrace from './../../pages/SOUPackage/SOUPackageGallery/SOUPackageGalleryTrace';
 
 
 
@@ -163,6 +171,23 @@ const RouteComponents = () => {
           <Route path="/gujarat-Packages-data/insert" element={<GujaratPackagesDataInsert/>} />
           <Route path="/gujarat-Packages-data/update" element={<GujaratPackagesDataUpdate/>} />
           <Route path="/gujarat-Packages-data/trace" element={<GujaratPackagesDataTrace/>} />
+
+
+          {/*------------------------------------------------- SOU Package------------------------------------------- */}
+
+
+
+          <Route path="/sou-package-name" element={<SOUPackageName/>} />
+          <Route path="/sou-package-name/insert" element={<SOUPackageNameInsert/>} />
+          <Route path="/sou-package-name/update" element={<SOUPackageNameUpdate/>} />
+          <Route path="/sou-package-name/trace" element={<SOUPackageNameTrace/>} />
+
+          
+
+          <Route path="/sou-package-gallery" element={<SOUPackageGallery/>} />
+          <Route path="/sou-package-gallery/insert" element={<SOUPackageGalleryInsert/>} />
+          <Route path="/sou-package-gallery/update" element={<SOUPackageGalleryUpdate/>} />
+          <Route path="/sou-package-gallery/trace" element={<SOUPackageGalleryTrace/>} />
 
 
 

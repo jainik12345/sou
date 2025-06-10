@@ -1,3 +1,17 @@
+// import React from 'react'
+
+// const SOUPackageNameTrace = () => {
+//   return (
+//     <div>
+//       SOUPackageName Trace
+//     </div>
+//   )
+// }
+
+// export default SOUPackageNameTrace
+
+/** */
+
 import React, { useEffect, useState } from "react";
 import {
   Table,
@@ -17,7 +31,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import BE_URL from "../../../config";
 
-const GujaratPackagesNameTrace = () => {
+const SOUPackageNameTrace = () => {
   const [page, setPage] = useState(1);
   const rowsPerPage = 10;
   const [showRestorePopup, setShowRestorePopup] = useState(false);
@@ -27,10 +41,10 @@ const GujaratPackagesNameTrace = () => {
 
   const fetchDeletedData = async () => {
     try {
-      const res = await axios.get(`${BE_URL}/gujaratPackage/trashed`);
+      const res = await axios.get(`${BE_URL}/souPackageName/trashed`);
       setData(res.data.data || []);
     } catch (err) {
-      console.error("Error fetching deleted data:", err);
+      console.error("Error fetching deleted SOU package data:", err);
     }
   };
 
@@ -40,39 +54,23 @@ const GujaratPackagesNameTrace = () => {
 
   const handleRestoreClick = async (id) => {
     try {
-      await axios.patch(`${BE_URL}/gujaratPackage/restore/${id}`);
+      await axios.patch(`${BE_URL}/souPackageName/restore/${id}`);
       setSelectedId(id);
       setShowRestorePopup(true);
       fetchDeletedData();
     } catch (err) {
-      console.error("Error restoring data:", err);
+      console.error("Error restoring SOU package name:", err);
     }
   };
 
   const handleBackClick = () => {
-    navigate("/gujarat-packages-name");
+    navigate("/sou-package-name");
   };
 
   const displayedRows = data.slice(
     (page - 1) * rowsPerPage,
     page * rowsPerPage
   );
-
-  // Helper to format places_name as a list, if available
-  const formatPlaces = (places_name) => {
-    if (!places_name) return "-";
-    let places = [];
-    try {
-      if (places_name.startsWith("[") && places_name.endsWith("]")) {
-        places = JSON.parse(places_name);
-      } else {
-        places = places_name.split(",").map((p) => p.trim());
-      }
-    } catch {
-      places = [places_name];
-    }
-    return places.join(", ");
-  };
 
   return (
     <div className="p-4 rounded-xl bg-white">
@@ -90,7 +88,7 @@ const GujaratPackagesNameTrace = () => {
       {/* Header and Back */}
       <div className="flex justify-between mb-4">
         <h2 className="text-left font-semibold text-xl">
-          Gujarat Packages Trace
+          SOU Package Name Trace
         </h2>
         <Back onClick={handleBackClick} />
       </div>
@@ -106,13 +104,7 @@ const GujaratPackagesNameTrace = () => {
                 S.No.
               </TableCell>
               <TableCell className="border-r !font-extrabold text-base text-left">
-                Package Name
-              </TableCell>
-              <TableCell className="border-r !font-extrabold text-base text-left">
-                Places
-              </TableCell>
-              <TableCell className="border-r !font-extrabold text-base text-left">
-                Images
+                SOU Package Name
               </TableCell>
               <TableCell className="!font-extrabold text-base text-left">
                 Restore
@@ -132,43 +124,7 @@ const GujaratPackagesNameTrace = () => {
                   className="border-r text-left"
                   style={{ maxWidth: 400, whiteSpace: "pre-wrap" }}
                 >
-                  {`Gujarat Tour ${row.Nights} Nights ${row.Days} Days`}
-                </TableCell>
-                <TableCell
-                  className="border-r text-left"
-                  style={{ maxWidth: 300, whiteSpace: "pre-wrap" }}
-                >
-                  {formatPlaces(row.places_name)}
-                </TableCell>
-                <TableCell className="border-r text-left">
-                  {/* Show images as thumbnails if available */}
-                  {(() => {
-                    let images = [];
-                    try {
-                      images = row.image ? JSON.parse(row.image) : [];
-                    } catch {
-                      images = typeof row.image === "string" ? [row.image] : [];
-                    }
-                    if (!images.length) return "-";
-                    return (
-                      <div className="flex flex-wrap gap-1">
-                        {images.map((img, i) => (
-                          <Tooltip key={i} title={img}>
-                            <img
-                              src={`${BE_URL}/Images/GujaratPackage/GujaratPackageImage/${img}`}
-                              alt={`img-${i + 1}`}
-                              style={{
-                                width: 40,
-                                height: 40,
-                                objectFit: "cover",
-                                borderRadius: 4,
-                              }}
-                            />
-                          </Tooltip>
-                        ))}
-                      </div>
-                    );
-                  })()}
+                  {row.sou_package_name}
                 </TableCell>
                 <TableCell className="text-left">
                   <button
@@ -197,4 +153,4 @@ const GujaratPackagesNameTrace = () => {
   );
 };
 
-export default GujaratPackagesNameTrace;
+export default SOUPackageNameTrace;
