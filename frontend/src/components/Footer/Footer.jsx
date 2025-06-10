@@ -162,12 +162,91 @@
 
 
 import logo from "../../assets/images/sou-logo.webp";
-import { navLinks } from "../Header/HeaderData.js";
 import { NavLink } from "react-router-dom";
 import { FaAnglesRight } from "react-icons/fa6";
 import { FaFacebookF, FaInstagram } from "react-icons/fa";
 
 export const Footer = () => {
+
+  const FooterNavLinks = [
+    {
+      label: "Home",
+      path: "/",
+    },
+    {
+      label: "About Us",
+      path: "/about-us",
+      dropdown: [
+        { label: "Attraction", path: "/about-us/Attraction" },
+        { label: "Wedding", path: "/about-us/Wedding" },
+        { label: "Activities", path: "/about-us/Activities" },
+      ],
+    },
+    {
+      label: "Stay In Tent",
+      path: "/stay-in-tent",
+      dropdown: [
+        { label: "SoU Tent City 1" },
+        { label: "Soil to Soul Resort" },
+        { label: "Unity Village Resort" },
+        { label: "River View Tent Resort" },
+        { label: "Nirvana Resort Restaurant" },
+        { label: "Tent City Narmada 2" },
+        { label: "Sou Eco Camp" },
+        { label: "Villa Euphoria Resort" },
+      ],
+    },
+    {
+      label: "Gallery",
+      path: "/gallery",
+      dropdown: [
+        { label: "SoU Tent City 1" },
+        { label: "Soil to Soul Resort" },
+        { label: "Unity Village Resort" },
+        { label: "River View Tent Resort" },
+        { label: "Nirvana Resort Restaurant" },
+        { label: "Tent City Narmada 2" },
+        { label: "Sou Eco Camp" },
+        { label: "Villa Euphoria Resort" },
+      ],
+    },
+    {
+      label: "SOU Tickets",
+      path: "/sou-tickets",
+    },
+    {
+      label: "Gujarat Packages",
+      path: "/gujarat-packages",
+      dropdown: [
+        { label: "Gujarat Tour 3N 4D" },
+        { label: "Gujarat Tour 4N 5D" },
+        { label: "Gujarat Tour 5N 6D" },
+        { label: "Gujarat Tour 6N 7D" },
+        { label: "Gujarat Tour 7N 8D" },
+        { label: "Gujarat Tour 11N 12D" },
+      ],
+    },
+    {
+      label: "Contact",
+      path: "/contact",
+    },
+    // {
+
+    //   label:"List Your Property",
+    //   path:"/list-your-property"
+
+    // }
+
+    {
+
+      label: "Privacy Policy",
+      path: "/privacy-policy",
+
+    }
+
+  ];
+
+
   return (
     <footer className="bg-gradient-to-br from-orange-50 via-white to-orange-100 border-t border-orange-200">
       <div className="max-w-screen-xl mx-auto px-6 py-12 flex flex-col gap-12">
@@ -184,7 +263,7 @@ export const Footer = () => {
             </span>
           </div>
           {/* Call to Action */}
-          
+
         </div>
         {/* Divider */}
         <div className="border-t border-orange-100" />
@@ -194,7 +273,7 @@ export const Footer = () => {
           <div>
             <h4 className="text-orange-500 font-bold mb-2 text-lg tracking-wide">Stay In Tent</h4>
             <ul className="space-y-2">
-              {navLinks[2].dropdown.map((Val, Idx) => (
+              {FooterNavLinks[2].dropdown.map((Val, Idx) => (
                 <li key={Idx}>
                   <NavLink
                     to={Val.path}
@@ -211,7 +290,7 @@ export const Footer = () => {
           <div>
             <h4 className="text-orange-500 font-bold mb-2 text-lg tracking-wide">Gujarat Packages</h4>
             <ul className="space-y-2">
-              {navLinks[5].dropdown.map((Val, Idx) => (
+              {FooterNavLinks[5].dropdown.map((Val, Idx) => (
                 <li key={Idx}>
                   <NavLink
                     to={Val.path}
@@ -228,7 +307,7 @@ export const Footer = () => {
           <div>
             <h4 className="text-orange-500 font-bold mb-2 text-lg tracking-wide">Useful Links</h4>
             <ul className="space-y-2">
-              {navLinks.map((Item, Idx) => (
+              {FooterNavLinks.map((Item, Idx) => (
                 <li key={Idx}>
                   <NavLink
                     to={Item.path}

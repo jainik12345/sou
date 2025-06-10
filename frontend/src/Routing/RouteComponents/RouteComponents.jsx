@@ -130,10 +130,12 @@ import { AboutActivities } from "../../pages/AboutPage/AboutDropDown/AboutActivi
 import { AboutAttraction } from "../../pages/AboutPage/AboutDropDown/AboutAttraction/AboutAttraction.jsx";
 import { AboutWeddings } from "../../pages/AboutPage/AboutDropDown/AboutWeddings/AboutWeddings.jsx";
 import { ScrollToTopBtn } from "../../components/ScrollToTopBtn/ScrollToTopBtn.jsx";
-import ScrollPageToTop from "../../components/ScrollPageToTop/ScrollPageToTop.jsx";
+import { ScrollPageToTop } from "../../components/ScrollPageToTop/ScrollPageToTop.jsx";
 import { GujaratPackagesDropDown } from "../../pages/GujaratPackagesPage/GujaratPackagesDropDown/GujaratPackagesDropDown.jsx";
 import { GalleryDropDown } from "../../pages/GalleryPage/GalleryDropDown/GalleryDropDown.jsx";
 import { StayInTentDropDown } from "../../pages/StayInTentPage/StayInTentDropDown/StayInTentDropDown.jsx";
+import { ListYourPropertyPage } from "../../pages/ListYourPropertyPage/ListYourPropertyPage.jsx";
+import { PrivacyPolicy } from "../../pages/PrivacyPolicyPage/PrivacyPolicy.jsx";
 
 const WebsitePage = ({ children }) => {
   return (
@@ -261,6 +263,23 @@ const RouteComponents = () => {
           element={
             <WebsitePage>
               <AboutWeddings />
+            </WebsitePage>
+          }
+        />
+        <Route
+          path="/list-your-property"
+          element={
+            <WebsitePage>
+              <ListYourPropertyPage />
+            </WebsitePage>
+          }
+        />
+
+        <Route
+          path="/privacy-policy"
+          element={
+            <WebsitePage>
+              <PrivacyPolicy />
             </WebsitePage>
           }
         />

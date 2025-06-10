@@ -197,7 +197,7 @@ export const HomePageTestimonial = () => {
                 <div className="testimonial-cards-cont flex overflow-visible justify-center items-center gap-2 max-w-screen-xl px-2 py-10 mx-auto relative">
                     {/* Prev Button - Left Side */}
                     <button
-                        className="absolute left-[-32px] md:left-[-48px] top-1/2 md:block hidden -translate-y-1/2 z-10 flex items-center justify-center w-10 h-10 bg-white text-orange-400 rounded-full shadow-lg hover:bg-orange-400 hover:text-white transition"
+                        className="absolute left-[-32px] md:left-[-48px] top-1/2 md:block hidden -translate-y-1/2 z-10  items-center justify-center w-10 h-10 bg-white text-orange-400 rounded-full shadow-lg hover:bg-orange-400 hover:text-white transition"
                         onClick={() => {
                             setFade(false);
                             setTimeout(() => {
@@ -234,7 +234,7 @@ export const HomePageTestimonial = () => {
                     </div>
                     {/* Next Button - Right Side */}
                     <button
-                        className="absolute right-[-32px] md:right-[-48px] top-1/2 md:block hidden -translate-y-1/2 z-10 flex items-center justify-center w-10 h-10 bg-white text-orange-400 rounded-full shadow-lg hover:bg-orange-400 hover:text-white transition"
+                        className="absolute right-[-32px] md:right-[-48px] top-1/2 md:block hidden -translate-y-1/2 z-10  items-center justify-center w-10 h-10 bg-white text-orange-400 rounded-full shadow-lg hover:bg-orange-400 hover:text-white transition"
                         onClick={() => {
                             setFade(false);
                             setTimeout(() => {

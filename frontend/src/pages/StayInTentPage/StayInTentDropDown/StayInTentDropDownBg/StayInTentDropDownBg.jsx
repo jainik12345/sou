@@ -5,7 +5,7 @@ export const StayInTentDropDownBg = () => {
 
         <>
             <div
-                className=" bg-cover bg-center bg-fixed h-[250px] w-full "
+                className=" bg-cover bg-center bg-fixed h-[200px] w-full "
                 style={{ backgroundImage: `url(${BgImg})` }}>
             </div>
         </>

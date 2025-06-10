@@ -116,7 +116,6 @@
 
 //     )
 // }
-
 import { FiPlus, FiMinus } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
@@ -135,6 +134,11 @@ export const StayInTentDropDownFaq = () => {
   const HandleFAQClick = (Idx) => {
     setOpenIndex((prev) => (prev === Idx ? null : Idx));
   };
+
+  // Only render section if there are FAQs available
+  if (!Array.isArray(FormattedData) || FormattedData.length === 0) {
+    return null;
+  }
 
   return (
     <section className="w-full py-16 bg-white ">

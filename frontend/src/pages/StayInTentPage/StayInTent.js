@@ -252,54 +252,6 @@ export const StayInTentDropDownData = {
     BookOnlineLayer:
       "Stay at Soil to Soul Resort on Your Trip to Statue of Unity…!!!",
 
-    Faq: [
-      {
-        FaqTitle: "Fact 1: Statue of Unity",
-        FaqFact:
-          "The Statue of Unity depicts Sardar Vallabhbhai Patel (1875–1950), a leading figure in the nonviolent Indian Independence Movement and the first Deputy Prime Minister/ Home Minister of Independent India.",
-      },
-      {
-        FaqTitle: "Fact 1: Statue of Unity",
-        FaqFact:
-          "The Statue of Unity depicts Sardar Vallabhbhai Patel (1875–1950), a leading figure in the nonviolent Indian Independence Movement and the first Deputy Prime Minister/ Home Minister of Independent India.",
-      },
-      {
-        FaqTitle: "Fact 1: Statue of Unity",
-        FaqFact:
-          "The Statue of Unity depicts Sardar Vallabhbhai Patel (1875–1950), a leading figure in the nonviolent Indian Independence Movement and the first Deputy Prime Minister/ Home Minister of Independent India.",
-      },
-      {
-        FaqTitle: "Fact 1: Statue of Unity",
-        FaqFact:
-          "The Statue of Unity depicts Sardar Vallabhbhai Patel (1875–1950), a leading figure in the nonviolent Indian Independence Movement and the first Deputy Prime Minister/ Home Minister of Independent India.",
-      },
-      {
-        FaqTitle: "Fact 1: Statue of Unity",
-        FaqFact:
-          "The Statue of Unity depicts Sardar Vallabhbhai Patel (1875–1950), a leading figure in the nonviolent Indian Independence Movement and the first Deputy Prime Minister/ Home Minister of Independent India.",
-      },
-      {
-        FaqTitle: "Fact 1: Statue of Unity",
-        FaqFact:
-          "The Statue of Unity depicts Sardar Vallabhbhai Patel (1875–1950), a leading figure in the nonviolent Indian Independence Movement and the first Deputy Prime Minister/ Home Minister of Independent India.",
-      },
-      {
-        FaqTitle: "Fact 1: Statue of Unity",
-        FaqFact:
-          "The Statue of Unity depicts Sardar Vallabhbhai Patel (1875–1950), a leading figure in the nonviolent Indian Independence Movement and the first Deputy Prime Minister/ Home Minister of Independent India.",
-      },
-      {
-        FaqTitle: "Fact 1: Statue of Unity",
-        FaqFact:
-          "The Statue of Unity depicts Sardar Vallabhbhai Patel (1875–1950), a leading figure in the nonviolent Indian Independence Movement and the first Deputy Prime Minister/ Home Minister of Independent India.",
-      },
-      {
-        FaqTitle: "Fact 1: Statue of Unity",
-        FaqFact:
-          "The Statue of Unity depicts Sardar Vallabhbhai Patel (1875–1950), a leading figure in the nonviolent Indian Independence Movement and the first Deputy Prime Minister/ Home Minister of Independent India.",
-      },
-    ],
-
     Notice: {
       NoticeHeader: "Notice",
       NoticeData: [

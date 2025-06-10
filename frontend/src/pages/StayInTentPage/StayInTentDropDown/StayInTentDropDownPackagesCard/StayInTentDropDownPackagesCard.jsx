@@ -163,7 +163,6 @@
 
 //     )
 // }
-
 import { useParams } from "react-router-dom";
 import { StayInTentDropDownData } from "../../StayInTent";
 import { BookOnline } from "../../../../components/Buttons/BookOnline";
@@ -176,6 +175,11 @@ export const StayInTentDropDownPackagesCard = () => {
         .replace(/[^a-z0-9-]/g, "");
     const FormattedData =
         StayInTentDropDownData[FormattedPath]?.PackagesBookOnlineCard || [];
+
+    // If there is no data, don't render the section
+    if (!Array.isArray(FormattedData) || FormattedData.length === 0) {
+        return null;
+    }
 
     return (
         <section className="w-full bg-white py-16">

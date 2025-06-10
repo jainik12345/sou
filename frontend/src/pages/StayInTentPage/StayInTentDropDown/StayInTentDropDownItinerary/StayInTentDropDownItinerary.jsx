@@ -25,7 +25,7 @@ export const StayInTentDropDownItinerary = () => {
   }
 
   return (
-    <section className="w-full min-h-screen px-4 py-14 bg-gradient-to-br from-orange-50 to-white">
+    <section className="w-full  px-4 py-14 bg-gradient-to-br from-orange-50 to-white">
       <div className="max-w-screen-xl mx-auto rounded-3xl p-8 shadow-2xl bg-white/90">
         <div className="mb-6 text-center">
           <h2 className="text-2xl sm:text-3xl font-extrabold text-orange-700 mb-2 tracking-tight">

@@ -14,6 +14,7 @@ import { StayInTentDropDownMealPlan } from "./StayInTentDropDownMealPlan/StayInT
 import { StayInTentDropDownItinerary } from "./StayInTentDropDownItinerary/StayInTentDropDownItinerary";
 import { StayInTentDropDownPackagesPrices } from "./StayInTentDropDownPackages&Prices/StayInTentDropDownPackages&Prices";
 import { StayInTentDropDownRiverViewBookNowPara } from "./StayInTentDropDownRiverViewBookNowPara/StayInTentDropDownRiverViewBookNowPara";
+import { StayInTentDropDownCottagePackagesRate } from "./StayInTentDropDownCottagePackagesRate/StayInTentDropDownCottagePackagesRate";
 
 export const StayInTentDropDown = () => {
   const { StayInTentPath } = useParams();
@@ -31,6 +32,7 @@ export const StayInTentDropDown = () => {
       <StayInTentDropDownBookOnlineCard />
       <StayInTentDropDownBookOnlineLayer />
       <StayInTentDropDownPackagesCard />
+      <StayInTentDropDownCottagePackagesRate/>
       <StayInTentDropDownTestimonial />
       <StayInTentDropDownMealPlan />
       <StayInTentDropDownPackagesPrices />
