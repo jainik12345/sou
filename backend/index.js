@@ -54,6 +54,7 @@ const contactPage = require("./routes/contact/contactPage");
 /**------------------------------------------Gujarat Package-------------------------------------------------- */
 
 const gujaratPackage = require("./routes/gujaratPackage/gujaratPackage");
+const gujaratPackageData = require("./routes/gujaratPackage/gujaratPackageData");
 
 app.use("/admin", admin);
 app.use("/privatePolicy", privatePolicy);
@@ -82,6 +83,7 @@ app.use("/contactPage", contactPage);
 /**------------------------------------------Gujarat Package-------------------------------------------------- */
 
 app.use("/gujaratPackage", gujaratPackage);
+app.use("/gujaratPackageData", gujaratPackageData);
 
 // Static Images
 /**--------------------------------------------------Home-------------------------------------------------- */
@@ -120,6 +122,22 @@ app.use(
 app.use(
   "/Images/AboutImages/Hero",
   express.static(path.join(__dirname, "Images/AboutImages/Hero"))
+);
+
+/**--------------------------------------------------GujaratPackage-------------------------------------------------- */
+
+app.use(
+  "/Images/GujaratPackage/GujaratPackageImage",
+  express.static(
+    path.join(__dirname, "Images/GujaratPackage/GujaratPackageImage")
+  )
+);
+
+app.use(
+  "/Images/GujaratPackage/GujaratPackageDataImage",
+  express.static(
+    path.join(__dirname, "Images/GujaratPackage/GujaratPackageDataImage")
+  )
 );
 
 /**---------------Start Server ---------------*/
