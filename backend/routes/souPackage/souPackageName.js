@@ -10,4 +10,6 @@ router.delete("/:id", controller.deleteSouPackage);
 router.get("/trashed/list", controller.getTrashedSouPackages);
 router.patch("/restore/:id", controller.restoreSouPackage);
 
+ 
+
 module.exports = router;

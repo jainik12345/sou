@@ -73,6 +73,42 @@ import SOUPackageGallery from './../../pages/SOUPackage/SOUPackageGallery/SOUPac
 import SOUPackageGalleryInsert from './../../pages/SOUPackage/SOUPackageGallery/SOUPackageGalleryInsert';
 import SOUPackageGalleryUpdate from './../../pages/SOUPackage/SOUPackageGallery/SOUPackageGalleryUpdate';
 import SOUPackageGalleryTrace from './../../pages/SOUPackage/SOUPackageGallery/SOUPackageGalleryTrace';
+import HomeSouPackage from "../../pages/HomePages/HomeSouPackage/HomeSouPackage";
+import HomeSouPackageInsert from "../../pages/HomePages/HomeSouPackage/HomeSouPackageInsert";
+import HomeSouPackageUpdate from "../../pages/HomePages/HomeSouPackage/HomeSouPackageUpdate";
+import HomeSouPackageTrace from "../../pages/HomePages/HomeSouPackage/HomeSouPackageTrace";
+import SOUPackageHeroSection from './../../pages/SOUPackage/SOUPackageHeroSection/SOUPackageHeroSection';
+import SOUPackageHeroSectionInsert from './../../pages/SOUPackage/SOUPackageHeroSection/SOUPackageHeroSectionInsert';
+import SOUPackageHeroSectionUpdate from './../../pages/SOUPackage/SOUPackageHeroSection/SOUPackageHeroSectionUpdate';
+import SOUPackageHeroSectionTrace from './../../pages/SOUPackage/SOUPackageHeroSection/SOUPackageHeroSectionTrace';
+import SOUPackageAmenities from './../../pages/SOUPackage/SOUPackageAmenities/SOUPackageAmenities';
+import SOUPackageAmenitiesInsert from './../../pages/SOUPackage/SOUPackageAmenities/SOUPackageAmenitiesInsert';
+import SOUPackageAmenitiesUpdate from './../../pages/SOUPackage/SOUPackageAmenities/SOUPackageAmenitiesUpdate';
+import SOUPackageAmenitiesTrace from './../../pages/SOUPackage/SOUPackageAmenities/SOUPackageAmenitiesTrace';
+import SOUPackageItinerarySection from './../../pages/SOUPackage/SOUPackageItinerarySection/SOUPackageItinerarySection';
+import SOUPackageItinerarySectionInsert from './../../pages/SOUPackage/SOUPackageItinerarySection/SOUPackageItinerarySectionInsert';
+import SOUPackageItinerarySectionUpdate from './../../pages/SOUPackage/SOUPackageItinerarySection/SOUPackageItinerarySectionUpdate';
+import SOUPackageItinerarySectionTrace from './../../pages/SOUPackage/SOUPackageItinerarySection/SOUPackageItinerarySectionTrace';
+import SOUPackageNotesPolicy from './../../pages/SOUPackage/SOUPackageNotesPolicy/SOUPackageNotesPolicy';
+import SOUPackageNotesPolicyInsert from './../../pages/SOUPackage/SOUPackageNotesPolicy/SOUPackageNotesPolicyInsert';
+import SOUPackageNotesPolicyUpdate from './../../pages/SOUPackage/SOUPackageNotesPolicy/SOUPackageNotesPolicyUpdate';
+import SOUPackageNotesPolicyTrace from './../../pages/SOUPackage/SOUPackageNotesPolicy/SOUPackageNotesPolicyTrace';
+import SOUPackageFAQS from './../../pages/SOUPackage/SOUPackageFAQS/SOUPackageFAQS';
+import SOUPackageFAQSInsert from './../../pages/SOUPackage/SOUPackageFAQS/SOUPackageFAQSInsert';
+import SOUPackageFAQSUpdate from './../../pages/SOUPackage/SOUPackageFAQS/SOUPackageFAQSUpdate';
+import SOUPackageFAQSTrace from './../../pages/SOUPackage/SOUPackageFAQS/SOUPackageFAQSTrace';
+import SOUPackageParagrpah from './../../pages/SOUPackage/SOUPackageParagrpah/SOUPackageParagrpah';
+import SOUPackageParagrpahInsert from './../../pages/SOUPackage/SOUPackageParagrpah/SOUPackageParagrpahInsert';
+import SOUPackageParagrpahUpdate from './../../pages/SOUPackage/SOUPackageParagrpah/SOUPackageParagrpahUpdate';
+import SOUPackageParagrpahTrace from './../../pages/SOUPackage/SOUPackageParagrpah/SOUPackageParagrpahTrace';
+import SOUPackageItineraryName from "../../pages/SOUPackage/SOUPackageItineraryName/SOUPackageItineraryName";
+import SOUPackageItineraryNameInsert from "../../pages/SOUPackage/SOUPackageItineraryName/SOUPackageItineraryNameInsert";
+import SOUPackageItineraryNameUpdate from "../../pages/SOUPackage/SOUPackageItineraryName/SOUPackageItineraryNameUpdate";
+import SOUPackageItineraryNameTrace from "../../pages/SOUPackage/SOUPackageItineraryName/SOUPackageItineraryNameTrace";
+import SOUPackageMealPlan from "../../pages/SOUPackage/SOUPackageMealPlan/SOUPackageMealPlan";
+import SOUPackageMealPlanInsert from "../../pages/SOUPackage/SOUPackageMealPlan/SOUPackageMealPlanInsert";
+import SOUPackageMealPlanUpdate from "../../pages/SOUPackage/SOUPackageMealPlan/SOUPackageMealPlanUpdate";
+import SOUPackageMealPlanTrace from "../../pages/SOUPackage/SOUPackageMealPlan/SOUPackageMealPlanTrace";
 
 
 
@@ -116,6 +152,13 @@ const RouteComponents = () => {
           <Route path="/home-certificate/insert" element={<HomeCertificateInsert/>} />
           <Route path="/home-certificate/update" element={<HomeCertificateUpdate/>} />
           <Route path="/home-certificate/trace" element={<HomeCertificateTrace/>} />
+
+
+
+          <Route path="/home-sou-package" element={<HomeSouPackage/>} />
+          <Route path="/home-sou-package/insert" element={<HomeSouPackageInsert/>} />
+          <Route path="/home-sou-package/update" element={<HomeSouPackageUpdate/>} />
+          <Route path="/home-sou-package/trace" element={<HomeSouPackageTrace/>} />
 
           {/*------------------------------------------------- About Pages -------------------------------------------------*/}
 
@@ -188,6 +231,54 @@ const RouteComponents = () => {
           <Route path="/sou-package-gallery/insert" element={<SOUPackageGalleryInsert/>} />
           <Route path="/sou-package-gallery/update" element={<SOUPackageGalleryUpdate/>} />
           <Route path="/sou-package-gallery/trace" element={<SOUPackageGalleryTrace/>} />
+
+
+          <Route path="/sou-package-hero-section" element={<SOUPackageHeroSection/>} />
+          <Route path="/sou-package-hero-section/insert" element={<SOUPackageHeroSectionInsert/>} />
+          <Route path="/sou-package-hero-section/update" element={<SOUPackageHeroSectionUpdate/>} />
+          <Route path="/sou-package-hero-section/trace" element={<SOUPackageHeroSectionTrace/>} />
+
+
+          <Route path="/sou-package-amenities" element={<SOUPackageAmenities/>} />
+          <Route path="/sou-package-amenities/insert" element={<SOUPackageAmenitiesInsert/>} />
+          <Route path="/sou-package-amenities/update" element={<SOUPackageAmenitiesUpdate/>} />
+          <Route path="/sou-package-amenities/trace" element={<SOUPackageAmenitiesTrace/>} />
+
+
+          <Route path="/sou-package-itinerary-name" element={<SOUPackageItineraryName/>} />
+          <Route path="/sou-package-itinerary-name/insert" element={<SOUPackageItineraryNameInsert/>} />
+          <Route path="/sou-package-itinerary-name/update" element={<SOUPackageItineraryNameUpdate/>} />
+          <Route path="/sou-package-itinerary-name/trace" element={<SOUPackageItineraryNameTrace/>} />
+
+
+          <Route path="/sou-package-itinerary-section" element={<SOUPackageItinerarySection/>} />
+          <Route path="/sou-package-itinerary-section/insert" element={<SOUPackageItinerarySectionInsert/>} />
+          <Route path="/sou-package-itinerary-section/update" element={<SOUPackageItinerarySectionUpdate/>} />
+          <Route path="/sou-package-itinerary-section/trace" element={<SOUPackageItinerarySectionTrace/>} />
+
+
+          <Route path="/sou-package-notes-policy" element={<SOUPackageNotesPolicy/>} />
+          <Route path="/sou-package-notes-policy/insert" element={<SOUPackageNotesPolicyInsert/>} />
+          <Route path="/sou-package-notes-policy/update" element={<SOUPackageNotesPolicyUpdate/>} />
+          <Route path="/sou-package-notes-policy/trace" element={<SOUPackageNotesPolicyTrace/>} />
+
+
+          <Route path="/sou-package-faqs" element={<SOUPackageFAQS/>} />
+          <Route path="/sou-package-faqs/insert" element={<SOUPackageFAQSInsert/>} />
+          <Route path="/sou-package-faqs/update" element={<SOUPackageFAQSUpdate/>} />
+          <Route path="/sou-package-faqs/trace" element={<SOUPackageFAQSTrace/>} />
+
+
+          <Route path="/sou-package-paragrpah" element={<SOUPackageParagrpah/>} />
+          <Route path="/sou-package-paragrpah/insert" element={<SOUPackageParagrpahInsert/>} />
+          <Route path="/sou-package-paragrpah/update" element={<SOUPackageParagrpahUpdate/>} />
+          <Route path="/sou-package-paragrpah/trace" element={<SOUPackageParagrpahTrace/>} />
+
+
+          <Route path="/sou-package-meal-plan" element={<SOUPackageMealPlan/>} />
+          <Route path="/sou-package-meal-plan/insert" element={<SOUPackageMealPlanInsert/>} />
+          <Route path="/sou-package-meal-plan/update" element={<SOUPackageMealPlanUpdate/>} />
+          <Route path="/sou-package-meal-plan/trace" element={<SOUPackageMealPlanTrace/>} />
 
 
 

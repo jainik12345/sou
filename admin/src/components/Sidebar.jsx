@@ -29,6 +29,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
       icon: <FaInfoCircle />,
       children: [
         { path: "/home-image-slider", name: "Home Image Slider" },
+        { path: "/home-sou-package", name: "Home Sou Package" },
         { path: "/home-near-attractions", name: "Home Near Attractions" },
         { path: "/home-testimonial", name: "Home Testimonial" },
         {
@@ -80,6 +81,20 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
       children: [
         { path: "/sou-package-name", name: "SOU Package Name" },
         { path: "/sou-package-gallery", name: "SOU Package Gallery" },
+        { path: "/sou-package-hero-section", name: "Sou Package Hero Section" },
+        { path: "/sou-package-amenities", name: "Sou Package Amenities" },
+         {
+          path: "/sou-package-itinerary-name",
+          name: "Sou Package Itinerary name",
+        },
+        {
+          path: "/sou-package-itinerary-section",
+          name: "Sou Package Itinerary Section",
+        },
+        { path: "/sou-package-notes-policy", name: "Sou Package Notes Policy" },
+        { path: "/sou-package-faqs", name: "Sou Package Faqs" },
+        { path: "/sou-package-paragrpah", name: "Sou Package Paragrpah" },
+        { path: "/sou-package-meal-plan", name: "Sou Package Meal Plan" },
       ],
     },
 

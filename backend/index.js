@@ -37,6 +37,7 @@ const homeCertificate = require("./routes/home/homeCertificate");
 const homeImageSlider = require("./routes/home/homeImageSlider");
 const homeNearAttractions = require("./routes/home/homeNearAttractions");
 const homeOnlineBookingContent = require("./routes/home/homeOnlineBookingContent");
+const homeSouPackage = require("./routes/home/homeSouPackage");
 
 /**--------------------------------------------------About-------------------------------------------------- */
 
@@ -56,10 +57,17 @@ const contactPage = require("./routes/contact/contactPage");
 const gujaratPackage = require("./routes/gujaratPackage/gujaratPackage");
 const gujaratPackageData = require("./routes/gujaratPackage/gujaratPackageData");
 
+/**------------------------------------------Sou Package-------------------------------------------------- */
 
-/**------------------------------------------Gujarat Package-------------------------------------------------- */
-
-const souPackageName = require("./routes/souPackage/souPackageName")
+const souPackageName = require("./routes/souPackage/souPackageName");
+const souPackageGallery = require("./routes/souPackage/souPackageGallery");
+const souPackageHeroSection = require("./routes/souPackage/souPackageHeroSection");
+const souPackageAmenities = require("./routes/souPackage/souPackageAmenities");
+const souPackageItineraryName = require("./routes/souPackage/souPackageItineraryName");
+const souPackageItinerarySection = require("./routes/souPackage/souPackageItinerarySection");
+const souPackageNotesPolicy = require("./routes/souPackage/souPackageNotesPolicy")
+const souPackageFaqs = require("./routes/souPackage/souPackageFaqs")
+const souPackageParagraph = require("./routes/souPackage/souPackageParagraph")
 
 
 
@@ -73,6 +81,7 @@ app.use("/homeCertificate", homeCertificate);
 app.use("/homeImageSlider", homeImageSlider);
 app.use("/homeNearAttractions", homeNearAttractions);
 app.use("/homeOnlineBookingContent", homeOnlineBookingContent);
+app.use("/homeSouPackage", homeSouPackage);
 
 /**--------------------------------------------------About-------------------------------------------------- */
 
@@ -92,12 +101,17 @@ app.use("/contactPage", contactPage);
 app.use("/gujaratPackage", gujaratPackage);
 app.use("/gujaratPackageData", gujaratPackageData);
 
+/**------------------------------------------Sou Package-------------------------------------------------- */
 
-
-/**------------------------------------------Gujarat Package-------------------------------------------------- */
-
-app.use("/souPackageName", souPackageName)
-
+app.use("/souPackageName", souPackageName);
+app.use("/souPackageGallery", souPackageGallery);
+app.use("/souPackageHeroSection", souPackageHeroSection);
+app.use("/souPackageAmenities", souPackageAmenities);
+app.use("/souPackageItineraryName", souPackageItineraryName);
+app.use("/souPackageItinerarySection", souPackageItinerarySection);
+app.use("/souPackageNotesPolicy", souPackageNotesPolicy)
+app.use("/souPackageFaqs", souPackageFaqs)
+app.use("/souPackageParagraph", souPackageParagraph)
 
 
 // Static Images
@@ -120,6 +134,11 @@ app.use(
 app.use(
   "/Images/HomeImages/HomeNearAttractions",
   express.static(path.join(__dirname, "Images/HomeImages/HomeNearAttractions"))
+);
+
+app.use(
+  "/Images/HomeImages/HomeSouPackage",
+  express.static(path.join(__dirname, "Images/HomeImages/HomeSouPackage"))
 );
 
 /**--------------------------------------------------About-------------------------------------------------- */
@@ -153,6 +172,27 @@ app.use(
   express.static(
     path.join(__dirname, "Images/GujaratPackage/GujaratPackageDataImage")
   )
+);
+
+/**------------------------------------------Sou Package-------------------------------------------------- */
+
+app.use(
+  "/Images/SouPackage/SouPackageGalleryImages",
+  express.static(
+    path.join(__dirname, "Images/SouPackage/SouPackageGalleryImages")
+  )
+);
+
+app.use(
+  "/Images/SouPackage/SouPackageHeroSection",
+  express.static(
+    path.join(__dirname, "Images/SouPackage/SouPackageHeroSection")
+  )
+);
+
+app.use(
+  "/Images/SouPackage/SouPackageAmenities",
+  express.static(path.join(__dirname, "Images/SouPackage/SouPackageAmenities"))
 );
 
 /**---------------Start Server ---------------*/

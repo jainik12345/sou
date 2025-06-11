@@ -43,7 +43,7 @@ const SOUPackageNameUpdate = () => {
       return;
     }
     try {
-      const res = await axios.put(`${BE_URL}/ssouPackageName/${rowData.id}`, {
+      const res = await axios.put(`${BE_URL}/souPackageName/${rowData.id}`, {
         sou_package_name: souPackageName,
       });
       if (res.data.status === "success") {

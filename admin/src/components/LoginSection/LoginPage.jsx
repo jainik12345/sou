@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 // import React, { useState } from "react";
 // import {
 //   Box,
@@ -392,8 +393,8 @@ import Swal from "sweetalert2";
 import { useNavigate, Link as RouterLink } from "react-router-dom";
 
 // Orange theme colors
-const PRIMARY = "#fb923c"; // Tailwind orange-400
-const SECONDARY = "#f97316"; // Tailwind orange-500
+const PRIMARY = "#fb923c"; 
+const SECONDARY = "#f97316";  
 
 const AnimatedLogo = () => (
   <motion.div
