@@ -12,6 +12,9 @@ import {
 import { IoMenu, IoClose } from "react-icons/io5";
 import { FaChevronRight } from "react-icons/fa";
 import { FaChevronDown } from "react-icons/fa6";
+import { LuPackageOpen } from "react-icons/lu";
+import { GoPackageDependents } from "react-icons/go";
+import { SiBloglovin } from "react-icons/si";
 
 const Sidebar = ({ isOpen, toggleSidebar }) => {
   const location = useLocation();
@@ -67,7 +70,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
     {
       path: "/gujarat-package",
       name: "Gujarat Package",
-      icon: <FaInfoCircle />,
+      icon: <GoPackageDependents />,
       children: [
         { path: "/gujarat-packages-name", name: "Gujarat Package Name" },
         { path: "/gujarat-Packages-data", name: "Gujarat Package Data" },
@@ -77,13 +80,13 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
     {
       path: "/sou-package",
       name: "SOU Package",
-      icon: <FaInfoCircle />,
+      icon: <LuPackageOpen />,
       children: [
         { path: "/sou-package-name", name: "SOU Package Name" },
         { path: "/sou-package-gallery", name: "SOU Package Gallery" },
         { path: "/sou-package-hero-section", name: "Sou Package Hero Section" },
         { path: "/sou-package-amenities", name: "Sou Package Amenities" },
-         {
+        {
           path: "/sou-package-itinerary-name",
           name: "Sou Package Itinerary name",
         },
@@ -95,6 +98,18 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
         { path: "/sou-package-faqs", name: "Sou Package Faqs" },
         { path: "/sou-package-paragrpah", name: "Sou Package Paragrpah" },
         { path: "/sou-package-meal-plan", name: "Sou Package Meal Plan" },
+        { path: "/sou-package-lake-view", name: "Sou Package lake View" },
+        { path: "/sou-package-resort", name: "Sou Package Resort" },
+      ],
+    },
+
+    {
+      path: "/blog",
+      name: "Blog",
+      icon: <SiBloglovin />,
+      children: [
+        { path: "/blog-category-name", name: "Blog Category Name" },
+        { path: "/blog-data-details", name: "Blog Data Details" },
       ],
     },
 

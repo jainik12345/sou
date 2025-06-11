@@ -17,7 +17,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import BE_URL from "../../../config";
 
-const SOUPackageNameTrace = () => {
+const BlogCategoryNameTrace = () => {
   const [page, setPage] = useState(1);
   const rowsPerPage = 10;
   const [showRestorePopup, setShowRestorePopup] = useState(false);
@@ -25,14 +25,14 @@ const SOUPackageNameTrace = () => {
   const [data, setData] = useState([]);
   const navigate = useNavigate();
 
-  // Fetch trashed (deleted) SOU package names
+  // Fetch trashed (deleted) Blog Category Names
   const fetchDeletedData = async () => {
     try {
       // Must match backend route
-      const res = await axios.get(`${BE_URL}/souPackageName/trashed/list`);
+      const res = await axios.get(`${BE_URL}/blogCategoryName/trashed/list`);
       setData(res.data.data || []);
     } catch (err) {
-      console.error("Error fetching deleted SOU package data:", err);
+      console.error("Error fetching deleted blog category data:", err);
     }
   };
 
@@ -42,17 +42,17 @@ const SOUPackageNameTrace = () => {
 
   const handleRestoreClick = async (id) => {
     try {
-      await axios.patch(`${BE_URL}/souPackageName/restore/${id}`);
+      await axios.patch(`${BE_URL}/blogCategoryName/restore/${id}`);
       setSelectedId(id);
       setShowRestorePopup(true);
       fetchDeletedData();
     } catch (err) {
-      console.error("Error restoring SOU package name:", err);
+      console.error("Error restoring blog category name:", err);
     }
   };
 
   const handleBackClick = () => {
-    navigate("/sou-package-name");
+    navigate("/blog-category-name");
   };
 
   const displayedRows = data.slice(
@@ -76,7 +76,7 @@ const SOUPackageNameTrace = () => {
       {/* Header and Back */}
       <div className="flex justify-between mb-4">
         <h2 className="text-left font-semibold text-xl">
-          SOU Package Name Trace
+          Blog Category Name Trace
         </h2>
         <Back onClick={handleBackClick} />
       </div>
@@ -92,7 +92,7 @@ const SOUPackageNameTrace = () => {
                 S.No.
               </TableCell>
               <TableCell className="border-r !font-extrabold text-base text-left">
-                SOU Package Name
+                Blog Category Name
               </TableCell>
               <TableCell className="!font-extrabold text-base text-left">
                 Restore
@@ -112,7 +112,7 @@ const SOUPackageNameTrace = () => {
                   className="border-r text-left"
                   style={{ maxWidth: 400, whiteSpace: "pre-wrap" }}
                 >
-                  {row.sou_package_name}
+                  {row.blog_category_name}
                 </TableCell>
                 <TableCell className="text-left">
                   <Tooltip title="Restore">
@@ -143,4 +143,4 @@ const SOUPackageNameTrace = () => {
   );
 };
 
-export default SOUPackageNameTrace;
+export default BlogCategoryNameTrace;

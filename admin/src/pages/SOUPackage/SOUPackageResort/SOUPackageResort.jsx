@@ -21,12 +21,12 @@ import axios from "axios";
 import BE_URL from "../../../config";
 import Trace from "../../../components/Buttons/Trace";
 
-const SOUPackageMealPlan = () => {
+const SOUPackageResort = () => {
   const [page, setPage] = useState(1);
   const rowsPerPage = 10;
   const [packageOptions, setPackageOptions] = useState([]);
   const [selectedPackageId, setSelectedPackageId] = useState("");
-  const [mealPlans, setMealPlans] = useState([]);
+  const [resorts, setResorts] = useState([]);
   const [deleteSuccess, setDeleteSuccess] = useState(false);
   const navigate = useNavigate();
 
@@ -38,24 +38,24 @@ const SOUPackageMealPlan = () => {
       .catch((err) => console.error("Package fetch failed:", err));
   }, []);
 
-  // Fetch Meal Plans by selected package
+  // Fetch Resorts by selected package
   useEffect(() => {
     if (selectedPackageId) {
       axios
-        .get(`${BE_URL}/souPackageMealPlan/package/${selectedPackageId}`)
-        .then((res) => setMealPlans(res.data.data))
-        .catch((err) => console.error("Meal Plan fetch failed:", err));
+        .get(`${BE_URL}/souPackageResort/package/${selectedPackageId}`)
+        .then((res) => setResorts(res.data.data))
+        .catch((err) => console.error("Resort fetch failed:", err));
     } else {
-      setMealPlans([]);
+      setResorts([]);
     }
   }, [selectedPackageId]);
 
   const handleDelete = (id) => {
     axios
-      .delete(`${BE_URL}/souPackageMealPlan/${id}`)
+      .delete(`${BE_URL}/souPackageResort/${id}`)
       .then((res) => {
         if (res.data.status === "success") {
-          setMealPlans((prev) => prev.filter((item) => item.id !== id));
+          setResorts((prev) => prev.filter((item) => item.id !== id));
           setDeleteSuccess(true);
           setTimeout(() => setDeleteSuccess(false), 2500);
         } else {
@@ -65,40 +65,24 @@ const SOUPackageMealPlan = () => {
       .catch((err) => console.error("Delete error:", err));
   };
 
-  const displayedRows = mealPlans.slice(
+  const displayedRows = resorts.slice(
     (page - 1) * rowsPerPage,
     page * rowsPerPage
   );
 
-  const handleAdd = () => navigate("/sou-package-meal-plan/insert");
+  const handleAdd = () => navigate("/sou-package-resort/insert");
 
   const handleUpdate = (item) => {
-    navigate("/sou-package-meal-plan/update", {
-      state: { mealPlanData: item },
+    navigate("/sou-package-resort/update", {
+      state: { resortData: item },
     });
   };
 
-  const handleTraceClick = () => navigate("/sou-package-meal-plan/trace");
+  const handleTraceClick = () => navigate("/sou-package-resort/trace");
 
   const handlePackageChange = (event) => {
     setSelectedPackageId(event.target.value);
     setPage(1);
-  };
-
-  // Helper to display JSON array data
-  const renderDataRows = (data) => {
-    if (!Array.isArray(data)) return "-";
-    return data.map((row, idx) => (
-      <div key={idx} className="mb-1">
-        <span className="font-semibold">Category:</span> {row.category || "-"}
-        {" | "}
-        <span className="font-semibold">Double Occupancy:</span>{" "}
-        {row.double_occupancyy || "-"}
-        {" | "}
-        <span className="font-semibold">Extra Person:</span>{" "}
-        {row.extra_person || "-"}
-      </div>
-    ));
   };
 
   return (
@@ -109,8 +93,8 @@ const SOUPackageMealPlan = () => {
       <div className="flex justify-between mb-4">
         <Trace onClick={handleTraceClick} />
         <Add
-          text="Add SOU Package Meal Plan"
-          width="w-[280px]"
+          text="Add SOU Package Resort"
+          width="w-[250px]"
           onClick={handleAdd}
         />
       </div>
@@ -135,13 +119,16 @@ const SOUPackageMealPlan = () => {
 
       <hr className="border-gray-300 mb-6" />
 
-      {/* Meal Plan Table */}
+      {/* Resort Table */}
       <TableContainer component={Paper} className="shadow-md">
         <Table className="border border-gray-300">
           <TableHead>
             <TableRow className="bg-gray-100">
               <TableCell className="border-r border-gray-300 font-bold text-base">
-                ID
+                #
+              </TableCell>
+              <TableCell className="border-r border-gray-300 font-bold text-base">
+                Type Room Name
               </TableCell>
               <TableCell className="border-r border-gray-300 font-bold text-base">
                 Week
@@ -150,7 +137,10 @@ const SOUPackageMealPlan = () => {
                 Food Plan
               </TableCell>
               <TableCell className="border-r border-gray-300 font-bold text-base">
-                Meal Plan Data
+                Per Couple (Price)
+              </TableCell>
+              <TableCell className="border-r border-gray-300 font-bold text-base">
+                Image
               </TableCell>
               <TableCell className="font-bold text-base">Action</TableCell>
             </TableRow>
@@ -166,25 +156,25 @@ const SOUPackageMealPlan = () => {
                   {(page - 1) * rowsPerPage + index + 1}
                 </TableCell>
                 <TableCell className="border-r">
-                  {row.week ? row.week : "-"}
+                  {row.type_room_name || "-"}
+                </TableCell>
+                <TableCell className="border-r">{row.week || "-"}</TableCell>
+                <TableCell className="border-r">
+                  {row.food_plans || "-"}
                 </TableCell>
                 <TableCell className="border-r">
-                  {row.food_plans ? row.food_plans : "-"}
+                  {row.per_couple || "-"}
                 </TableCell>
                 <TableCell className="border-r">
-                  {row.data
-                    ? renderDataRows(
-                        typeof row.data === "string"
-                          ? (() => {
-                              try {
-                                return JSON.parse(row.data);
-                              } catch {
-                                return [];
-                              }
-                            })()
-                          : row.data
-                      )
-                    : "-"}
+                  {row.image ? (
+                    <img
+                      src={`${BE_URL}/Images/SouPackage/SouPackageResortImages/${row.image}`}
+                      alt="Resort"
+                      className="h-12 w-12 object-cover rounded"
+                    />
+                  ) : (
+                    "-"
+                  )}
                 </TableCell>
                 <TableCell>
                   <div className="flex space-x-4">
@@ -210,7 +200,7 @@ const SOUPackageMealPlan = () => {
         {/* Pagination */}
         <div className="flex justify-end p-4">
           <Pagination
-            count={Math.ceil(mealPlans.length / rowsPerPage)}
+            count={Math.ceil(resorts.length / rowsPerPage)}
             page={page}
             onChange={(e, val) => setPage(val)}
             color="primary"
@@ -221,4 +211,4 @@ const SOUPackageMealPlan = () => {
   );
 };
 
-export default SOUPackageMealPlan;
+export default SOUPackageResort;

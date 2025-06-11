@@ -109,6 +109,22 @@ import SOUPackageMealPlan from "../../pages/SOUPackage/SOUPackageMealPlan/SOUPac
 import SOUPackageMealPlanInsert from "../../pages/SOUPackage/SOUPackageMealPlan/SOUPackageMealPlanInsert";
 import SOUPackageMealPlanUpdate from "../../pages/SOUPackage/SOUPackageMealPlan/SOUPackageMealPlanUpdate";
 import SOUPackageMealPlanTrace from "../../pages/SOUPackage/SOUPackageMealPlan/SOUPackageMealPlanTrace";
+import SOUPackageLakeView from "../../pages/SOUPackage/SOUPackageLakeView/SOUPackageLakeView";
+import SOUPackageLakeViewInsert from "../../pages/SOUPackage/SOUPackageLakeView/SOUPackageLakeViewInsert";
+import SOUPackageLakeViewUpdate from "../../pages/SOUPackage/SOUPackageLakeView/SOUPackageLakeViewUpdate";
+import SOUPackageLakeViewTrace from "../../pages/SOUPackage/SOUPackageLakeView/SOUPackageLakeViewTrace";
+import SOUPackageResort from "../../pages/SOUPackage/SOUPackageResort/SOUPackageResort";
+import SOUPackageResortInsert from "../../pages/SOUPackage/SOUPackageResort/SOUPackageResortInsert";
+import SOUPackageResortUpdate from "../../pages/SOUPackage/SOUPackageResort/SOUPackageResortUpdate";
+import SOUPackageResortTrace from "../../pages/SOUPackage/SOUPackageResort/SOUPackageResortTrace";
+import BlogCategoryName from './../../pages/BlogSection/BlogCategoryName/BlogCategoryName';
+import BlogCategoryNameInsert from './../../pages/BlogSection/BlogCategoryName/BlogCategoryNameInsert';
+import BlogCategoryNameUpdate from './../../pages/BlogSection/BlogCategoryName/BlogCategoryNameUpdate';
+import BlogCategoryNameTrace from './../../pages/BlogSection/BlogCategoryName/BlogCategoryNameTrace';
+import BlogDataDetails from './../../pages/BlogSection/BlogDataDetails/BlogDataDetails';
+import BlogDataDetailsInsert from './../../pages/BlogSection/BlogDataDetails/BlogDataDetailsInsert';
+import BlogDataDetailsUpdate from './../../pages/BlogSection/BlogDataDetails/BlogDataDetailsUpdate';
+import BlogDataDetailsTrace from './../../pages/BlogSection/BlogDataDetails/BlogDataDetailsTrace';
 
 
 
@@ -279,6 +295,36 @@ const RouteComponents = () => {
           <Route path="/sou-package-meal-plan/insert" element={<SOUPackageMealPlanInsert/>} />
           <Route path="/sou-package-meal-plan/update" element={<SOUPackageMealPlanUpdate/>} />
           <Route path="/sou-package-meal-plan/trace" element={<SOUPackageMealPlanTrace/>} />
+
+
+
+          <Route path="/sou-package-lake-view" element={<SOUPackageLakeView/>} />
+          <Route path="/sou-package-lake-view/insert" element={<SOUPackageLakeViewInsert/>} />
+          <Route path="/sou-package-lake-view/update" element={<SOUPackageLakeViewUpdate/>} />
+          <Route path="/sou-package-lake-view/trace" element={<SOUPackageLakeViewTrace/>} />
+
+
+          <Route path="/sou-package-resort" element={<SOUPackageResort/>} />
+          <Route path="/sou-package-resort/insert" element={<SOUPackageResortInsert/>} />
+          <Route path="/sou-package-resort/update" element={<SOUPackageResortUpdate/>} />
+          <Route path="/sou-package-resort/trace" element={<SOUPackageResortTrace/>} />
+
+
+          {/*-------------------------------------------------Blog---------------------------------------------- */}
+
+
+          <Route path="/blog-category-name" element={<BlogCategoryName/>} />
+          <Route path="/blog-category-name/insert" element={<BlogCategoryNameInsert/>} />
+          <Route path="/blog-category-name/update" element={<BlogCategoryNameUpdate/>} />
+          <Route path="/blog-category-name/trace" element={<BlogCategoryNameTrace/>} />
+
+
+
+          <Route path="/blog-data-details" element={<BlogDataDetails/>} />
+          <Route path="/blog-data-details/insert" element={<BlogDataDetailsInsert/>} />
+          <Route path="/blog-data-details/update" element={<BlogDataDetailsUpdate/>} />
+          <Route path="/blog-data-details/trace" element={<BlogDataDetailsTrace/>} />
+
 
 
 

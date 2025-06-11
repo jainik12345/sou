@@ -65,11 +65,17 @@ const souPackageHeroSection = require("./routes/souPackage/souPackageHeroSection
 const souPackageAmenities = require("./routes/souPackage/souPackageAmenities");
 const souPackageItineraryName = require("./routes/souPackage/souPackageItineraryName");
 const souPackageItinerarySection = require("./routes/souPackage/souPackageItinerarySection");
-const souPackageNotesPolicy = require("./routes/souPackage/souPackageNotesPolicy")
-const souPackageFaqs = require("./routes/souPackage/souPackageFaqs")
-const souPackageParagraph = require("./routes/souPackage/souPackageParagraph")
+const souPackageNotesPolicy = require("./routes/souPackage/souPackageNotesPolicy");
+const souPackageFaqs = require("./routes/souPackage/souPackageFaqs");
+const souPackageParagraph = require("./routes/souPackage/souPackageParagraph");
+const souPackageMealPlan = require("./routes/souPackage/souPackageMealPlan");
+const souPackageLakeView = require("./routes/souPackage/souPackageLakeView");
+const souPackageResort = require("./routes/souPackage/souPackageResort");
 
+/**------------------------------------------Blogs-------------------------------------------------- */
 
+const blogcategoryName = require("./routes/blog/blogCategoryName");
+const blogDataDetails = require("./routes/blog/blogDataDetails");
 
 app.use("/admin", admin);
 app.use("/privatePolicy", privatePolicy);
@@ -109,10 +115,17 @@ app.use("/souPackageHeroSection", souPackageHeroSection);
 app.use("/souPackageAmenities", souPackageAmenities);
 app.use("/souPackageItineraryName", souPackageItineraryName);
 app.use("/souPackageItinerarySection", souPackageItinerarySection);
-app.use("/souPackageNotesPolicy", souPackageNotesPolicy)
-app.use("/souPackageFaqs", souPackageFaqs)
-app.use("/souPackageParagraph", souPackageParagraph)
+app.use("/souPackageNotesPolicy", souPackageNotesPolicy);
+app.use("/souPackageFaqs", souPackageFaqs);
+app.use("/souPackageParagraph", souPackageParagraph);
+app.use("/souPackageMealPlan", souPackageMealPlan);
+app.use("/souPackageLakeView", souPackageLakeView);
+app.use("/souPackageResort", souPackageResort);
 
+/**------------------------------------------Blogs-------------------------------------------------- */
+
+app.use("/blogcategoryName", blogcategoryName);
+app.use("/blogDataDetails", blogDataDetails);
 
 // Static Images
 /**--------------------------------------------------Home-------------------------------------------------- */
@@ -193,6 +206,20 @@ app.use(
 app.use(
   "/Images/SouPackage/SouPackageAmenities",
   express.static(path.join(__dirname, "Images/SouPackage/SouPackageAmenities"))
+);
+
+app.use(
+  "/Images/SouPackage/SouPackageResortImages",
+  express.static(
+    path.join(__dirname, "Images/SouPackage/SouPackageResortImages")
+  )
+);
+
+/**------------------------------------------Blogs-------------------------------------------------- */
+
+app.use(
+  "/Images/Blog/BlogDataDetailsImages",
+  express.static(path.join(__dirname, "Images/Blog/BlogDataDetailsImages"))
 );
 
 /**---------------Start Server ---------------*/

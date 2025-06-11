@@ -21,12 +21,12 @@ import axios from "axios";
 import BE_URL from "../../../config";
 import Trace from "../../../components/Buttons/Trace";
 
-const SOUPackageMealPlan = () => {
+const SOUPackageLakeView = () => {
   const [page, setPage] = useState(1);
   const rowsPerPage = 10;
   const [packageOptions, setPackageOptions] = useState([]);
   const [selectedPackageId, setSelectedPackageId] = useState("");
-  const [mealPlans, setMealPlans] = useState([]);
+  const [lakeViews, setLakeViews] = useState([]);
   const [deleteSuccess, setDeleteSuccess] = useState(false);
   const navigate = useNavigate();
 
@@ -38,24 +38,24 @@ const SOUPackageMealPlan = () => {
       .catch((err) => console.error("Package fetch failed:", err));
   }, []);
 
-  // Fetch Meal Plans by selected package
+  // Fetch Lake Views by selected package
   useEffect(() => {
     if (selectedPackageId) {
       axios
-        .get(`${BE_URL}/souPackageMealPlan/package/${selectedPackageId}`)
-        .then((res) => setMealPlans(res.data.data))
-        .catch((err) => console.error("Meal Plan fetch failed:", err));
+        .get(`${BE_URL}/souPackageLakeView/package/${selectedPackageId}`)
+        .then((res) => setLakeViews(res.data.data))
+        .catch((err) => console.error("Lake View fetch failed:", err));
     } else {
-      setMealPlans([]);
+      setLakeViews([]);
     }
   }, [selectedPackageId]);
 
   const handleDelete = (id) => {
     axios
-      .delete(`${BE_URL}/souPackageMealPlan/${id}`)
+      .delete(`${BE_URL}/souPackageLakeView/${id}`)
       .then((res) => {
         if (res.data.status === "success") {
-          setMealPlans((prev) => prev.filter((item) => item.id !== id));
+          setLakeViews((prev) => prev.filter((item) => item.id !== id));
           setDeleteSuccess(true);
           setTimeout(() => setDeleteSuccess(false), 2500);
         } else {
@@ -65,20 +65,20 @@ const SOUPackageMealPlan = () => {
       .catch((err) => console.error("Delete error:", err));
   };
 
-  const displayedRows = mealPlans.slice(
+  const displayedRows = lakeViews.slice(
     (page - 1) * rowsPerPage,
     page * rowsPerPage
   );
 
-  const handleAdd = () => navigate("/sou-package-meal-plan/insert");
+  const handleAdd = () => navigate("/sou-package-lake-view/insert");
 
   const handleUpdate = (item) => {
-    navigate("/sou-package-meal-plan/update", {
-      state: { mealPlanData: item },
+    navigate("/sou-package-lake-view/update", {
+      state: { lakeViewData: item },
     });
   };
 
-  const handleTraceClick = () => navigate("/sou-package-meal-plan/trace");
+  const handleTraceClick = () => navigate("/sou-package-lake-view/trace");
 
   const handlePackageChange = (event) => {
     setSelectedPackageId(event.target.value);
@@ -90,13 +90,13 @@ const SOUPackageMealPlan = () => {
     if (!Array.isArray(data)) return "-";
     return data.map((row, idx) => (
       <div key={idx} className="mb-1">
-        <span className="font-semibold">Category:</span> {row.category || "-"}
+        <span className="font-semibold">Plan:</span> {row.plans || "-"}
         {" | "}
-        <span className="font-semibold">Double Occupancy:</span>{" "}
-        {row.double_occupancyy || "-"}
+        <span className="font-semibold">1 Night & 2 Days:</span>{" "}
+        {row.night1days2 || "-"}
         {" | "}
-        <span className="font-semibold">Extra Person:</span>{" "}
-        {row.extra_person || "-"}
+        <span className="font-semibold">2 Night & 3 Days:</span>{" "}
+        {row.night2days3 || "-"}
       </div>
     ));
   };
@@ -109,7 +109,7 @@ const SOUPackageMealPlan = () => {
       <div className="flex justify-between mb-4">
         <Trace onClick={handleTraceClick} />
         <Add
-          text="Add SOU Package Meal Plan"
+          text="Add SOU Package Lake View"
           width="w-[280px]"
           onClick={handleAdd}
         />
@@ -135,7 +135,7 @@ const SOUPackageMealPlan = () => {
 
       <hr className="border-gray-300 mb-6" />
 
-      {/* Meal Plan Table */}
+      {/* Lake View Table */}
       <TableContainer component={Paper} className="shadow-md">
         <Table className="border border-gray-300">
           <TableHead>
@@ -147,10 +147,7 @@ const SOUPackageMealPlan = () => {
                 Week
               </TableCell>
               <TableCell className="border-r border-gray-300 font-bold text-base">
-                Food Plan
-              </TableCell>
-              <TableCell className="border-r border-gray-300 font-bold text-base">
-                Meal Plan Data
+                Lake View Data
               </TableCell>
               <TableCell className="font-bold text-base">Action</TableCell>
             </TableRow>
@@ -167,9 +164,6 @@ const SOUPackageMealPlan = () => {
                 </TableCell>
                 <TableCell className="border-r">
                   {row.week ? row.week : "-"}
-                </TableCell>
-                <TableCell className="border-r">
-                  {row.food_plans ? row.food_plans : "-"}
                 </TableCell>
                 <TableCell className="border-r">
                   {row.data
@@ -210,7 +204,7 @@ const SOUPackageMealPlan = () => {
         {/* Pagination */}
         <div className="flex justify-end p-4">
           <Pagination
-            count={Math.ceil(mealPlans.length / rowsPerPage)}
+            count={Math.ceil(lakeViews.length / rowsPerPage)}
             page={page}
             onChange={(e, val) => setPage(val)}
             color="primary"
@@ -221,4 +215,4 @@ const SOUPackageMealPlan = () => {
   );
 };
 
-export default SOUPackageMealPlan;
+export default SOUPackageLakeView;

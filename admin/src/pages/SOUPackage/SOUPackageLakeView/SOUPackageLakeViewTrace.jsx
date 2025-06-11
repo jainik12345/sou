@@ -23,12 +23,12 @@ import RestoreData from "../../../components/Popup/RestoreData";
 import Back from "../../../components/Buttons/Back";
 import { FaRecycle } from "react-icons/fa";
 
-const SOUPackageMealPlanTrace = () => {
+const SOUPackageLakeViewTrace = () => {
   const [page, setPage] = useState(1);
   const rowsPerPage = 10;
   const [packageOptions, setPackageOptions] = useState([]);
   const [selectedPackageId, setSelectedPackageId] = useState("");
-  const [trashedMealPlans, setTrashedMealPlans] = useState([]);
+  const [trashedLakeViews, setTrashedLakeViews] = useState([]);
   const [restoreSuccess, setRestoreSuccess] = useState(false);
   const navigate = useNavigate();
 
@@ -40,17 +40,17 @@ const SOUPackageMealPlanTrace = () => {
       .catch((err) => console.error("Package fetch failed:", err));
   }, []);
 
-  // Fetch trashed meal plans by package
+  // Fetch trashed lake views by package
   useEffect(() => {
     if (selectedPackageId) {
       axios
         .get(
-          `${BE_URL}/souPackageMealPlan/trashed/package/${selectedPackageId}`
+          `${BE_URL}/souPackageLakeView/trashed/package/${selectedPackageId}`
         )
-        .then((res) => setTrashedMealPlans(res.data.data))
+        .then((res) => setTrashedLakeViews(res.data.data))
         .catch((err) => console.error("Trash fetch failed:", err));
     } else {
-      setTrashedMealPlans([]);
+      setTrashedLakeViews([]);
     }
   }, [selectedPackageId]);
 
@@ -61,10 +61,10 @@ const SOUPackageMealPlanTrace = () => {
 
   const handleRestore = (id) => {
     axios
-      .patch(`${BE_URL}/souPackageMealPlan/restore/${id}`)
+      .patch(`${BE_URL}/souPackageLakeView/restore/${id}`)
       .then((res) => {
         if (res.data.status === "success") {
-          setTrashedMealPlans((prev) => prev.filter((item) => item.id !== id));
+          setTrashedLakeViews((prev) => prev.filter((item) => item.id !== id));
           setRestoreSuccess(true);
           setTimeout(() => setRestoreSuccess(false), 2500);
         }
@@ -74,7 +74,7 @@ const SOUPackageMealPlanTrace = () => {
       });
   };
 
-  const displayedRows = trashedMealPlans.slice(
+  const displayedRows = trashedLakeViews.slice(
     (page - 1) * rowsPerPage,
     page * rowsPerPage
   );
@@ -84,13 +84,13 @@ const SOUPackageMealPlanTrace = () => {
     if (!Array.isArray(data)) return "-";
     return data.map((row, idx) => (
       <div key={idx} className="mb-1">
-        <span className="font-semibold">Category:</span> {row.category || "-"}
+        <span className="font-semibold">Plan:</span> {row.plans || "-"}
         {" | "}
-        <span className="font-semibold">Double Occupancy:</span>{" "}
-        {row.double_occupancyy || "-"}
+        <span className="font-semibold">1 Night & 2 Days:</span>{" "}
+        {row.night1days2 || "-"}
         {" | "}
-        <span className="font-semibold">Extra Person:</span>{" "}
-        {row.extra_person || "-"}
+        <span className="font-semibold">2 Night & 3 Days:</span>{" "}
+        {row.night2days3 || "-"}
       </div>
     ));
   };
@@ -108,9 +108,9 @@ const SOUPackageMealPlanTrace = () => {
         mb={4}
       >
         <h2 className="text-2xl font-semibold text-gray-900">
-          Trashed Package Meal Plan
+          Trashed Package Lake View
         </h2>
-        <Back onClick={() => navigate("/sou-package-meal-plan")} />
+        <Back onClick={() => navigate("/sou-package-lake-view")} />
       </Box>
 
       {/* Package Selector */}
@@ -145,10 +145,7 @@ const SOUPackageMealPlanTrace = () => {
                 Week
               </TableCell>
               <TableCell className="border-r font-bold text-base">
-                Food Plan
-              </TableCell>
-              <TableCell className="border-r font-bold text-base">
-                Meal Plan Data
+                Lake View Data
               </TableCell>
               <TableCell className="font-bold text-base text-center">
                 Restore
@@ -159,8 +156,8 @@ const SOUPackageMealPlanTrace = () => {
           <TableBody>
             {displayedRows.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={5} align="center" className="py-6">
-                  First select package name, then meal plan data will appear
+                <TableCell colSpan={4} align="center" className="py-6">
+                  First select package name, then lake view data will appear
                   here.
                 </TableCell>
               </TableRow>
@@ -174,9 +171,6 @@ const SOUPackageMealPlanTrace = () => {
                     {(page - 1) * rowsPerPage + index + 1}
                   </TableCell>
                   <TableCell className="border-r">{row.week || "-"}</TableCell>
-                  <TableCell className="border-r">
-                    {row.food_plans || "-"}
-                  </TableCell>
                   <TableCell className="border-r">
                     {row.data
                       ? renderDataRows(
@@ -193,11 +187,11 @@ const SOUPackageMealPlanTrace = () => {
                       : "-"}
                   </TableCell>
                   <TableCell className="text-center">
-                    <Tooltip title="Restore Meal Plan" arrow>
+                    <Tooltip title="Restore Lake View" arrow>
                       <IconButton
                         className="text-blue-600 cursor-pointer hover:text-blue-800"
                         onClick={() => handleRestore(row.id)}
-                        aria-label="Restore Meal Plan"
+                        aria-label="Restore Lake View"
                         size="small"
                       >
                         <FaRecycle size={22} />
@@ -212,7 +206,7 @@ const SOUPackageMealPlanTrace = () => {
 
         <div className="flex justify-end p-4">
           <Pagination
-            count={Math.ceil(trashedMealPlans.length / rowsPerPage)}
+            count={Math.ceil(trashedLakeViews.length / rowsPerPage)}
             page={page}
             onChange={(e, val) => setPage(val)}
             color="primary"
@@ -223,4 +217,4 @@ const SOUPackageMealPlanTrace = () => {
   );
 };
 
-export default SOUPackageMealPlanTrace;
+export default SOUPackageLakeViewTrace;

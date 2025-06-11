@@ -21,33 +21,34 @@ const BlueTextField = styled(TextField)({
 });
 
 const weekOptions = [
-  { value: "Weekdays", label: "Weekdays" },
+  { value: "Weekday", label: "Weekday" },
   { value: "Weekend", label: "Weekend" },
 ];
 
-const foodPlanOptions = [
+const planOptions = [
   { value: "EP", label: "EP" },
-  { value: "CP", label: "CP" },
   { value: "MAP", label: "MAP" },
   { value: "AP", label: "AP" },
 ];
 
-const emptyEntry = { category: "", double_occupancyy: "", extra_person: "" };
+const emptyEntry = {
+  plans: "",
+  night1days2: "",
+  night2days3: "",
+};
 
-const SOUPackageMealPlanUpdate = () => {
+const SOUPackageLakeViewUpdate = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const mealPlanData = location.state?.mealPlanData;
+  const lakeViewData = location.state?.lakeViewData;
 
   const [formData, setFormData] = useState({
     sou_package_id: "",
     week: "",
-    food_plans: "",
     id: "",
     data: [{ ...emptyEntry }],
   });
   const [packageOptions, setPackageOptions] = useState([]);
-  const [errors, setErrors] = useState({});
   const [entryErrors, setEntryErrors] = useState([{}]);
   const [success, setSuccess] = useState(false);
 
@@ -61,42 +62,39 @@ const SOUPackageMealPlanUpdate = () => {
         console.error("Package fetch failed:", err);
       });
 
-    if (mealPlanData) {
+    if (lakeViewData) {
       let safeData = [];
-      if (typeof mealPlanData.data === "string") {
+      if (typeof lakeViewData.data === "string") {
         try {
-          safeData = JSON.parse(mealPlanData.data);
+          safeData = JSON.parse(lakeViewData.data);
         } catch {
           safeData = [{ ...emptyEntry }];
         }
-      } else if (Array.isArray(mealPlanData.data)) {
-        safeData = mealPlanData.data;
+      } else if (Array.isArray(lakeViewData.data)) {
+        safeData = lakeViewData.data;
       } else {
         safeData = [{ ...emptyEntry }];
       }
 
       setFormData({
-        sou_package_id: mealPlanData.sou_package_id,
-        week: mealPlanData.week || "",
-        food_plans: mealPlanData.food_plans || "",
-        id: mealPlanData.id,
+        sou_package_id: lakeViewData.sou_package_id,
+        week: lakeViewData.week || "",
+        id: lakeViewData.id,
         data: safeData.length > 0 ? safeData : [{ ...emptyEntry }],
       });
       setEntryErrors(
         safeData.map(() => ({})) // one error object per entry
       );
     } else {
-      navigate("/sou-package-meal-plan");
+      navigate("/sou-package-lake-view");
     }
-  }, [mealPlanData, navigate]);
+  }, [lakeViewData, navigate]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    setErrors((prev) => ({ ...prev, [name]: false }));
   };
 
-  // Handle change for data entries (array of category/double_occupancyy/extra_person)
   const handleEntryChange = (idx, e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -110,7 +108,6 @@ const SOUPackageMealPlanUpdate = () => {
     );
   };
 
-  // Add new entry
   const handleAddEntry = () => {
     setFormData((prev) => ({
       ...prev,
@@ -119,7 +116,6 @@ const SOUPackageMealPlanUpdate = () => {
     setEntryErrors((prev) => [...prev, {}]);
   };
 
-  // Remove entry
   const handleRemoveEntry = (idx) => {
     setFormData((prev) => ({
       ...prev,
@@ -133,9 +129,9 @@ const SOUPackageMealPlanUpdate = () => {
 
     // Validate all data entries
     const newEntryErrors = formData.data.map((entry) => ({
-      category: entry.category.trim() === "",
-      double_occupancyy: entry.double_occupancyy === "",
-      extra_person: entry.extra_person === "",
+      plans: entry.plans === "",
+      night1days2: entry.night1days2 === "",
+      night2days3: entry.night2days3 === "",
     }));
 
     setEntryErrors(newEntryErrors);
@@ -146,19 +142,18 @@ const SOUPackageMealPlanUpdate = () => {
       const data = {
         sou_package_id: formData.sou_package_id,
         week: formData.week,
-        food_plans: formData.food_plans,
         data: formData.data,
       };
 
       const res = await axios.put(
-        `${BE_URL}/souPackageMealPlan/${formData.id}`,
+        `${BE_URL}/souPackageLakeView/${formData.id}`,
         data
       );
 
       if (res.data.status === "success") {
         setSuccess(true);
         setTimeout(() => setSuccess(false), 2500);
-        navigate("/sou-package-meal-plan");
+        navigate("/sou-package-lake-view");
       } else {
         console.error("Update failed");
       }
@@ -168,18 +163,18 @@ const SOUPackageMealPlanUpdate = () => {
   };
 
   const handleCancel = () => {
-    navigate("/sou-package-meal-plan");
+    navigate("/sou-package-lake-view");
   };
 
   return (
     <div className="p-6">
       <div className="border-2 border-blue-300 rounded-2xl p-6 shadow-md">
         <h2 className="bg-blue-600 text-white text-lg font-semibold py-3 px-5 rounded-md mb-8">
-          Update SOU Package Meal Plan
+          Update SOU Package Lake View
         </h2>
 
         <form onSubmit={handleSubmit} className="space-y-8">
-          {/* Package */}
+          {/* Package Selector */}
           <BlueTextField
             select
             label="Select Package"
@@ -188,8 +183,6 @@ const SOUPackageMealPlanUpdate = () => {
             onChange={handleInputChange}
             fullWidth
             required
-            error={errors.sou_package_id}
-            helperText={errors.sou_package_id ? "Please select a package" : ""}
           >
             {packageOptions.map((pkg) => (
               <MenuItem key={pkg.id} value={pkg.id}>
@@ -198,7 +191,7 @@ const SOUPackageMealPlanUpdate = () => {
             ))}
           </BlueTextField>
 
-          {/* Week */}
+          {/* Week Selector */}
           <BlueTextField
             select
             label="Week"
@@ -207,29 +200,8 @@ const SOUPackageMealPlanUpdate = () => {
             onChange={handleInputChange}
             fullWidth
             required
-            error={errors.week}
-            helperText={errors.week ? "Please select week" : ""}
           >
             {weekOptions.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </BlueTextField>
-
-          {/* Food Plans */}
-          <BlueTextField
-            select
-            label="Food Plans"
-            name="food_plans"
-            value={formData.food_plans}
-            onChange={handleInputChange}
-            fullWidth
-            required
-            error={errors.food_plans}
-            helperText={errors.food_plans ? "Please select food plan" : ""}
-          >
-            {foodPlanOptions.map((option) => (
               <MenuItem key={option.value} value={option.value}>
                 {option.label}
               </MenuItem>
@@ -240,7 +212,7 @@ const SOUPackageMealPlanUpdate = () => {
           <div>
             <div className="flex items-center mb-2">
               <span className="font-semibold text-blue-700">
-                Meal Plan Details
+                Lake View Plan Details
               </span>
               <button
                 type="button"
@@ -261,45 +233,52 @@ const SOUPackageMealPlanUpdate = () => {
                 className="flex flex-col md:flex-row md:items-end gap-4 mb-4 border-b pb-4 relative"
               >
                 <BlueTextField
-                  label="Category"
-                  name="category"
-                  value={entry.category}
+                  select
+                  label="Plans"
+                  name="plans"
+                  value={entry.plans}
                   onChange={(e) => handleEntryChange(idx, e)}
                   fullWidth
                   required
-                  error={entryErrors[idx]?.category}
+                  error={entryErrors[idx]?.plans}
                   helperText={
-                    entryErrors[idx]?.category ? "Please enter a category" : ""
+                    entryErrors[idx]?.plans ? "Please select a plan" : ""
                   }
-                />
+                >
+                  {planOptions.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </BlueTextField>
                 <BlueTextField
-                  label="Double Occupancy"
-                  name="double_occupancyy"
+                  label="1 Night & 2 Days (Per Person)"
+                  name="night1days2"
                   type="number"
-                  value={entry.double_occupancyy}
+                  value={entry.night1days2}
                   onChange={(e) => handleEntryChange(idx, e)}
                   fullWidth
                   required
-                  error={entryErrors[idx]?.double_occupancyy}
+                  error={entryErrors[idx]?.night1days2}
                   helperText={
-                    entryErrors[idx]?.double_occupancyy
-                      ? "Please enter double occupancy"
+                    entryErrors[idx]?.night1days2
+                      ? "Please enter 1 Night & 2 Days rate"
                       : ""
                   }
                   inputProps={{ min: 0 }}
                 />
                 <BlueTextField
-                  label="Extra Person"
-                  name="extra_person"
+                  label="2 Night & 3 Days (Per Person)"
+                  name="night2days3"
                   type="number"
-                  value={entry.extra_person}
+                  value={entry.night2days3}
                   onChange={(e) => handleEntryChange(idx, e)}
                   fullWidth
                   required
-                  error={entryErrors[idx]?.extra_person}
+                  error={entryErrors[idx]?.night2days3}
                   helperText={
-                    entryErrors[idx]?.extra_person
-                      ? "Please enter extra person"
+                    entryErrors[idx]?.night2days3
+                      ? "Please enter 2 Night & 3 Days rate"
                       : ""
                   }
                   inputProps={{ min: 0 }}
@@ -335,4 +314,4 @@ const SOUPackageMealPlanUpdate = () => {
   );
 };
 
-export default SOUPackageMealPlanUpdate;
+export default SOUPackageLakeViewUpdate;

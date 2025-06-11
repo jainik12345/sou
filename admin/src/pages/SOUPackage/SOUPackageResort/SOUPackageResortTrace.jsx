@@ -14,7 +14,6 @@ import {
   FormControl,
   Box,
   Tooltip,
-  IconButton,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -23,12 +22,12 @@ import RestoreData from "../../../components/Popup/RestoreData";
 import Back from "../../../components/Buttons/Back";
 import { FaRecycle } from "react-icons/fa";
 
-const SOUPackageMealPlanTrace = () => {
+const SOUPackageResortTrace = () => {
   const [page, setPage] = useState(1);
   const rowsPerPage = 10;
   const [packageOptions, setPackageOptions] = useState([]);
   const [selectedPackageId, setSelectedPackageId] = useState("");
-  const [trashedMealPlans, setTrashedMealPlans] = useState([]);
+  const [trashedResorts, setTrashedResorts] = useState([]);
   const [restoreSuccess, setRestoreSuccess] = useState(false);
   const navigate = useNavigate();
 
@@ -40,17 +39,15 @@ const SOUPackageMealPlanTrace = () => {
       .catch((err) => console.error("Package fetch failed:", err));
   }, []);
 
-  // Fetch trashed meal plans by package
+  // Fetch trashed resorts by package
   useEffect(() => {
     if (selectedPackageId) {
       axios
-        .get(
-          `${BE_URL}/souPackageMealPlan/trashed/package/${selectedPackageId}`
-        )
-        .then((res) => setTrashedMealPlans(res.data.data))
+        .get(`${BE_URL}/souPackageResort/trashed/package/${selectedPackageId}`)
+        .then((res) => setTrashedResorts(res.data.data))
         .catch((err) => console.error("Trash fetch failed:", err));
     } else {
-      setTrashedMealPlans([]);
+      setTrashedResorts([]);
     }
   }, [selectedPackageId]);
 
@@ -61,10 +58,10 @@ const SOUPackageMealPlanTrace = () => {
 
   const handleRestore = (id) => {
     axios
-      .patch(`${BE_URL}/souPackageMealPlan/restore/${id}`)
+      .patch(`${BE_URL}/souPackageResort/restore/${id}`)
       .then((res) => {
         if (res.data.status === "success") {
-          setTrashedMealPlans((prev) => prev.filter((item) => item.id !== id));
+          setTrashedResorts((prev) => prev.filter((item) => item.id !== id));
           setRestoreSuccess(true);
           setTimeout(() => setRestoreSuccess(false), 2500);
         }
@@ -74,26 +71,10 @@ const SOUPackageMealPlanTrace = () => {
       });
   };
 
-  const displayedRows = trashedMealPlans.slice(
+  const displayedRows = trashedResorts.slice(
     (page - 1) * rowsPerPage,
     page * rowsPerPage
   );
-
-  // Helper to display JSON array data
-  const renderDataRows = (data) => {
-    if (!Array.isArray(data)) return "-";
-    return data.map((row, idx) => (
-      <div key={idx} className="mb-1">
-        <span className="font-semibold">Category:</span> {row.category || "-"}
-        {" | "}
-        <span className="font-semibold">Double Occupancy:</span>{" "}
-        {row.double_occupancyy || "-"}
-        {" | "}
-        <span className="font-semibold">Extra Person:</span>{" "}
-        {row.extra_person || "-"}
-      </div>
-    ));
-  };
 
   return (
     <div className="p-6 rounded-xl bg-white relative shadow-lg">
@@ -108,9 +89,9 @@ const SOUPackageMealPlanTrace = () => {
         mb={4}
       >
         <h2 className="text-2xl font-semibold text-gray-900">
-          Trashed Package Meal Plan
+          Trashed Package Resort
         </h2>
-        <Back onClick={() => navigate("/sou-package-meal-plan")} />
+        <Back onClick={() => navigate("/sou-package-resort")} />
       </Box>
 
       {/* Package Selector */}
@@ -142,13 +123,19 @@ const SOUPackageMealPlanTrace = () => {
             <TableRow className="bg-gray-100">
               <TableCell className="border-r font-bold text-base">#</TableCell>
               <TableCell className="border-r font-bold text-base">
+                Type Room Name
+              </TableCell>
+              <TableCell className="border-r font-bold text-base">
                 Week
               </TableCell>
               <TableCell className="border-r font-bold text-base">
                 Food Plan
               </TableCell>
               <TableCell className="border-r font-bold text-base">
-                Meal Plan Data
+                Per Couple (Price)
+              </TableCell>
+              <TableCell className="border-r font-bold text-base">
+                Image
               </TableCell>
               <TableCell className="font-bold text-base text-center">
                 Restore
@@ -159,9 +146,8 @@ const SOUPackageMealPlanTrace = () => {
           <TableBody>
             {displayedRows.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={5} align="center" className="py-6">
-                  First select package name, then meal plan data will appear
-                  here.
+                <TableCell colSpan={7} align="center" className="py-6">
+                  First select package name, then resort data will appear here.
                 </TableCell>
               </TableRow>
             ) : (
@@ -173,35 +159,36 @@ const SOUPackageMealPlanTrace = () => {
                   <TableCell className="border-r">
                     {(page - 1) * rowsPerPage + index + 1}
                   </TableCell>
+                  <TableCell className="border-r">
+                    {row.type_room_name || "-"}
+                  </TableCell>
                   <TableCell className="border-r">{row.week || "-"}</TableCell>
                   <TableCell className="border-r">
                     {row.food_plans || "-"}
                   </TableCell>
                   <TableCell className="border-r">
-                    {row.data
-                      ? renderDataRows(
-                          typeof row.data === "string"
-                            ? (() => {
-                                try {
-                                  return JSON.parse(row.data);
-                                } catch {
-                                  return [];
-                                }
-                              })()
-                            : row.data
-                        )
-                      : "-"}
+                    {row.per_couple || "-"}
+                  </TableCell>
+                  <TableCell className="border-r">
+                    {row.image ? (
+                      <img
+                        src={`${BE_URL}/Images/SouPackage/SouPackageResortImages/${row.image}`}
+                        alt="Resort"
+                        className="w-16 h-16 object-cover rounded-md border"
+                      />
+                    ) : (
+                      "-"
+                    )}
                   </TableCell>
                   <TableCell className="text-center">
-                    <Tooltip title="Restore Meal Plan" arrow>
-                      <IconButton
+                    <Tooltip title="Restore Resort" arrow>
+                      <button
                         className="text-blue-600 cursor-pointer hover:text-blue-800"
                         onClick={() => handleRestore(row.id)}
-                        aria-label="Restore Meal Plan"
-                        size="small"
+                        aria-label="Restore Resort"
                       >
                         <FaRecycle size={22} />
-                      </IconButton>
+                      </button>
                     </Tooltip>
                   </TableCell>
                 </TableRow>
@@ -212,7 +199,7 @@ const SOUPackageMealPlanTrace = () => {
 
         <div className="flex justify-end p-4">
           <Pagination
-            count={Math.ceil(trashedMealPlans.length / rowsPerPage)}
+            count={Math.ceil(trashedResorts.length / rowsPerPage)}
             page={page}
             onChange={(e, val) => setPage(val)}
             color="primary"
@@ -223,4 +210,4 @@ const SOUPackageMealPlanTrace = () => {
   );
 };
 
-export default SOUPackageMealPlanTrace;
+export default SOUPackageResortTrace;

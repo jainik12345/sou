@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import {
   Table,
@@ -8,82 +9,81 @@ import {
   TableRow,
   Paper,
   Pagination,
-  Tooltip,
 } from "@mui/material";
-import { FaRecycle } from "react-icons/fa";
-import Back from "../../../components/Buttons/Back";
-import RestoreData from "../../../components/Popup/RestoreData";
+import { FaEdit, FaTrash } from "react-icons/fa";
+import Add from "../../../components/Buttons/Add";
+import Trace from "../../../components/Buttons/Trace";
+import DeleteData from "../../../components/Popup/DeleteData";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import BE_URL from "../../../config";
 
-const SOUPackageNameTrace = () => {
+const BlogCategoryName = () => {
   const [page, setPage] = useState(1);
   const rowsPerPage = 10;
-  const [showRestorePopup, setShowRestorePopup] = useState(false);
+  const [showDeletePopup, setShowDeletePopup] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
   const [data, setData] = useState([]);
   const navigate = useNavigate();
 
-  // Fetch trashed (deleted) SOU package names
-  const fetchDeletedData = async () => {
+  const fetchData = async () => {
     try {
-      // Must match backend route
-      const res = await axios.get(`${BE_URL}/souPackageName/trashed/list`);
-      setData(res.data.data || []);
+      const res = await axios.get(`${BE_URL}/blogCategoryName`);
+      setData(res.data.data);
     } catch (err) {
-      console.error("Error fetching deleted SOU package data:", err);
+      console.error("Error fetching data:", err);
     }
   };
 
   useEffect(() => {
-    fetchDeletedData();
+    fetchData();
   }, []);
-
-  const handleRestoreClick = async (id) => {
-    try {
-      await axios.patch(`${BE_URL}/souPackageName/restore/${id}`);
-      setSelectedId(id);
-      setShowRestorePopup(true);
-      fetchDeletedData();
-    } catch (err) {
-      console.error("Error restoring SOU package name:", err);
-    }
-  };
-
-  const handleBackClick = () => {
-    navigate("/sou-package-name");
-  };
 
   const displayedRows = data.slice(
     (page - 1) * rowsPerPage,
     page * rowsPerPage
   );
 
+  const handleAddClick = () => {
+    navigate("/blog-category-name/insert");
+  };
+
+  const handleTraceClick = () => {
+    navigate("/blog-category-name/trace");
+  };
+
+  const handleEditClick = (row) => {
+    navigate("/blog-category-name/update", { state: { rowData: row } });
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`${BE_URL}/blogCategoryName/${id}`);
+      setShowDeletePopup(true);
+      setSelectedId(id);
+      fetchData();
+    } catch (err) {
+      console.error("Error deleting:", err);
+    }
+  };
+
   return (
     <div className="p-4 rounded-xl bg-white">
-      {/* Restore Popup */}
-      {showRestorePopup && (
-        <RestoreData
-          onClose={() => {
-            setShowRestorePopup(false);
-            setSelectedId(null);
-          }}
-          id={selectedId}
-        />
+      {showDeletePopup && (
+        <DeleteData onClose={() => setShowDeletePopup(false)} />
       )}
 
-      {/* Header and Back */}
       <div className="flex justify-between mb-4">
-        <h2 className="text-left font-semibold text-xl">
-          SOU Package Name Trace
-        </h2>
-        <Back onClick={handleBackClick} />
+        <Trace onClick={handleTraceClick} />
+        <Add
+          text="Add Blog Category Name"
+          width="w-[250px]"
+          onClick={handleAddClick}
+        />
       </div>
 
       <hr className="border-gray-300 mb-6" />
 
-      {/* Table */}
       <TableContainer component={Paper} className="shadow-md">
         <Table className="border border-gray-300">
           <TableHead>
@@ -92,10 +92,10 @@ const SOUPackageNameTrace = () => {
                 S.No.
               </TableCell>
               <TableCell className="border-r !font-extrabold text-base text-left">
-                SOU Package Name
+                Blog Category Name
               </TableCell>
               <TableCell className="!font-extrabold text-base text-left">
-                Restore
+                Action
               </TableCell>
             </TableRow>
           </TableHead>
@@ -108,28 +108,30 @@ const SOUPackageNameTrace = () => {
                 <TableCell className="border-r">
                   {(page - 1) * rowsPerPage + index + 1}
                 </TableCell>
-                <TableCell
-                  className="border-r text-left"
-                  style={{ maxWidth: 400, whiteSpace: "pre-wrap" }}
-                >
-                  {row.sou_package_name}
+                <TableCell className="border-r text-left">
+                  {row.blog_category_name}
                 </TableCell>
                 <TableCell className="text-left">
-                  <Tooltip title="Restore">
+                  <div className="flex space-x-4">
                     <button
-                      className="text-blue-600 cursor-pointer hover:text-blue-800"
-                      onClick={() => handleRestoreClick(row.id)}
+                      className="text-green-600 cursor-pointer hover:text-green-800"
+                      onClick={() => handleEditClick(row)}
                     >
-                      <FaRecycle size={22} />
+                      <FaEdit size={22} />
                     </button>
-                  </Tooltip>
+                    <button
+                      className="text-red-600 cursor-pointer hover:text-red-800"
+                      onClick={() => handleDelete(row.id)}
+                    >
+                      <FaTrash size={22} />
+                    </button>
+                  </div>
                 </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
 
-        {/* Pagination */}
         <div className="flex justify-end p-4">
           <Pagination
             count={Math.ceil(data.length / rowsPerPage)}
@@ -143,4 +145,4 @@ const SOUPackageNameTrace = () => {
   );
 };
 
-export default SOUPackageNameTrace;
+export default BlogCategoryName;

@@ -1,17 +1,3 @@
-// import React from 'react'
-
-// const SOUPackageName = () => {
-//   return (
-//     <div>
-//       SOUPackageName
-//     </div>
-//   )
-// }
-
-// export default SOUPackageName
-
-/** */
-
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import {
