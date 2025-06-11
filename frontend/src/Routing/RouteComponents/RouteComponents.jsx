@@ -136,6 +136,8 @@ import { GalleryDropDown } from "../../pages/GalleryPage/GalleryDropDown/Gallery
 import { StayInTentDropDown } from "../../pages/StayInTentPage/StayInTentDropDown/StayInTentDropDown.jsx";
 import { ListYourPropertyPage } from "../../pages/ListYourPropertyPage/ListYourPropertyPage.jsx";
 import { PrivacyPolicy } from "../../pages/PrivacyPolicyPage/PrivacyPolicy.jsx";
+import TermsConditions from "../../pages/TermsConditionsPages/TermsConditions.js";
+import BlogInnerPage from "../../pages/BlogPages/BlogInnerPage/BlogInnerPage.jsx";
 
 const WebsitePage = ({ children }) => {
   return (
@@ -235,13 +237,22 @@ const RouteComponents = () => {
           }
         />
         <Route
-          path="/blog"
+          path="/blogs"
           element={
             <WebsitePage>
               <Blog />
             </WebsitePage>
           }
         />
+        <Route
+          path="/blogs/:BlogSlug"
+          element={
+            <WebsitePage>
+              <BlogInnerPage />
+            </WebsitePage>
+          }
+        />
+
         <Route
           path="/about-us/Activities"
           element={
@@ -280,6 +291,16 @@ const RouteComponents = () => {
           element={
             <WebsitePage>
               <PrivacyPolicy />
+            </WebsitePage>
+          }
+        />
+
+
+        <Route
+          path="/terms-conditions"
+          element={
+            <WebsitePage>
+              <TermsConditions />
             </WebsitePage>
           }
         />

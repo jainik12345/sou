@@ -81,7 +81,7 @@ export const ExploreCard = ({ visibleCards }) => {
           </div>
 
           {/* Timing */}
-          <div className="Card-Timing relative text-center font-semibold overflow-hidden rounded group bg-white">
+          <div className="Card-Timing relative text-center font-semibold overflow-hidden  group bg-white">
             <div className="absolute top-0 right-0 h-full w-0 bg-orange-color z-0 transition-all duration-700 origin-right group-hover:w-full"></div>
             <h4 className="relative z-10 py-3 text-gray-600 group-hover:text-white transition-all duration-700">
               {item.Timing}
