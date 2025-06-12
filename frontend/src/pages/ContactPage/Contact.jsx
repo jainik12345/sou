@@ -5,23 +5,13 @@ import { ContactIcons } from "./ContactIcons/ContactIcons";
 import { ContactMap } from "./ContactMap/ContactMap";
 
 export const Contact = () => {
-
-
-    return (
-
-        <>
-
-            <Banner Title={"Contact Us"} />
-
-            <HomePageForm />
-            
-            <ContactPageHeading/>
-
-            <ContactIcons/>
-
-            <ContactMap/>
-
-        </>
-
-    )
-}
+  return (
+    <>
+      <Banner Title={"Contact Us"} />
+      <HomePageForm />
+      <ContactPageHeading />
+      <ContactIcons />
+      <ContactMap />
+    </>
+  );
+};

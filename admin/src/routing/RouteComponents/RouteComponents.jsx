@@ -133,6 +133,10 @@ import SOUPackageBGImage from "../../pages/SOUPackage/SOUPackageBGImage/SOUPacka
 import SOUPackageBGImageInsert from './../../pages/SOUPackage/SOUPackageBGImage/SOUPackageBGImageInsert';
 import SOUPackageBGImageUpdate from './../../pages/SOUPackage/SOUPackageBGImage/SOUPackageBGImageUpdate';
 import SOUPackageBGImageTrace from './../../pages/SOUPackage/SOUPackageBGImage/SOUPackageBGImageTrace';
+import SOUPackageItineraryPackagePrice from './../../pages/SOUPackage/SOUPackageItineraryPackagePrice/SOUPackageItineraryPackagePrice';
+import SOUPackageItineraryPackagePriceInsert from './../../pages/SOUPackage/SOUPackageItineraryPackagePrice/SOUPackageItineraryPackagePriceInsert';
+import SOUPackageItineraryPackagePriceUpdate from './../../pages/SOUPackage/SOUPackageItineraryPackagePrice/SOUPackageItineraryPackagePriceUpdate';
+import SOUPackageItineraryPackagePriceTrace from './../../pages/SOUPackage/SOUPackageItineraryPackagePrice/SOUPackageItineraryPackagePriceTrace';
 
 
 
@@ -328,6 +332,16 @@ const RouteComponents = () => {
           <Route path="/sou-package-bg-image/insert" element={<SOUPackageBGImageInsert/>} />
           <Route path="/sou-package-bg-image/update" element={<SOUPackageBGImageUpdate/>} />
           <Route path="/sou-package-bg-image/trace" element={<SOUPackageBGImageTrace/>} />
+
+
+
+          <Route path="/sou-package-itinerary-price" element={<SOUPackageItineraryPackagePrice/>} />
+          <Route path="/sou-package-itinerary-price/insert" element={<SOUPackageItineraryPackagePriceInsert/>} />
+          <Route path="/sou-package-itinerary-price/update" element={<SOUPackageItineraryPackagePriceUpdate/>} />
+          <Route path="/sou-package-itinerary-price/trace" element={<SOUPackageItineraryPackagePriceTrace/>} />
+
+
+
 
 
           {/*-------------------------------------------------Blog---------------------------------------------- */}

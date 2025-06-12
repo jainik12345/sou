@@ -105,21 +105,6 @@ const ContactSectionInsert = () => {
           {dataId ? "Update Contact Section" : "Add Contact Section"}
         </h2>
 
-        {/* Map link preview after fetch */}
-        {dataId && (
-          <div className="mb-6">
-            <p className="font-semibold text-blue-700 mb-1">Map Link:</p>
-            <a
-              href={form.map_link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-600 underline break-all"
-            >
-              {form.map_link}
-            </a>
-          </div>
-        )}
-
         {error && (
           <div className="text-red-600 font-semibold mb-4">{error}</div>
         )}
