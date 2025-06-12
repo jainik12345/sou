@@ -71,6 +71,9 @@ const souPackageParagraph = require("./routes/souPackage/souPackageParagraph");
 const souPackageMealPlan = require("./routes/souPackage/souPackageMealPlan");
 const souPackageLakeView = require("./routes/souPackage/souPackageLakeView");
 const souPackageResort = require("./routes/souPackage/souPackageResort");
+const souPackageBookLayer = require("./routes/souPackage/souPackageBookLayer");
+const souPackageBgImage = require("./routes/souPackage/souPackageBgImage");
+const souPackageItineraryPackagePrice = require("./routes/souPackage/souPackageItineraryPackagePrice");
 
 /**------------------------------------------Blogs-------------------------------------------------- */
 
@@ -121,6 +124,9 @@ app.use("/souPackageParagraph", souPackageParagraph);
 app.use("/souPackageMealPlan", souPackageMealPlan);
 app.use("/souPackageLakeView", souPackageLakeView);
 app.use("/souPackageResort", souPackageResort);
+app.use("/souPackageBookLayer", souPackageBookLayer);
+app.use("/souPackageBgImage", souPackageBgImage);
+app.use("/souPackageItineraryPackagePrice", souPackageItineraryPackagePrice);
 
 /**------------------------------------------Blogs-------------------------------------------------- */
 
@@ -212,6 +218,21 @@ app.use(
   "/Images/SouPackage/SouPackageResortImages",
   express.static(
     path.join(__dirname, "Images/SouPackage/SouPackageResortImages")
+  )
+);
+
+app.use(
+  "/Images/SouPackage/SouPackageBgImages",
+  express.static(path.join(__dirname, "Images/SouPackage/SouPackageBgImages"))
+);
+
+app.use(
+  "/Images/SouPackage/SouPackageItineraryPackagePriceImages",
+  express.static(
+    path.join(
+      __dirname,
+      "Images/SouPackage/SouPackageItineraryPackagePriceImages"
+    )
   )
 );
 

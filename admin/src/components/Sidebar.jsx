@@ -100,6 +100,8 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
         { path: "/sou-package-meal-plan", name: "Sou Package Meal Plan" },
         { path: "/sou-package-lake-view", name: "Sou Package lake View" },
         { path: "/sou-package-resort", name: "Sou Package Resort" },
+        { path: "/sou-package-book-layer", name: "Sou Package Book layer" },
+        { path: "/sou-package-bg-image", name: "Sou Package Bg Image" },
       ],
     },
 
