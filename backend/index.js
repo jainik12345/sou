@@ -213,8 +213,6 @@ app.use(
   express.static(path.join(__dirname, "Images/SouPackage/SouPackageAmenities"))
 );
 
-<<<<<<< HEAD
-=======
 app.use(
   "/Images/SouPackage/SouPackageResortImages",
   express.static(
@@ -244,7 +242,6 @@ app.use(
   express.static(path.join(__dirname, "Images/Blog/BlogDataDetailsImages"))
 );
 
->>>>>>> d87d21312ac0468fa525b6b24160e83bae205387
 /**---------------Start Server ---------------*/
 // app.listen(port, () => {
 //   console.log(`Server Running On Port: ${port}`);
