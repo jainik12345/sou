@@ -133,7 +133,7 @@ import { GalleryDropDown } from "../../pages/GalleryPage/GalleryDropDown/Gallery
 import { StayInTentDropDown } from "../../pages/StayInTentPage/StayInTentDropDown/StayInTentDropDown.jsx";
 import { ListYourPropertyPage } from "../../pages/ListYourPropertyPage/ListYourPropertyPage.jsx";
 import { PrivacyPolicy } from "../../pages/PrivacyPolicyPage/PrivacyPolicy.jsx";
-import TermsConditions from "../../pages/TermsConditionsPages/TermsConditions.js";
+import TermsConditions from "../../pages/TermsConditionsPages/TermsConditions.jsx";
 import BlogInnerPage from "../../pages/BlogPages/BlogInnerPage/BlogInnerPage.jsx";
 import BlogCategoryArchiveList from "../../pages/BlogPages/BlogInnerPage/BlogCategoryArchiveList.jsx";
 

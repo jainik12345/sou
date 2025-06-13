@@ -5,23 +5,18 @@ import { GujaratPackagesDropDownBg } from "../GujaratPackagesDropDown/GujaratPac
 import { GujaratPackagesDropDownForm } from "./GujaratPackagesDropDownForm/GujaratPackagesDropDownForm";
 
 export const GujaratPackagesDropDown = () => {
+  const { GujaratPath } = useParams();
 
-    const { GujaratPath } = useParams();
+  if (!GujaratPath) {
+    return <h1 className="text-xl text-red-600">Invalid Gujarat Package</h1>;
+  }
 
-    if (!GujaratPath) {
-        return <h1 className="text-xl text-red-600">Invalid Gujarat Package</h1>;
-    }
-
-    // const formattedTitle = pathName
-    //     .replace(/-/g, " ")
-    //     .replace(/\b\w/g, (char) => char.toUpperCase());
-
-    return (
-        <>
-            <GujaratPackagesDropDownBanner />
-            <GujaratPackagesDropDownCards />
-            <GujaratPackagesDropDownBg />
-            <GujaratPackagesDropDownForm />
-        </>
-    );
+  return (
+    <>
+      <GujaratPackagesDropDownBanner />
+      <GujaratPackagesDropDownCards />
+      <GujaratPackagesDropDownBg />
+      <GujaratPackagesDropDownForm />
+    </>
+  );
 };

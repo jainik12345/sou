@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 // import { useState, useEffect } from "react";
 // import { Inquiry } from "../../components/Buttons/Inquiry";
 // import { motion, AnimatePresence } from "framer-motion";
@@ -48,7 +49,6 @@
 
 //               return (
 
-
 //                 <div className="fact-cont relative border border-gray-400 p-5 select-none"
 //                   key={Idx} onClick={() => { HandleFAQClick(Idx) }}>
 
@@ -84,7 +84,6 @@
 
 //                 </div>
 
-
 //               )
 
 //             })
@@ -96,8 +95,6 @@
 //       <div className="overflow-x-auto p-5">
 //         <table className="min-w-full border-collapse border border-gray-300 text-center">
 
-
-
 //           <thead className="bg-orange-color text-white">
 //             <tr>
 
@@ -106,7 +103,6 @@
 //                 TableData && TableData.map((TableVal, TableIdx) => {
 
 //                   return (
-
 
 //                     <th className="border border-gray-300 p-3 " key={TableIdx}>{TableVal.Head}</th>
 
@@ -130,7 +126,6 @@
 
 //                   )
 
-
 //                 })
 //               }
 //             </tr>
@@ -145,12 +140,10 @@
 
 //                   )
 
-
 //                 })
 //               }
 //             </tr>
 //             <tr>
-
 
 //               {
 
@@ -158,11 +151,9 @@
 
 //                   <td className="border border-gray-300 p-3" key={idx}>{val}</td>
 
-
 //                 })
 
 //               }
-
 
 //             </tr>
 
@@ -178,7 +169,6 @@
 //         </table>
 //       </div>
 
-
 //     </div>
 //   );
 // };
@@ -193,8 +183,8 @@ export const GujaratPackagesGuideCard = ({
   Images = [],
   Title,
   Faq = [],
-  TableData = [],
-  Optional = [],
+  // Rates = {},
+  TableData = {},
 }) => {
   const [currentIdx, setCurrentIdx] = useState(0);
   const [fade, setFade] = useState(true);
@@ -204,7 +194,6 @@ export const GujaratPackagesGuideCard = ({
     setOpenIndex((prev) => (prev === Idx ? null : Idx));
   };
 
-  // Image slider w/ fade
   useEffect(() => {
     if (!Images.length) return;
     const interval = setInterval(() => {
@@ -219,11 +208,17 @@ export const GujaratPackagesGuideCard = ({
 
   return (
     <div className="bg-white rounded-3xl shadow-xl p-6 grid gap-8 max-w-screen-xl mx-auto">
-      <h2 className="text-3xl sm:text-4xl text-center font-extrabold text-orange-500 tracking-tight">{Heading}</h2>
+      <h2 className="text-3xl sm:text-4xl text-center font-extrabold text-orange-500 tracking-tight">
+        {Heading}
+      </h2>
 
       <div className="grid md:grid-cols-2 gap-8">
         {/* Image Section */}
-        <div className={`overflow-hidden rounded-2xl transition-opacity duration-500 ${fade ? "opacity-100" : "opacity-0"}`}>
+        <div
+          className={`overflow-hidden rounded-2xl transition-opacity duration-500 ${
+            fade ? "opacity-100" : "opacity-0"
+          }`}
+        >
           {Images.length > 0 && (
             <img
               src={Images[currentIdx]}
@@ -236,17 +231,19 @@ export const GujaratPackagesGuideCard = ({
         {/* Details Section */}
         <div className="flex flex-col gap-6">
           <div className="flex items-center justify-between mb-2">
-            <h2 className="text-xl sm:text-2xl font-bold text-orange-500">{Title}</h2>
+            <h2 className="text-xl sm:text-2xl font-bold text-orange-500">
+              {Title}
+            </h2>
             <Inquiry />
           </div>
+
           <div className="flex flex-col gap-3">
             {Faq.map((val, idx) => (
               <div
-                className={`relative border border-gray-200 rounded-xl bg-gray-50 transition-all shadow-sm hover:shadow-md cursor-pointer`}
+                className="relative border border-gray-200 rounded-xl bg-gray-50 transition-all shadow-sm hover:shadow-md cursor-pointer"
                 key={idx}
                 onClick={() => handleFAQClick(idx)}
               >
-                {/* Accent bar */}
                 <motion.div
                   initial={{ height: 0 }}
                   animate={{ height: openIndex === idx ? "100%" : 0 }}
@@ -256,11 +253,16 @@ export const GujaratPackagesGuideCard = ({
                 <div className="flex justify-between items-center gap-4 px-5 py-4">
                   <h3 className="font-semibold text-gray-800 flex items-center gap-2">
                     {openIndex === idx ? (
-                      <FiMinus size={22} className="bg-gray-200 p-1 rounded-full" />
+                      <FiMinus
+                        size={22}
+                        className="bg-gray-200 p-1 rounded-full"
+                      />
                     ) : (
-                      <FiPlus size={22} className="bg-gray-200 p-1 rounded-full" />
+                      <FiPlus
+                        size={22}
+                        className="bg-gray-200 p-1 rounded-full"
+                      />
                     )}
-                    
                     {val.FaqTitle}
                   </h3>
                 </div>
@@ -274,7 +276,9 @@ export const GujaratPackagesGuideCard = ({
                       transition={{ duration: 0.3, ease: "easeInOut" }}
                       className="overflow-hidden px-5 pb-4"
                     >
-                      <div className="text-gray-600 text-base">{val.FaqFact}</div>
+                      <div className="text-gray-600 text-base">
+                        {val.FaqFact}
+                      </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -284,52 +288,89 @@ export const GujaratPackagesGuideCard = ({
         </div>
       </div>
 
-      {/* Table Section */}
-      {TableData.length > 0 && (
-        <div className="overflow-x-auto rounded-2xl shadow-inner bg-white">
-          <table className="min-w-full border-collapse text-center">
-            <thead>
-              <tr className="bg-orange-500 text-white">
-                {TableData.map((col, idx) => (
-                  <th className="border border-gray-300 p-3 font-semibold" key={idx}>
-                    {col.Head}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody className="text-gray-800">
-              {/* Render each row based on max .Value array length */}
-              {(() => {
-                const rows = [];
-                const maxRows = Math.max(...TableData.map((col) => col.Value.length));
-                for (let row = 0; row < maxRows; row++) {
-                  rows.push(
-                    <tr key={row}>
-                      {TableData.map((col, idx) => (
-                        <td className="border border-gray-300 p-3" key={idx}>
-                          {col.Value[row] ?? ""}
-                        </td>
-                      ))}
-                    </tr>
-                  );
-                }
-                return rows;
-              })()}
-              {/* Optional row */}
-              {Optional.length > 0 && (
-                <tr>
-                  <td
-                    className="border border-gray-300 p-3 font-medium text-orange-600 bg-orange-50"
-                    colSpan={TableData.length}
-                  >
-                    {Optional.join(" / ")}
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
-      )}
+      {/* Table Section - Static Structure, Dynamic Values */}
+
+      <div className="overflow-x-auto bg-white">
+        <table className="min-w-full border-collapse text-center">
+          <thead>
+            <tr className="bg-orange-500 text-white">
+              <th className="border border-gray-300 p-3 font-semibold">
+                Hotel Category
+              </th>
+              <th className="border border-gray-300 p-3 font-semibold">
+                Rate Specification
+              </th>
+              <th className="border border-gray-300 p-3 font-semibold">
+                2 Pax
+              </th>
+              <th className="border border-gray-300 p-3 font-semibold">
+                4 Pax
+              </th>
+              <th className="border border-gray-300 p-3 font-semibold">
+                6 Pax
+              </th>
+              <th className="border border-gray-300 p-3 font-semibold">
+                8 Pax
+              </th>
+              <th className="border border-gray-300 p-3 font-semibold">
+                10 Pax
+              </th>
+            </tr>
+          </thead>
+          <tbody className="text-gray-800">
+            <tr>
+              <td
+                className="border border-gray-300 p-3 font-medium"
+                rowSpan={2}
+              >
+                3*
+              </td>
+              <td className="border border-gray-300 p-3">
+                Per Person with CP (Stay + Breakfast)
+              </td>
+              <td className="border border-gray-300 p-3">
+                ₹ {TableData["2pax"] || "-"}/-
+              </td>
+              <td className="border border-gray-300 p-3">
+                ₹ {TableData["4pax"] || "-"}/-
+              </td>
+              <td className="border border-gray-300 p-3">
+                ₹ {TableData["6pax"] || "-"}/-
+              </td>
+              <td className="border border-gray-300 p-3">
+                ₹ {TableData["8pax"] || "-"}/-
+              </td>
+              <td className="border border-gray-300 p-3">
+                ₹ {TableData["10pax"] || "-"}/-
+              </td>
+            </tr>
+            <tr>
+              <td className="border border-gray-300 p-3">
+                Vehicle Ex.Ahmedabad
+              </td>
+              <td className="border border-gray-300 p-3">AC Sedan Cab</td>
+              <td className="border border-gray-300 p-3" colSpan={2}>
+                AC Innova Crysta
+              </td>
+              <td className="border border-gray-300 p-3" colSpan={2}>
+                11+1 Seat AC Tempo Traveller
+              </td>
+              {/* No extra <td> here – total cols now = 1 (Hotel) + 1 (Spec) + 1 + 2 + 2 = 7 */}
+            </tr>
+            <tr>
+              <td
+                className="border border-gray-300 p-3 font-medium text-orange-600 bg-orange-50"
+                colSpan={2}
+              >
+                Extra Bed/Mattress
+              </td>
+              <td className="border border-gray-300 p-3" colSpan={5}>
+                ₹ {TableData.extra || "-"}/-
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

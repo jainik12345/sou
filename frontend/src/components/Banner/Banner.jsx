@@ -34,7 +34,8 @@ export const Banner = ({ Title, subtitle }) => {
     // Animate in (left to right, full width)
     timeoutAppear = setTimeout(() => {
       if (underlineRef.current) {
-        underlineRef.current.style.transition = "width 1s cubic-bezier(0.4,0,0.2,1)";
+        underlineRef.current.style.transition =
+          "width 1s cubic-bezier(0.4,0,0.2,1)";
         underlineRef.current.style.width = "100%";
       }
     }, 700);
@@ -50,7 +51,8 @@ export const Banner = ({ Title, subtitle }) => {
     // Animate out (right to left, full width)
     timeoutDisappear = setTimeout(() => {
       if (underlineRef.current) {
-        underlineRef.current.style.transition = "width 1s cubic-bezier(0.4,0,0.2,1)";
+        underlineRef.current.style.transition =
+          "width 1s cubic-bezier(0.4,0,0.2,1)";
         underlineRef.current.style.width = "0";
       }
     }, 2200); // 700ms delay + 1s grow + 500ms pause
