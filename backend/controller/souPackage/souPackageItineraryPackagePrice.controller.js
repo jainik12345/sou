@@ -3,10 +3,13 @@ const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
 
-// Multer config for blog images
+// Multer config for itinerary package price images
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    const dir = path.join(__dirname, "../../Images/Blog/BlogDataDetailsImages");
+    const dir = path.join(
+      __dirname,
+      "../../Images/SouPackage/SouPackageItineraryPackagePriceImages"
+    );
     if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
     cb(null, dir);
   },
@@ -21,10 +24,10 @@ const upload = multer({
   limits: { fileSize: 20 * 1024 * 1024 },
 }).single("image");
 
-// Get all blog data details
-exports.getAllBlogDataDetails = (req, res) => {
+// Get all itinerary package prices
+exports.getAllItineraryPackagePrices = (req, res) => {
   db.query(
-    "SELECT * FROM blog_data_details WHERE deleted_at = 0",
+    "SELECT * FROM sou_package_itinerary_package_price WHERE deleted_at = 0",
     (err, results) => {
       if (err) return res.status(500).json({ error: err.message });
       res.status(200).json({ status: "success", data: results });
@@ -32,29 +35,29 @@ exports.getAllBlogDataDetails = (req, res) => {
   );
 };
 
-// Insert blog data detail
-exports.insertBlogDataDetail = (req, res) => {
+// Insert itinerary package price
+exports.insertItineraryPackagePrice = (req, res) => {
   upload(req, res, (err) => {
     if (err) return res.status(500).json({ error: err.message });
 
-    const {
-      blog_category_id,
-      title,
-      date,
-      description,
-      data: jsonData,
-    } = req.body;
+    const { sou_package_itinerary_id, package_start_price, other_price } =
+      req.body;
     const image = req.file?.filename || null;
 
-    if (!blog_category_id || !image) {
+    if (!sou_package_itinerary_id || !image) {
       return res
         .status(400)
-        .json({ error: "Blog Category ID and Image are required" });
+        .json({ error: "Itinerary ID and Image are required" });
     }
 
     db.query(
-      "INSERT INTO blog_data_details (blog_category_id, title, date, description, data, image) VALUES (?, ?, ?, ?, ?, ?)",
-      [blog_category_id, title, date, description, jsonData, image],
+      "INSERT INTO sou_package_itinerary_package_price (sou_package_itinerary_id, image, package_start_price, other_price) VALUES (?, ?, ?, ?)",
+      [
+        sou_package_itinerary_id,
+        image,
+        package_start_price || null,
+        other_price || null,
+      ],
       (err, result) => {
         if (err) return res.status(500).json({ error: err.message });
         res.status(201).json({
@@ -67,31 +70,35 @@ exports.insertBlogDataDetail = (req, res) => {
   });
 };
 
-// Update blog data detail
-exports.updateBlogDataDetail = (req, res) => {
+// Update itinerary package price
+exports.updateItineraryPackagePrice = (req, res) => {
   upload(req, res, (err) => {
     if (err) return res.status(500).json({ error: err.message });
 
     const { id } = req.params;
     const {
-      blog_category_id,
-      title,
-      date,
-      description,
-      data: jsonData,
+      sou_package_itinerary_id,
+      package_start_price,
+      other_price,
       existingImage,
     } = req.body;
     const image = req.file ? req.file.filename : existingImage || null;
 
-    if (!blog_category_id || !image) {
+    if (!sou_package_itinerary_id || !image) {
       return res
         .status(400)
-        .json({ error: "Blog Category ID and Image are required" });
+        .json({ error: "Itinerary ID and Image are required" });
     }
 
     db.query(
-      "UPDATE blog_data_details SET blog_category_id = ?, title = ?, date = ?, description = ?, data = ?, image = ? WHERE id = ? AND deleted_at = 0",
-      [blog_category_id, title, date, description, jsonData, image, id],
+      "UPDATE sou_package_itinerary_package_price SET sou_package_itinerary_id = ?, image = ?, package_start_price = ?, other_price = ? WHERE id = ? AND deleted_at = 0",
+      [
+        sou_package_itinerary_id,
+        image,
+        package_start_price || null,
+        other_price || null,
+        id,
+      ],
       (err) => {
         if (err) return res.status(500).json({ error: err.message });
         res.status(200).json({ status: "success", message: "Updated" });
@@ -101,10 +108,10 @@ exports.updateBlogDataDetail = (req, res) => {
 };
 
 // Soft delete
-exports.deleteBlogDataDetail = (req, res) => {
+exports.deleteItineraryPackagePrice = (req, res) => {
   const { id } = req.params;
   db.query(
-    "UPDATE blog_data_details SET deleted_at = 1 WHERE id = ?",
+    "UPDATE sou_package_itinerary_package_price SET deleted_at = 1 WHERE id = ?",
     [id],
     (err) => {
       if (err) return res.status(500).json({ error: err.message });
@@ -114,10 +121,10 @@ exports.deleteBlogDataDetail = (req, res) => {
 };
 
 // Restore deleted
-exports.restoreBlogDataDetail = (req, res) => {
+exports.restoreItineraryPackagePrice = (req, res) => {
   const { id } = req.params;
   db.query(
-    "UPDATE blog_data_details SET deleted_at = 0 WHERE id = ?",
+    "UPDATE sou_package_itinerary_package_price SET deleted_at = 0 WHERE id = ?",
     [id],
     (err) => {
       if (err) return res.status(500).json({ error: err.message });
@@ -126,12 +133,12 @@ exports.restoreBlogDataDetail = (req, res) => {
   );
 };
 
-// Get by Blog Category ID
-exports.getBlogDataDetailsByCategoryId = (req, res) => {
-  const { categoryId } = req.params;
+// Get by Itinerary ID
+exports.getItineraryPackagePricesByItineraryId = (req, res) => {
+  const { itineraryId } = req.params;
   db.query(
-    "SELECT * FROM blog_data_details WHERE blog_category_id = ? AND deleted_at = 0",
-    [categoryId],
+    "SELECT * FROM sou_package_itinerary_package_price WHERE sou_package_itinerary_id = ? AND deleted_at = 0",
+    [itineraryId],
     (err, results) => {
       if (err) return res.status(500).json({ error: err.message });
       res.status(200).json({ status: "success", data: results });
@@ -139,12 +146,12 @@ exports.getBlogDataDetailsByCategoryId = (req, res) => {
   );
 };
 
-// Get trashed by Blog Category ID
-exports.getTrashedBlogDataDetailsByCategoryId = (req, res) => {
-  const { categoryId } = req.params;
+// Get trashed by Itinerary ID
+exports.getTrashedItineraryPackagePricesByItineraryId = (req, res) => {
+  const { itineraryId } = req.params;
   db.query(
-    "SELECT * FROM blog_data_details WHERE blog_category_id = ? AND deleted_at = 1",
-    [categoryId],
+    "SELECT * FROM sou_package_itinerary_package_price WHERE sou_package_itinerary_id = ? AND deleted_at = 1",
+    [itineraryId],
     (err, results) => {
       if (err) return res.status(500).json({ error: err.message });
       res.status(200).json({ status: "success", data: results });
@@ -152,11 +159,11 @@ exports.getTrashedBlogDataDetailsByCategoryId = (req, res) => {
   );
 };
 
-// Get blog data detail by ID
-exports.getBlogDataDetailById = (req, res) => {
+// Get itinerary package price by ID
+exports.getItineraryPackagePriceById = (req, res) => {
   const { id } = req.params;
   db.query(
-    "SELECT * FROM blog_data_details WHERE id = ? AND deleted_at = 0",
+    "SELECT * FROM sou_package_itinerary_package_price WHERE id = ? AND deleted_at = 0",
     [id],
     (err, results) => {
       if (err) return res.status(500).json({ error: err.message });

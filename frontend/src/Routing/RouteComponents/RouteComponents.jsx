@@ -26,11 +26,10 @@
 //       <Header />
 //       <Outlet />
 //       <WaytoConatct />
-//       <Footer /> 
+//       <Footer />
 //     </>
 //   );
 // };
-
 
 // export const RouteComponents = () => {
 //   const Router = createBrowserRouter([
@@ -112,8 +111,6 @@
 //   return <RouterProvider router={Router} />;
 // };
 
-
-
 import { Routes, Route } from "react-router-dom";
 import { Header } from "../../components/Header/Header.jsx";
 import { Footer } from "../../components/Footer/Footer.jsx";
@@ -138,6 +135,7 @@ import { ListYourPropertyPage } from "../../pages/ListYourPropertyPage/ListYourP
 import { PrivacyPolicy } from "../../pages/PrivacyPolicyPage/PrivacyPolicy.jsx";
 import TermsConditions from "../../pages/TermsConditionsPages/TermsConditions.js";
 import BlogInnerPage from "../../pages/BlogPages/BlogInnerPage/BlogInnerPage.jsx";
+import BlogCategoryArchiveList from "../../pages/BlogPages/BlogInnerPage/BlogCategoryArchiveList.jsx";
 
 const WebsitePage = ({ children }) => {
   return (
@@ -252,6 +250,23 @@ const RouteComponents = () => {
             </WebsitePage>
           }
         />
+        <Route
+          path="/blogs/category/:categoryId"
+          element={
+            <WebsitePage>
+              <BlogCategoryArchiveList />
+            </WebsitePage>
+          }
+        />
+
+        <Route
+          path="/blogs/archive/:archiveMonth"
+          element={
+            <WebsitePage>
+              <BlogCategoryArchiveList />
+            </WebsitePage>
+          }
+        />
 
         <Route
           path="/about-us/Activities"
@@ -294,7 +309,6 @@ const RouteComponents = () => {
             </WebsitePage>
           }
         />
-
 
         <Route
           path="/terms-conditions"

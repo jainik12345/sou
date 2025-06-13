@@ -125,6 +125,18 @@ import BlogDataDetails from './../../pages/BlogSection/BlogDataDetails/BlogDataD
 import BlogDataDetailsInsert from './../../pages/BlogSection/BlogDataDetails/BlogDataDetailsInsert';
 import BlogDataDetailsUpdate from './../../pages/BlogSection/BlogDataDetails/BlogDataDetailsUpdate';
 import BlogDataDetailsTrace from './../../pages/BlogSection/BlogDataDetails/BlogDataDetailsTrace';
+import SOUPackageBookLayer from "../../pages/SOUPackage/SOUPackageBookLayer/SOUPackageBookLayer";
+import SOUPackageBookLayerInsert from "../../pages/SOUPackage/SOUPackageBookLayer/SOUPackageBookLayerInsert";
+import SOUPackageBookLayerUpdate from "../../pages/SOUPackage/SOUPackageBookLayer/SOUPackageBookLayerUpdate";
+import SOUPackageBookLayerTrace from "../../pages/SOUPackage/SOUPackageBookLayer/SOUPackageBookLayerTrace";
+import SOUPackageBGImage from "../../pages/SOUPackage/SOUPackageBGImage/SOUPackageBGImage";
+import SOUPackageBGImageInsert from './../../pages/SOUPackage/SOUPackageBGImage/SOUPackageBGImageInsert';
+import SOUPackageBGImageUpdate from './../../pages/SOUPackage/SOUPackageBGImage/SOUPackageBGImageUpdate';
+import SOUPackageBGImageTrace from './../../pages/SOUPackage/SOUPackageBGImage/SOUPackageBGImageTrace';
+import SOUPackageItineraryPackagePrice from './../../pages/SOUPackage/SOUPackageItineraryPackagePrice/SOUPackageItineraryPackagePrice';
+import SOUPackageItineraryPackagePriceInsert from './../../pages/SOUPackage/SOUPackageItineraryPackagePrice/SOUPackageItineraryPackagePriceInsert';
+import SOUPackageItineraryPackagePriceUpdate from './../../pages/SOUPackage/SOUPackageItineraryPackagePrice/SOUPackageItineraryPackagePriceUpdate';
+import SOUPackageItineraryPackagePriceTrace from './../../pages/SOUPackage/SOUPackageItineraryPackagePrice/SOUPackageItineraryPackagePriceTrace';
 
 
 
@@ -308,6 +320,28 @@ const RouteComponents = () => {
           <Route path="/sou-package-resort/insert" element={<SOUPackageResortInsert/>} />
           <Route path="/sou-package-resort/update" element={<SOUPackageResortUpdate/>} />
           <Route path="/sou-package-resort/trace" element={<SOUPackageResortTrace/>} />
+
+
+          <Route path="/sou-package-book-layer" element={<SOUPackageBookLayer/>} />
+          <Route path="/sou-package-book-layer/insert" element={<SOUPackageBookLayerInsert/>} />
+          <Route path="/sou-package-book-layer/update" element={<SOUPackageBookLayerUpdate/>} />
+          <Route path="/sou-package-book-layer/trace" element={<SOUPackageBookLayerTrace/>} />
+
+
+          <Route path="/sou-package-bg-image" element={<SOUPackageBGImage/>} />
+          <Route path="/sou-package-bg-image/insert" element={<SOUPackageBGImageInsert/>} />
+          <Route path="/sou-package-bg-image/update" element={<SOUPackageBGImageUpdate/>} />
+          <Route path="/sou-package-bg-image/trace" element={<SOUPackageBGImageTrace/>} />
+
+
+
+          <Route path="/sou-package-itinerary-price" element={<SOUPackageItineraryPackagePrice/>} />
+          <Route path="/sou-package-itinerary-price/insert" element={<SOUPackageItineraryPackagePriceInsert/>} />
+          <Route path="/sou-package-itinerary-price/update" element={<SOUPackageItineraryPackagePriceUpdate/>} />
+          <Route path="/sou-package-itinerary-price/trace" element={<SOUPackageItineraryPackagePriceTrace/>} />
+
+
+
 
 
           {/*-------------------------------------------------Blog---------------------------------------------- */}

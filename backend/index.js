@@ -65,9 +65,21 @@ const souPackageHeroSection = require("./routes/souPackage/souPackageHeroSection
 const souPackageAmenities = require("./routes/souPackage/souPackageAmenities");
 const souPackageItineraryName = require("./routes/souPackage/souPackageItineraryName");
 const souPackageItinerarySection = require("./routes/souPackage/souPackageItinerarySection");
+<<<<<<< HEAD
 const souPackageNotesPolicy = require("./routes/souPackage/souPackageNotesPolicy")
 const souPackageFaqs = require("./routes/souPackage/souPackageFaqs")
 const souPackageParagraph = require("./routes/souPackage/souPackageParagraph")
+=======
+const souPackageNotesPolicy = require("./routes/souPackage/souPackageNotesPolicy");
+const souPackageFaqs = require("./routes/souPackage/souPackageFaqs");
+const souPackageParagraph = require("./routes/souPackage/souPackageParagraph");
+const souPackageMealPlan = require("./routes/souPackage/souPackageMealPlan");
+const souPackageLakeView = require("./routes/souPackage/souPackageLakeView");
+const souPackageResort = require("./routes/souPackage/souPackageResort");
+const souPackageBookLayer = require("./routes/souPackage/souPackageBookLayer");
+const souPackageBgImage = require("./routes/souPackage/souPackageBgImage");
+const souPackageItineraryPackagePrice = require("./routes/souPackage/souPackageItineraryPackagePrice");
+>>>>>>> d87d21312ac0468fa525b6b24160e83bae205387
 
 
 
@@ -112,6 +124,15 @@ app.use("/souPackageItinerarySection", souPackageItinerarySection);
 app.use("/souPackageNotesPolicy", souPackageNotesPolicy)
 app.use("/souPackageFaqs", souPackageFaqs)
 app.use("/souPackageParagraph", souPackageParagraph)
+app.use("/souPackageNotesPolicy", souPackageNotesPolicy);
+app.use("/souPackageFaqs", souPackageFaqs);
+app.use("/souPackageParagraph", souPackageParagraph);
+app.use("/souPackageMealPlan", souPackageMealPlan);
+app.use("/souPackageLakeView", souPackageLakeView);
+app.use("/souPackageResort", souPackageResort);
+app.use("/souPackageBookLayer", souPackageBookLayer);
+app.use("/souPackageBgImage", souPackageBgImage);
+app.use("/souPackageItineraryPackagePrice", souPackageItineraryPackagePrice);
 
 
 // Static Images
@@ -195,6 +216,38 @@ app.use(
   express.static(path.join(__dirname, "Images/SouPackage/SouPackageAmenities"))
 );
 
+<<<<<<< HEAD
+=======
+app.use(
+  "/Images/SouPackage/SouPackageResortImages",
+  express.static(
+    path.join(__dirname, "Images/SouPackage/SouPackageResortImages")
+  )
+);
+
+app.use(
+  "/Images/SouPackage/SouPackageBgImages",
+  express.static(path.join(__dirname, "Images/SouPackage/SouPackageBgImages"))
+);
+
+app.use(
+  "/Images/SouPackage/SouPackageItineraryPackagePriceImages",
+  express.static(
+    path.join(
+      __dirname,
+      "Images/SouPackage/SouPackageItineraryPackagePriceImages"
+    )
+  )
+);
+
+/**------------------------------------------Blogs-------------------------------------------------- */
+
+app.use(
+  "/Images/Blog/BlogDataDetailsImages",
+  express.static(path.join(__dirname, "Images/Blog/BlogDataDetailsImages"))
+);
+
+>>>>>>> d87d21312ac0468fa525b6b24160e83bae205387
 /**---------------Start Server ---------------*/
 // app.listen(port, () => {
 //   console.log(`Server Running On Port: ${port}`);
