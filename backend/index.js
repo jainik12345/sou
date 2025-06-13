@@ -65,11 +65,9 @@ const souPackageHeroSection = require("./routes/souPackage/souPackageHeroSection
 const souPackageAmenities = require("./routes/souPackage/souPackageAmenities");
 const souPackageItineraryName = require("./routes/souPackage/souPackageItineraryName");
 const souPackageItinerarySection = require("./routes/souPackage/souPackageItinerarySection");
-<<<<<<< HEAD
 const souPackageNotesPolicy = require("./routes/souPackage/souPackageNotesPolicy")
 const souPackageFaqs = require("./routes/souPackage/souPackageFaqs")
 const souPackageParagraph = require("./routes/souPackage/souPackageParagraph")
-=======
 const souPackageNotesPolicy = require("./routes/souPackage/souPackageNotesPolicy");
 const souPackageFaqs = require("./routes/souPackage/souPackageFaqs");
 const souPackageParagraph = require("./routes/souPackage/souPackageParagraph");
@@ -79,7 +77,6 @@ const souPackageResort = require("./routes/souPackage/souPackageResort");
 const souPackageBookLayer = require("./routes/souPackage/souPackageBookLayer");
 const souPackageBgImage = require("./routes/souPackage/souPackageBgImage");
 const souPackageItineraryPackagePrice = require("./routes/souPackage/souPackageItineraryPackagePrice");
->>>>>>> d87d21312ac0468fa525b6b24160e83bae205387
 
 
 
