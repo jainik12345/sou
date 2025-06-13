@@ -65,9 +65,6 @@ const souPackageHeroSection = require("./routes/souPackage/souPackageHeroSection
 const souPackageAmenities = require("./routes/souPackage/souPackageAmenities");
 const souPackageItineraryName = require("./routes/souPackage/souPackageItineraryName");
 const souPackageItinerarySection = require("./routes/souPackage/souPackageItinerarySection");
-const souPackageNotesPolicy = require("./routes/souPackage/souPackageNotesPolicy")
-const souPackageFaqs = require("./routes/souPackage/souPackageFaqs")
-const souPackageParagraph = require("./routes/souPackage/souPackageParagraph")
 const souPackageNotesPolicy = require("./routes/souPackage/souPackageNotesPolicy");
 const souPackageFaqs = require("./routes/souPackage/souPackageFaqs");
 const souPackageParagraph = require("./routes/souPackage/souPackageParagraph");
@@ -78,7 +75,10 @@ const souPackageBookLayer = require("./routes/souPackage/souPackageBookLayer");
 const souPackageBgImage = require("./routes/souPackage/souPackageBgImage");
 const souPackageItineraryPackagePrice = require("./routes/souPackage/souPackageItineraryPackagePrice");
 
+/**------------------------------------------Blogs-------------------------------------------------- */
 
+const blogcategoryName = require("./routes/blog/blogCategoryName");
+const blogDataDetails = require("./routes/blog/blogDataDetails");
 
 app.use("/admin", admin);
 app.use("/privatePolicy", privatePolicy);
@@ -118,9 +118,6 @@ app.use("/souPackageHeroSection", souPackageHeroSection);
 app.use("/souPackageAmenities", souPackageAmenities);
 app.use("/souPackageItineraryName", souPackageItineraryName);
 app.use("/souPackageItinerarySection", souPackageItinerarySection);
-app.use("/souPackageNotesPolicy", souPackageNotesPolicy)
-app.use("/souPackageFaqs", souPackageFaqs)
-app.use("/souPackageParagraph", souPackageParagraph)
 app.use("/souPackageNotesPolicy", souPackageNotesPolicy);
 app.use("/souPackageFaqs", souPackageFaqs);
 app.use("/souPackageParagraph", souPackageParagraph);
@@ -131,6 +128,10 @@ app.use("/souPackageBookLayer", souPackageBookLayer);
 app.use("/souPackageBgImage", souPackageBgImage);
 app.use("/souPackageItineraryPackagePrice", souPackageItineraryPackagePrice);
 
+/**------------------------------------------Blogs-------------------------------------------------- */
+
+app.use("/blogcategoryName", blogcategoryName);
+app.use("/blogDataDetails", blogDataDetails);
 
 // Static Images
 /**--------------------------------------------------Home-------------------------------------------------- */
@@ -164,7 +165,7 @@ app.use(
 app.use(
   "/Images/AboutImages/Activities",
   express.static(path.join(__dirname, "Images/AboutImages/Activities"))
-);  
+);
 
 app.use(
   "/Images/AboutImages/Attractions",
