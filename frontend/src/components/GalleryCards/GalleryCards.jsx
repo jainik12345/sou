@@ -2,6 +2,7 @@ import { IoIosSearch } from "react-icons/io";
 import { useState } from "react";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import { RiCloseLargeFill } from "react-icons/ri";
+import BE_URL from "../../config";
 
 export const GalleryCards = ({ GalleryImgs }) => {
 
@@ -27,11 +28,15 @@ export const GalleryCards = ({ GalleryImgs }) => {
             }
           />
 
-          <div className="relative bg-white p-4 rounded-lg shadow-lg">
+          <div
+            className="relative bg-white p-4 rounded-lg shadow-lg flex items-center justify-center"
+            style={{ width: "80vw", height: "80vh", maxWidth: 900, maxHeight: 700 }}
+          >
             <img
-              src={GalleryImgs[IsImgClickedIdx]}
+              src={`${BE_URL}/Images/SouPackage/SouPackageGalleryImages/${GalleryImgs[IsImgClickedIdx].image}`}
               alt="Pop Up Img"
-              className="lg:max-h-[80vh] md:max-h-[70vh] max-h-[60vh] rounded-lg"
+              className="w-full h-full object-cover rounded-lg"
+              style={{ maxWidth: "100%", maxHeight: "100%" }}
             />
           </div>
 
@@ -46,14 +51,14 @@ export const GalleryCards = ({ GalleryImgs }) => {
 
       {
 
-        GalleryImgs && GalleryImgs.map((val, idx) => {
+        GalleryImgs && GalleryImgs?.map((val, idx) => {
 
           return (
 
             <div className="gallery-card relative group" key={idx} onClick={() => { setIsImgClickedIdx(idx) }}>
 
-              <img src={val} alt="IMG" className="h-60 w-100 rounded-2xl" />
-              <div className="absolute top-0 left-0 w-full h-0 bg-black z-10 transition-all duration-500 ease-in-out group-hover:h-full rounded-2xl opacity-50 flex justify-between items-center flex-col gap-5 cursor-pointer group-hover:pt-25 group-hover:pb-2"><IoIosSearch size={30} className="text-white hidden group-hover:block" /><span className="hidden group-hover:block text-white text-[1.2rem]">Cycling</span></div>
+              <img src={`${BE_URL}/Images/SouPackage/SouPackageGalleryImages/${val.image}`} alt="IMG" className="h-60 w-100 rounded-2xl" />
+              <div className="absolute top-0 left-0 w-full h-0 bg-black z-10 transition-all duration-500 ease-in-out group-hover:h-full rounded-2xl opacity-50 flex justify-between items-center flex-col gap-5 cursor-pointer group-hover:pt-25 group-hover:pb-2"><IoIosSearch size={30} className="text-white hidden group-hover:block" /><span className="hidden group-hover:block text-white text-[1.2rem]">{val.title}</span></div>
 
             </div>
 

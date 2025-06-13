@@ -800,16 +800,7 @@ export const Footer = () => {
     {
       label: "Gallery",
       path: "/gallery",
-      dropdown: [
-        { label: "SoU Tent City 1" },
-        { label: "Soil to Soul Resort" },
-        { label: "Unity Village Resort" },
-        { label: "River View Tent Resort" },
-        { label: "Nirvana Resort Restaurant" },
-        { label: "Tent City Narmada 2" },
-        { label: "Sou Eco Camp" },
-        { label: "Villa Euphoria Resort" },
-      ],
+      dropdown: SouPackages,
     },
     {
       label: "SOU Tickets",

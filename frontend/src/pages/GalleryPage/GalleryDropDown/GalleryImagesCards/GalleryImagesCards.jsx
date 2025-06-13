@@ -1,8 +1,18 @@
 import { GalleryImgData } from "../../Gallery.js";
 import { useParams } from "react-router-dom";
 import { GalleryCards } from "../../../../components/GalleryCards/GalleryCards.jsx";
+import BE_URL from "../../../../config.js";
+import axios from "axios";
+import { useEffect, useState } from "react";
+
 
 export const GalleryImagesCards = () => {
+
+    //useStates Definations
+    const [GalleryImgs, setGalleryImgs] = useState([]);
+    const [FetchError, setFetchError] = useState(null);
+
+    //routing path defineded
     const { GalleryPath } = useParams();
 
     // Convert GalleryPath to match the key format in GalleryImgData
@@ -10,15 +20,56 @@ export const GalleryImagesCards = () => {
     const GalleryData = GalleryImgData[formattedGalleryPath];
 
     // Error handling: If GalleryData is undefined
-    if (!GalleryData) {
-        return (
-            <div className="text-center py-10">
-                <h2 className="text-red-500 text-2xl font-semibold">
-                    Gallery not found. Please check the URL.
-                </h2>
-            </div>
-        );
-    }
+    // if (!GalleryData) {
+    //     return (
+    //         <div className="text-center py-10">
+    //             <h2 className="text-red-500 text-2xl font-semibold">
+    //                 Gallery not found. Please check the URL.
+    //             </h2>
+    //         </div>
+    //     );
+    // }
+
+    //Fetching API Here 
+
+    useEffect(() => {
+
+        const FetchingGalleryDropdown = async () => {
+
+            try {
+
+                //fetching packages names of sou 
+
+                const FetchSouPackagesNames = await axios.get(`${BE_URL}/souPackageName`);
+
+                const FindId = FetchSouPackagesNames.data.data && FetchSouPackagesNames.data.data.find((key) => key.sou_package_name.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "") === GalleryPath);
+
+                const FetchGalleryImg = await axios.get(`${BE_URL}/souPackageGallery/package/${FindId.id}`);
+
+
+                if (FetchGalleryImg.status === 200) {
+
+                    setGalleryImgs(FetchGalleryImg.data.data);
+
+                    setFetchError(null);
+
+                } else {
+
+                    setFetchError("Failed To Load Gallery Data.");
+                    console.warn("Unexpected response status:", FetchGalleryImg.status);
+
+                }
+
+            } catch (error) {
+
+                console.error("Unable To Fetch Data Of Gallery Data :- ", error);
+            }
+
+        };
+
+        FetchingGalleryDropdown();
+
+    }, [GalleryPath]);
 
     return (
         <>
@@ -34,7 +85,7 @@ export const GalleryImagesCards = () => {
                     </div>
 
                     <div className="grid lg:grid-cols-3 md:grid-cols-2 justify-items-center gap-5">
-                        <GalleryCards GalleryImgs={GalleryData.Imgs} />
+                        <GalleryCards GalleryImgs={GalleryImgs} />
                     </div>
                 </div>
             </div>

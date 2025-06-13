@@ -36,17 +36,11 @@ export const Header = () => {
         if (FetchNavbarDropdownResponse.status === 200) {
 
 
-          const PackagesNames = FilteredFetchNavbarDropdownResponse && FilteredFetchNavbarDropdownResponse?.map((pkg, idx) => {
-
-            return (
-
-              pkg.sou_package_name
-
-            )
-
-          });
-
-          setSouDropdown(PackagesNames);
+          setSouDropdown(
+            FilteredFetchNavbarDropdownResponse && FilteredFetchNavbarDropdownResponse.map(pkg => (
+              { label: pkg.sou_package_name }
+            ))
+          )
 
         } else {
 
@@ -67,8 +61,7 @@ export const Header = () => {
 
     FetchNavbarDropdownData();
 
-  },[])
-
+  }, [])
 
   //navbar toggle dropdown logic
   const toggleDropdown = (index) => {
@@ -100,30 +93,12 @@ export const Header = () => {
     {
       label: "Stay In Tent",
       path: "/stay-in-tent",
-      dropdown: [
-        { label: "SoU Tent City 1" },
-        { label: "Soil to Soul Resort" },
-        { label: "Unity Village Resort" },
-        { label: "River View Tent Resort" },
-        { label: "Nirvana Resort Restaurant" },
-        { label: "Tent City Narmada 2" },
-        { label: "Sou Eco Camp" },
-        { label: "Villa Euphoria Resort" },
-      ],
+      dropdown: SouDropdown,
     },
     {
       label: "Gallery",
       path: "/gallery",
-      dropdown: [
-        { label: "SoU Tent City 1" },
-        { label: "Soil to Soul Resort" },
-        { label: "Unity Village Resort" },
-        { label: "River View Tent Resort" },
-        { label: "Nirvana Resort Restaurant" },
-        { label: "Tent City Narmada 2" },
-        { label: "Sou Eco Camp" },
-        { label: "Villa Euphoria Resort" },
-      ],
+      dropdown:SouDropdown,
     },
     {
       label: "SOU Tickets",
@@ -373,7 +348,7 @@ export const Header = () => {
 
 
 
-//fetching completed 
+//fetching completed
 
 
 // import { NavLink, useNavigate } from "react-router-dom";

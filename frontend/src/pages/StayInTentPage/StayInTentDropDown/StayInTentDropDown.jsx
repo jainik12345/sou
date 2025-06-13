@@ -28,7 +28,7 @@ export const StayInTentDropDown = () => {
       <StayInTentDropDownBanner />
       <StayInTentDropDownHerosection />
       <StayInTentDropDownRiverViewBookNowPara />
-      <StayInTentDropDownBg />
+      {/* <StayInTentDropDownBg />
       <StayInTentDropDownBookOnlineCard />
       <StayInTentDropDownBookOnlineLayer />
       <StayInTentDropDownPackagesCard />
@@ -40,7 +40,7 @@ export const StayInTentDropDown = () => {
       <StayInTentDropDownItinerary />
       <StayInTentDropDownNoticePolicy />
       <StayInTentDropDownFaq />
-      <HomePageForm />
+      <HomePageForm /> */}
     </>
   );
 };

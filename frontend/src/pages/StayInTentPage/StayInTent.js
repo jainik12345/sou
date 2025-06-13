@@ -3,7 +3,7 @@ import TestiMonialImg from "../../assets/images/1N-2D-Package-Statue-of-unity-te
 import { Card } from "@mui/material";
 
 export const StayInTentDropDownData = {
-  "sou-tent-city-1": {
+  "tent-city-1": {
     Banner: "Statue of Unity Tent City",
     HeroSection: [
       {
@@ -863,7 +863,7 @@ export const StayInTentDropDownData = {
     ],
   },
 
-  "tent-city-narmada-2": {
+  "narmada-tent-city": {
     Banner: "Tent City Narmada",
     HeroSection: [
       {

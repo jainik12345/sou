@@ -5,7 +5,7 @@ import GalleryImg4 from "../../assets/images/017.webp"
 
 export const  GalleryImgData = {
 
-    "sou-tent-city-1":{
+    "tent-city-1":{
 
         Imgs:[GalleryImg,GalleryImg2,GalleryImg3,GalleryImg4,GalleryImg,GalleryImg,GalleryImg2,GalleryImg3,GalleryImg4,GalleryImg,GalleryImg,GalleryImg2,GalleryImg3,GalleryImg4,GalleryImg]
 
@@ -35,7 +35,7 @@ export const  GalleryImgData = {
 
     },
 
-    "tent-city-narmada-2":{    
+    "narmada-tent-city":{    
 
         Imgs:[GalleryImg,GalleryImg2,GalleryImg3,GalleryImg4,GalleryImg,GalleryImg,GalleryImg2,GalleryImg3,GalleryImg4,GalleryImg,GalleryImg,GalleryImg2,GalleryImg3,GalleryImg4,GalleryImg]
 
