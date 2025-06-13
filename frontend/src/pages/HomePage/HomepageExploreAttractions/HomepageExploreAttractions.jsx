@@ -1,114 +1,43 @@
-// import { ExploreTestimonialCards } from "../HomeData.js";
-// import { ExploreCard } from "../../../components/ExploreCard/ExploreCard.jsx";
-// import { useState , useEffect } from "react";
-
-// export const HomepageExploreAttractions = () => {
-
-
-//     const [currentIndex, setCurrentIndex] = useState(0);
-//     const [cardsPerPage, setCardsPerPage] = useState(3);
-//     const [Fade, setFade] = useState(true);
-
-//     const totalSlides = Math.ceil(ExploreTestimonialCards.length / cardsPerPage);
-//     const currentSlide = Math.floor(currentIndex / cardsPerPage);
-
-//     // 🔁 Responsive handler
-//     useEffect(() => {
-//         const handleResize = () => {
-//             const width = window.innerWidth;
-
-//             if (width >= 1024) {
-//                 setCardsPerPage(3);
-//             } else if (width >= 768) {
-//                 setCardsPerPage(2);
-//             } else {
-//                 setCardsPerPage(1);
-//             }
-//         };
-
-//         handleResize();
-//         window.addEventListener("resize", handleResize);
-//         return () => window.removeEventListener("resize", handleResize);
-//     }, []);
-
-//     useEffect(() => {
-//         const ExploreCardInterval = setInterval(() => {
-//             handleNext();
-//         }, 5000);
-//         return () => clearInterval(ExploreCardInterval);
-//     }, [cardsPerPage]);
-
-//     const handleNext = () => {
-//         setFade(false);
-//         setTimeout(() => {
-//             setCurrentIndex((prev) =>
-//                 prev + cardsPerPage >= ExploreTestimonialCards.length ? 0 : prev + cardsPerPage
-//             );
-//             setFade(true);
-//         }, 300);
-//     };
-
-//     const visibleCards = ExploreTestimonialCards.slice(currentIndex, currentIndex + cardsPerPage);
-
-//     return (
-//         <>
-
-//             <div className="explore-section bg-section-background-color py-10">
-//                 <div className="explore-cont max-w-screen mx-auto">
-//                     <div className="explore-title-cont flex justify-center items-center flex-col gap-2">
-//                         <h3 className="text-orange-color font-bold text-[2rem] text-center">
-//                             Explore Attractions near Statue of Unity
-//                         </h3>
-//                         <p className="text-grey-text font-bold text-center">
-//                             Explore various natural and architecture attraction in Ekta nagar.
-//                         </p>
-//                     </div>
-
-//                     <div className="explore-cards-section mt-10 relative">
-//                         <div
-//                             className={`explore-cards-cont flex gap-9 overflow-hidden max-w-screen-xl mx-auto transition-opacity duration-700 ${Fade ? "opacity-100" : "opacity-0"
-//                                 } justify-center items-center`}
-//                         >
-//                             <ExploreCard visibleCards={visibleCards} />
-//                         </div>
-
-//                         <div className="ExploreCardDots flex justify-center items-center mt-6 gap-2">
-//                             {Array.from({ length: totalSlides }).map((_, idx) => (
-//                                 <div
-//                                     key={idx}
-//                                     className={`h-3 w-3  cursor-pointer transition-all duration-300 ${idx === currentSlide ? "bg-orange-color scale-110" : "bg-gray-300"
-//                                         }`}
-//                                     onClick={() => {
-//                                         setFade(false);
-//                                         setTimeout(() => {
-//                                             setCurrentIndex(idx * cardsPerPage);
-//                                             setFade(true);
-//                                         }, 300);
-//                                     }}
-//                                 />
-//                             ))}
-//                         </div>
-//                     </div>
-//                 </div>
-//             </div>
-
-//         </>
-//     )
-// }
-
-
-
-import { ExploreTestimonialCards } from "../HomeData.js";
-import { ExploreCard } from "../../../components/ExploreCard/ExploreCard.jsx";
 import { useState, useEffect } from "react";
+import axios from "axios";
+import BE_URL from "../../../config.js";
+import { ExploreCard } from "../../../components/ExploreCard/ExploreCard.jsx";
 
 export const HomepageExploreAttractions = () => {
+  // useStates
   const [currentIndex, setCurrentIndex] = useState(0);
   const [cardsPerPage, setCardsPerPage] = useState(3);
   const [fade, setFade] = useState(true);
+  const [FetchError, setFetchError] = useState(null);
+  const [HomeExploreAttraction, setHomeExploreAttraction] = useState([]);
 
-  const totalSlides = Math.ceil(ExploreTestimonialCards.length / cardsPerPage);
-  const currentSlide = Math.floor(currentIndex / cardsPerPage);
+  // Fetching API Here
+  useEffect(() => {
+    const FetchHomeExploreAttraction = async () => {
+      try {
+        const FetchResponse = await axios.get(`${BE_URL}/homeNearAttractions`);
+        const FetchFilteredResponse = FetchResponse.data.data;
+
+        if (FetchResponse.status === 200) {
+          setHomeExploreAttraction(FetchFilteredResponse);
+          setFetchError(null);
+        } else {
+          setFetchError("Failed to load home explore attractions.");
+          console.warn("Unexpected response status:", FetchResponse.status);
+        }
+      } catch (error) {
+        console.error(
+          "Unable To Fetch Data Of Home Page Explore Attraction:- ",
+          error
+        );
+        setFetchError(
+          "An error occurred while loading Home Page Explore Attraction."
+        );
+      }
+    };
+
+    FetchHomeExploreAttraction();
+  }, []); // Only fetch once on mount!
 
   // Responsive handler
   useEffect(() => {
@@ -133,34 +62,44 @@ export const HomepageExploreAttractions = () => {
       handleNext();
     }, 5000);
     return () => clearInterval(ExploreCardInterval);
-  }, [cardsPerPage, currentIndex]);
+    // eslint-disable-next-line
+  }, [cardsPerPage, currentIndex, HomeExploreAttraction.length]);
 
+  // Handling Next Button
   const handleNext = () => {
     setFade(false);
     setTimeout(() => {
       setCurrentIndex((prev) =>
-        prev + cardsPerPage >= ExploreTestimonialCards.length ? 0 : prev + cardsPerPage
+        prev + cardsPerPage >= HomeExploreAttraction.length
+          ? 0
+          : prev + cardsPerPage
       );
       setFade(true);
     }, 350);
   };
 
+  // Handling Previous Button
   const handlePrev = () => {
     setFade(false);
     setTimeout(() => {
       setCurrentIndex((prev) =>
         prev - cardsPerPage < 0
-          ? Math.max(
-              0,
-              ExploreTestimonialCards.length - cardsPerPage
-            )
+          ? Math.max(0, HomeExploreAttraction.length - cardsPerPage)
           : prev - cardsPerPage
       );
       setFade(true);
     }, 350);
   };
 
-  const visibleCards = ExploreTestimonialCards.slice(currentIndex, currentIndex + cardsPerPage);
+  // Math for slider
+  const totalSlides = Math.ceil(HomeExploreAttraction.length / cardsPerPage);
+  const currentSlide = Math.floor(currentIndex / cardsPerPage);
+
+  // Filtering Cards Per Page
+  const visibleCards = HomeExploreAttraction.slice(
+    currentIndex,
+    currentIndex + cardsPerPage
+  );
 
   return (
     <section className="explore-section bg-gray-50 py-16">
@@ -175,36 +114,56 @@ export const HomepageExploreAttractions = () => {
           </p>
         </div>
 
+        {/* Error */}
+        {FetchError && (
+          <div className="text-center text-red-500 py-2 font-semibold">{FetchError}</div>
+        )}
+
         {/* Cards Slider */}
         <div className="relative">
           {/* Prev Button */}
-          <button
+          {/* <button
             className="absolute md:left-[-2.2rem] left-[.5rem] top-1/2 -translate-y-1/2 z-10 bg-white shadow-lg rounded-full p-3 hover:bg-orange-100 transition disabled:opacity-40"
             onClick={handlePrev}
             disabled={currentIndex === 0}
             aria-label="Previous"
           >
             <svg width="20" height="20" fill="none" viewBox="0 0 20 20">
-              <path d="M13 16l-5-5 5-5" stroke="#EA580C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <path
+                d="M13 16l-5-5 5-5"
+                stroke="#EA580C"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
-          </button>
+          </button> */}
           {/* Cards */}
           <div
-            className={`flex gap-8 overflow-hidden justify-center transition-opacity duration-500 px-1 md:px-0 ${fade ? "opacity-100" : "opacity-0"}`}
+            className={`flex gap-8 overflow-hidden justify-center transition-opacity duration-500 px-1 md:px-0 ${
+              fade ? "opacity-100" : "opacity-0"
+            }`}
             style={{ minHeight: 310 }}
           >
+            {/* Map API data and pass to ExploreCard */}
             <ExploreCard visibleCards={visibleCards} />
           </div>
           {/* Next Button */}
-          <button
+          {/* <button
             className="absolute md:right-[-2.2rem] right-[.5rem] top-1/2 -translate-y-1/2 z-10 bg-white shadow-lg rounded-full p-3 hover:bg-orange-100 transition disabled:opacity-40"
             onClick={handleNext}
             aria-label="Next"
           >
             <svg width="20" height="20" fill="none" viewBox="0 0 20 20">
-              <path d="M7 4l5 5-5 5" stroke="#EA580C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <path
+                d="M7 4l5 5-5 5"
+                stroke="#EA580C"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
-          </button>
+          </button> */}
         </div>
 
         {/* Dots */}

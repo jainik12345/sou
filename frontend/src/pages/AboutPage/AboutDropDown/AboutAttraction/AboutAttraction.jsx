@@ -7,16 +7,9 @@ export const AboutAttraction = () => {
   return (
     <>
 
-
-      
       <Banner Title="Places to visit near Statue of Unity" />
-
       <AboutAttractionHeading />
-
-
       <AboutCards />
-
-      
       <HomePageForm />
 
     </>
