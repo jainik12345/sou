@@ -1,224 +1,186 @@
-// import { useParams } from "react-router-dom";
-// import { StayInTentDropDownData } from "../../StayInTent.js";
-// import { BookOnline } from "../../../../components/Buttons/BookOnline.jsx";
-
-// export const StayInTentDropDownBookOnlineCard = () => {
-//   const { StayInTentPath } = useParams();
-//   const FormattedPath = StayInTentPath
-//     .toLowerCase()
-//     .replace(/\s+/g, "-")
-//     .replace(/[^a-z0-9-]/g, "");
-//   const FormattedData = StayInTentDropDownData[FormattedPath];
-
-//   // If data or the BookOnlineCard array is missing or empty, don't render anything
-//   if (
-//     !FormattedData ||
-//     !Array.isArray(FormattedData.BookOnlineCard) ||
-//     FormattedData.BookOnlineCard.length === 0
-//   ) {
-//     return null;
-//   }
-
-//   return (
-//     <section className="w-full bg-white py-16">
-//       {FormattedData.BookOnlineCard.map((Val, Idx) => (
-//         <div
-//           key={Idx}
-//           className="mx-auto max-w-screen-xl flex flex-col gap-8 px-4 md:px-8 py-8"
-//         >
-//           <h2 className="text-4xl font-extrabold text-center text-orange-500 mb-3 tracking-tight drop-shadow-sm">
-//             {Val.CardHeading}
-//           </h2>
-//           {Val.CardPara &&
-//             Val.CardPara.map((ParaVal, ParaIdx) => (
-//               <p
-//                 className="text-center text-lg font-medium text-gray-600 mb-2"
-//                 key={ParaIdx}
-//               >
-//                 {ParaVal}
-//               </p>
-//             ))}
-
-//           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 mt-6">
-//             {Val.CardData &&
-//               Val.CardData.map((CardVal, CardIdx) => (
-//                 <div
-//                   key={CardIdx}
-//                   className="relative group flex flex-col items-center bg-white/80 border border-orange-100 rounded-3xl shadow-xl hover:shadow-orange-300 hover:-translate-y-2 transition-all duration-300  overflow-hidden backdrop-blur-lg"
-//                 >
-//                   {/* Floating price badge */}
-//                   <div className="absolute top-4 right-4 z-10">
-//                     <span className="bg-orange-500 text-white font-bold text-base px-4 py-1 rounded-full shadow-md">
-//                       {CardVal.CardPrice}
-//                     </span>
-//                   </div>
-//                   {/* Image */}
-//                   <div className="w-full aspect-[4/3] flex items-center justify-center bg-gray-100 rounded-2xl mb-4 overflow-hidden">
-//                     <img
-//                       src={CardVal.CardImg}
-//                       alt={CardVal.CardTitle}
-//                       className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
-//                     />
-//                   </div>
-//                   {/* Title */}
-
-//                   <div className="p-5 flex flex-col gap-5">
-//                     <h3 className="font-extrabold text-xl text-gray-900 mb-1 text-center">
-//                       {CardVal.CardTitle}
-//                     </h3>
-//                     {/* CTA */}
-//                     <div className="w-full flex justify-center mt-3">
-//                       <BookOnline BookOnlineLink={CardVal.BookOnlineLink || ""} />
-//                     </div>
-//                   </div>
-
-//                 </div>
-//               ))}
-//           </div>
-//         </div>
-//       ))}
-//     </section>
-//   );
-// };
-
-
-
-
-// fetching code
-
-
-import { useParams } from "react-router-dom";
-import { StayInTentDropDownData } from "../../StayInTent.js";
-import { BookOnline } from "../../../../components/Buttons/BookOnline.jsx";
 import { useEffect, useState } from "react";
-import BE_URL from "../../../../config.js";
+import { useParams } from "react-router-dom";
 import axios from "axios";
+import BE_URL from "../../../../config";
+import { BookOnline } from "../../../../components/Buttons/BookOnline.jsx";
 
+ 
+const slugify = (str = "") =>
+  str
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(/[^a-z0-9-]/g, "");
+
+ 
+const getImageUrl = (filename) =>
+  filename
+    ? `${BE_URL}/Images/SouPackage/SouPackageResortImages/${filename}`
+    : "https://via.placeholder.com/400x200?text=No+Image";
+
+// Food plan descriptions
+const FOOD_PLAN_LABELS = {
+  CP: "CP (Continental Plan: Includes stay & breakfast only)",
+  MAP: "MAP (Modified American Plan: Includes stay, breakfast, and one major meal – lunch or dinner)",
+  AP: "AP (American Plan: Includes stay and all meals – breakfast, lunch, and dinner)",
+  EP: "EP (European Plan: Includes stay only, no meals provided)",
+};
+
+const groupResortsByPlanAndWeek = (resortsArr) => {
+  const weekMap = {
+    Weekday: "Monday To Thursday",
+    Weekend: "Friday To Sunday",
+    Other: "Other",
+  };
+  const group = {};
+  for (const r of resortsArr) {
+    const plan = (r.food_plans || "").trim() || "No Plan";
+    if (!group[plan]) group[plan] = { Weekday: [], Weekend: [], Other: [] };
+
+    const week = (r.week || "").trim().toLowerCase();
+    let weekKey = "Other";
+    if (week === "weekday") weekKey = "Weekday";
+    else if (week === "weekend") weekKey = "Weekend";
+    group[plan][weekKey].push(r);
+  }
+  return { group, weekMap };
+};
 
 export const StayInTentDropDownBookOnlineCard = () => {
-
-  //useState Definations
-
-  const [StayInTentBookCard, setStayInTentBookCard] = useState(null);
-  const [FetchError, setFetchError] = useState(null);
-
-  //routing definations 
-
   const { StayInTentPath } = useParams();
-  const FormattedPath = StayInTentPath.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
-  const FormattedData = StayInTentDropDownData[FormattedPath];
+  const formattedPath = slugify(StayInTentPath);
 
-  // If data or the BookOnlineCard array is missing or empty, don't render anything
-  if (
-    !FormattedData ||
-    !Array.isArray(FormattedData.BookOnlineCard) ||
-    FormattedData.BookOnlineCard.length === 0
-  ) {
-    return null;
-  }
-
-  //Fetch API 
+  const [loading, setLoading] = useState(true);
+  const [resorts, setResorts] = useState([]);
+  const [planOrder, setPlanOrder] = useState([]);
+  const [grouped, setGrouped] = useState({ group: {}, weekMap: {} });
 
   useEffect(() => {
+    setLoading(true);
+    setResorts([]);
+    setPlanOrder([]);
+    setGrouped({ group: {}, weekMap: {} });
 
-    const FetchStayInTentDropDownCards = async () => {
-
-      try {
-
-        const FetchSouPackgesNames = await axios.get(`${BE_URL}/souPackageName`);
-
-        // Matching Routing Path With The Name Of The All Sou Packages Name And If Both Matches It Will Return That Purticular Matched Data
-
-        const FindId = FetchSouPackgesNames.data.data && FetchSouPackgesNames.data.data.find((Key) => {
-          return (
-            StayInTentPath === Key.sou_package_name.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "")
-          );
-        });
-
-        //Fetching API Of SouPackages Hero Section
-
-        const FetchStayInTentBookOnlineCard = await axios.get(`${BE_URL}/souPackageResort/package/${FindId.id}`);
-
-        if (FetchStayInTentBookOnlineCard.status === 200) {
-
-          setStayInTentBookCard(FetchStayInTentBookOnlineCard.data.data);
-          setFetchError(null);
-
-        } else {
-
-          console.warn("Unexpected response status:", FetchHeroSectionResponse.status);
-          setFetchError("Failed To Load Stay In Tent Hero Section Data.");
-
-        }
-
-      } catch (error) {
-        console.error(
-          "Unable To Fetch Data Of Stay In Tent Book Online Card Section:- ",
-          error
+    // 1. Find sou_package_id by path
+    axios
+      .get(`${BE_URL}/souPackageName`)
+      .then((res) => {
+        const allPackages = res.data.data || [];
+        const found = allPackages.find(
+          (pkg) => slugify(pkg.sou_package_name) === formattedPath
         );
-        setFetchError("An error occurred while loading Data.");
-      }
+        if (!found) {
+          setLoading(false);
+          return;
+        }
+        // 2. Fetch all resorts for this package
+        return axios.get(`${BE_URL}/souPackageResort/package/${found.id}`);
+      })
+      .then((resortRes) => {
+        if (
+          !resortRes ||
+          !resortRes.data ||
+          !Array.isArray(resortRes.data.data)
+        ) {
+          setLoading(false);
+          return;
+        }
+        const resortsArr = resortRes.data.data;
 
-    };
+        // Find all unique food plans, preserve order of appearance
+        const plansSet = [];
+        resortsArr.forEach((r) => {
+          const plan = (r.food_plans || "").trim() || "No Plan";
+          if (!plansSet.includes(plan)) plansSet.push(plan);
+        });
+        setPlanOrder(plansSet);
 
-    FetchStayInTentDropDownCards();
+        // Group by food plan and week
+        setGrouped(groupResortsByPlanAndWeek(resortsArr));
+        setResorts(resortsArr);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  }, [formattedPath]);
 
-  }, [StayInTentPath]);
+  if (loading)
+    return (
+      <section className="w-full px-4 py-16 bg-white text-center">
+        <span className="text-lg">Loading...</span>
+      </section>
+    );
 
+  if (!resorts.length) return null;
 
-  console.log(StayInTentBookCard);
-
-  return (
-    <section className="w-full bg-white py-16">
-      <div
-        className="mx-auto max-w-screen-xl flex flex-col gap-8 px-4 md:px-8 py-8"
-      >
-        <h2 className="text-4xl font-extrabold text-center text-orange-500 mb-3 tracking-tight drop-shadow-sm">
-          Affordable Tour Packages For Soil to Soul Resort
-        </h2>
-
-        <p className="text-center text-lg font-medium text-gray-600 mb-2" >
-          Depending on how long your vacation is, you can choose 1 Night & 2 Days Package  with us. and below 6yr. Child Complimentary <br />
-          For all of our visitors, our Soil to Soul Resort Package also comes with interesting cultural programs that highlight the local culture. After a full day of sightseeing, visitors can unwind and recuperate on our lush green lawn.
-        </p>
-
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 mt-6">
-          {StayInTentBookCard && StayInTentBookCard?.map((CardVal, CardIdx) => (
-            <div
-              key={CardIdx}
-              className="relative group flex flex-col items-center bg-white/80 border border-orange-100 rounded-3xl shadow-xl hover:shadow-orange-300 hover:-translate-y-2 transition-all duration-300  overflow-hidden backdrop-blur-lg"
-            >
-              {/* Floating price badge */}
-              <div className="absolute top-4 right-4 z-10">
-                <span className="bg-orange-500 text-white font-bold text-base px-4 py-1 rounded-full shadow-md">
-                  Per Couple {CardVal.per_couple}/-
-                </span>
-              </div>
-              {/* Image */}
-              <div className="w-full aspect-[4/3] flex items-center justify-center bg-gray-100 rounded-2xl mb-4 overflow-hidden">
-                <img
-                  src={`${BE_URL}/Images/SouPackage/SouPackageResortImages/${CardVal.image}`}
-                  alt={CardVal.CardTitle}
-                  className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-              {/* Title */}
-
-              <div className="p-5 flex flex-col gap-5">
-                <h3 className="font-extrabold text-xl text-gray-900 mb-1 text-center">
-                  {CardVal.type_room_name}
-                </h3>
-                {/* CTA */}
-                <div className="w-full flex justify-center mt-3">
-                  <BookOnline BookOnlineLink={CardVal.BookOnlineLink || ""} />
+  // Render helper for week group
+  const renderWeekCards = (weekObj, weekMap) => {
+    return ["Weekday", "Weekend"].map((weekKey) =>
+      weekObj[weekKey] && weekObj[weekKey].length > 0 ? (
+        <div key={weekKey} className="flex-1 min-w-[280px] max-w-[420px]">
+          <div className="text-xl font-bold text-center text-orange-500 mb-3">
+            {weekMap[weekKey]}
+          </div>
+          <div className="bg-white rounded-2xl shadow-lg border border-orange-100 flex flex-col items-center p-0 mb-6">
+            {weekObj[weekKey].map((resort, idx) => (
+              <div key={resort.id || idx} className="w-full">
+                <div className="w-full aspect-[4/3] flex items-center justify-center bg-gray-100 rounded-t-2xl overflow-hidden">
+                  <img
+                    src={getImageUrl(resort.image)}
+                    alt={resort.type_room_name}
+                    className="object-cover w-full h-full"
+                  />
+                </div>
+                <div className="p-5 flex flex-col items-center">
+                  <h3 className="font-extrabold text-lg text-orange-700 mb-1 text-center">
+                    {resort.type_room_name}
+                  </h3>
+                  <div className="mb-2 text-gray-800 font-medium">
+                    Per Couple ₹
+                    {resort.per_couple
+                      ? Number(resort.per_couple).toLocaleString()
+                      : "-"}
+                  </div>
+                  <BookOnline BookOnlineLink="" />
                 </div>
               </div>
-
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
+      ) : null
+    );
+  };
+
+  // Main rendering
+  return (
+    <section className="w-full bg-white py-16">
+      <div className="mx-auto max-w-5xl flex flex-col gap-16 px-4 md:px-8 py-8">
+        {planOrder.map((plan, idx) => {
+          const weekObj = grouped.group[plan];
+          if (!weekObj) return null;
+
+          // Find label for food plan, fallback to plan name if missing
+          // For "No Plan", show just the plan name
+          const planKey = plan.toUpperCase();
+          const planLabel =
+            planKey !== "NO PLAN" ? FOOD_PLAN_LABELS[planKey] || plan : plan;
+
+          return (
+            <div key={plan + idx}>
+              {/* Plan Title */}
+              <div className="mb-2">
+                <div className="text-[18px] font-semibold text-center text-orange-600 uppercase tracking-wide mb-1">
+                  {planLabel}
+                </div>
+              </div>
+              {/* Week cards in row */}
+              <div className="flex flex-col md:flex-row gap-8 justify-center">
+                {renderWeekCards(weekObj, grouped.weekMap)}
+              </div>
+            </div>
+          );
+        })}
       </div>
     </section>
   );
 };
+
+export default StayInTentDropDownBookOnlineCard;
