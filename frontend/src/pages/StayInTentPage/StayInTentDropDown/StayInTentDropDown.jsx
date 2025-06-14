@@ -28,19 +28,19 @@ export const StayInTentDropDown = () => {
       <StayInTentDropDownBanner />
       <StayInTentDropDownHerosection />
       <StayInTentDropDownRiverViewBookNowPara />
-      {/* <StayInTentDropDownBg />
-      <StayInTentDropDownBookOnlineCard />
+      <StayInTentDropDownBg />
+      {/* <StayInTentDropDownBookOnlineCard /> need to be fixed some bugs here  */}
       <StayInTentDropDownBookOnlineLayer />
       <StayInTentDropDownPackagesCard />
-      <StayInTentDropDownCottagePackagesRate/>
-      <StayInTentDropDownTestimonial />
-      <StayInTentDropDownMealPlan />
+      {/* <StayInTentDropDownCottagePackagesRate/> */}
+      {/* <StayInTentDropDownTestimonial /> */}
+      {/* <StayInTentDropDownMealPlan /> */}
       <StayInTentDropDownPackagesPrices />
-      <StayInTentDropDownIcons />
-      <StayInTentDropDownItinerary />
-      <StayInTentDropDownNoticePolicy />
-      <StayInTentDropDownFaq />
-      <HomePageForm /> */}
+      {/* <StayInTentDropDownIcons /> */}
+      {/* <StayInTentDropDownItinerary /> */}
+      {/* <StayInTentDropDownNoticePolicy /> */}
+      {/* <StayInTentDropDownFaq /> */}
+      {/* <HomePageForm /> */}
     </>
   );
 };
