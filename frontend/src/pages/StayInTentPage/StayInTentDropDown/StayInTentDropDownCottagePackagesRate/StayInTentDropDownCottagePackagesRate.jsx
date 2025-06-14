@@ -1,72 +1,44 @@
-import React from "react";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import BE_URL from "../../../../config";
 
-const packages = [
-  {
-    title: "Lake View Cottage Room Packages Rate",
-    sections: [
-      {
-        label: "Monday to Thursday",
-        columns: [
-          { label: "Plan", key: "plan" },
-          { label: "1 Night & 2 Days (Per Couple)", key: "night1" },
-          { label: "2 Night & 3 Days (Per Couple)", key: "night2" },
-        ],
-        rows: [
-          { plan: "CP Plan", night1: "₹ 5,000/-", night2: "₹ 10,000/-" },
-          { plan: "MAP Plan", night1: "₹ 6,000/-", night2: "₹ 12,000/-" },
-          { plan: "AP Plan", night1: "₹ 7,000/-", night2: "₹ 14,000/-" },
-        ],
-      },
-      {
-        label: "Friday to Sunday",
-        columns: [
-          { label: "Plan", key: "plan" },
-          { label: "1 Night & 2 Days (Per Couple)", key: "night1" },
-          { label: "2 Night & 3 Days (Per Couple)", key: "night2" },
-        ],
-        rows: [
-          { plan: "CP Plan", night1: "₹ 6,000/-", night2: "₹ 12,000/-" },
-          { plan: "MAP Plan", night1: "₹ 7,000/-", night2: "₹ 14,000/-" },
-          { plan: "AP Plan", night1: "₹ 8,000/-", night2: "₹ 16,000/-" },
-        ],
-      },
-    ],
-  },
-  {
-    title: "Lake View Cross Camp Cottage Room Packages Rate",
-    subtitle: "Cross Camp (Min 10 Pax & Max 40 Pax in)",
-    sections: [
-      {
-        columns: [
-          { label: "Plan", key: "plan" },
-          { label: "1 Night & 2 Days (Per Person)", key: "night1" },
-          { label: "2 Night & 3 Days (Per Person)", key: "night2" },
-        ],
-        rows: [
-          { plan: "EP Plan", night1: "₹ 500/-", night2: "₹ 1,000/-" },
-          { plan: "CP Plan", night1: "₹ 900/-", night2: "₹ 1,800/-" },
-          { plan: "MAP Plan", night1: "₹ 1,200/-", night2: "₹ 2,400/-" },
-          { plan: "AP Plan", night1: "₹ 1,600/-", night2: "₹ 3,200/-" },
-        ],
-      },
-    ],
-  },
-];
+const getWeekLabel = (week = "") => {
+  const trimmed = week.trim().toLowerCase();
+  if (trimmed === "weekday")
+    return { main: "Monday to Thursday", secondary: "Weekday" };
+  if (trimmed === "weekend")
+    return { main: "Friday to Sunday", secondary: "Weekend" };
+
+  return { main: week.charAt(0).toUpperCase() + week.slice(1), secondary: "" };
+};
+
+const slugify = (str = "") =>
+  str
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(/[^a-z0-9-]/g, "");
 
 const PackageTable = ({ section }) => (
-  <div className="overflow-x-auto rounded-lg shadow-md bg-white">
+  <div className="overflow-x-auto bg-white  shadow-md">
     {section.label && (
-      <div className="bg-orange-100 text-orange-700 px-4 py-2 font-bold text-center rounded-t-md">
-        {section.label}
+      <div className="bg-orange-100 text-orange-700 px-4 py-2 font-bold text-center text-lg  flex items-center justify-center gap-2">
+        <span>{section.label.main}</span>
+        {section.label.secondary && (
+          <span className="text-base text-orange-600 font-semibold">
+            ( {section.label.secondary} )
+          </span>
+        )}
       </div>
     )}
-    <table className="min-w-full text-sm text-gray-700 border">
+    <table className="min-w-max w-full text-sm text-gray-700 border">
       <thead>
         <tr>
           {section.columns.map((col) => (
             <th
               key={col.key}
-              className="px-4 py-2 bg-orange-400 text-white font-semibold text-center"
+              className="px-4 py-3 bg-orange-500 text-white font-semibold text-center text-base"
+              style={{ whiteSpace: "nowrap" }}
             >
               {col.label}
             </th>
@@ -80,7 +52,11 @@ const PackageTable = ({ section }) => (
             className="hover:bg-orange-50 transition-colors border-b last:border-none"
           >
             {section.columns.map((col) => (
-              <td key={col.key} className="px-4 py-2 text-center">
+              <td
+                key={col.key}
+                className="px-4 py-2 text-center"
+                style={{ whiteSpace: "nowrap" }}
+              >
                 {row[col.key]}
               </td>
             ))}
@@ -91,43 +67,109 @@ const PackageTable = ({ section }) => (
   </div>
 );
 
-export const StayInTentDropDownCottagePackagesRate = () => (
-  <div className="py-12 px-2 bg-white">
-    <div className="max-w-5xl mx-auto">
-      <header className="text-center mb-10">
-        <h1 className="text-3xl md:text-4xl font-extrabold text-orange-600 mb-2">
-          SOU Eco Camp Packages
-        </h1>
-        <p className="text-gray-700 text-lg">
-          Choose the best package for your stay. Enjoy nature, comfort, and a memorable experience at the Statue of Unity.
-        </p>
-      </header>
-      <div className="space-y-12">
-        {packages.map((pkg, idx) => (
-          <section key={idx} className="bg-white rounded-xl shadow-lg p-6">
-            <h2 className="text-2xl text-orange-700 font-bold mb-2 text-center">
-              {pkg.title}
-            </h2>
-            {pkg.subtitle && (
-              <p className="text-center text-sm mb-4 text-gray-500">
-                {pkg.subtitle}
-              </p>
-            )}
-            <div className="flex flex-col md:flex-row gap-8 justify-center mb-4">
-              {pkg.sections.map((section, sidx) => (
-                <div key={sidx} className="flex-1">
-                  <PackageTable section={section} />
-                </div>
-              ))}
+export const StayInTentDropDownCottagePackagesRate = () => {
+  const { StayInTentPath } = useParams();
+  const [loading, setLoading] = useState(true);
+  const [packageData, setPackageData] = useState([]);
+  const [notFound, setNotFound] = useState(false);
+
+  // Format param for matching
+  const formattedPath = slugify(StayInTentPath);
+
+  useEffect(() => {
+    setLoading(true);
+    setNotFound(false);
+    setPackageData([]);
+
+    // 1. Fetch all package names
+    axios
+      .get(`${BE_URL}/souPackageName`)
+      .then((res) => {
+        const allPackages = res.data.data || [];
+        const found = allPackages.find(
+          (pkg) => slugify(pkg.sou_package_name) === formattedPath
+        );
+        if (!found) {
+          setNotFound(true);
+          setLoading(false);
+          return;
+        }
+        // 2. Fetch all lake view plans for that package
+        return axios.get(`${BE_URL}/souPackageLakeView/package/${found.id}`);
+      })
+      .then((lakeRes) => {
+        if (!lakeRes || !lakeRes.data || !Array.isArray(lakeRes.data.data)) {
+          setLoading(false);
+          return;
+        }
+        const views = lakeRes.data.data;
+
+        // Group by week, map backend week value to user-friendly label+suffix
+        const sections = views.map((view) => {
+          let rows = [];
+          try {
+            rows = Array.isArray(view.data) ? view.data : JSON.parse(view.data);
+          } catch {
+            rows = [];
+          }
+          return {
+            label: getWeekLabel(view.week),
+            columns: [
+              { label: "Plan", key: "plans" },
+              { label: "1 Night & 2 Days", key: "night1days2" },
+              { label: "2 Night & 3 Days", key: "night2days3" },
+            ],
+            rows: rows,
+          };
+        });
+
+        setPackageData(sections);
+        setLoading(false);
+      })
+      .catch(() => {
+        setNotFound(true);
+        setLoading(false);
+      });
+  }, [formattedPath]);
+
+  if (loading)
+    return (
+      <section className="w-full px-4 py-12 bg-gray-50 text-center">
+        <span className="text-lg">Loading...</span>
+      </section>
+    );
+
+  if (notFound || !packageData.length) return null;
+
+  return (
+    <section className="w-full px-4 py-12 bg-gray-50">
+      <div className="max-w-[1440px] mx-auto">
+        <div className="heading">
+          <h1 className="text-3xl md:text-4xl font-bold text-center mb-2 text-orange-600">
+            Lake View Cottage Packages
+          </h1>
+          <p className="text-center text-gray-600 mb-1">
+            Choose from our exclusive lake view cottage packages.
+          </p>
+        </div>
+        <div className="flex flex-col md:flex-row gap-8 justify-center mt-8">
+          {packageData.map((section, idx) => (
+            <div key={idx} className="flex-1 flex flex-col mb-6">
+              <PackageTable section={section} />
+              <div className="flex-1"></div>
+              <div className="flex justify-center mt-6">
+                <button
+                  className={`px-8 py-3 rounded-lg text-white font-semibold cursor-pointer transition bg-green-500 hover:bg-green-600 shadow-md focus:outline-none`}
+                >
+                  Book Online
+                </button>
+              </div>
             </div>
-            <div className="flex justify-center">
-              <button className="bg-green-500 hover:bg-green-600 text-white font-semibold px-6 py-2 rounded-lg shadow-md transition-all">
-                Book Online
-              </button>
-            </div>
-          </section>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
-  </div>
-);
+    </section>
+  );
+};
+
+export default StayInTentDropDownCottagePackagesRate;

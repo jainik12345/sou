@@ -11,19 +11,48 @@ exports.getAllMealPlans = (req, res) => {
   );
 };
 
+// // Insert meal plan
+// exports.insertMealPlan = (req, res) => {
+//   const { sou_package_id, week, food_plans, data } = req.body;
+
+//   if (!sou_package_id || !week || !food_plans || !data) {
+//     return res
+//       .status(400)
+//       .json({ error: "Package ID, Week, Food Plans, and Data are required" });
+//   }
+
+//   db.query(
+//     "INSERT INTO sou_package_meal_plan (sou_package_id, week, food_plans, data) VALUES (?, ?, ?, ?)",
+//     [sou_package_id, week, food_plans, JSON.stringify(data)],
+//     (err, result) => {
+//       if (err) return res.status(500).json({ error: err.message });
+//       res.status(201).json({
+//         status: "success",
+//         message: "Inserted",
+//         insertId: result.insertId,
+//       });
+//     }
+//   );
+// };
+
 // Insert meal plan
 exports.insertMealPlan = (req, res) => {
   const { sou_package_id, week, food_plans, data } = req.body;
 
-  if (!sou_package_id || !week || !food_plans || !data) {
+  // Only require sou_package_id, food_plans, and data
+  if (!sou_package_id || !food_plans || !data) {
     return res
       .status(400)
-      .json({ error: "Package ID, Week, Food Plans, and Data are required" });
+      .json({ error: "Package ID, Food Plans, and Data are required" });
   }
+
+  // If week is missing or empty, set it to NULL (or you can set to '' if you prefer)
+  const weekValue =
+    week !== undefined && week !== null && week !== "" ? week : null;
 
   db.query(
     "INSERT INTO sou_package_meal_plan (sou_package_id, week, food_plans, data) VALUES (?, ?, ?, ?)",
-    [sou_package_id, week, food_plans, JSON.stringify(data)],
+    [sou_package_id, weekValue, food_plans, JSON.stringify(data)],
     (err, result) => {
       if (err) return res.status(500).json({ error: err.message });
       res.status(201).json({
@@ -35,20 +64,46 @@ exports.insertMealPlan = (req, res) => {
   );
 };
 
+// // Update meal plan
+// exports.updateMealPlan = (req, res) => {
+//   const { id } = req.params;
+//   const { sou_package_id, week, food_plans, data } = req.body;
+
+//   if (!sou_package_id || !week || !food_plans || !data) {
+//     return res
+//       .status(400)
+//       .json({ error: "Package ID, Week, Food Plans, and Data are required" });
+//   }
+
+//   db.query(
+//     "UPDATE sou_package_meal_plan SET sou_package_id = ?, week = ?, food_plans = ?, data = ? WHERE id = ? AND deleted_at = 0",
+//     [sou_package_id, week, food_plans, JSON.stringify(data), id],
+//     (err) => {
+//       if (err) return res.status(500).json({ error: err.message });
+//       res.status(200).json({ status: "success", message: "Updated" });
+//     }
+//   );
+// };
+
 // Update meal plan
 exports.updateMealPlan = (req, res) => {
   const { id } = req.params;
   const { sou_package_id, week, food_plans, data } = req.body;
 
-  if (!sou_package_id || !week || !food_plans || !data) {
+  // Only require sou_package_id, food_plans, and data
+  if (!sou_package_id || !food_plans || !data) {
     return res
       .status(400)
-      .json({ error: "Package ID, Week, Food Plans, and Data are required" });
+      .json({ error: "Package ID, Food Plans, and Data are required" });
   }
+
+  // week is optional
+  const weekValue =
+    week !== undefined && week !== null && week !== "" ? week : null;
 
   db.query(
     "UPDATE sou_package_meal_plan SET sou_package_id = ?, week = ?, food_plans = ?, data = ? WHERE id = ? AND deleted_at = 0",
-    [sou_package_id, week, food_plans, JSON.stringify(data), id],
+    [sou_package_id, weekValue, food_plans, JSON.stringify(data), id],
     (err) => {
       if (err) return res.status(500).json({ error: err.message });
       res.status(200).json({ status: "success", message: "Updated" });

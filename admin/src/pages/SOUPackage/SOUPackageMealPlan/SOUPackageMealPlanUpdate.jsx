@@ -199,7 +199,7 @@ const SOUPackageMealPlanUpdate = () => {
           </BlueTextField>
 
           {/* Week */}
-          <BlueTextField
+          {/* <BlueTextField
             select
             label="Week"
             name="week"
@@ -210,6 +210,25 @@ const SOUPackageMealPlanUpdate = () => {
             error={errors.week}
             helperText={errors.week ? "Please select week" : ""}
           >
+            {weekOptions.map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </BlueTextField> */}
+
+          <BlueTextField
+            select
+            label="Week"
+            name="week"
+            value={formData.week}
+            onChange={handleInputChange}
+            fullWidth
+            // DO NOT set required or error/helperText for week
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
             {weekOptions.map((option) => (
               <MenuItem key={option.value} value={option.value}>
                 {option.label}
