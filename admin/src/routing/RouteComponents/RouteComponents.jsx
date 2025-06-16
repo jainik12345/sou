@@ -137,6 +137,14 @@ import SOUPackageItineraryPackagePrice from './../../pages/SOUPackage/SOUPackage
 import SOUPackageItineraryPackagePriceInsert from './../../pages/SOUPackage/SOUPackageItineraryPackagePrice/SOUPackageItineraryPackagePriceInsert';
 import SOUPackageItineraryPackagePriceUpdate from './../../pages/SOUPackage/SOUPackageItineraryPackagePrice/SOUPackageItineraryPackagePriceUpdate';
 import SOUPackageItineraryPackagePriceTrace from './../../pages/SOUPackage/SOUPackageItineraryPackagePrice/SOUPackageItineraryPackagePriceTrace';
+import SOUTicketInsideEventPrice from './../../pages/SOUTicket/SOUTicketInsideEventPrice/SOUTicketInsideEventPrice';
+import SOUTicketInsideEventPriceInsert from './../../pages/SOUTicket/SOUTicketInsideEventPrice/SOUTicketInsideEventPriceInsert';
+import SOUTicketInsideEventPriceUpdate from './../../pages/SOUTicket/SOUTicketInsideEventPrice/SOUTicketInsideEventPriceUpdate';
+import SOUTicketInsideEventPriceTrace from './../../pages/SOUTicket/SOUTicketInsideEventPrice/SOUTicketInsideEventPriceTrace';
+import SOUTicketTourPackage from './../../pages/SOUTicket/SOUTicketTourPackage/SOUTicketTourPackage';
+import SOUTicketTourPackageInsert from './../../pages/SOUTicket/SOUTicketTourPackage/SOUTicketTourPackageInsert';
+import SOUTicketTourPackageUpdate from './../../pages/SOUTicket/SOUTicketTourPackage/SOUTicketTourPackageUpdate';
+import SOUTicketTourPackageTrace from './../../pages/SOUTicket/SOUTicketTourPackage/SOUTicketTourPackageTrace';
 
 
 
@@ -343,6 +351,27 @@ const RouteComponents = () => {
 
 
 
+          {/*-------------------------------------------------Sou Ticket---------------------------------------------- */}
+
+
+
+
+          <Route path="/sou-ticket-inside-event-price" element={<SOUTicketInsideEventPrice/>} />
+          <Route path="/sou-ticket-inside-event-price/insert" element={<SOUTicketInsideEventPriceInsert/>} />
+          <Route path="/sou-ticket-inside-event-price/update" element={<SOUTicketInsideEventPriceUpdate/>} />
+          <Route path="/sou-ticket-inside-event-price/trace" element={<SOUTicketInsideEventPriceTrace/>} />
+
+
+
+          <Route path="/sou-ticket-tour-Package" element={<SOUTicketTourPackage/>} />
+          <Route path="/sou-ticket-tour-Package/insert" element={<SOUTicketTourPackageInsert/>} />
+          <Route path="/sou-ticket-tour-Package/update" element={<SOUTicketTourPackageUpdate/>} />
+          <Route path="/sou-ticket-tour-Package/trace" element={<SOUTicketTourPackageTrace/>} />
+
+
+
+
+
 
           {/*-------------------------------------------------Blog---------------------------------------------- */}
 
@@ -375,6 +404,11 @@ const RouteComponents = () => {
           <Route path="/terms-conditions/insert" element={<TermsConditionsInsert/>} />
           <Route path="/terms-conditions/update" element={<TermsConditionsUpdate/>} />
           <Route path="/terms-conditions/trace" element={<TermsConditionsTrace/>} />
+
+
+
+
+
 
 
 

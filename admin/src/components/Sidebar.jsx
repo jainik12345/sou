@@ -8,7 +8,9 @@ import {
   FaLock,
   FaPhotoVideo,
   FaFileContract,
+  FaTicketAlt,
 } from "react-icons/fa";
+
 import { IoMenu, IoClose } from "react-icons/io5";
 import { FaChevronRight } from "react-icons/fa";
 import { FaChevronDown } from "react-icons/fa6";
@@ -106,6 +108,19 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           path: "/sou-package-itinerary-price",
           name: "Sou Package Itinerary Price",
         },
+      ],
+    },
+
+    {
+      path: "/sou-ticket",
+      name: "SOU Ticket",
+      icon: <FaTicketAlt />,
+      children: [
+        {
+          path: "/sou-ticket-inside-event-price",
+          name: "Sou Ticket Inside Event Price",
+        },
+        { path: "/sou-ticket-tour-Package", name: "Sou Ticket Tour Package" },
       ],
     },
 
