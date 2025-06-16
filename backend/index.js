@@ -80,6 +80,11 @@ const souPackageItineraryPackagePrice = require("./routes/souPackage/souPackageI
 const blogcategoryName = require("./routes/blog/blogCategoryName");
 const blogDataDetails = require("./routes/blog/blogDataDetails");
 
+/**------------------------------------------Sou Ticket-------------------------------------------------- */
+
+const souTicketInsideEventPrice = require("./routes/souTicket/souTicketInsideEventPrice");
+const souTicketTourPackage = require("./routes/souTicket/souTicketTourPackage");
+
 app.use("/admin", admin);
 app.use("/privatePolicy", privatePolicy);
 app.use("/termsConditions", termsConditions);
@@ -132,6 +137,11 @@ app.use("/souPackageItineraryPackagePrice", souPackageItineraryPackagePrice);
 
 app.use("/blogcategoryName", blogcategoryName);
 app.use("/blogDataDetails", blogDataDetails);
+
+/**------------------------------------------Sou Ticket-------------------------------------------------- */
+
+app.use("/souTicketInsideEventPrice", souTicketInsideEventPrice);
+app.use("/souTicketTourPackage", souTicketTourPackage);
 
 // Static Images
 /**--------------------------------------------------Home-------------------------------------------------- */
@@ -241,6 +251,22 @@ app.use(
 app.use(
   "/Images/Blog/BlogDataDetailsImages",
   express.static(path.join(__dirname, "Images/Blog/BlogDataDetailsImages"))
+);
+
+/**------------------------------------------Sou Ticket-------------------------------------------------- */
+
+app.use(
+  "/Images/SouTicket/SouTicketInsideEventPriceImages",
+  express.static(
+    path.join(__dirname, "Images/SouTicket/SouTicketInsideEventPriceImages")
+  )
+);
+
+app.use(
+  "/Images/SouTicket/SouTicketTourPackageImages",
+  express.static(
+    path.join(__dirname, "Images/SouTicket/SouTicketTourPackageImages")
+  )
 );
 
 /**---------------Start Server ---------------*/
