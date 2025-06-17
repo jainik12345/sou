@@ -17,6 +17,7 @@ import BE_URL from "../../../config";
 import { FaPlus, FaTimes } from "react-icons/fa";
 
 const BlueTextField = styled(TextField)({
+  marginBottom:"1.8rem",
   "& label.Mui-focused": { color: "#1976d2" },
   "& .MuiInput-underline:after": { borderBottomColor: "#1976d2" },
   "& .MuiOutlinedInput-root": {
