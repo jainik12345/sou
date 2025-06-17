@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { TextField, IconButton } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
-import { FiPlus } from "react-icons/fi";
+import { FiPlus, FiX } from "react-icons/fi";
 import axios from "axios";
 import Submit from "../../../components/Buttons/Submit";
 import Cancel from "../../../components/Buttons/Cancel";
@@ -10,7 +10,7 @@ import SubmitData from "../../../components/Popup/SubmitData";
 import BE_URL from "../../../config";
 
 const BlueTextField = styled(TextField)({
-  marginBottom:"1.8rem",
+  marginBottom: "1.8rem",
   "& label.Mui-focused": { color: "#1976d2" },
   "& .MuiInput-underline:after": { borderBottomColor: "#1976d2" },
   "& .MuiOutlinedInput-root": {
@@ -49,6 +49,14 @@ const SOUTicketOnlineBookingInsert = () => {
     setFormData((prev) => ({
       ...prev,
       data: [...prev.data, { heading: "", title: "" }],
+    }));
+  };
+
+  const removeDataRow = (idx) => {
+    if (formData.data.length === 1) return; // Always keep at least 1 row
+    setFormData((prev) => ({
+      ...prev,
+      data: prev.data.filter((_, index) => index !== idx),
     }));
   };
 
@@ -152,7 +160,12 @@ const SOUTicketOnlineBookingInsert = () => {
           <div>
             <div className="flex items-center justify-between mb-2">
               <p className="font-semibold">Add JSON Data</p>
-              <IconButton onClick={addDataRow} size="small" color="primary">
+              <IconButton
+                onClick={addDataRow}
+                size="small"
+                color="primary"
+                aria-label="Add Step"
+              >
                 <FiPlus />
               </IconButton>
             </div>
@@ -160,7 +173,7 @@ const SOUTicketOnlineBookingInsert = () => {
             {formData.data.map((item, index) => (
               <div
                 key={index}
-                className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4"
+                className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4 relative group"
               >
                 <BlueTextField
                   label="Heading"
@@ -178,6 +191,23 @@ const SOUTicketOnlineBookingInsert = () => {
                   }
                   fullWidth
                 />
+                {formData.data.length > 1 && (
+                  <IconButton
+                    aria-label="Remove Step"
+                    onClick={() => removeDataRow(index)}
+                    size="small"
+                    color="error"
+                    style={{
+                      position: "absolute",
+                      right: "-38px",
+                      top: "50%",
+                      transform: "translateY(-50%)",
+                      zIndex: 2,
+                    }}
+                  >
+                    <FiX />
+                  </IconButton>
+                )}
               </div>
             ))}
           </div>
