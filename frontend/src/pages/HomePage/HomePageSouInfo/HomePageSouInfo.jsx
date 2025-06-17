@@ -38,7 +38,7 @@ export const HomePageSouInfo = () => {
 
       <div className="relative z-10 max-w-5xl mx-auto px-4 flex flex-col items-center gap-10">
         <div className="flex flex-col items-center">
-          <h2 className="text-gray-800 text-2xl sm:text-4xl font-extrabold mb-2 tracking-tight">
+          <h2 className="text-gray-800 text-2xl text-center sm:text-4xl font-extrabold mb-2 tracking-tight">
             Statue of Unity Tent City Online Booking
           </h2>
           <div className="w-16 h-1 bg-orange-300 rounded mb-2" />
