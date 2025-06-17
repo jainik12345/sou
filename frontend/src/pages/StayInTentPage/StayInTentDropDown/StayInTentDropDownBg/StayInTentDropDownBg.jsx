@@ -66,7 +66,7 @@ export const StayInTentDropDownBg = () => {
 
     return (
         <div
-            className="w-full h-[250px] relative overflow-hidden"
+            className="w-full h-[250px] bg-fixed overflow-hidden"
             style={{
                 backgroundImage: `url(${bgImageUrl})`,
                 backgroundSize: "cover",

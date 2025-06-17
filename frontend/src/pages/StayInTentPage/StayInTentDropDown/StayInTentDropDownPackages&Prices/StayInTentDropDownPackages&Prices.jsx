@@ -153,7 +153,7 @@ export const StayInTentDropDownPackagesPrices = () => {
                 <img
                   src={getImageUrl(priceRow.image)}
                   alt={priceRow.itineraryName}
-                  className="h-44 w-full object-cover"
+                  className="h-full w-full object-cover"
                 />
                 <div className="p-5 flex flex-col h-full">
                   <h2 className="text-lg text-center font-bold text-orange-700 mb-1">

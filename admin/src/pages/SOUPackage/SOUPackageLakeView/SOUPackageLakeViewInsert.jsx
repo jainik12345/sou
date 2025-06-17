@@ -28,6 +28,7 @@ const planOptions = [
   { value: "EP", label: "EP" },
   { value: "MAP", label: "MAP" },
   { value: "AP", label: "AP" },
+  { value: "CP", label: "CP" },
 ];
 
 const emptyEntry = {

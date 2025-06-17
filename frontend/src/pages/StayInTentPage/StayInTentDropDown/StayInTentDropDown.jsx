@@ -25,22 +25,22 @@ export const StayInTentDropDown = () => {
 
   return (
     <>
-      {/* <StayInTentDropDownBanner /> */}
-      {/* <StayInTentDropDownHerosection /> */}
-      {/* <StayInTentDropDownRiverViewBookNowPara /> */}
-      {/* <StayInTentDropDownBg /> */}
-      <StayInTentDropDownBookOnlineCard />  
-      {/* <StayInTentDropDownBookOnlineLayer /> */}
-      {/* <StayInTentDropDownPackagesCard /> */}
-      {/* <StayInTentDropDownCottagePackagesRate/> */}
-      {/* <StayInTentDropDownTestimonial /> */}
-      {/* <StayInTentDropDownMealPlan /> */}
-      {/* <StayInTentDropDownPackagesPrices /> */}
-      {/* <StayInTentDropDownIcons /> */}
-      {/* <StayInTentDropDownItinerary /> */}
-      {/* <StayInTentDropDownNoticePolicy /> */}
-      {/* <StayInTentDropDownFaq /> */}
-      {/* <HomePageForm /> */}
+      <StayInTentDropDownBanner />
+      <StayInTentDropDownHerosection />
+      <StayInTentDropDownRiverViewBookNowPara />
+      <StayInTentDropDownBg />
+      <StayInTentDropDownPackagesCard />
+      <StayInTentDropDownCottagePackagesRate />
+      <StayInTentDropDownPackagesPrices />
+      <StayInTentDropDownMealPlan />
+      <StayInTentDropDownIcons />
+      <StayInTentDropDownItinerary />
+      <StayInTentDropDownNoticePolicy />
+      <StayInTentDropDownBookOnlineLayer />
+      <StayInTentDropDownFaq />
+      <HomePageForm />
+      {/* <StayInTentDropDownBookOnlineCard />  NO USE OF THIS  */}
+      {/* <StayInTentDropDownTestimonial />  NO USE OF THIS  */}
     </>
   );
 };

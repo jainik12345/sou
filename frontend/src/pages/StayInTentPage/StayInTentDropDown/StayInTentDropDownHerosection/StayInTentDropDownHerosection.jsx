@@ -160,7 +160,7 @@ export const StayInTentDropDownHerosection = () => {
                 StayInTentHeroData?.map((Val, Idx) => {
                     return (
                         <div className="hero-section" key={Idx}>
-                            <div className="hero-cont max-w-screen-xl mx-auto md:px-10 py-20 px-5">
+                            <div className="hero-cont max-w-screen-xl mx-auto md:px-5 py-10 px-5">
                                 <div className="flex flex-col gap-5" >
                                     <div className="hero-title text-center">
                                         <h2 className="text-[2rem] font-semibold font-(family-name:--font-title-font) ">
