@@ -84,6 +84,7 @@ const blogDataDetails = require("./routes/blog/blogDataDetails");
 
 const souTicketInsideEventPrice = require("./routes/souTicket/souTicketInsideEventPrice");
 const souTicketTourPackage = require("./routes/souTicket/souTicketTourPackage");
+const souTicketOnlineBooking = require("./routes/souTicket/souTicketOnlineBooking");
 
 app.use("/admin", admin);
 app.use("/privatePolicy", privatePolicy);
@@ -142,6 +143,7 @@ app.use("/blogDataDetails", blogDataDetails);
 
 app.use("/souTicketInsideEventPrice", souTicketInsideEventPrice);
 app.use("/souTicketTourPackage", souTicketTourPackage);
+app.use("/souTicketOnlineBooking", souTicketOnlineBooking);
 
 // Static Images
 /**--------------------------------------------------Home-------------------------------------------------- */
