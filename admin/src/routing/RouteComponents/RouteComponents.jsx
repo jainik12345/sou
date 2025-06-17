@@ -145,6 +145,10 @@ import SOUTicketTourPackage from './../../pages/SOUTicket/SOUTicketTourPackage/S
 import SOUTicketTourPackageInsert from './../../pages/SOUTicket/SOUTicketTourPackage/SOUTicketTourPackageInsert';
 import SOUTicketTourPackageUpdate from './../../pages/SOUTicket/SOUTicketTourPackage/SOUTicketTourPackageUpdate';
 import SOUTicketTourPackageTrace from './../../pages/SOUTicket/SOUTicketTourPackage/SOUTicketTourPackageTrace';
+import SOUTicketOnlineBooking from './../../pages/SOUTicket/SOUTicketOnlineBooking/SOUTicketOnlineBooking';
+import SOUTicketOnlineBookingInsert from './../../pages/SOUTicket/SOUTicketOnlineBooking/SOUTicketOnlineBookingInsert';
+import SOUTicketOnlineBookingUpdate from './../../pages/SOUTicket/SOUTicketOnlineBooking/SOUTicketOnlineBookingUpdate';
+import SOUTicketOnlineBookingTrace from './../../pages/SOUTicket/SOUTicketOnlineBooking/SOUTicketOnlineBookingTrace';
 
 
 
@@ -371,7 +375,12 @@ const RouteComponents = () => {
 
 
 
+          <Route path="/sou-ticket-online-booking" element={<SOUTicketOnlineBooking/>} />
+          <Route path="/sou-ticket-online-booking/insert" element={<SOUTicketOnlineBookingInsert/>} />
+          <Route path="/sou-ticket-online-booking/update" element={<SOUTicketOnlineBookingUpdate/>} />
+          <Route path="/sou-ticket-online-booking/trace" element={<SOUTicketOnlineBookingTrace/>} />
 
+ 
 
           {/*-------------------------------------------------Blog---------------------------------------------- */}
 
@@ -404,14 +413,7 @@ const RouteComponents = () => {
           <Route path="/terms-conditions/insert" element={<TermsConditionsInsert/>} />
           <Route path="/terms-conditions/update" element={<TermsConditionsUpdate/>} />
           <Route path="/terms-conditions/trace" element={<TermsConditionsTrace/>} />
-
-
-
-
-
-
-
-
+ 
 
         </Route>
       </Routes>

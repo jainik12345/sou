@@ -121,6 +121,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           name: "Sou Ticket Inside Event Price",
         },
         { path: "/sou-ticket-tour-Package", name: "Sou Ticket Tour Package" },
+        { path: "/sou-ticket-online-booking", name: "Sou Ticket Online Booking" },
       ],
     },
 
