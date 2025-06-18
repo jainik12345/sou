@@ -144,7 +144,7 @@ const WebsitePage = ({ children }) => {
       <Header />
       {children}
       <WaytoConatct />
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 };

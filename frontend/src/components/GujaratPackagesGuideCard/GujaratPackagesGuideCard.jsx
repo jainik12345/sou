@@ -173,9 +173,11 @@
 //   );
 // };
 
-import { useState, useEffect } from "react";
-import { Inquiry } from "../../components/Buttons/Inquiry";
+/** */
+
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 import { FiPlus, FiMinus } from "react-icons/fi";
 
 export const GujaratPackagesGuideCard = ({
@@ -183,86 +185,131 @@ export const GujaratPackagesGuideCard = ({
   Images = [],
   Title,
   Faq = [],
-  // Rates = {},
   TableData = {},
 }) => {
-  const [currentIdx, setCurrentIdx] = useState(0);
-  const [fade, setFade] = useState(true);
+  // Image Slider States & Logic
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [intervalId, setIntervalId] = useState(null);
+
+  useEffect(() => {
+    if (!Images.length) return;
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % Images.length);
+    }, 4000);
+    setIntervalId(interval);
+    return () => clearInterval(interval);
+    // eslint-disable-next-line
+  }, [Images.length]);
+
+  const handleNext = () => {
+    if (intervalId) clearInterval(intervalId);
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % Images.length);
+  };
+
+  const handlePrev = () => {
+    if (intervalId) clearInterval(intervalId);
+    setCurrentIndex(
+      (prevIndex) => (prevIndex - 1 + Images.length) % Images.length
+    );
+  };
+
+  // FAQ Section (with AboutFAQ style)
   const [openIndex, setOpenIndex] = useState(null);
+  const faqContainerRef = useRef(null);
 
   const handleFAQClick = (Idx) => {
     setOpenIndex((prev) => (prev === Idx ? null : Idx));
   };
 
-  useEffect(() => {
-    if (!Images.length) return;
-    const interval = setInterval(() => {
-      setFade(false);
-      setTimeout(() => {
-        setCurrentIdx((prev) => (prev + 1) % Images.length);
-        setFade(true);
-      }, 200);
-    }, 3500);
-    return () => clearInterval(interval);
-  }, [Images.length]);
-
   return (
-    <div className="bg-white rounded-3xl shadow-xl p-6 grid gap-8 max-w-screen-xl mx-auto">
+    <div className="bg-white mt-10 rounded-3xl shadow-2xl p-6 grid gap-8 max-w-screen-xl mx-auto">
       <h2 className="text-3xl sm:text-4xl text-center font-extrabold text-orange-500 tracking-tight">
         {Heading}
       </h2>
 
       <div className="grid md:grid-cols-2 gap-8">
-        {/* Image Section */}
-        <div
-          className={`overflow-hidden rounded-2xl transition-opacity duration-500 ${
-            fade ? "opacity-100" : "opacity-0"
-          }`}
-        >
+        {/* Image Slider Section */}
+        <div className="overflow-hidden rounded-2xl relative">
           {Images.length > 0 && (
-            <img
-              src={Images[currentIdx]}
-              alt={Title || "Image"}
-              className="w-full h-80 object-cover rounded-2xl shadow-lg"
-            />
+            <div className="w-full h-80 relative overflow-hidden">
+              <AnimatePresence>
+                {Images.map((image, index) =>
+                  index === currentIndex ? (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, scale: 1.05 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.95 }}
+                      transition={{ duration: 1.2, ease: "easeInOut" }}
+                      className="absolute inset-0"
+                    >
+                      <img
+                        src={image}
+                        alt={`Slide ${index}`}
+                        className="w-full h-full object-cover rounded-2xl"
+                      />
+                    </motion.div>
+                  ) : null
+                )}
+              </AnimatePresence>
+
+              {/* Overlay Gradient */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-black/30 pointer-events-none rounded-2xl"></div>
+
+              {/* Left Arrow */}
+              <button
+                onClick={handlePrev}
+                className="absolute cursor-pointer left-4 top-1/2 transform -translate-y-1/2 text-white z-10 bg-black/30 hover:bg-black/60 rounded-full p-2"
+                type="button"
+              >
+                <FaAngleLeft size={30} />
+              </button>
+
+              {/* Right Arrow */}
+              <button
+                onClick={handleNext}
+                className="absolute cursor-pointer right-4 top-1/2 transform -translate-y-1/2 text-white z-10 bg-black/30 hover:bg-black/60 rounded-full p-2"
+                type="button"
+              >
+                <FaAngleRight size={30} />
+              </button>
+            </div>
           )}
         </div>
 
         {/* Details Section */}
         <div className="flex flex-col gap-6">
-          <div className="flex items-center justify-between mb-2">
-            <h2 className="text-xl sm:text-2xl font-bold text-orange-500">
-              {Title}
-            </h2>
-            <Inquiry />
-          </div>
-
-          <div className="flex flex-col gap-3">
+          {/* FAQ Section: AboutFAQ style */}
+          <div
+            className="flex flex-col gap-3 max-h-80 overflow-y-auto pr-2"
+            ref={faqContainerRef}
+            style={{ scrollbarGutter: "stable", scrollbarWidth: "thin" }}
+          >
             {Faq.map((val, idx) => (
               <div
-                className="relative border border-gray-200 rounded-xl bg-gray-50 transition-all shadow-sm hover:shadow-md cursor-pointer"
                 key={idx}
+                className={`relative transition-all duration-200 rounded-xl border border-gray-200 shadow-sm bg-gray-50 hover:shadow-lg cursor-pointer`}
                 onClick={() => handleFAQClick(idx)}
               >
-                <motion.div
-                  initial={{ height: 0 }}
-                  animate={{ height: openIndex === idx ? "100%" : 0 }}
-                  transition={{ duration: 0.3, ease: "easeInOut" }}
-                  className="absolute top-0 left-0 w-1 bg-orange-500 rounded-tl-xl rounded-bl-xl"
-                />
-                <div className="flex justify-between items-center gap-4 px-5 py-4">
-                  <h3 className="font-semibold text-gray-800 flex items-center gap-2">
-                    {openIndex === idx ? (
-                      <FiMinus
-                        size={22}
-                        className="bg-gray-200 p-1 rounded-full"
-                      />
-                    ) : (
-                      <FiPlus
-                        size={22}
-                        className="bg-gray-200 p-1 rounded-full"
-                      />
-                    )}
+                <div className="flex items-center justify-between px-6 py-3.5">
+                  <h3 className="text-[14px] md:text-[16px] font-semibold text-gray-800 flex items-center gap-3">
+                    <span
+                      className={`transition-transform duration-200 ${
+                        openIndex === idx ? "rotate-180" : ""
+                      }`}
+                    >
+                      {openIndex === idx ? (
+                        <FiMinus
+                          size={24}
+                          className="bg-orange-100 text-orange-500 p-1 rounded-full shadow-sm"
+                        />
+                      ) : (
+                        <FiPlus
+                          size={24}
+                          className="bg-orange-100 text-orange-500 p-1 rounded-full shadow-sm"
+                        />
+                      )}
+                    </span>
                     {val.FaqTitle}
                   </h3>
                 </div>
@@ -273,15 +320,25 @@ export const GujaratPackagesGuideCard = ({
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: "auto" }}
                       exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.3, ease: "easeInOut" }}
-                      className="overflow-hidden px-5 pb-4"
+                      transition={{ duration: 0.25, ease: "easeInOut" }}
+                      className="overflow-hidden"
                     >
-                      <div className="text-gray-600 text-base">
+                      <div className="px-6 pb-6 text-gray-700 text-[13px] md:text-[15px] leading-relaxed">
                         {val.FaqFact}
                       </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
+                {/* Accent vertical bar */}
+                <motion.div
+                  initial={false}
+                  animate={{
+                    height: openIndex === idx ? "100%" : "0%",
+                    opacity: openIndex === idx ? 1 : 0,
+                  }}
+                  transition={{ duration: 0.25 }}
+                  className="absolute left-0 top-0 w-1 bg-orange-500 rounded-tl-xl rounded-bl-xl"
+                />
               </div>
             ))}
           </div>
@@ -289,7 +346,6 @@ export const GujaratPackagesGuideCard = ({
       </div>
 
       {/* Table Section - Static Structure, Dynamic Values */}
-
       <div className="overflow-x-auto bg-white">
         <table className="min-w-full border-collapse text-center">
           <thead>
@@ -355,7 +411,6 @@ export const GujaratPackagesGuideCard = ({
               <td className="border border-gray-300 p-3" colSpan={2}>
                 11+1 Seat AC Tempo Traveller
               </td>
-              {/* No extra <td> here – total cols now = 1 (Hotel) + 1 (Spec) + 1 + 2 + 2 = 7 */}
             </tr>
             <tr>
               <td

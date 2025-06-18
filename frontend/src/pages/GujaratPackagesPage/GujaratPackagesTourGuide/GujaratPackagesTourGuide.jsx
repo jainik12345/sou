@@ -70,6 +70,10 @@
 //   );
 // };
 
+
+/** */
+
+
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Banner } from "../../../components/Banner/Banner";
@@ -203,3 +207,7 @@ export const GujaratPackagesTourGuide = () => {
 };
 
 export default GujaratPackagesTourGuide;
+
+
+ 
+

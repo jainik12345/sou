@@ -76,6 +76,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
       children: [
         { path: "/gujarat-packages-name", name: "Gujarat Package Name" },
         { path: "/gujarat-Packages-data", name: "Gujarat Package Data" },
+        { path: "/gujarat-Packages-form", name: "Gujarat Package Form" },
       ],
     },
 

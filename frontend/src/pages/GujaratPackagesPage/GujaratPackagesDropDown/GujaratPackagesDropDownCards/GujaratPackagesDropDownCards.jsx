@@ -142,6 +142,101 @@
 
 /** */
 
+// import { useParams } from "react-router-dom";
+// import { useEffect, useState } from "react";
+// import axios from "axios";
+// import BE_URL from "../../../../config";
+// import { GujaratPackagesGuideCard } from "../../../../components/GujaratPackagesGuideCard/GujaratPackagesGuideCard";
+
+// export const GujaratPackagesDropDownCards = () => {
+//   const { GujaratPath } = useParams();
+//   const [packageDataList, setPackageDataList] = useState([]);
+
+//   useEffect(() => {
+//     const fetchData = async () => {
+//       if (!GujaratPath) return;
+
+//       const match = GujaratPath.match(/(\d+)n-(\d+)d/i);
+//       if (!match) return;
+
+//       const [_, nightsStr, daysStr] = match;
+//       const Nights = parseInt(nightsStr, 10);
+//       const Days = parseInt(daysStr, 10);
+
+//       try {
+//         const resPkg = await axios.get(`${BE_URL}/gujaratPackage`);
+//         const allPackages = resPkg.data?.data || [];
+
+//         const matched = allPackages.find(
+//           (pkg) => pkg.Nights === Nights && pkg.Days === Days
+//         );
+
+//         if (!matched) {
+//           setPackageDataList([]);
+//           return;
+//         }
+
+//         const resData = await axios.get(
+//           `${BE_URL}/gujaratPackageData/by-package/${matched.id}`
+//         );
+//         const allData = resData.data?.data || [];
+
+//         const formattedList = allData.map((item) => ({
+//           Title: `Gujarat Tour ${Nights} Nights ${Days} Days`,
+//           Heading: item.heading || "",
+//           Faq:
+//             item.faqs?.flatMap((faqBlock) =>
+//               faqBlock.faqs.map((faq) => ({
+//                 FaqTitle: faq.question,
+//                 FaqFact: faq.answer,
+//               }))
+//             ) || [],
+//           ImgUrl: item.multiple_images || [],
+//           TourTable: item.price || {},
+//           Optional: [],
+//         }));
+
+//         setPackageDataList(formattedList);
+//       } catch (err) {
+//         console.error("Error fetching package data", err);
+//         setPackageDataList([]);
+//       }
+//     };
+
+//     fetchData();
+//   }, [GujaratPath]);
+
+//   if (!packageDataList.length) {
+//     return (
+//       <div className="text-center text-black text-xl p-10">
+//         Data is not available for this package.
+//       </div>
+//     );
+//   }
+
+//   return (
+//     <div className="gujarat-packages-tour-guide-section">
+//       <div className="gujarat-packages-tour-guide-cont max-w-screen-xl mx-auto">
+//         {packageDataList.map((pkg, idx) => (
+//           <div key={idx} className="mb-10">
+//             <GujaratPackagesGuideCard
+//               Title={pkg.Title}
+//               Heading={pkg.Heading}
+//               Faq={pkg.Faq}
+//               Images={pkg.ImgUrl}
+//               TableData={pkg.TourTable}
+//               Optional={pkg.Optional}
+//             />
+//           </div>
+//         ))}
+//       </div>
+//     </div>
+//   );
+// };
+
+
+/** */
+
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -181,20 +276,75 @@ export const GujaratPackagesDropDownCards = () => {
         );
         const allData = resData.data?.data || [];
 
-        const formattedList = allData.map((item) => ({
-          Title: `Gujarat Tour ${Nights} Nights ${Days} Days`,
-          Heading: item.heading || "",
-          Faq:
-            item.faqs?.flatMap((faqBlock) =>
+        const formattedList = allData.map((item) => {
+          // Handle images: multiple_images may be JSON string, array, or empty
+          let images = [];
+          if (item.multiple_images) {
+            if (Array.isArray(item.multiple_images)) {
+              images = item.multiple_images;
+            } else {
+              try {
+                images = JSON.parse(item.multiple_images);
+                if (!Array.isArray(images)) images = [];
+              } catch {
+                images = [];
+              }
+            }
+          }
+          // Add full static path for each image
+          images = images.map(
+            (img) =>
+              `${BE_URL}/Images/GujaratPackage/GujaratPackageDataImage/${img}`
+          );
+
+          // Parse faqs
+          let faqs = [];
+          if (Array.isArray(item.faqs)) {
+            faqs = item.faqs.flatMap((faqBlock) =>
               faqBlock.faqs.map((faq) => ({
                 FaqTitle: faq.question,
                 FaqFact: faq.answer,
               }))
-            ) || [],
-          ImgUrl: item.multiple_images || [],
-          TourTable: item.price || {},
-          Optional: [],
-        }));
+            );
+          } else {
+            try {
+              const parsed = JSON.parse(item.faqs);
+              if (Array.isArray(parsed)) {
+                faqs = parsed.flatMap((faqBlock) =>
+                  faqBlock.faqs.map((faq) => ({
+                    FaqTitle: faq.question,
+                    FaqFact: faq.answer,
+                  }))
+                );
+              }
+            } catch {
+              faqs = [];
+            }
+          }
+
+          // Parse price as object
+          let tableData = {};
+          if (item.price) {
+            if (typeof item.price === "object") {
+              tableData = item.price;
+            } else {
+              try {
+                tableData = JSON.parse(item.price);
+              } catch {
+                tableData = {};
+              }
+            }
+          }
+
+          return {
+            Title: `Gujarat Tour ${Nights} Nights ${Days} Days`,
+            Heading: item.heading || "",
+            Faq: faqs,
+            Images: images,
+            TableData: tableData,
+            Optional: [],
+          };
+        });
 
         setPackageDataList(formattedList);
       } catch (err) {
@@ -223,8 +373,8 @@ export const GujaratPackagesDropDownCards = () => {
               Title={pkg.Title}
               Heading={pkg.Heading}
               Faq={pkg.Faq}
-              Images={pkg.ImgUrl}
-              TableData={pkg.TourTable}
+              Images={pkg.Images}
+              TableData={pkg.TableData}
               Optional={pkg.Optional}
             />
           </div>

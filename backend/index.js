@@ -56,6 +56,7 @@ const contactPage = require("./routes/contact/contactPage");
 
 const gujaratPackage = require("./routes/gujaratPackage/gujaratPackage");
 const gujaratPackageData = require("./routes/gujaratPackage/gujaratPackageData");
+const gujaratPackageForm = require("./routes/gujaratPackage/gujaratPackageForm")
 
 /**------------------------------------------Sou Package-------------------------------------------------- */
 
@@ -115,6 +116,7 @@ app.use("/contactPage", contactPage);
 
 app.use("/gujaratPackage", gujaratPackage);
 app.use("/gujaratPackageData", gujaratPackageData);
+app.use("/gujaratPackageForm", gujaratPackageForm)
 
 /**------------------------------------------Sou Package-------------------------------------------------- */
 

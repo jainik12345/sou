@@ -149,6 +149,8 @@ import SOUTicketOnlineBooking from './../../pages/SOUTicket/SOUTicketOnlineBooki
 import SOUTicketOnlineBookingInsert from './../../pages/SOUTicket/SOUTicketOnlineBooking/SOUTicketOnlineBookingInsert';
 import SOUTicketOnlineBookingUpdate from './../../pages/SOUTicket/SOUTicketOnlineBooking/SOUTicketOnlineBookingUpdate';
 import SOUTicketOnlineBookingTrace from './../../pages/SOUTicket/SOUTicketOnlineBooking/SOUTicketOnlineBookingTrace';
+import GujaratPackagesForm from "../../pages/GujaratPackage/GujaratPackagesForm/GujaratPackagesForm";
+import GujaratPackagesFormTrace from './../../pages/GujaratPackage/GujaratPackagesForm/GujaratPackagesFormTrace';
 
 
 
@@ -254,6 +256,11 @@ const RouteComponents = () => {
           <Route path="/gujarat-Packages-data/insert" element={<GujaratPackagesDataInsert/>} />
           <Route path="/gujarat-Packages-data/update" element={<GujaratPackagesDataUpdate/>} />
           <Route path="/gujarat-Packages-data/trace" element={<GujaratPackagesDataTrace/>} />
+
+
+
+          <Route path="/gujarat-Packages-form" element={<GujaratPackagesForm/>} />
+          <Route path="/gujarat-Packages-form/trace" element={<GujaratPackagesFormTrace/>} />
 
 
           {/*------------------------------------------------- SOU Package------------------------------------------- */}
