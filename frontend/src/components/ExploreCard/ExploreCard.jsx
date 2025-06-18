@@ -15,7 +15,7 @@ export const ExploreCard = ({ visibleCards }) => {
             <LazyLoadImage
               src={`${BE_URL}/Images/HomeImages/HomeNearAttractions/${item.image}`}
               alt={item.Title || item.title || "Image"}
-              className="h-60 w-full object-cover rounded"
+              className="h-45 w-full object-cover rounded"
             />
           </div>
 

@@ -37,8 +37,13 @@ export const HomePageCard = ({ HomeStayPackages }) => {
           console.warn("Unexpected response status:", FetchResponse.status);
         }
       } catch (error) {
-        console.error("Unable To Fetch Data Of Home Page Stay Packages :- ", error);
-        setFetchError("An error occurred while loading Home Page Stay Packages.");
+        console.error(
+          "Unable To Fetch Data Of Home Page Stay Packages :- ",
+          error
+        );
+        setFetchError(
+          "An error occurred while loading Home Page Stay Packages."
+        );
       }
     };
     FetchHomePageStayPackages();
@@ -47,7 +52,9 @@ export const HomePageCard = ({ HomeStayPackages }) => {
   // Helper to get the package name by id
   const getPackageName = (sou_package_id) => {
     if (!HomePackagesNames) return null;
-    const pkg = HomePackagesNames.find((pkgName) => pkgName.id === sou_package_id);
+    const pkg = HomePackagesNames.find(
+      (pkgName) => pkgName.id === sou_package_id
+    );
     return pkg ? pkg.sou_package_name : null;
   };
 
@@ -73,7 +80,8 @@ export const HomePageCard = ({ HomeStayPackages }) => {
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: Idx * 0.1 }}>
+            transition={{ duration: 0.4, delay: Idx * 0.1 }}
+          >
             <motion.div
               className="card-img rounded-xl overflow-hidden shadow-lg"
               whileHover={{ scale: 1.05, rotate: 2 }}
@@ -101,10 +109,18 @@ export const HomePageCard = ({ HomeStayPackages }) => {
             <div className="card-title text-center">
               <h3
                 className="text-[1.25rem] font-extrabold tracking-wide"
-                style={{ color: COLORS.accent, textShadow: "0 2px 12px #fee14033" }}
+                style={{
+                  color: COLORS.accent,
+                  textShadow: "0 2px 12px #fee14033",
+                }}
               >
-                <NavLink to={`/stay-in-tent/${Val.sou_package_id}`}>
-                  {getPackageName(Val.sou_package_id) || `Stay Package ${Val.sou_package_id}`}
+                <NavLink
+                  to={`/stay-in-tent/${getPackageName(Val.sou_package_id)
+                    .toLowerCase()
+                    .replace(/\s+/g, "-")
+                    .replace(/[^a-z0-9\-]/g, "")}`}
+                >
+                  {getPackageName(Val.sou_package_id)}
                 </NavLink>
               </h3>
             </div>
@@ -125,12 +141,20 @@ export const HomePageCard = ({ HomeStayPackages }) => {
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.09, duration: 0.4, type: "spring" }}
                 >
-                  <TfiLayoutLineSolid className="absolute top-[5px] left-[-22px] text-[1.2rem]" style={{ color: COLORS.accent }} />
-                  <h4 className="font-bold flex items-center gap-2 text-[1.07rem]" style={{ color: COLORS.text }}>
+                  <TfiLayoutLineSolid
+                    className="absolute top-[5px] left-[-22px] text-[1.2rem]"
+                    style={{ color: COLORS.accent }}
+                  />
+                  <h4
+                    className="font-bold flex items-center gap-2 text-[1.07rem]"
+                    style={{ color: COLORS.text }}
+                  >
                     <FaHome className="bg-[#9F7AEA] text-[1.25rem] p-1 rounded-md text-white" />
                     Accommodation
                   </h4>
-                  <p className="text-[#635985] text-[.92rem] font-[400] pl-10">{Val.accommodation}</p>
+                  <p className="text-[#635985] text-[.92rem] font-[400] pl-10">
+                    {Val.accommodation}
+                  </p>
                 </motion.div>
                 <motion.div
                   className="Package-cont flex flex-col gap-1 relative"
@@ -138,12 +162,20 @@ export const HomePageCard = ({ HomeStayPackages }) => {
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.17, duration: 0.4, type: "spring" }}
                 >
-                  <TfiLayoutLineSolid className="absolute top-[5px] left-[-22px] text-[1.2rem]" style={{ color: COLORS.accent }} />
-                  <h4 className="font-bold flex items-center gap-2 text-[1.07rem]" style={{ color: COLORS.text }}>
+                  <TfiLayoutLineSolid
+                    className="absolute top-[5px] left-[-22px] text-[1.2rem]"
+                    style={{ color: COLORS.accent }}
+                  />
+                  <h4
+                    className="font-bold flex items-center gap-2 text-[1.07rem]"
+                    style={{ color: COLORS.text }}
+                  >
                     <CgNotes className="bg-[#FEE140] text-[1.25rem] p-1 rounded-md text-[#9F7AEA]" />
                     Package
                   </h4>
-                  <p className="text-[#635985] text-[.92rem] font-[400] pl-10">{Val.package}</p>
+                  <p className="text-[#635985] text-[.92rem] font-[400] pl-10">
+                    {Val.package}
+                  </p>
                 </motion.div>
                 <motion.div
                   className="Location-cont flex flex-col gap-1 relative"
@@ -151,12 +183,20 @@ export const HomePageCard = ({ HomeStayPackages }) => {
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.25, duration: 0.4, type: "spring" }}
                 >
-                  <TfiLayoutLineSolid className="absolute top-[5px] left-[-22px] text-[1.2rem]" style={{ color: COLORS.accent }} />
-                  <h4 className="font-bold flex items-center gap-2 text-[1.07rem]" style={{ color: COLORS.text }}>
+                  <TfiLayoutLineSolid
+                    className="absolute top-[5px] left-[-22px] text-[1.2rem]"
+                    style={{ color: COLORS.accent }}
+                  />
+                  <h4
+                    className="font-bold flex items-center gap-2 text-[1.07rem]"
+                    style={{ color: COLORS.text }}
+                  >
                     <FaLocationDot className="bg-[#9F7AEA] text-[1.25rem] p-1 rounded-md text-white" />
                     Location
                   </h4>
-                  <p className="text-[#635985] text-[.92rem] font-[400] pl-10">{Val.location}</p>
+                  <p className="text-[#635985] text-[.92rem] font-[400] pl-10">
+                    {Val.location}
+                  </p>
                 </motion.div>
               </div>
             </div>
@@ -167,7 +207,15 @@ export const HomePageCard = ({ HomeStayPackages }) => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.21, duration: 0.4, type: "spring" }}
             >
-              <KnowMore KnowMoreLink={`/stay-in-tent/${Val.sou_package_id}`} Text={"Know More"} />
+              <KnowMore
+                KnowMoreLink={`/stay-in-tent/${getPackageName(
+                  Val.sou_package_id
+                )
+                  .toLowerCase()
+                  .replace(/\s+/g, "-")
+                  .replace(/[^a-z0-9\-]/g, "")}`}
+                Text={"Know More"}
+              />
               <BookOnline BookOnlineLink="#" />
             </motion.div>
           </motion.div>

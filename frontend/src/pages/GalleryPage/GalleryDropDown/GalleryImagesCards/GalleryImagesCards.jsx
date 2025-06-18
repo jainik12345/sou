@@ -74,7 +74,7 @@ export const GalleryImagesCards = () => {
     return (
         <>
             <div className="gallery-img-section">
-                <div className="gallery-img-cont mx-auto p-10 flex flex-col gap-5">
+                <div className="gallery-img-cont max-w-screen-xl mx-auto p-5 flex flex-col gap-5">
                     <div className="heading flex flex-col items-center justify-center">
                         <h2 className="text-orange-color md:text-[2rem] text-[1.5rem] font-semibold font-(family-name:--font-title-font)">
                             Tallest statue in the world

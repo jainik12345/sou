@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
 import BE_URL from "../../../config.js";
 import { ExploreCard } from "../../../components/ExploreCard/ExploreCard.jsx";
@@ -102,7 +103,7 @@ export const HomepageExploreAttractions = () => {
   );
 
   return (
-    <section className="explore-section bg-gray-50 py-16">
+    <section className="explore-section  py-16">
       <div className="max-w-screen-xl mx-auto px-4">
         {/* Title and subtitle */}
         <div className="flex flex-col gap-2 items-center mb-10">
@@ -120,10 +121,19 @@ export const HomepageExploreAttractions = () => {
         )}
 
         {/* Cards Slider */}
-        <div className="relative">
+        <div className="relative flex items-center">
           {/* Prev Button */}
-          {/* <button
-            className="absolute md:left-[-2.2rem] left-[.5rem] top-1/2 -translate-y-1/2 z-10 bg-white shadow-lg rounded-full p-3 hover:bg-orange-100 transition disabled:opacity-40"
+          <button
+            className={`
+              absolute
+              top-1/2 -translate-y-1/2 z-10
+              bg-white shadow-lg rounded-full p-3
+              hover:bg-orange-100 transition disabled:opacity-40
+              left-2 md:left-[-1.5rem]
+            `}
+            style={{
+              left: "max(0.5rem, env(safe-area-inset-left, 0.5rem))"
+            }}
             onClick={handlePrev}
             disabled={currentIndex === 0}
             aria-label="Previous"
@@ -137,20 +147,33 @@ export const HomepageExploreAttractions = () => {
                 strokeLinejoin="round"
               />
             </svg>
-          </button> */}
+          </button>
           {/* Cards */}
-          <div
-            className={`flex gap-8 overflow-hidden justify-center transition-opacity duration-500 px-1 md:px-0 ${
-              fade ? "opacity-100" : "opacity-0"
-            }`}
-            style={{ minHeight: 310 }}
-          >
-            {/* Map API data and pass to ExploreCard */}
-            <ExploreCard visibleCards={visibleCards} />
-          </div>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentIndex}
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -24 }}
+              transition={{ duration: 0.45, ease: "easeInOut" }}
+              className={`flex gap-8 overflow-hidden justify-center px-1 md:px-0 w-full`}
+              style={{ minHeight: 310 }}
+            >
+              <ExploreCard visibleCards={visibleCards} />
+            </motion.div>
+          </AnimatePresence>
           {/* Next Button */}
-          {/* <button
-            className="absolute md:right-[-2.2rem] right-[.5rem] top-1/2 -translate-y-1/2 z-10 bg-white shadow-lg rounded-full p-3 hover:bg-orange-100 transition disabled:opacity-40"
+          <button
+            className={`
+              absolute
+              top-1/2 -translate-y-1/2 z-10
+              bg-white shadow-lg rounded-full p-3
+              hover:bg-orange-100 transition disabled:opacity-40
+              right-2 md:right-[-1.5rem]
+            `}
+            style={{
+              right: "max(0.5rem, env(safe-area-inset-right, 0.5rem))"
+            }}
             onClick={handleNext}
             aria-label="Next"
           >
@@ -163,28 +186,47 @@ export const HomepageExploreAttractions = () => {
                 strokeLinejoin="round"
               />
             </svg>
-          </button> */}
+          </button>
         </div>
 
         {/* Dots */}
         <div className="flex justify-center items-center mt-7 gap-3">
-          {Array.from({ length: totalSlides }).map((_, idx) => (
-            <span
-              key={idx}
-              className={`h-3 w-3 rounded-full cursor-pointer border border-orange-200 transition-all duration-300 shadow ${
-                idx === currentSlide
-                  ? "bg-orange-500 scale-125 shadow-orange-200"
-                  : "bg-gray-300"
-              }`}
-              onClick={() => {
-                setFade(false);
-                setTimeout(() => {
-                  setCurrentIndex(idx * cardsPerPage);
-                  setFade(true);
-                }, 300);
-              }}
-            />
-          ))}
+          <div className="flex gap-2">
+            {Array.from({ length: totalSlides }).map((_, idx) => (
+              <motion.button
+                key={idx}
+                onClick={() => {
+                  setFade(false);
+                  setTimeout(() => {
+                    setCurrentIndex(idx * cardsPerPage);
+                    setFade(true);
+                  }, 300);
+                }}
+                className="relative flex items-center focus:outline-none"
+                style={{ background: "none", border: "none", padding: 0 }}
+                aria-label={`Go to slide ${idx + 1}`}
+              >
+                <motion.div
+                  layout
+                  initial={false}
+                  animate={
+                    idx === currentSlide
+                      ? { width: 32, height: 8, borderRadius: 8, backgroundColor: "#EA580C" }
+                      : { width: 12, height: 8, borderRadius: 8, backgroundColor: "#F3F4F6" }
+                  }
+                  transition={{
+                    type: "spring",
+                    stiffness: 400,
+                    damping: 25,
+                  }}
+                  className="shadow border border-orange-200"
+                  style={{
+                    boxShadow: idx === currentSlide ? "0 0 8px #fb923c55" : "none"
+                  }}
+                />
+              </motion.button>
+            ))}
+          </div>
         </div>
       </div>
     </section>
