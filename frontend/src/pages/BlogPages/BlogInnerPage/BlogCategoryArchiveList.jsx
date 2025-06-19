@@ -458,6 +458,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams, NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
 import BE_URL from "../../../config";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 // ---- ADD THIS SLUGIFY FUNCTION AT THE TOP ----
 function slugify(title = "") {
@@ -672,7 +674,7 @@ const BlogCategoryArchiveList = () => {
       >
         <div className="w-full min-w-[220px] h-[240px] overflow-hidden bg-gray-100 flex items-center">
           {blog.image && (
-            <img
+            <LazyLoadImage
               src={`${BE_URL}/Images/Blog/BlogDataDetailsImages/${blog.image}`}
               alt={blog.title}
               className="object-cover w-full h-full"

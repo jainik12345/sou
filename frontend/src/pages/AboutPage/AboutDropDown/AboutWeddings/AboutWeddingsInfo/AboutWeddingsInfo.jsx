@@ -64,6 +64,8 @@
 import { AboutWeddingsData } from "../../../AboutData.js";
 import { FiChevronsRight } from "react-icons/fi";
 import { ClickHere } from "../../../../../components/Buttons/ClickHere.jsx";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 export const AboutWeddingsInfo = () => {
   return (
@@ -104,7 +106,7 @@ export const AboutWeddingsInfo = () => {
             {/* Image with overlay and effect */}
             <div className="flex-1 flex justify-center items-center relative">
               <div className="relative w-full max-w-lg group rounded-2xl overflow-hidden">
-                <img
+                <LazyLoadImage
                   src={Val.ImgUrl}
                   alt="Wedding venue"
                   className="w-full h-80 md:h-96 object-cover transition-transform duration-500 group-hover:scale-110"

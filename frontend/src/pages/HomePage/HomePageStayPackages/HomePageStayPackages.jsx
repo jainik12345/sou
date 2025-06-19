@@ -3,6 +3,7 @@ import BE_URL from "../../../config.js";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+
 export const HomePageStayPackages = () => {
   const [HomeStayPackages, setHomeStayPackages] = useState(null);
   const [FetchError, setFetchError] = useState(null);

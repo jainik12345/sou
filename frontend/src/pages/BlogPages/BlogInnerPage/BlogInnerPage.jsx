@@ -649,6 +649,8 @@ import { NavLink, useParams, useNavigate } from "react-router-dom";
 import { FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import BE_URL from "../../../config";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 // --- ADD THIS FUNCTION AT THE TOP ---
 function slugify(title = "") {
@@ -891,7 +893,7 @@ const BlogInnerPage = () => {
       >
         <div className="w-full h-[240px] overflow-hidden bg-gray-100 flex items-center">
           {blog.image && (
-            <img
+            <LazyLoadImage
               src={`${BE_URL}/Images/Blog/BlogDataDetailsImages/${blog.image}`}
               alt={blog.title}
               className="object-cover w-full h-full"
@@ -983,7 +985,7 @@ const BlogInnerPage = () => {
               >
                 <div className="relative">
                   {blog.image ? (
-                    <motion.img
+                    <motion.LazyLoadImage
                       src={`${BE_URL}/Images/Blog/BlogDataDetailsImages/${blog.image}`}
                       alt={blog.title}
                       className="w-full object-cover h-100"
