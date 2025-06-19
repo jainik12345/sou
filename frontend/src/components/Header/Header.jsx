@@ -692,7 +692,7 @@ export const Header = () => {
           </div>
 
           {/* Desktop Nav */}
-          <ul className="hidden md:flex items-center gap-4 lg:gap-7">
+          <ul className="hidden md:flex items-center gap-1 lg:gap-5">
             {navLinks.map((nav, idx) => {
               const hasDropdown = !!nav.dropdown;
               const parentActive = isParentDropdownActive(nav);
@@ -703,7 +703,7 @@ export const Header = () => {
                   <li key={nav.label} className="relative group">
                     <button
                       type="button"
-                      className={`flex items-center gap-1 font-semibold transition-colors duration-150 px-2 py-2 hover:text-orange-color bg-transparent border-0 outline-none ${
+                      className={`flex text-[12px] lg:text-[15px] items-center gap-1 font-semibold transition-colors duration-150 px-0 md:px-2 py-2 hover:text-orange-color bg-transparent border-0 outline-none ${
                         location.pathname.startsWith("/gallery/")
                           ? "text-orange-600"
                           : "text-gray-800"
@@ -728,7 +728,7 @@ export const Header = () => {
                           nav.dropdown.map((drop, dropIdx) => (
                             <li key={drop.label} className="w-full">
                               <button
-                                className={`w-full text-left font-medium px-4 py-2 block text-sm
+                                className={`w-full text-[12px] lg:text-[15px] text-left font-medium px-4 py-2 block text-sm
                                 ${
                                   isDropdownItemActive(
                                     nav.label,
@@ -760,7 +760,7 @@ export const Header = () => {
                   <NavLink
                     to={nav.path}
                     className={({ isActive }) =>
-                      `flex items-center gap-1 font-semibold transition-colors duration-150 px-2 py-2 hover:text-orange-color ${
+                      `flex items-center gap-1 text-[12px] lg:text-[15px] font-semibold transition-colors duration-150 px-2 py-2 hover:text-orange-color ${
                         isActive || parentActive
                           ? "text-orange-600"
                           : "text-gray-800"

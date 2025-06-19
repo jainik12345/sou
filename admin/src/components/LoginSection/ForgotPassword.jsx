@@ -265,10 +265,10 @@ const ForgotPassword = () => {
         initial={{ opacity: 0, y: -40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="relative z-10 w-full max-w-sm"
+        className="relative z-10 w-full max-w-md"
       >
         <div className="bg-white/80 rounded-2xl shadow-2xl backdrop-blur-lg p-8 flex flex-col gap-3 border border-orange-100">
-          <h2 className="text-2xl font-bold text-center mb-2 text-orange-600 drop-shadow">
+          <h2 className="text-3xl font-semibold text-center  text-orange-600 drop-shadow">
             Forgot Password
           </h2>
           <p className="text-center text-gray-500 text-sm mb-4">

@@ -416,7 +416,7 @@ export const Footer = () => {
           <div className="flex flex-col items-center md:items-center  gap-4 text-center">
             <img
               src={logo}
-              alt="Logo"  
+              alt="Logo"
               className="h-20 cursor-pointer drop-shadow-md"
             />
             <p className="text-base text-gray-600 text-center  max-w-xs">
@@ -534,7 +534,7 @@ export const Footer = () => {
             </a>
             <a
               href="https://mail.google.com/mail/?view=cm&fs=1&to=compassInfo@gmail.com"
-              className="flex items-center text-gray-600 hover:text-orange-500 mb-2"
+              className="flex text-[13px] lg:text-[16px] items-center text-gray-600 hover:text-orange-500 mb-2"
               target="_blank"
               rel="noopener noreferrer"
             >

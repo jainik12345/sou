@@ -215,7 +215,6 @@
 
 // export default VerifyOTP;
 
-
 import React, { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
@@ -304,7 +303,12 @@ const VerifyOTP = () => {
         <motion.div
           initial={{ scale: 0.8, rotate: 12 }}
           animate={{ scale: 1, rotate: 0 }}
-          transition={{ type: "spring", stiffness: 120, damping: 12, delay: 0.1 }}
+          transition={{
+            type: "spring",
+            stiffness: 120,
+            damping: 12,
+            delay: 0.1,
+          }}
           className="mb-6"
         >
           <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-br from-orange-400 to-orange-500 flex items-center justify-center text-white text-3xl md:text-4xl font-extrabold shadow-2xl border-4 border-white/70">
@@ -315,36 +319,40 @@ const VerifyOTP = () => {
           Enter OTP
         </h1>
         <p className="text-gray-500 text-center mb-7 text-base md:text-lg">
-          Enter the 6-digit code sent to your email<br />
-          <span className="text-orange-400 text-xs">Code is valid for 15 minutes</span>
+          Enter the 6-digit code sent to your email
+          <br />
+          <span className="text-orange-400 text-xs">
+            Code is valid for 10 minutes
+          </span>
         </p>
         {/* OTP Input */}
         <form
           className="flex flex-col items-center w-full gap-7"
-          onSubmit={e => {
+          onSubmit={(e) => {
             e.preventDefault();
             handleVerify();
           }}
           autoComplete="off"
         >
-          <div
-            className="flex justify-center gap-4 mb-2"
-            onPaste={handlePaste}
-          >
+          <div className="flex justify-center gap-4 mb-2" onPaste={handlePaste}>
             {otp.map((digit, index) => (
               <motion.input
                 key={index}
-                ref={el => (inputRefs.current[index] = el)}
+                ref={(el) => (inputRefs.current[index] = el)}
                 value={digit}
-                onChange={e => handleChange(index, e.target.value)}
-                onKeyDown={e => handleKeyDown(index, e)}
+                onChange={(e) => handleChange(index, e.target.value)}
+                onKeyDown={(e) => handleKeyDown(index, e)}
                 maxLength={1}
                 inputMode="numeric"
                 className={`
                   w-14 h-14 md:w-16 md:h-16 text-2xl md:text-3xl text-center outline-none transition
                   font-bold tracking-wider
                   bg-white/90 border-2
-                  ${error ? "border-red-400 focus:border-red-500" : "border-orange-300 focus:border-orange-400"}
+                  ${
+                    error
+                      ? "border-red-400 focus:border-red-500"
+                      : "border-orange-300 focus:border-orange-400"
+                  }
                   shadow-md focus:shadow-xl
                   rounded-2xl
                   hover:scale-105 focus:scale-110
@@ -361,12 +369,10 @@ const VerifyOTP = () => {
             </span>
           )}
           <motion.button
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.97 }}
             type="submit"
             disabled={verifying}
             className={`
-              w-full py-3 rounded-xl font-bold text-white text-lg tracking-wide
+              w-[200px] py-3 cursor-pointer rounded-xl font-bold text-white text-lg tracking-wide
               bg-gradient-to-r from-orange-400 to-orange-500 shadow-lg
               hover:from-orange-500 hover:to-orange-600
               transition-all duration-150
@@ -388,8 +394,18 @@ const VerifyOTP = () => {
             className="fixed top-8 left-1/2 -translate-x-1/2 z-50"
           >
             <div className="flex items-center px-6 py-3 rounded-lg shadow-lg text-white font-medium bg-gradient-to-r from-orange-400 to-orange-500">
-              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7"/>
+              <svg
+                className="w-5 h-5 mr-2"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M5 13l4 4L19 7"
+                />
               </svg>
               OTP Verified! Proceeding to Reset Password
             </div>

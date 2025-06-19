@@ -537,10 +537,10 @@ const LoginPage = () => {
             </RouterLink>
           </div>
           {/* Sign In Button */}
-          <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.98 }}>
+          <motion.div>
             <button
               type="submit"
-              className="w-full py-3 rounded-2xl font-bold text-white text-lg tracking-wide bg-gradient-to-r from-orange-400 to-orange-500 shadow-lg hover:from-orange-500 hover:to-orange-600 transition-all duration-150"
+              className="w-full cursor-pointer py-3 rounded-2xl font-bold text-white text-lg tracking-wide bg-gradient-to-r from-orange-400 to-orange-500 shadow-lg hover:from-orange-500 hover:to-orange-600 transition-all duration-150"
             >
               SIGN IN
             </button>
