@@ -282,7 +282,7 @@ export const AboutCards = () => {
                 )}
                 <div className="mt-auto w-full flex justify-center">
                   <ClickHere
-                    ButtonDirection={Val.buttonUrl || "/sou-tickets"}
+                    ButtonDirection={Val.buttonUrl || ""}
                     ButtonText={Val.buttonText || "Book Online"}
                     className="w-full"
                     style={{ minWidth: 120 }}

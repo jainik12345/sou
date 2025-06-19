@@ -15,7 +15,6 @@
 
 //                 </div>
 
-
 //                 <div className="package-rates grid grid-col-2 gap-3 p-3">
 
 //                     <h2 className="font-bold text-orange-color text-[1.2rem] text-center w-full col-span-2">Package Rates:</h2>
@@ -39,7 +38,6 @@
 //     )
 // }
 
-
 import { BookOnline } from "../Buttons/BookOnline";
 
 export const SouTicketsBookingCards = ({
@@ -53,11 +51,11 @@ export const SouTicketsBookingCards = ({
   return (
     <div
       key={Idx}
-      className="relative  w-full max-w-screen-xl mx-auto bg-white rounded-3xl shadow-2xl border border-gray-200 flex flex-col group transition-all duration-300 hover:scale-[1.025]"
+      className="relative  w-full max-w-screen-xl mx-auto bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col group transition-all duration-300"
       style={{
         minHeight: 410,
-        boxShadow: '0 6px 24px 0 rgba(16,30,54,0.13)',
-        border: '1px solid #eee',
+        boxShadow: "0 6px 24px 0 rgba(16,30,54,0.13)",
+        border: "1px solid #eee",
       }}
     >
       {/* Top Image with overlay */}
@@ -65,7 +63,7 @@ export const SouTicketsBookingCards = ({
         <img
           src={CardImg}
           alt={CardTitle}
-          className="rounded-t-3xl w-full h-44 object-cover"
+          className="rounded-t-2xl w-full h-44 object-cover"
         />
         {/* Notice badge */}
         {notice && (
@@ -77,7 +75,7 @@ export const SouTicketsBookingCards = ({
 
       {/* Content */}
       <div className="flex-1 flex flex-col px-5 pb-5 pt-4">
-        <h2 className="text-center text-xl font-extrabold text-gray-900 tracking-tight mb-2">
+        <h2 className="text-center text-lg h-18 font-extrabold text-gray-900 tracking-tight mb-2">
           {CardTitle}
         </h2>
 
@@ -88,11 +86,15 @@ export const SouTicketsBookingCards = ({
         <div className="flex justify-center gap-8 mb-4">
           <div className="flex flex-col items-center">
             <span className="text-xs uppercase text-gray-400">Adult</span>
-            <span className="text-xl font-bold text-orange-500">{PerAdultPrice}</span>
+            <span className="text-xl font-bold text-orange-500">
+              {PerAdultPrice}
+            </span>
           </div>
           <div className="flex flex-col items-center">
             <span className="text-xs uppercase text-gray-400">Child</span>
-            <span className="text-xl font-bold text-yellow-500">{PerChildPrice}</span>
+            <span className="text-xl font-bold text-yellow-500">
+              {PerChildPrice}
+            </span>
           </div>
         </div>
 

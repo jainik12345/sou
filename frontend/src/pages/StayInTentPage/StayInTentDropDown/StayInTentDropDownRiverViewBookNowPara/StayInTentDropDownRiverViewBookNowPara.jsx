@@ -98,9 +98,109 @@
 //   );
 // };
 
+// import BE_URL from "../../../../config";
+// import axios from "axios";
+// import { useState, useEffect } from "react";
+// import { useParams } from "react-router-dom";
 
+// export const StayInTentDropDownRiverViewBookNowPara = () => {
+//   const [StayInTentBookNowPara, setStayInTentBookNowPara] = useState(null);
+//   const [FetchError, setFetchError] = useState(null);
+//   const { StayInTentPath } = useParams();
 
+//   useEffect(() => {
+//     const FetchStayInTentBookNowPara = async () => {
+//       try {
+//         const FetchSouPackgesNames = await axios.get(
+//           `${BE_URL}/souPackageName`
+//         );
+//         const FindId =
+//           FetchSouPackgesNames.data.data &&
+//           FetchSouPackgesNames.data.data.find((Key) => {
+//             return (
+//               StayInTentPath ===
+//               Key.sou_package_name
+//                 .toLowerCase()
+//                 .replace(/\s+/g, "-")
+//                 .replace(/[^a-z0-9-]/g, "")
+//             );
+//           });
+//         if (!FindId) {
+//           setFetchError("No matching package found.");
+//           setStayInTentBookNowPara(null);
+//           return;
+//         }
+//         const FetchStayInTentBookNowData = await axios.get(
+//           `${BE_URL}/souPackageParagraph/package/${FindId.id}`
+//         );
+//         if (FetchStayInTentBookNowData.status === 200) {
+//           setStayInTentBookNowPara(FetchStayInTentBookNowData.data.data);
+//           setFetchError(null);
+//         } else {
+//           setFetchError(
+//             "Failed To Load Stay In Tent Book Now Para Section Data."
+//           );
+//           setStayInTentBookNowPara(null);
+//         }
+//       } catch (error) {
+//         setFetchError("An error occurred while loading Data.");
+//         setStayInTentBookNowPara(null);
+//         console.error(error);
+//       }
+//     };
+//     FetchStayInTentBookNowPara();
+//   }, [StayInTentPath]);
 
+//   if (!StayInTentBookNowPara || StayInTentBookNowPara.length === 0) {
+//     return null;
+//   }
+
+//   // Get the first item if array, else null
+
+//   const para =
+//     StayInTentBookNowPara && Array.isArray(StayInTentBookNowPara)
+//       ? StayInTentBookNowPara[0]
+//       : StayInTentBookNowPara;
+
+//   if (FetchError) {
+//     return (
+//       <section className="w-full py-14 px-4 bg-white">
+//         <div className="max-w-screen-xl mx-auto">
+//           <div className="text-red-600 text-center mb-4">{FetchError}</div>
+//         </div>
+//       </section>
+//     );
+//   }
+
+//   if (!para) {
+//     // Optionally render a loader here, or just nothing
+//     return null;
+//   }
+
+//   return (
+//     <section className="w-full py-14 px-4 bg-white">
+//       <div className="max-w-screen-xl mx-auto">
+//         {para.heading && (
+//           <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 text-center mb-8">
+//             Book a trip to{" "}
+//             <span className="text-orange-600">{para.heading}</span>
+//           </h2>
+//         )}
+//         {para.description &&
+//           para.description.split("\n").map((desc, idx) => (
+//             <p
+//               key={idx}
+//               className="text-gray-700 text-lg mb-6 leading-relaxed text-justify md:text-left"
+//             >
+//               {desc}
+//             </p>
+//           ))}
+//       </div>
+//     </section>
+//   );
+// };
+
+/* */
 
 import BE_URL from "../../../../config";
 import axios from "axios";
@@ -109,13 +209,14 @@ import { useParams } from "react-router-dom";
 
 export const StayInTentDropDownRiverViewBookNowPara = () => {
   const [StayInTentBookNowPara, setStayInTentBookNowPara] = useState(null);
-  const [FetchError, setFetchError] = useState(null);
   const { StayInTentPath } = useParams();
 
   useEffect(() => {
     const FetchStayInTentBookNowPara = async () => {
       try {
-        const FetchSouPackgesNames = await axios.get(`${BE_URL}/souPackageName`);
+        const FetchSouPackgesNames = await axios.get(
+          `${BE_URL}/souPackageName`
+        );
         const FindId =
           FetchSouPackgesNames.data.data &&
           FetchSouPackgesNames.data.data.find((Key) => {
@@ -128,65 +229,61 @@ export const StayInTentDropDownRiverViewBookNowPara = () => {
             );
           });
         if (!FindId) {
-          setFetchError("No matching package found.");
           setStayInTentBookNowPara(null);
           return;
         }
         const FetchStayInTentBookNowData = await axios.get(
           `${BE_URL}/souPackageParagraph/package/${FindId.id}`
         );
-        if (FetchStayInTentBookNowData.status === 200) {
+        if (
+          FetchStayInTentBookNowData.status === 200 &&
+          FetchStayInTentBookNowData.data.data &&
+          Array.isArray(FetchStayInTentBookNowData.data.data) &&
+          FetchStayInTentBookNowData.data.data.length > 0
+        ) {
           setStayInTentBookNowPara(FetchStayInTentBookNowData.data.data);
-          setFetchError(null);
         } else {
-          setFetchError("Failed To Load Stay In Tent Book Now Para Section Data.");
           setStayInTentBookNowPara(null);
         }
       } catch (error) {
-        setFetchError("An error occurred while loading Data.");
         setStayInTentBookNowPara(null);
+        console.error(error);
       }
     };
     FetchStayInTentBookNowPara();
   }, [StayInTentPath]);
 
-  // Get the first item if array, else null
+  if (!StayInTentBookNowPara || StayInTentBookNowPara.length === 0) {
+    return null;
+  }
+
   const para =
     StayInTentBookNowPara && Array.isArray(StayInTentBookNowPara)
       ? StayInTentBookNowPara[0]
       : StayInTentBookNowPara;
 
-  if (FetchError) {
-    return (
-      <section className="w-full py-14 px-4 bg-white">
-        <div className="max-w-screen-xl mx-auto">
-          <div className="text-red-600 text-center mb-4">{FetchError}</div>
-        </div>
-      </section>
-    );
-  }
-
-  if (!para) {
-    // Optionally render a loader here, or just nothing
+  if (!para || (!para.heading && !para.description)) {
     return null;
   }
 
   return (
-    <section className="w-full py-14 px-4 bg-white">
+    <section className="w-full py-14 px-4 border-2  bg-white">
       <div className="max-w-screen-xl mx-auto">
         {para.heading && (
           <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 text-center mb-8">
             Book a trip to{" "}
-            <span className="text-orange-600">
-              {para.heading}
-            </span>
+            <span className="text-orange-600">{para.heading}</span>
           </h2>
         )}
-        {para.description && para.description.split('\n').map((desc, idx) => (
-          <p key={idx} className="text-gray-700 text-lg mb-6 leading-relaxed text-justify md:text-left">
-            {desc}
-          </p>
-        ))}
+        {para.description &&
+          para.description.split("\n").map((desc, idx) => (
+            <p
+              key={idx}
+              className="text-gray-700 text-lg mb-6 leading-relaxed text-justify md:text-left"
+            >
+              {desc}
+            </p>
+          ))}
       </div>
     </section>
   );

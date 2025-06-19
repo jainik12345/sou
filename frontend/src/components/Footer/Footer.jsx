@@ -129,9 +129,9 @@ export const Footer = () => {
             <p className="text-base text-gray-600 text-center  max-w-xs">
               We work with a passion for taking challenges and creating new ones in the hospitality & travel sector.
             </p>
-            <span className="inline-block bg-orange-400 text-white px-5 py-2 rounded-full font-semibold shadow mt-2 text-sm tracking-wider">
+            {/* <span className="inline-block bg-orange-400 text-white px-5 py-2 rounded-full font-semibold shadow mt-2 text-sm tracking-wider">
               Visits: <span className="font-bold">180468</span>
-            </span>
+            </span> */}
           </div>
         </div>
         {/* Divider */}
@@ -220,23 +220,23 @@ export const Footer = () => {
             <h4 className="text-orange-500 font-bold mb-2 text-lg tracking-wide">Contact</h4>
             <p className="text-gray-600 text-base mb-2 flex items-start">
               <i className="fa-solid fa-location-dot text-orange-400 mr-2 mt-1"></i>
-              B-701/702, Pntc, Radio Mirchi Road, Satellite, Ahmedabad
+             301, KALING Behind Bata Showroom Opp. Mount Carmel Convent school Ashram Road - 380009
             </p>
             <a
-              href="https://wa.me/917069766966"
+              href="https://wa.me/918347622244"
               className="flex items-center text-gray-600 hover:text-orange-500 mb-2"
             >
               <i className="fa-solid fa-phone text-orange-400 mr-2"></i>
-              +91 7069766966
+              +91 8347622244
             </a>
             <a
-              href="https://mail.google.com/mail/?view=cm&fs=1&to=booking@aalpine.in"
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=compassInfo@gmail.com"
               className="flex items-center text-gray-600 hover:text-orange-500 mb-2"
               target="_blank"
               rel="noopener noreferrer"
             >
               <i className="fa-solid fa-envelope text-orange-400 mr-2"></i>
-              booking@aalpine.in
+              compassInfo@gmail.com
             </a>
             <div className="flex gap-3 mt-3">
               <a

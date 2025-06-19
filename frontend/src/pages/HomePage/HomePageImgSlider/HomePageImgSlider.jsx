@@ -1,83 +1,74 @@
-// import { useEffect, useState } from "react";
+// import { useEffect, useState, useRef } from "react";
 // import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 // import { NavLink } from "react-router-dom";
 // import Typewriter from "typewriter-effect";
 // import BE_URL from "../../../config";
 // import axios from "axios";
-// import { LazyLoadImage } from 'react-lazy-load-image-component';
-// import 'react-lazy-load-image-component/src/effects/blur.css'; // Optional effect
-// // Responsive padding helper
-// const getResponsivePadding = () =>
-//   "px-4 sm:px-8 md:px-16 lg:px-32 xl:px-52";
+// import { LazyLoadImage } from "react-lazy-load-image-component";
+// import "react-lazy-load-image-component/src/effects/blur.css";
+
+// const getResponsivePadding = () => "px-4 sm:px-8 md:px-16 lg:px-32 xl:px-52";
 
 // export const HomePageImgSlider = () => {
-
-//   //useState Defind here 
 //   const [CurrentImgIdx, SetCurrentImgIdx] = useState(0);
 //   const [Fade, setFade] = useState(true);
 //   const [HomeSliderImgs, setHomeSliderImgs] = useState([]);
 //   const [FetchError, setFetchError] = useState(null);
+//   const [countdown, setCountdown] = useState(5);
 
-//   //Fetching The API Here
+//   const countdownRef = useRef();
 
-
+//   // Fetch images
 //   useEffect(() => {
-
-//     //Function Declared to Fetch API Data
 //     const FetchHomeImgSlider = async () => {
-
 //       try {
-
-//         //Fetching The API Response 
-
 //         const FetchResponse = await axios.get(`${BE_URL}/homeImageSlider`);
 //         const FetchFilteredResponse = FetchResponse.data.data;
-
-//         //Checking If Status Code Is 200 Then Data Will Be Stored In useState
-
 //         if (FetchResponse.status === 200) {
-
 //           setHomeSliderImgs(FetchFilteredResponse);
 //           setFetchError(null);
-
 //         } else {
-
 //           setFetchError("Failed to load home slider images.");
 //           console.warn("Unexpected response status:", FetchResponse.status);
-
 //         }
-
-//         //Displaying The Error 
-
 //       } catch (error) {
-
-//         console.error("Unable To Fetch Data Of Home Page Image Slider:- ", error);
+//         console.error(
+//           "Unable To Fetch Data Of Home Page Image Slider:- ",
+//           error
+//         );
 //         setFetchError("An error occurred while loading home slider images.");
-
 //       }
-
-//     }
-
-//     //Calling The Function Only Once To Fetch Api Data
-
+//     };
 //     FetchHomeImgSlider();
-
 //   }, []);
 
-
-//   //useEffect to slide the Image after Certain time
-
+//   // Auto-advance image and reset countdown
 //   useEffect(() => {
 //     if (HomeSliderImgs.length === 0) return;
-
+//     setCountdown(8); // Reset countdown when images loaded or changed
 //     const SliderInterval = setInterval(() => {
 //       HandleNextBtn();
-//     }, 8000);
-
+//     }, 5000);
 //     return () => clearInterval(SliderInterval);
-//   }, [HomeSliderImgs]);
+//     // eslint-disable-next-line
+//   }, [HomeSliderImgs, CurrentImgIdx]);
 
-//   //Handle Previous Button    
+//   // Countdown effect
+//   useEffect(() => {
+//     if (HomeSliderImgs.length === 0) return;
+//     setCountdown(5); // Always reset when image changes
+
+//     // Setup a 1-second interval to decrease the timer
+//     countdownRef.current && clearInterval(countdownRef.current);
+//     countdownRef.current = setInterval(() => {
+//       setCountdown((prev) => (prev > 0 ? prev - 1 : 0));
+//     }, 1000);
+
+//     // Cleanup
+//     return () => {
+//       clearInterval(countdownRef.current);
+//     };
+//   }, [CurrentImgIdx, HomeSliderImgs]);
 
 //   const HandlePrevBtn = () => {
 //     setFade(false);
@@ -89,11 +80,8 @@
 //     }, 200);
 //   };
 
-//   //Handle Next Button
-
 //   const HandleNextBtn = () => {
 //     if (HomeSliderImgs.length === 0) return;
-
 //     setFade(false);
 //     setTimeout(() => {
 //       SetCurrentImgIdx((PrevVal) =>
@@ -103,10 +91,8 @@
 //     }, 250);
 //   };
 
-
 //   return (
 //     <section className="relative w-full h-[75vh] md:h-[85vh] overflow-hidden shadow-2xl mb-6 bg-black">
-
 //       {/* Show loading or error message */}
 //       {FetchError && (
 //         <div className="text-center text-red-500 py-10">{FetchError}</div>
@@ -119,7 +105,9 @@
 //           <LazyLoadImage
 //             src={`${BE_URL}/Images/HomeImages/HomeImageSlider/${HomeSliderImgs[CurrentImgIdx]?.image}`}
 //             alt="slider"
-//             className={`w-full h-full object-cover transition-opacity duration-700  ${Fade ? "opacity-100" : "opacity-0"}`}
+//             className={`w-full h-full object-cover transition-opacity duration-700  ${
+//               Fade ? "opacity-100" : "opacity-0"
+//             }`}
 //           />
 //           <div
 //             className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/80 pointer-events-none"
@@ -159,6 +147,10 @@
 //                 >
 //                   Click Here
 //                 </NavLink>
+//                 {/* Countdown Timer */}
+//                 {/* <div className="text-white text-xl mt-4 select-none">
+//                   Next in: <span className="font-bold">{countdown}s</span>
+//                 </div> */}
 //               </div>
 //             </div>
 //           )}
@@ -189,12 +181,13 @@
 //               <button
 //                 key={idx}
 //                 className={`transition-all duration-300 outline-none border-none
-//                 ${idx === CurrentImgIdx
-//                     ? "w-8 h-3 bg-orange-400 rounded-full shadow"
-//                     : "w-3 h-3 bg-white/70 rounded-full border border-orange-300"
-//                   }`}
+//                 ${
+//                   idx === CurrentImgIdx
+//                     ? "w-4 h-1.5 bg-orange-400 rounded-full shadow"
+//                     : "w-1.5 h-1.5 bg-white/70 rounded-full border border-orange-300"
+//                 }`}
 //                 style={{
-//                   transition: "all 0.3s cubic-bezier(.4,2,.6,1)"
+//                   transition: "all 0.3s cubic-bezier(.4,2,.6,1)",
 //                 }}
 //                 onClick={() => {
 //                   setFade(false);
@@ -211,34 +204,37 @@
 //       )}
 //     </section>
 //   );
+// };
 
-// };  
-
-
-
-//fixed code 
+/* */
 
 import { useEffect, useState, useRef } from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Typewriter from "typewriter-effect";
 import BE_URL from "../../../config";
 import axios from "axios";
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-import 'react-lazy-load-image-component/src/effects/blur.css';
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
-const getResponsivePadding = () =>
-  "px-4 sm:px-8 md:px-16 lg:px-32 xl:px-52";
+const getResponsivePadding = () => "px-4 sm:px-8 md:px-16 lg:px-32 xl:px-52";
+
+// Utility to slugify string for URL
+const slugify = (str = "") =>
+  str
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-") // non-word to hyphen
+    .replace(/^-+|-+$/g, ""); // trim hyphens from ends
 
 export const HomePageImgSlider = () => {
-
   const [CurrentImgIdx, SetCurrentImgIdx] = useState(0);
   const [Fade, setFade] = useState(true);
   const [HomeSliderImgs, setHomeSliderImgs] = useState([]);
   const [FetchError, setFetchError] = useState(null);
-  const [countdown, setCountdown] = useState(5); // Countdown in seconds
+  const [countdown, setCountdown] = useState(5);
 
   const countdownRef = useRef();
+  const navigate = useNavigate();
 
   // Fetch images
   useEffect(() => {
@@ -254,10 +250,13 @@ export const HomePageImgSlider = () => {
           console.warn("Unexpected response status:", FetchResponse.status);
         }
       } catch (error) {
-        console.error("Unable To Fetch Data Of Home Page Image Slider:- ", error);
+        console.error(
+          "Unable To Fetch Data Of Home Page Image Slider:- ",
+          error
+        );
         setFetchError("An error occurred while loading home slider images.");
       }
-    }
+    };
     FetchHomeImgSlider();
   }, []);
 
@@ -280,7 +279,7 @@ export const HomePageImgSlider = () => {
     // Setup a 1-second interval to decrease the timer
     countdownRef.current && clearInterval(countdownRef.current);
     countdownRef.current = setInterval(() => {
-      setCountdown(prev => (prev > 0 ? prev - 1 : 0));
+      setCountdown((prev) => (prev > 0 ? prev - 1 : 0));
     }, 1000);
 
     // Cleanup
@@ -310,9 +309,17 @@ export const HomePageImgSlider = () => {
     }, 250);
   };
 
+  // Handle click for "Click Here" button
+  const handleClickHere = () => {
+    const title = HomeSliderImgs[CurrentImgIdx]?.title;
+    if (title) {
+      const slug = slugify(title);
+      navigate(`/stay-in-tent/${slug}`);
+    }
+  };
+
   return (
     <section className="relative w-full h-[75vh] md:h-[85vh] overflow-hidden shadow-2xl mb-6 bg-black">
-
       {/* Show loading or error message */}
       {FetchError && (
         <div className="text-center text-red-500 py-10">{FetchError}</div>
@@ -325,7 +332,9 @@ export const HomePageImgSlider = () => {
           <LazyLoadImage
             src={`${BE_URL}/Images/HomeImages/HomeImageSlider/${HomeSliderImgs[CurrentImgIdx]?.image}`}
             alt="slider"
-            className={`w-full h-full object-cover transition-opacity duration-700  ${Fade ? "opacity-100" : "opacity-0"}`}
+            className={`w-full h-full object-cover transition-opacity duration-700  ${
+              Fade ? "opacity-100" : "opacity-0"
+            }`}
           />
           <div
             className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/80 pointer-events-none"
@@ -359,12 +368,13 @@ export const HomePageImgSlider = () => {
                     }}
                   />
                 </h2>
-                <NavLink
-                  to="#"
-                  className="bg-orange-500/90 hover:bg-orange-500 text-white font-bold px-8 py-3 rounded-full shadow-lg border border-orange-400/60 hover:border-orange-500/80 transition-all duration-300 text-lg w-fit mt-2"
+                {/* Use button instead of NavLink for routing */}
+                <button
+                  onClick={handleClickHere}
+                  className="bg-orange-500/90 hover:bg-orange-500 text-white font-bold px-8 py-3 rounded-full shadow-lg border border-orange-400/60 hover:border-orange-500/80 cursor-pointer transition-all duration-300 text-lg w-fit mt-2"
                 >
                   Click Here
-                </NavLink>
+                </button>
                 {/* Countdown Timer */}
                 {/* <div className="text-white text-xl mt-4 select-none">
                   Next in: <span className="font-bold">{countdown}s</span>
@@ -399,12 +409,13 @@ export const HomePageImgSlider = () => {
               <button
                 key={idx}
                 className={`transition-all duration-300 outline-none border-none
-                ${idx === CurrentImgIdx
-                    ? "w-8 h-3 bg-orange-400 rounded-full shadow"
-                    : "w-3 h-3 bg-white/70 rounded-full border border-orange-300"
-                  }`}
+                ${
+                  idx === CurrentImgIdx
+                    ? "w-4 h-1.5 bg-orange-400 rounded-full shadow"
+                    : "w-1.5 h-1.5 bg-white/70 rounded-full border border-orange-300"
+                }`}
                 style={{
-                  transition: "all 0.3s cubic-bezier(.4,2,.6,1)"
+                  transition: "all 0.3s cubic-bezier(.4,2,.6,1)",
                 }}
                 onClick={() => {
                   setFade(false);

@@ -51,7 +51,7 @@ exports.insertGujaratPackageForm = (req, res) => {
 
       // Send email after successful insert
       const mailOptions = {
-        from: `"Compass Tourism" <${process.env.EMAIL_USER}>`,
+        from: `"Statue of Unity" <${process.env.EMAIL_USER}>`,
         to: process.env.EMAIL_USER, // send to your own company email
         subject: "New Gujarat Package Form Submission",
         html: `
@@ -96,9 +96,9 @@ exports.replyToGujaratPackageForm = async (req, res) => {
   }
 
   const mailOptions = {
-    from: `"Compass Tourism" <${process.env.EMAIL_USER}>`,
+    from: `"Statue of Unity" <${process.env.EMAIL_USER}>`,
     to: toEmail,
-    subject: "Reply from Compass Tourism",
+    subject: "Reply from Statue of Unity",
     html: `<p>${replyMessage}</p>`,
   };
 

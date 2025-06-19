@@ -66,7 +66,7 @@ exports.insertContactForm = (req, res) => {
 
       // Send email after successful insert
       const mailOptions = {
-        from: `"Compass Tourism" <${process.env.EMAIL_USER}>`,
+        from: `"Statue of Unity" <${process.env.EMAIL_USER}>`,
         to: process.env.EMAIL_USER, // send to your own company email
         subject: "New Contact Form Submission",
         html: `
@@ -115,7 +115,7 @@ exports.replyToContactForm = async (req, res) => {
   }
 
   const mailOptions = {
-    from: `"Compass Tourism" <${process.env.EMAIL_USER}>`,
+    from: `"Statue of Unity" <${process.env.EMAIL_USER}>`,
     to: toEmail,
     subject: "Reply from Support Team",
     html: `<p>${replyMessage}</p>`,

@@ -104,7 +104,7 @@ export const HomepageExploreAttractions = () => {
 
   return (
     <section className="explore-section  py-16">
-      <div className="max-w-screen-xl mx-auto px-4">
+      <div className="max-w-[1440px] mx-auto px-4">
         {/* Title and subtitle */}
         <div className="flex flex-col gap-2 items-center mb-10">
           <h3 className="text-orange-500 font-extrabold text-3xl md:text-4xl text-center drop-shadow-sm">

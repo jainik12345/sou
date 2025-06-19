@@ -1,3 +1,149 @@
+// import { BookOnline } from "../Buttons/BookOnline";
+// import { FiPlus, FiMinus, FiChevronsRight } from "react-icons/fi";
+// import { useState } from "react";
+// import { motion, AnimatePresence } from "framer-motion";
+
+// export const SouResortTicketBookingCards = ({
+//   FaqData,
+//   CardTitle,
+//   NightsDays,
+//   CardImg,
+//   PerAdultPrice,
+//   PerChildPrice,
+//   notice,
+//   Idx,
+// }) => {
+//   const [openIndex, setOpenIndex] = useState(null);
+
+//   const HandleFAQClick = (index) => {
+//     setOpenIndex((prev) => (prev === index ? null : index));
+//   };
+
+//   return (
+//     <div
+//       key={Idx}
+//       className="relative w-full max-w-2xl mx-auto bg-white rounded-3xl shadow-xl border border-gray-100 flex flex-col transition-transform duration-300"
+//       style={{
+//         minHeight: 580,
+//         boxShadow: "0 2px 16px rgba(40,40,40,0.08)",
+//       }}
+//     >
+//       {/* Notice badge */}
+//       {notice && (
+//         <span className="absolute top-5 left-5 bg-gradient-to-r from-red-500 to-orange-400 text-white px-4 py-1 rounded-full text-xs font-bold shadow animate-pulse z-10">
+//           {notice}
+//         </span>
+//       )}
+
+//       {/* Card image */}
+//       <div className="flex justify-center items-center mb-4 rounded-xl overflow-hidden shadow-sm bg-gray-50">
+//         <img
+//           src={CardImg}
+//           alt={CardTitle}
+//           className="w-full max-w-[600px] h-60 object-cover"
+//         />
+//       </div>
+
+//       {/* Card Title */}
+//       <h2 className="text-center text-3xl font-extrabold text-gray-900 tracking-tight mb-1">
+//         {CardTitle}
+//       </h2>
+
+//       {/* Card nights & days */}
+//       {NightsDays && (
+//         <h3 className="text-center text-md font-semibold text-orange-600 mb-1">
+//           {NightsDays}
+//         </h3>
+//       )}
+
+//       {/* Divider */}
+//       <div className="w-16 border-b-2 border-orange-400 mx-auto mb-4" />
+
+//       {/* Price section */}
+//       <div className="flex justify-center gap-16 mb-6">
+//         <div className="flex flex-col items-center">
+//           <span className="text-xs uppercase text-gray-400">Adult</span>
+//           <span className="text-2xl font-bold text-orange-500">
+//             {PerAdultPrice}
+//           </span>
+//         </div>
+//         <div className="flex flex-col items-center">
+//           <span className="text-xs uppercase text-gray-400">Child</span>
+//           <span className="text-2xl font-bold text-yellow-500">
+//             {PerChildPrice}
+//           </span>
+//         </div>
+//       </div>
+
+//       {/* FAQ Accordion */}
+//       {FaqData && FaqData.length > 0 && (
+//         <div className="mb-6 px-2">
+//           <div className="flex flex-col gap-3">
+//             {FaqData.map((FaqVal, index) => (
+//               <div
+//                 key={index}
+//                 className={`relative rounded-xl border border-orange-100 bg-white shadow-sm transition cursor-pointer px-4 py-3 ${
+//                   openIndex === index ? "ring-2 ring-orange-300" : ""
+//                 }`}
+//                 onClick={() => HandleFAQClick(index)}
+//               >
+//                 <div className="faq-title flex justify-between items-center">
+//                   <h4 className="text-base font-semibold text-gray-900 flex items-center gap-2">
+//                     {openIndex === index ? (
+//                       <FiMinus
+//                         size={22}
+//                         className="bg-gray-200 p-1 rounded-full text-orange-500"
+//                       />
+//                     ) : (
+//                       <FiPlus
+//                         size={22}
+//                         className="bg-gray-200 p-1 rounded-full text-orange-500"
+//                       />
+//                     )}
+//                     {FaqVal.FaqTitle}
+//                   </h4>
+//                 </div>
+//                 <AnimatePresence initial={false}>
+//                   {openIndex === index && (
+//                     <motion.div
+//                       key="faq-content"
+//                       initial={{ opacity: 0, height: 0 }}
+//                       animate={{ opacity: 1, height: "auto" }}
+//                       exit={{ opacity: 0, height: 0 }}
+//                       transition={{ duration: 0.25, ease: "easeInOut" }}
+//                       className="overflow-hidden"
+//                     >
+//                       <ul className="mt-2 ml-2 text-gray-700 text-base flex flex-col gap-2 pl-3">
+//                         {FaqVal.FaqFact &&
+//                           FaqVal.FaqFact.map((FactVal, FactIdx) => (
+//                             <li
+//                               key={FactIdx}
+//                               className="flex items-start gap-2 font-medium"
+//                             >
+//                               <FiChevronsRight className="mt-1 text-orange-500 shrink-0" />
+//                               {FactVal}
+//                             </li>
+//                           ))}
+//                       </ul>
+//                     </motion.div>
+//                   )}
+//                 </AnimatePresence>
+//               </div>
+//             ))}
+//           </div>
+//         </div>
+//       )}
+
+//       {/* Book Button */}
+//       <div className="mt-auto flex justify-center pb-6">
+//         <BookOnline BookOnlineLink="" />
+//       </div>
+//     </div>
+//   );
+// };
+
+/* */
+
 import { BookOnline } from "../Buttons/BookOnline";
 import { FiPlus, FiMinus, FiChevronsRight } from "react-icons/fi";
 import { useState } from "react";
@@ -22,7 +168,7 @@ export const SouResortTicketBookingCards = ({
   return (
     <div
       key={Idx}
-      className="relative w-full max-w-2xl mx-auto bg-white rounded-3xl shadow-xl border border-gray-100 flex flex-col transition-transform duration-300 hover:-translate-y-1"
+      className="relative w-full max-w-2xl mx-auto bg-white rounded-3xl shadow-xl border border-gray-100 flex flex-col transition-transform duration-300"
       style={{
         minHeight: 580,
         boxShadow: "0 2px 16px rgba(40,40,40,0.08)",
@@ -36,11 +182,11 @@ export const SouResortTicketBookingCards = ({
       )}
 
       {/* Card image */}
-      <div className="flex justify-center items-center mb-4 rounded-2xl overflow-hidden shadow-sm bg-gray-50">
+      <div className="flex justify-center items-center mb-4 rounded-xl overflow-hidden shadow-sm bg-gray-50">
         <img
           src={CardImg}
           alt={CardTitle}
-          className="w-full max-w-[600px] h-56 object-cover"
+          className="w-full max-w-[600px] h-60 object-cover"
         />
       </div>
 
@@ -75,10 +221,17 @@ export const SouResortTicketBookingCards = ({
         </div>
       </div>
 
-      {/* FAQ Accordion */}
+      {/* FAQ Accordion - fixed height with scroll */}
       {FaqData && FaqData.length > 0 && (
         <div className="mb-6 px-2">
-          <div className="flex flex-col gap-3">
+          <div
+            className="flex flex-col gap-3 h-64 overflow-y-auto rounded-xl border border-orange-100 bg-white shadow-sm p-2"
+            style={{
+              maxHeight: "16rem",
+              minHeight: "10rem",
+              scrollbarWidth:"thin",
+            }}
+          >
             {FaqData.map((FaqVal, index) => (
               <div
                 key={index}

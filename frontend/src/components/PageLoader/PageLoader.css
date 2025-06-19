@@ -1,0 +1,46 @@
+.spinner-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.95);
+  z-index: 9999;
+}
+
+.loader-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+.spinner {
+  width: 80px;
+  height: 80px;
+  border: 8px solid #eee;
+  border-top: 8px solid #f68121;
+  border-radius: 50%;
+  margin-bottom: 12px;
+}
+
+.company-logo {
+  width: 320px;
+  height: 110px;
+  margin-top: 8px;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.12));
+}
+
+.welcome-text {
+  font-size: 1.8rem;
+  color: #f68121;
+  font-family: "Segoe UI", "Arial", sans-serif;
+  margin: 0;
+  text-align: center;
+  letter-spacing: 1px;
+  font-weight: 600;
+  text-shadow: 0 1px 8px rgba(246, 129, 33, 0.04);
+}

@@ -8,14 +8,14 @@ export const ExploreCard = ({ visibleCards }) => {
       {visibleCards.map((item, index) => (
         <div
           key={item.id || index}
-          className="Explore-card group bg-white rounded-2xl shadow-md shadow-grey-text p-5 max-w-[400px] my-5 flex flex-col transition-all duration-500 ease-in-out"
+          className="Explore-card group bg-white rounded-2xl shadow-md shadow-grey-text p-3 max-w-[400px] my-5 flex flex-col transition-all duration-500 ease-in-out"
         >
           {/* Card Image */}
            <div className="Card-img mb-10">
             <LazyLoadImage
               src={`${BE_URL}/Images/HomeImages/HomeNearAttractions/${item.image}`}
               alt={item.Title || item.title || "Image"}
-              className="h-45 w-full object-cover rounded"
+              className="h-55 w-[400px] object-cover rounded-xl"
             />
           </div>
 

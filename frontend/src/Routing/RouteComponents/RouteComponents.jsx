@@ -136,11 +136,12 @@ import { PrivacyPolicy } from "../../pages/PrivacyPolicyPage/PrivacyPolicy.jsx";
 import TermsConditions from "../../pages/TermsConditionsPages/TermsConditions.jsx";
 import BlogInnerPage from "../../pages/BlogPages/BlogInnerPage/BlogInnerPage.jsx";
 import BlogCategoryArchiveList from "../../pages/BlogPages/BlogInnerPage/BlogCategoryArchiveList.jsx";
+import PageNotFound from "../../pages/PageNotFound/PageNotFound.jsx";
 
 const WebsitePage = ({ children }) => {
   return (
     <>
-      <ScrollToTopBtn />
+      {/* <ScrollToTopBtn /> */}
       <Header />
       {children}
       <WaytoConatct />
@@ -178,14 +179,14 @@ const RouteComponents = () => {
             </WebsitePage>
           }
         />
-        <Route
+        {/* <Route
           path="/gallery"
           element={
             <WebsitePage>
               <Gallery />
             </WebsitePage>
           }
-        />
+        /> */}
         <Route
           path="/gallery/:GalleryPath"
           element={
@@ -315,6 +316,16 @@ const RouteComponents = () => {
           element={
             <WebsitePage>
               <TermsConditions />
+            </WebsitePage>
+          }
+        />
+
+        {/* 404 Page Not Found Route */}
+        <Route
+          path="*"
+          element={
+            <WebsitePage>
+              <PageNotFound />
             </WebsitePage>
           }
         />
