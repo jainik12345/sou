@@ -108,16 +108,16 @@ export const StayInTentDropDownItinerary = () => {
         </div>
 
         {/* Tabs */}
-        <div className="flex flex-wrap justify-center gap-2 mb-10">
+        <div className="flex flex-wrap justify-center gap-5 mb-10">
           {itineraries.map((tab, idx) => (
             <motion.button
               key={tab.id}
-              className={`px-5 py-2 rounded-xl font-semibold border-2 border-orange-400 focus:outline-none transition-all md:text-[1rem] text-[.7rem]
+              className={`px-5 py-3 rounded-xl font-semibold cursor-pointer border-2  border-orange-400 focus:outline-none transition-all md:text-[1rem] text-[.7rem]
                 ${selectedTab === idx ? "shadow-lg" : ""}
               `}
               animate={selectedTab === idx ? "active" : "inactive"}
               variants={tabVariants}
-              whileHover={selectedTab !== idx ? { scale: 1.06 } : undefined}
+              whileHover={selectedTab !== idx ? { scale: 1.00 } : undefined}
               onClick={() => setSelectedTab(idx)}
             >
               {tab.sou_package_itinerary_name}

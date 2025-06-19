@@ -69,7 +69,7 @@ import "react-lazy-load-image-component/src/effects/blur.css";
 
 export const AboutWeddingsInfo = () => {
   return (
-    <section className="w-full min-h-screen bg-gray-100 py-24">
+    <section className="w-full bg-gray-100 p-10">
       <div className="max-w-screen-xl mx-auto px-4 md:px-8 flex flex-col gap-20">
         {AboutWeddingsData?.map((Val, Idx) => (
           <div

@@ -36,6 +36,16 @@ const fieldLabels = [
   { key: "Message", label: "Message" },
 ];
 
+function formatDate(dateString) {
+  if (!dateString) return "-";
+  const d = new Date(dateString);
+  if (isNaN(d)) return dateString;
+  const day = String(d.getDate()).padStart(2, "0");
+  const month = String(d.getMonth() + 1).padStart(2, "0");
+  const year = d.getFullYear();
+  return `${day}-${month}-${year}`;
+}
+
 const ContactFormDetails = () => {
   const [page, setPage] = useState(1);
   const [showReplyDialog, setShowReplyDialog] = useState(false);
@@ -239,7 +249,7 @@ const ContactFormDetails = () => {
             </TableRow>
           </TableHead>
 
-          <TableBody>
+          {/* <TableBody>
             {displayedRows.map((row, index) => (
               <TableRow
                 key={row.id}
@@ -275,6 +285,84 @@ const ContactFormDetails = () => {
                   {row.NumberOfChild}
                 </TableCell>
                 <TableCell className="border-r text-left">{row.Date}</TableCell>
+                <TableCell className="border-r text-left">
+                  {row.NumberOfNights}
+                </TableCell>
+                <TableCell className="border-r text-left">
+                  {row.Resort}
+                </TableCell>
+                <TableCell className="border-r text-left">
+                  <div
+                    className="w-full max-h-24 overflow-y-auto text-sm whitespace-pre-wrap"
+                    style={{
+                      wordBreak: "break-word",
+                      fontFamily: "inherit",
+                    }}
+                  >
+                    {row.Message}
+                  </div>
+                </TableCell>
+                <TableCell className="text-left flex items-center gap-2">
+                  <button
+                    className="text-blue-600 hover:text-blue-800 mr-2"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleReplyClick(row);
+                    }}
+                  >
+                    <FaReply size={20} />
+                  </button>
+                  <button
+                    className="text-red-600 hover:text-red-800"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleDeleteRow(row.id);
+                    }}
+                  >
+                    <FaTrash size={20} />
+                  </button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody> */}
+          <TableBody>
+            {displayedRows.map((row, index) => (
+              <TableRow
+                key={row.id}
+                className="hover:bg-gray-100 transition-all duration-300 border-t border-gray-300"
+                hover
+                onClick={(e) => {
+                  // Avoid opening the view popup if an action button is clicked
+                  if (
+                    e.target.closest("button") ||
+                    e.target.closest("svg") ||
+                    e.target.closest("path")
+                  )
+                    return;
+                  handleRowClick(row);
+                }}
+                style={{ cursor: "pointer" }}
+              >
+                <TableCell className="border-r text-left">
+                  {(page - 1) * rowsPerPage + index + 1}
+                </TableCell>
+                <TableCell className="border-r text-left">{row.Name}</TableCell>
+                <TableCell className="border-r text-left">
+                  {row.Email}
+                </TableCell>
+                <TableCell className="border-r text-left">
+                  {row.Number}
+                </TableCell>
+                <TableCell className="border-r text-left">{row.City}</TableCell>
+                <TableCell className="border-r text-left">
+                  {row.NumberOfPerson}
+                </TableCell>
+                <TableCell className="border-r text-left">
+                  {row.NumberOfChild}
+                </TableCell>
+                <TableCell className="border-r text-left">
+                  {formatDate(row.Date)}
+                </TableCell>
                 <TableCell className="border-r text-left">
                   {row.NumberOfNights}
                 </TableCell>
