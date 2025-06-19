@@ -112,7 +112,7 @@ export const ContactIcons = () => {
             className="text-orange-color mt-2 group-hover:text-white"
           />
           <div className="flex flex-col gap-5 justify-center ">
-            <h2 className="text-black font-semibold text-[1.5rem] group-hover:text-white">
+            <h2 className="text-black font-semibold md:text-[1.5rem] text-[1rem] group-hover:text-white">
               Booking Office
             </h2>
             <p className="text-gray-500 font-semibold text-[1rem] group-hover:text-white">
@@ -130,7 +130,7 @@ export const ContactIcons = () => {
             className="text-orange-color mt-2 group-hover:text-white"
           />
           <div className="flex flex-col gap-5 justify-center ">
-            <h2 className="text-black font-semibold text-[1.5rem] group-hover:text-white">
+            <h2 className="text-black font-semibold md:text-[1.5rem] text-[1rem] group-hover:text-white">
               Email Address
             </h2>
             <a
@@ -151,7 +151,7 @@ export const ContactIcons = () => {
             className="text-orange-color mt-2 group-hover:text-white"
           />
           <div className="flex flex-col gap-5 justify-center ">
-            <h2 className="text-black font-semibold text-[1.5rem] group-hover:text-white">
+            <h2 className="text-black font-semibold md:text-[1.5rem] text-[1rem] group-hover:text-white">
               Talk to Our Tour Expert
             </h2>
             <a

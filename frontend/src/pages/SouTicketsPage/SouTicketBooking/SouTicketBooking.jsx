@@ -65,7 +65,7 @@ export const SouTicketBooking = () => {
 
   return (
     <div className="SouTicketsBookingCards-section md:p-10 p-5">
-      <h2 className="font-semibold text-[1.1rem] text-gray-600 text-center py-10">
+      <h2 className="font-semibold md:text-xl text-md text-gray-600 text-center py-10">
         You will receive all tickets with QR code within 24 Hours of your
         booking or before your arrival time at SOU, whichever is early.
       </h2>

@@ -121,12 +121,12 @@ export const HomePageTestimonial = () => {
 
   return (
     <section className="testimonial-section py-10 bg-gray-50">
-      <div className="testimonial-cont flex flex-col gap-10 max-w-screen-xl mx-auto py-10">
-        <div className="testimonial-heading flex flex-col gap-2 items-center mb-6">
-          <h3 className="text-orange-500 font-bold text-[2rem] md:text-4xl text-center tracking-tight drop-shadow-sm">
+      <div className="testimonial-cont flex flex-col gap-1 max-w-screen-xl mx-auto py-10">
+        <div className="testimonial-heading flex flex-col gap-2 items-center">
+          <h3 className="text-orange-500 font-bold text-3xl md:text-4xl text-center tracking-tight drop-shadow-sm">
             What Our Customers Say
           </h3>
-          <p className="text-center text-gray-500 max-w-2xl mx-auto mt-2 text-base font-medium">
+          <p className="text-center text-gray-500  mx-auto text-lg px-2 font-medium">
             Real reviews from real customers. Here’s what they think about us!
           </p>
         </div>
@@ -170,14 +170,14 @@ export const HomePageTestimonial = () => {
             >
               {visibleTestimonialImages.map((fileName, idx) => (
                 <div
-                  className="testimonial-card shadow-xl bg-white rounded-2xl p-5  flex flex-col items-center  transition-all duration-300"
+                  className="testimonial-card shadow-xl bg-white rounded-2xl p-3 flex flex-col items-center transition-all duration-300"
                   key={fileName + currentTestimonialIdx}
                 >
                   <LazyLoadImage
                     src={getImageUrl(fileName)}
                     alt="Customer testimonial"
                     // className="w-[260px] md:w-[340px] lg:w-[440px] h-[150px] md:h-[190px] lg:h-[210px] flex-shrink-0 object-contain rounded-lg shadow-sm"
-                    className="h-50 object-cover"
+                    className="h-50 object-contain"
                   />
                 </div>
               ))}
@@ -210,7 +210,7 @@ export const HomePageTestimonial = () => {
           </button>
         </div>
         {/* Dot Pagination */}
-        <div className="flex justify-center items-center mt-7 gap-3">
+        <div className="flex justify-center items-center  gap-3">
           <div className="flex gap-2">
             {Array.from({ length: totalTestimonialSlides }).map((_, idx) => (
               <motion.button

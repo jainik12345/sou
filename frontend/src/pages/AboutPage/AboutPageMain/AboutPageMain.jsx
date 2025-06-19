@@ -197,7 +197,7 @@ export const AboutPageMain = () => {
             <h2 className="text-orange-500 text-2xl md:text-3xl font-black tracking-tight uppercase">
               Tallest statue in the world
             </h2>
-            <h3 className="text-orange-400 text-3xl md:text-5xl font-extrabold mt-2 drop-shadow-sm">
+            <h3 className="text-orange-400 text-2xl md:text-5xl font-extrabold mt-2 drop-shadow-sm">
               Statue Of Unity
             </h3>
           </div>

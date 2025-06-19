@@ -933,8 +933,8 @@ export const GujaratPackagesDropDownForm = () => {
   }
 
   return (
-    <div className="gujarat-packages-section p-10">
-      <h2 className="text-center font-semibold text-orange-color text-[2rem]">
+    <div className="gujarat-packages-section px-5 py-10">
+      <h2 className="text-center font-semibold text-orange-color md:text-2xl text-lg">
         Plan Your Trip to {formattedTitle}
       </h2>
 

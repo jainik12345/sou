@@ -223,7 +223,7 @@ export const GujaratPackagesGuideCard = ({
 
   return (
     <div className="bg-white mt-10 rounded-3xl shadow-2xl p-6 grid gap-8 max-w-screen-xl mx-auto">
-      <h2 className="text-3xl sm:text-4xl text-center font-extrabold text-orange-500 tracking-tight">
+      <h2 className=" md:text-2xl text-md text-center font-extrabold text-orange-500 tracking-tight">
         {Heading}
       </h2>
 

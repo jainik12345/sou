@@ -160,10 +160,10 @@ export const AboutFAQ = () => {
 
       <div className="max-w-screen-xl mx-auto px-4 py-16">
         <div className="text-center mb-10">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-3">
+          <h2 className="text-2xl md:text-4xl font-extrabold text-gray-900 mb-3">
             <span className="text-orange-500">Interesting Facts</span> About Statue of Unity
           </h2>
-          <p className="text-gray-600 text-lg font-medium">
+          <p className="text-gray-600 md:text-xl text-sm font-medium">
             Here are some interesting facts you should know about the Statue of Unity.
           </p>
         </div>
@@ -174,8 +174,8 @@ export const AboutFAQ = () => {
               className={`relative transition-all duration-200 rounded-xl border border-gray-200 shadow-sm bg-gray-50 hover:shadow-lg cursor-pointer`}
               onClick={() => HandleFAQClick(Idx)}
             >
-              <div className="flex items-center justify-between px-6 py-5">
-                <h3 className="text-lg md:text-xl font-semibold text-gray-800 flex items-center gap-3">
+              <div className="flex items-center justify-between px-6 py-3">
+                <h3 className="text-md md:text-xl font-semibold text-gray-800 flex items-center gap-3">
                   <span
                     className={`transition-transform duration-200 ${openIndex === Idx ? "rotate-180" : ""
                       }`}

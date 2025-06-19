@@ -107,10 +107,10 @@ export const HomepageExploreAttractions = () => {
       <div className="max-w-[1440px] mx-auto px-4">
         {/* Title and subtitle */}
         <div className="flex flex-col gap-2 items-center mb-10">
-          <h3 className="text-orange-500 font-extrabold text-3xl md:text-4xl text-center drop-shadow-sm">
+          <h3 className="text-orange-500 font-extrabold md:text-3xl text-xl text-center drop-shadow-sm">
             Explore Attractions Near Statue of Unity
           </h3>
-          <p className="text-gray-500 font-medium text-lg md:text-xl text-center max-w-2xl">
+          <p className="text-gray-500 font-medium text-lg md:text-md text-center max-w-2xl">
             Explore various natural and architectural attractions in Ekta Nagar.
           </p>
         </div>

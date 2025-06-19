@@ -75,7 +75,7 @@ export const Banner = ({ Title, subtitle }) => {
       <div className="absolute inset-0  bg-gradient-to-b from-black/70 via-black/40 to-black/80 pointer-events-none" />
 
       <div className="relative z-10  w-fit flex flex-col items-center justify-center text-center px-10">
-        <h1 className="text-white text-xl md:text-3xl font-extrabold tracking-wide drop-shadow-lg">
+        <h1 className="text-white md:text-2xl font-extrabold tracking-wide drop-shadow-lg">
           {Title}
         </h1>
         {subtitle && (

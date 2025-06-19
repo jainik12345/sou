@@ -30,18 +30,18 @@ export const SouBookingInfo = () => {
   return (
     <section className="SouBookingInfo-Section bg-gray-50 py-8">
       <div className="SouBookingInfo-Cont max-w-screen-xl mx-auto px-4 md:px-1 flex flex-col gap-8">
-        <h2 className="text-orange-500 font-extrabold text-center text-3xl md:text-4xl mb-4">
+        <h2 className="text-orange-500 font-extrabold text-center text-xl md:text-4xl mb-4">
           Statue Of Unity Tickets Online Booking
         </h2>
 
         {SouTicketOnlineBookingData?.map((val, idx) => (
           <article
             key={idx}
-            className="bg-white rounded-2xl shadow-md border border-gray-100 p-6 flex flex-col gap-6"
+            className="rounded-2xl md:p-6 p-2 flex flex-col gap-6"
           >
             {/* First Description */}
             {val.first_description && (
-              <p className="text-justify font-semibold text-gray-600 text-base mb-1">
+              <p className="text-justify font-semibold text-gray-600 md:text-md text-sm mb-1 ">
                 {val.first_description}
               </p>
             )}
@@ -55,7 +55,7 @@ export const SouBookingInfo = () => {
 
             {/* Description */}
             {val.description && (
-              <p className="text-justify font-medium text-gray-600 mb-2">
+              <p className="text-justify font-medium text-gray-600 mb-2  md:text-md text-sm ">
                 {val.description}
               </p>
             )}
@@ -68,10 +68,10 @@ export const SouBookingInfo = () => {
                   {val.data.map((step, i) => (
                     <div key={i} className="flex flex-col items-start gap-2">
                       {/* Option Number */}
-                      <span className="inline-block bg-orange-500 text-white font-bold px-3 py-1.5 rounded-full  text-sm min-w-[100px] text-center">
+                      <span className="inline-block bg-orange-500 text-justify text-white font-bold px-3 py-1.5 rounded-full   md:text-md text-sm  min-w-[100px] ">
                         Option {i + 1} :
                       </span>
-                      <span className="text-gray-800">
+                      <span className="text-gray-800 text-justify">
                         {step.heading ? (
                           <strong>{step.heading} : </strong>
                         ) : null}
@@ -85,7 +85,7 @@ export const SouBookingInfo = () => {
 
             {/* Notes */}
             {val.notes && (
-              <div className="px-4 py-2 bg-orange-50 border-l-4 border-orange-400 rounded text-orange-800 font-semibold text-sm">
+              <div className="px-4 py-2 bg-orange-50 border-l-4 text-justify border-orange-400 rounded text-orange-800 font-semibold text-sm">
                 {val.notes}
               </div>
             )}

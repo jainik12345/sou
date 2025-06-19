@@ -54,8 +54,6 @@
 //   );
 // };
 
-
-
 import { useState } from "react";
 import { AboutWeddingVideoData } from "../../../AboutData";
 import { FaCirclePlay } from "react-icons/fa6";
@@ -71,11 +69,13 @@ export const AboutWeddingsVideo = () => {
           AboutWeddingVideoData.map((video, idx) => (
             <div key={idx} className="flex flex-col gap-8 items-center">
               <div className="heading text-center mb-6">
-                <h2 className="text-orange-600 font-bold md:text-4xl text-2xl font-title tracking-tight drop-shadow">
+                <h2 className="text-orange-600 font-bold md:text-4xl text-xl font-title tracking-tight drop-shadow">
                   Tie The Knot At The Iconic Statue Of Unity
                 </h2>
-                <p className="max-w-xl mx-auto mt-3 text-gray-600 text-base md:text-lg">
-                  Experience a wedding like never before at one of India's most iconic landmarks. Celebrate your special day in grandeur and elegance.
+                <p className="mx-auto mt-3 text-gray-600 md:text-lg text-sm">
+                  Experience a wedding like never before at one of India's most
+                  iconic landmarks. Celebrate your special day in grandeur and
+                  elegance.
                 </p>
               </div>
 
@@ -102,7 +102,9 @@ export const AboutWeddingsVideo = () => {
 
                 <video
                   src={video.VideoUrl}
-                  className={`w-full h-full object-cover transition-opacity duration-700 ${isPlayed ? "opacity-100" : "opacity-80 blur-sm grayscale"}`}
+                  className={`w-full h-full object-cover transition-opacity duration-700 ${
+                    isPlayed ? "opacity-100" : "opacity-80 blur-sm grayscale"
+                  }`}
                   autoPlay={isPlayed}
                   loop
                   muted

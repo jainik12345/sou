@@ -45,10 +45,10 @@ export const HomePageStayPackages = () => {
       <div className="bg-gray-50">
         <div className="home-page-card-cont flex justify-center items-center p-5 ">
           <div className="home-page-card-title max-w-screen-xl flex justify-center items-center flex-col gap-4 text-center my-4">
-            <h2 className="text-orange-color text-4xl font-bold">
+            <h2 className="text-orange-color md:text-3xl text-xl font-bold">
               Statue of Unity Stay Package
             </h2>
-            <p className="text-grey-text text-base font-semibold w-full">
+            <p className="text-grey-text text-base text-justify font-semibold w-full">
               We provide a wide range of Statue of Unity Stay Package for you.
               All of these tents and resorts are equipped with weather-tented
               accommodation so that your vacation amidst nature is successful

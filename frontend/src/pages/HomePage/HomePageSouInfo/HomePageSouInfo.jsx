@@ -38,14 +38,14 @@ export const HomePageSouInfo = () => {
 
       <div className="relative z-10 max-w-5xl mx-auto px-4 flex flex-col items-center gap-10">
         <div className="flex flex-col items-center">
-          <h2 className="text-gray-800 text-2xl text-center sm:text-4xl font-extrabold mb-2 tracking-tight">
+          <h2 className="text-gray-800 text-xl text-center md:text-4xl font-extrabold mb-2 tracking-tight">
             Statue of Unity Tent City Online Booking
           </h2>
           <div className="w-16 h-1 bg-orange-300 rounded mb-2" />
         </div>
         <div className="bg-white rounded-lg shadow px-6 py-6 md:px-10 md:py-8">
           {SouInfo && SouInfo.map((val, idx) => (
-            <p key={val.id || idx} className="mb-4 whitespace-pre-line text-[1rem] font-semibold text-gray-600">
+            <p key={val.id || idx} className="mb-4 whitespace-pre-line text-justify text-[1rem] font-semibold text-gray-600">
               {val.text}
             </p>
           ))}

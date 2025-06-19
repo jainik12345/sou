@@ -4,7 +4,7 @@ export const ContactPageHeading = () => {
   return (
     <>
       <div className="ContactPageHeading-section bg-gray-100">
-        <div className="ContactPageHeading-cont max-w-screen-xl mx-auto p-10 flex lg:flex-row flex-col justify-center items-center gap-5">
+        <div className="ContactPageHeading-cont max-w-screen-xl mx-auto p-5 flex lg:flex-row flex-col justify-center items-center gap-5">
           <div className="flex flex-col gap-5  relative">
             <h4 className="sm:text-[1rem] text-[1rem] font-bold text-gray-600 ml-14">
               Contact us only for resort booking

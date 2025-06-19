@@ -101,7 +101,7 @@ export const SouResortTicketBooking = () => {
   return (
     <>
       <div className="SouResortTicketsBookingCards-section md:p-10 p-8 ">
-        <h2 className="font-bold text-[1.3rem] text-orange-color text-center p-5 mb-5">
+        <h2 className="font-bold md:text-xl text-md text-orange-color text-center p-2 mb-5">
           SOU || 01 Night - 02Day and 02 Night - 03Day's Sightseeing || Stay +
           Tickets + E-Rickshaw + Breakfast & Dinner
         </h2>

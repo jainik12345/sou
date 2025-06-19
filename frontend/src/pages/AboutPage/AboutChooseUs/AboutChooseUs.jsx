@@ -51,7 +51,7 @@ export const AboutChooseUs = () => {
       <div className="max-w-screen-xl mx-auto px-4 py-15 flex flex-col gap-8">
         {/* Title */}
         <div className="text-center">
-          <h2 className="text-orange-500 font-extrabold text-2xl sm:text-3xl mb-2">
+          <h2 className="text-orange-500 font-extrabold text-xl md:text-4xl mb-2">
             Why should you Choose Us?
           </h2>
           <div className="w-16 h-1 mx-auto bg-orange-300 rounded mb-2"></div>
@@ -65,10 +65,10 @@ export const AboutChooseUs = () => {
               className="flex items-start gap-3 bg-white shadow-sm rounded-lg p-4 hover:shadow-md transition"
             >
               <div className="mt-1">
-                <span className="text-orange-500 font-semibold text-xl">
+                <span className="text-orange-500 font-semibold md:text-xl text-md">
                   {Val.heading}
                 </span>
-                <span className="text-gray-700 block text-justify font-medium text-base mt-1">
+                <span className="text-gray-700 block text-justify font-medium md:text-md text-sm mt-1">
                   {Val.title}
                 </span>
               </div>

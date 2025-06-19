@@ -79,14 +79,14 @@ export const AboutWeddingsInfo = () => {
             } gap-10`}
           >
             {/* Info Card */}
-            <div className="flex-1 flex flex-col justify-center bg-white/90 rounded-2xl shadow-2xl p-10 backdrop-blur-md border border-orange-200">
-              <h3 className="text-3xl font-extrabold text-orange-700 mb-6 tracking-tight drop-shadow-sm">
+            <div className="flex-1 flex flex-col justify-center bg-white/90 rounded-2xl shadow-2xl p-5 backdrop-blur-md border border-orange-200">
+              <h3 className="text-2xl font-extrabold text-orange-700 mb-6 tracking-tight drop-shadow-sm">
                 {Val.Title || "A Wedding to Remember"}
               </h3>
               <ul className="flex flex-col gap-4">
                 {Val.ImgDescLists?.map((List, Index) => (
                   <li
-                    className="flex items-start text-base md:text-lg font-medium text-gray-700"
+                    className="flex items-start  md:text-md text-sm font-medium text-gray-700"
                     key={Index}
                   >
                     <span className="mt-1 mr-3 text-orange-400">
