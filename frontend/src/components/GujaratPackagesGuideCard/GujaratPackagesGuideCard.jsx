@@ -179,6 +179,9 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 import { FiPlus, FiMinus } from "react-icons/fi";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
+
 
 export const GujaratPackagesGuideCard = ({
   Heading,
@@ -243,7 +246,7 @@ export const GujaratPackagesGuideCard = ({
                       transition={{ duration: 1.2, ease: "easeInOut" }}
                       className="absolute inset-0"
                     >
-                      <img
+                      <LazyLoadImage
                         src={image}
                         alt={`Slide ${index}`}
                         className="w-full h-full object-cover rounded-2xl"

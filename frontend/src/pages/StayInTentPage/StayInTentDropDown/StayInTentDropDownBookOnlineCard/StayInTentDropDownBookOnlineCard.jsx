@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import BE_URL from "../../../../config";
 import { BookOnline } from "../../../../components/Buttons/BookOnline.jsx";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
  
 const slugify = (str = "") =>
@@ -123,7 +125,7 @@ export const StayInTentDropDownBookOnlineCard = () => {
             {weekObj[weekKey].map((resort, idx) => (
               <div key={resort.id || idx} className="w-full">
                 <div className="w-full aspect-[4/3] flex items-center justify-center bg-gray-100 rounded-t-2xl overflow-hidden">
-                  <img
+                  <LazyLoadImage
                     src={getImageUrl(resort.image)}
                     alt={resort.type_room_name}
                     className="object-cover w-full h-full"

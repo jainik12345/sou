@@ -237,6 +237,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import BE_URL from "../../../../config";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 const slugify = (str = "") =>
   str
@@ -413,7 +415,7 @@ export const StayInTentDropDownPackagesPrices = () => {
                     key={priceRow.id + "-" + idx}
                     className="bg-white rounded-3xl shadow-lg border border-orange-100 flex flex-col hover:shadow-2xl transition-all overflow-hidden"
                   >
-                    <img
+                    <LazyLoadImage
                       src={getImageUrl(priceRow.image)}
                       alt={priceRow.itineraryName}
                       className="h-full w-full object-cover"

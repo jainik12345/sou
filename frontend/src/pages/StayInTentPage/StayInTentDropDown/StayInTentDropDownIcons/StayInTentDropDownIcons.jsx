@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import BE_URL from "../../../../config";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 export const StayInTentDropDownIcons = () => {
   const { StayInTentPath } = useParams();
@@ -87,7 +89,7 @@ export const StayInTentDropDownIcons = () => {
                 key={amenity.id}
                 className="flex flex-col items-center justify-center gap-5"
               >
-                <img
+                <LazyLoadImage
                   src={`${BE_URL}/Images/SouPackage/SouPackageAmenities/${amenity.image}`}
                   alt={amenity.title}
                   className="icon-item bg-white shadow-md rounded-lg object-contain w-32 h-32 p-5 hover:bg-orange-color transition-all duration-200 ease-in hover:text-white flex flex-col items-center justify-center"

@@ -32,13 +32,17 @@
 
 import { KnowMore } from "../Buttons/KnowMore";
 import { Inquiry } from "../Buttons/Inquiry";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
+
+
 
 export const GujaratPackagesCard = ({ CardImg, TourTitle, PlacesName }) => {
   return (
     <div className="card-cont flex max-w-[1440px] flex-col cursor-pointer bg-white rounded-xl shadow-lg h-full overflow-hidden hover:shadow-2xl transition-shadow duration-300">
       {/* Image Section */}
       <div className="relative">
-        <img
+        <LazyLoadImage
           src={CardImg}
           alt={TourTitle || "IMG"}
           className="w-full h-55 object-cover rounded-t-2xl"

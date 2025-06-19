@@ -141,6 +141,8 @@ import { BookOnline } from "../../../../components/Buttons/BookOnline";
 import BE_URL from "../../../../config";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 function groupByFoodPlans(data = []) {
   return data.reduce((acc, pkg) => {
@@ -257,7 +259,7 @@ export const StayInTentDropDownPackagesCard = () => {
                         </span>
                       )}
                       <div className="w-full aspect-[4/3] flex items-center justify-center bg-gray-50 overflow-hidden">
-                        <img
+                        <LazyLoadImage
                           src={`${BE_URL}/Images/SouPackage/SouPackageResortImages/${pkg.image}`}
                           alt={pkg.type_room_name}
                           className="object-cover w-full h-full"

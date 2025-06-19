@@ -39,6 +39,8 @@
 // }
 
 import { BookOnline } from "../Buttons/BookOnline";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 export const SouTicketsBookingCards = ({
   CardTitle,
@@ -60,7 +62,7 @@ export const SouTicketsBookingCards = ({
     >
       {/* Top Image with overlay */}
       <div className="relative">
-        <img
+        <LazyLoadImage
           src={CardImg}
           alt={CardTitle}
           className="rounded-t-2xl w-full h-44 object-cover"

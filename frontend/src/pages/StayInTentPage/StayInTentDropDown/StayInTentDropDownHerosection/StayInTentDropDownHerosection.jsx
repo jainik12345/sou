@@ -78,6 +78,8 @@ import { StayInTentDropDownData } from "../../StayInTent";
 import BE_URL from "../../../../config";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 export const StayInTentDropDownHerosection = () => {
   //Routing Defineded
@@ -174,7 +176,7 @@ export const StayInTentDropDownHerosection = () => {
                   </div>
                   <div className="hero-img flex md:flex-row flex-col justify-center gap-10">
                     <div className="img md:w-1/2 w-full">
-                      <img
+                      <LazyLoadImage
                         src={`${BE_URL}/Images/SouPackage/SouPackageHeroSection/${Val.image}`}
                         alt="IMG"
                         className="h-120 w-full bg-cover"

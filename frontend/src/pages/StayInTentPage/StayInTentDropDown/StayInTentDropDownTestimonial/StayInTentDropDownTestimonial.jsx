@@ -2,6 +2,10 @@ import { useParams } from "react-router-dom"
 import { StayInTentDropDownData } from "../../StayInTent";
 import { BookOnline } from "../../../../components/Buttons/BookOnline";
 import { useEffect, useState } from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
+
+
 
 export const StayInTentDropDownTestimonial = () => {
 
@@ -85,7 +89,7 @@ export const StayInTentDropDownTestimonial = () => {
                                 <div className={`testimonial-card flex md:flex-row flex-col w-full relative md:px-10 px-5 md:py-20 py-10 transition-opacity duration-300 items-center ${Fade ? "opacity-100" : "opacity-0"
                                     }`} key={Idx}>
 
-                                    <img src={Val.TestimonialCardImg} alt="IMG" className="md:w-1/2 h-100  object-fill" />
+                                    <LazyLoadImage src={Val.TestimonialCardImg} alt="IMG" className="md:w-1/2 h-100  object-fill" />
                                     
                                     <div className="testimonial-card-content px-5 justify-center  py-10 flex flex-col gap-7  md:absolute md:right-10 right-0 md:bottom-25 bottom-0 bg-white h-70  md:w-1/2 shadow-[0px_0px_20px_10px_rgba(0,0,0,0.1)] rounded-tr-2xl rounded-bl-2xl">
 
