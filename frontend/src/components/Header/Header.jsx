@@ -599,10 +599,10 @@ export const Header = () => {
       path: "/gallery",
       dropdown: SouDropdown,
     },
-    {
-      label: "SOU Tickets",
-      path: "/sou-tickets",
-    },
+    // {
+    //   label: "SOU Tickets",
+    //   path: "/sou-tickets",
+    // },
     {
       label: "Gujarat Packages",
       path: "/gujarat-packages",
