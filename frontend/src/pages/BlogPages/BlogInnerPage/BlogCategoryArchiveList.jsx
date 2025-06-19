@@ -695,9 +695,9 @@ const BlogCategoryArchiveList = () => {
                 />
               </svg>
               {formatBlogDate(blog.date)}
-              <span className="ml-3">{category}</span>
+              <span className="ml-3 text-justify ">{category}</span>
             </div>
-            <div className="text-gray-600">
+            <div className="text-gray-600 text-justify ">
               {blog.description?.slice(0, 180)}
               {blog.description && blog.description.length > 180 ? "..." : ""}
             </div>

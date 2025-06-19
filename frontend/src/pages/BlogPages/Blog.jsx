@@ -236,7 +236,7 @@ export const Blog = () => {
                     <p className="text-sm text-gray-500 mb-1">
                       {category ? category.blog_category_name : ""}
                     </p>
-                    <h3 className="text-lg font-semibold text-gray-800 line-clamp-2">
+                    <h3 className="text-lg text-justify font-semibold text-gray-800 line-clamp-2">
                       {val.title}
                     </h3>
                     <p className="text-sm text-gray-400 mt-2">
