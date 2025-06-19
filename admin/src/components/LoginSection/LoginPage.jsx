@@ -142,7 +142,7 @@
 //           }}
 //         >
 //           <Grid container>
-          
+
 //             <Grid
 //               item
 //               xs={12}
@@ -393,21 +393,8 @@ import Swal from "sweetalert2";
 import { useNavigate, Link as RouterLink } from "react-router-dom";
 
 // Orange theme colors
-const PRIMARY = "#fb923c"; 
-const SECONDARY = "#f97316";  
-
-const AnimatedLogo = () => (
-  <motion.div
-    initial={{ scale: 0.7, rotate: -20 }}
-    animate={{ scale: 1, rotate: 0 }}
-    transition={{ type: "spring", stiffness: 170, damping: 18 }}
-    className="flex items-center justify-center mb-8"
-  >
-    <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-orange-300 to-orange-500 flex items-center justify-center shadow-lg border-2 border-white/40 text-5xl font-bold backdrop-blur-md">
-      <span role="img" aria-label="Logo">🧭</span>
-    </div>
-  </motion.div>
-);
+const PRIMARY = "#fb923c";
+const SECONDARY = "#f97316";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -481,14 +468,17 @@ const LoginPage = () => {
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[25rem] h-[8rem] bg-white/60 rounded-2xl opacity-60 blur-2xl z-0"></div>
 
       <div className="relative z-10 w-full max-w-md mx-auto bg-white/80 border border-orange-200 shadow-2xl rounded-3xl px-8 py-12 backdrop-blur-2xl flex flex-col items-center">
-        <AnimatedLogo />
-        <h2 className="text-2xl font-extrabold text-center mb-1 tracking-tight text-orange-500 drop-shadow">
+        <h2 className="text-4xl font-semibold text-center mb-5 tracking-tight text-orange-500 drop-shadow">
           Admin Portal
         </h2>
         <p className="text-center text-gray-500 text-base mb-8">
           Sign in to your account
         </p>
-        <form className="w-full flex flex-col gap-7" onSubmit={handleSubmit} autoComplete="off">
+        <form
+          className="w-full flex flex-col gap-7"
+          onSubmit={handleSubmit}
+          autoComplete="off"
+        >
           {/* Email */}
           <div>
             <div className="flex items-center gap-2 mb-1">
@@ -516,7 +506,9 @@ const LoginPage = () => {
           <div>
             <div className="flex items-center gap-2 mb-1">
               <MdLock className="text-orange-400" size={20} />
-              <label className="block font-semibold text-gray-700">Password</label>
+              <label className="block font-semibold text-gray-700">
+                Password
+              </label>
             </div>
             <input
               className={`w-full px-4 py-3 rounded-xl border-2 ${
