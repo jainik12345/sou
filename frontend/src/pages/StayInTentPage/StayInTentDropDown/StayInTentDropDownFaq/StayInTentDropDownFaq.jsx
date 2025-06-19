@@ -180,11 +180,11 @@ export const StayInTentDropDownFaq = () => {
     <section className="w-full py-16 bg-white ">
       <div className="max-w-screen-xl mx-auto px-4">
         <div className="text-center mb-10">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-3">
+          <h2 className="text-xl md:text-3xl font-extrabold text-gray-900 mb-3">
             <span className="text-orange-500">Interesting Facts</span> About
             Statue of Unity
           </h2>
-          <p className="text-gray-600 text-lg font-medium">
+          <p className="text-gray-600 text-sm md:text-lg font-medium">
             Here are some interesting facts you should know about the Statue of
             Unity.
           </p>
@@ -196,8 +196,8 @@ export const StayInTentDropDownFaq = () => {
               className={`relative transition-all duration-200 rounded-xl border border-gray-200 shadow-sm bg-gray-50 hover:shadow-lg cursor-pointer`}
               onClick={() => HandleFAQClick(idx)}
             >
-              <div className="flex items-center justify-between px-6 py-5">
-                <h3 className="text-lg md:text-xl font-semibold text-gray-800 flex items-center gap-3">
+              <div className="flex items-center justify-between px-6 py-3.5">
+                <h3 className="text-md md:text-lg text-left font-semibold text-gray-800 flex items-center gap-3">
                   <span
                     className={`transition-transform duration-200 ${
                       openIndex === idx ? "rotate-180" : ""
@@ -228,7 +228,7 @@ export const StayInTentDropDownFaq = () => {
                     transition={{ duration: 0.25, ease: "easeInOut" }}
                     className="overflow-hidden"
                   >
-                    <div className="px-6 pb-6 text-gray-700 text-base leading-relaxed">
+                    <div className="px-6 text-[14px]  md:text-lg pb-6 text-gray-700 text-justify leading-relaxed">
                       {faq.answer}
                     </div>
                   </motion.div>

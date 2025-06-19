@@ -620,7 +620,7 @@ export const Header = () => {
       {/* Top Header Bar */}
       <header className="bg-orange-color z-50 sticky left-0 top-0">
         <div className="max-w-screen-xl mx-auto md:block hidden">
-          <div className="flex lg:justify-between justify-center items-center px-4 md:px-12 py-2 md:py-4">
+          <div className="flex lg:justify-between justify-center items-center px-4 md:px-12 py-1.5 md:py-2.5">
             <div className="hidden lg:block">
               <h2 className="text-white font-medium text-base">
                 Welcome to Statue of Unity

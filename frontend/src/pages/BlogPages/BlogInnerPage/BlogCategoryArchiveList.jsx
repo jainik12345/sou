@@ -654,7 +654,7 @@ const BlogCategoryArchiveList = () => {
     const blogSlug = slugify(blog.title);
     return (
       <BlogCardWrapper
-        className="flex bg-white rounded-lg shadow-lg overflow-hidden mb-10 cursor-pointer hover:shadow-xl transition"
+        className="flex-col bg-white rounded-lg shadow-lg overflow-hidden mb-10 cursor-pointer hover:shadow-xl transition"
         onClick={() => navigate(`/blogs/${blogSlug}`)}
         tabIndex={0}
         onKeyDown={(e) => {
@@ -670,7 +670,7 @@ const BlogCategoryArchiveList = () => {
           whileHover: { boxShadow: "0 8px 32px rgba(0,0,0,0.14)" },
         })}
       >
-        <div className="w-[300px] min-w-[220px] h-[240px] overflow-hidden bg-gray-100 flex items-center">
+        <div className="w-full min-w-[220px] h-[240px] overflow-hidden bg-gray-100 flex items-center">
           {blog.image && (
             <img
               src={`${BE_URL}/Images/Blog/BlogDataDetailsImages/${blog.image}`}

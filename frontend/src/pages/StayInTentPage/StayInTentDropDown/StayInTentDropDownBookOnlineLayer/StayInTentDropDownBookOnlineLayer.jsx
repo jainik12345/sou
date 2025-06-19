@@ -5,93 +5,79 @@ import axios from "axios";
 import BE_URL from "../../../../config.js";
 import { useEffect, useState } from "react";
 
-
 export const StayInTentDropDownBookOnlineLayer = () => {
+  //Routing Definations
 
-    //Routing Definations
+  const { StayInTentPath } = useParams();
 
-    const { StayInTentPath } = useParams();
+  //useState Declarations
 
-    //useState Declarations
+  const [StayInTentDropdownBookLayer, setStayInTentDropdownBookLayer] =
+    useState([]);
 
-    const [StayInTentDropdownBookLayer, setStayInTentDropdownBookLayer] = useState([]);
+  //Fetching API
 
-    //Fetching API
+  useEffect(() => {
+    const StayInTentDropDownLayer = async () => {
+      try {
+        const FetchSouPackagesNames = await axios.get(
+          `${BE_URL}/souPackageName`
+        );
+        const findId =
+          FetchSouPackagesNames.data.data &&
+          FetchSouPackagesNames.data.data.find((key) => {
+            return (
+              StayInTentPath ===
+              key.sou_package_name
+                .toLowerCase()
+                .replace(/\s+/g, "-")
+                .replace(/[^a-z0-9-]/g, "")
+            );
+          });
 
-    useEffect(() => {
+        const FetchStayInTentBookOnlineLayerData = await axios.get(
+          `${BE_URL}/souPackageBookLayer/package/${findId.id}`
+        );
 
-        const StayInTentDropDownLayer = async () => {
-
-            try {
-
-                const FetchSouPackagesNames = await axios.get(`${BE_URL}/souPackageName`);
-                const findId = FetchSouPackagesNames.data.data && FetchSouPackagesNames.data.data.find((key) => {
-                    return (
-                        StayInTentPath === key.sou_package_name
-                            .toLowerCase()
-                            .replace(/\s+/g, "-")
-                            .replace(/[^a-z0-9-]/g, "")
-                    );
-                });
-
-                const FetchStayInTentBookOnlineLayerData = await axios.get(`${BE_URL}/souPackageBookLayer/package/${findId.id}`);
-
-                if (FetchStayInTentBookOnlineLayerData.status === 200) {
-
-                    setStayInTentDropdownBookLayer(FetchStayInTentBookOnlineLayerData.data.data);
-
-                } else {
-
-                    console.warn("Unexpected response status:", FetchStayInTentBookOnlineLayerData.status);
-
-                }
-
-            } catch (error) {
-                console.error(
-                    "Unable To Fetch Data Of Stay In Tent Book Online Layer Section:- ",
-                    error
-                );
-            }
-
+        if (FetchStayInTentBookOnlineLayerData.status === 200) {
+          setStayInTentDropdownBookLayer(
+            FetchStayInTentBookOnlineLayerData.data.data
+          );
+        } else {
+          console.warn(
+            "Unexpected response status:",
+            FetchStayInTentBookOnlineLayerData.status
+          );
         }
+      } catch (error) {
+        console.error(
+          "Unable To Fetch Data Of Stay In Tent Book Online Layer Section:- ",
+          error
+        );
+      }
+    };
 
-        StayInTentDropDownLayer();
+    StayInTentDropDownLayer();
+  }, [StayInTentPath]);
 
-    }, [StayInTentPath]);
+  return (
+    <>
+      {StayInTentDropdownBookLayer &&
+        StayInTentDropdownBookLayer?.map((val, idx) => {
+          return (
+            <div className="bg-gray-200" key={idx}>
+              <div className="flex flex-col md:flex-row   max-w-screen-xl mx-auto py-10 px-2 md:px-10 gap-10 items-center justify-between">
+                <p className="text-gray-600   md:text-[1.5rem] text-[14px] font-(family-name:--font-layer-font)">
+                  {val.title}
+                </p>
 
-
-    return (
-
-        <>
-            {
-
-                StayInTentDropdownBookLayer && StayInTentDropdownBookLayer?.map((val, idx) => {
-
-
-                    return (
-
-                        <div className="bg-gray-200" key={idx}>
-                            <div className="flex flex-row max-w-screen-xl mx-auto py-10 px-10 gap-10 items-center justify-between">
-
-                                <p className="text-gray-600  md:text-[1.5rem] text-[.8rem] font-(family-name:--font-layer-font)">{val.title}</p>
-
-                                <div className="flex flex-row gap-5 ">
-
-                                    <KnowMore Text={"Book Now"} />
-
-                                </div>
-
-                            </div>
-                        </div>
-
-                    )
-                })
-
-            }
-
-
-
-        </>
-
-    )
-}
+                <div className="flex flex-row gap-5 ">
+                  <KnowMore Text={"Book Now"} />
+                </div>
+              </div>
+            </div>
+          );
+        })}
+    </>
+  );
+};

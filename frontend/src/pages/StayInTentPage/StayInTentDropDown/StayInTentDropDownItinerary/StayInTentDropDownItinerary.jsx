@@ -95,8 +95,8 @@ export const StayInTentDropDownItinerary = () => {
   const currentSections = sections[itineraries[selectedTab]?.id] || [];
 
   return (
-    <section className="w-full px-4 py-14 bg-gradient-to-br from-orange-50 to-white">
-      <div className="max-w-screen-xl mx-auto rounded-3xl p-8 shadow-2xl bg-white/90">
+    <section className="w-full px-2 py-14 bg-gradient-to-br from-orange-50 to-white">
+      <div className="max-w-screen-xl mx-auto rounded-3xl p-3 md:p-5 shadow-2xl bg-white/90">
         <div className="mb-6 text-center">
           <h2 className="text-2xl sm:text-3xl font-extrabold text-orange-700 mb-2 tracking-tight">
             Itinerary of Statue of Unity Tent City 1
@@ -108,7 +108,7 @@ export const StayInTentDropDownItinerary = () => {
         </div>
 
         {/* Tabs */}
-        <div className="flex flex-wrap justify-center gap-6 mb-10">
+        <div className="flex flex-wrap justify-center gap-2 mb-10">
           {itineraries.map((tab, idx) => (
             <motion.button
               key={tab.id}
@@ -167,7 +167,7 @@ export const StayInTentDropDownItinerary = () => {
                       {events.map((event, evtIdx) => (
                         <motion.li
                           key={evtIdx}
-                          className="relative pl-7 text-gray-800 font-semibold"
+                          className="relative pl-7 text-gray-800 text-sm text-justify md:text-left  md:text-md font-semibold"
                           initial={{ x: -10, opacity: 0 }}
                           animate={{ x: 0, opacity: 1 }}
                           transition={{ delay: 0.1 + evtIdx * 0.07 }}

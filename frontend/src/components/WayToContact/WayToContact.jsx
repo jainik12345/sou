@@ -5,9 +5,9 @@ export const WaytoConatct = () => {
   return (
     <>
       <section className=" bg-orange-color">
-        <div className="way-to-contact-cont  p-8 flex md:flex-row flex-col gap-5 justify-around items-center max-w-screen-xl mx-auto" >
-          <div className="way-to-contact-title xl:text-[1.5rem] lg:text-[1.3rem] md:text-[1rem] text-[.8rem] text-white  font-(family-name:--font-layer-font)">
-            <h3 >
+        <div className="way-to-contact-cont  p-8 flex md:flex-row flex-col gap-5 justify-around items-center max-w-screen-xl mx-auto">
+          <div className="way-to-contact-title xl:text-[1.5rem] lg:text-[1.3rem] md:text-[1rem] text-[12px] text-white  font-(family-name:--font-layer-font)">
+            <h3>
               Let’s plan to visit tallest statue in the world – Statue of Unity
             </h3>
           </div>

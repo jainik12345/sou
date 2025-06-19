@@ -124,7 +124,7 @@ export const StayInTentDropDownNoticePolicy = () => {
 
   return (
     <motion.div
-      className="max-w-screen-xl mx-auto py-12 px-4 grid md:grid-cols-2 grid-cols-1 gap-10"
+      className="max-w-screen-xl mx-auto py-12 px-1 md:px-4 grid md:grid-cols-2 grid-cols-1 gap-10"
       initial="hidden"
       animate="visible"
       variants={containerVariants}
@@ -132,7 +132,7 @@ export const StayInTentDropDownNoticePolicy = () => {
       {/* Notice Section */}
       {notes.length > 0 && (
         <motion.section
-          className="bg-orange-50 shadow-lg rounded-xl p-8 flex flex-col gap-6 border-t-4 border-orange-400"
+          className="bg-orange-50 shadow-lg rounded-xl p-3 md:p-8 flex flex-col gap-6 border-t-4 border-orange-400"
           variants={sectionVariants}
         >
           <div className="flex items-center gap-3 mb-3">
@@ -178,7 +178,7 @@ export const StayInTentDropDownNoticePolicy = () => {
                     <FaAnglesRight />
                   </motion.span>
                   <motion.span
-                    className="text-gray-800 text-base font-medium"
+                    className="text-gray-800 text-base text-left font-medium"
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.3, delay: 0.04 * idx }}
@@ -195,7 +195,7 @@ export const StayInTentDropDownNoticePolicy = () => {
       {/* Policy Section */}
       {refundPolicies.length > 0 && (
         <motion.section
-          className="bg-blue-50 shadow-lg rounded-xl p-8 flex flex-col gap-6 border-t-4 border-blue-400"
+          className="bg-blue-50 shadow-lg rounded-xl p-3 md:p-8  flex flex-col gap-6 border-t-4 border-blue-400"
           variants={sectionVariants}
         >
           <div className="flex items-center gap-3 mb-3">
@@ -208,7 +208,7 @@ export const StayInTentDropDownNoticePolicy = () => {
               <FaAnglesRight />
             </motion.div>
             <motion.h2
-              className="text-2xl font-bold text-blue-700 tracking-wide"
+              className="text-2xl font-bold text-blue-700  tracking-wide"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.22, duration: 0.6 }}
@@ -241,7 +241,7 @@ export const StayInTentDropDownNoticePolicy = () => {
                     <FaAnglesRight />
                   </motion.span>
                   <motion.span
-                    className="text-gray-800 text-base font-medium"
+                    className="text-gray-800 text-base text-left font-medium"
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.3, delay: 0.04 * idx }}

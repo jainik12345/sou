@@ -162,13 +162,13 @@ export const StayInTentDropDownHerosection = () => {
         StayInTentHeroData?.map((Val, Idx) => {
           return (
             <div className="hero-section" key={Idx}>
-              <div className="hero-cont max-w-screen-xl mx-auto md:px-5 py-10 px-5">
+              <div className="hero-cont max-w-screen-xl mx-auto md:px-5 pb-10 pt-1 px-1.5">
                 <div className="flex flex-col gap-5">
                   <div className="hero-title text-center">
                     <h2 className="text-[2rem] font-semibold font-(family-name:--font-title-font) ">
                       {Val.HeroHeading}
                     </h2>
-                    <h2 className="text-[2rem] font-semibold text-orange-color">
+                    <h2 className="text-[2rem]  font-semibold text-orange-color">
                       {Val.HeroTitle}
                     </h2>
                   </div>
@@ -191,7 +191,7 @@ export const StayInTentDropDownHerosection = () => {
                       {Val.description.split("\n").map((para, i) => (
                         <p
                           key={i}
-                          className="md:text-[1rem] text-[.9rem] font-semibold text-gray-600"
+                          className="md:text-[1rem] text-justify text-[.9rem] font-semibold text-gray-600"
                         >
                           {para}
                         </p>
