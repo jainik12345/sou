@@ -985,9 +985,10 @@ const BlogInnerPage = () => {
               >
                 <div className="relative">
                   {blog.image ? (
-                    <motion.LazyLoadImage
+                    <motion.img
                       src={`${BE_URL}/Images/Blog/BlogDataDetailsImages/${blog.image}`}
                       alt={blog.title}
+                      loading="lazy"
                       className="w-full object-cover h-100"
                     />
                   ) : null}
