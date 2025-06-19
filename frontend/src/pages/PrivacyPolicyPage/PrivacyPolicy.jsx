@@ -1,60 +1,27 @@
-// import { useEffect } from "react";
-
-// export const PrivacyPolicy = () => {
-//   useEffect(() => {
-//     window.scrollTo(0, 0);
-//   }, []);
-
-//   return (
-//     <div className=" bg-[#f9f6f1] text-[#333] px-4 py-12 md:px-12 lg:px-36">
-//       <div className="max-w-screen-xl mx-auto bg-white shadow-md rounded-2xl p-8 md:p-12 animate-fadeIn">
-//         <h2 className="text-3xl font-bold text-center text-orange-500 mb-8">
-//           Privacy Policy
-//         </h2>
-
-//         <div className="space-y-6 text-justify text-gray-700 leading-relaxed">
-//           <p>
-//             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam
-//             necessitatibus, unde delectus asperiores amet, soluta aliquam cumque
-//             nihil earum veritatis dolorum provident debitis sequi.
-//           </p>
-//           <p>
-//             Eos doloribus iusto eaque aliquid sunt laudantium voluptas laborum
-//             porro? Excepturi voluptates similique velit, unde iusto pariatur
-//             culpa.
-//           </p>
-//           <p>
-//             Perspiciatis repellendus nisi fugiat minus dignissimos labore
-//             expedita sint officiis laborum praesentium quos commodi hic
-//             accusantium.
-//           </p>
-//           <p>
-//             Quam, voluptatum? Laudantium molestiae cumque tempore saepe
-//             asperiores deserunt nulla alias, quia consequatur exercitationem eos
-//             incidunt!
-//           </p>
-//           <p>
-//             Sed vel maiores earum dicta quasi ea explicabo repellat inventore.
-//             Quibusdam dignissimos, illo aliquid amet error.
-//           </p>
-//           <p>
-//             If you have any questions, feel free to contact us at{" "}
-//             <span className="text-orange-500 underline cursor-pointer">
-//               support@example.com
-//             </span>
-//             .
-//           </p>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-/* */
-
 import { useEffect, useState } from "react";
 import axios from "axios";
-import BE_URL from "../../config"; 
+import BE_URL from "../../config";
+
+// Modern arrow icon as SVG component - size increased to 2em
+const ArrowIcon = () => (
+  <svg
+    className="inline-block mr-3 text-orange-500"
+    width="2em"
+    height="2em"
+    viewBox="0 0 20 20"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    style={{ verticalAlign: "middle" }}
+  >
+    <path
+      d="M7 5l5 5-5 5"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
 
 export const PrivacyPolicy = () => {
   const [policies, setPolicies] = useState([]);
@@ -76,8 +43,9 @@ export const PrivacyPolicy = () => {
       });
   }, []);
 
+  // Split each policy text by newline and render each line as its own <p> with a larger arrow icon
   return (
-    <div className="bg-[#f9f6f1] text-[#333] px-4 py-12 md:px-12 lg:px-36">
+    <div className="bg-[#f9f6f1] text-[#333] px-4 py-12 md:px-12 lg:px-20">
       <div className="max-w-screen-xl mx-auto bg-white shadow-md rounded-2xl p-8 md:p-12 animate-fadeIn">
         <h2 className="text-3xl font-bold text-center text-orange-500 mb-8">
           Privacy Policy
@@ -90,7 +58,19 @@ export const PrivacyPolicy = () => {
           )}
           {!loading &&
             !error &&
-            policies.map((policy) => <p key={policy.id}>{policy.text}</p>)}
+            policies.map((policy) =>
+              policy.text
+                .split("\n")
+                .filter((line) => line.trim() !== "")
+                .map((line, lineIdx) => (
+                  <p
+                    key={`${policy.id}-${lineIdx}`}
+                    className="text-[1rem] font-semibold text-gray-600 flex items-start"
+                  >
+                    <span>{line}</span>
+                  </p>
+                ))
+            )}
         </div>
       </div>
     </div>

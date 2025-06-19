@@ -267,7 +267,7 @@ export const StayInTentDropDownRiverViewBookNowPara = () => {
   }
 
   return (
-    <section className="w-full py-14 px-4 border-2  bg-white">
+    <section className="w-full py-14 px-4  bg-white">
       <div className="max-w-screen-xl mx-auto">
         {para.heading && (
           <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 text-center mb-8">

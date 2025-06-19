@@ -852,7 +852,7 @@ export const Header = () => {
                     <li key={nav.label} className="w-full">
                       <div className="flex items-center justify-between">
                         <button
-                          className={`flex-1 px-3 py-2 font-semibold block rounded hover:bg-orange-50 transition-colors ${
+                          className={`flex-1 px-3 py-2 text-left font-semibold block rounded hover:bg-orange-50 transition-colors ${
                             location.pathname.startsWith("/gallery/")
                               ? "text-orange-600"
                               : "text-gray-800"
