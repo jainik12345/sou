@@ -449,6 +449,48 @@ const SOUPackageItineraryPackagePriceUpdate = () => {
   //   }
   // }, [priceData, navigate]);
 
+  // useEffect(() => {
+  //   axios
+  //     .get(`${BE_URL}/souPackageItineraryName`)
+  //     .then((res) => {
+  //       if (res.data?.data) setItineraryOptions(res.data.data);
+  //     })
+  //     .catch((err) => {
+  //       console.error("Itinerary fetch failed:", err);
+  //     });
+
+  //   if (priceData) {
+
+  //     setFormData({
+  //       sou_package_itinerary_id: priceData.sou_package_itinerary_id,
+  //       id: priceData.id,
+  //       package_start_price: priceData.package_start_price || "",
+  //       from_date: priceData.from_date ? priceData.from_date.split("T")[0] : "",
+  //       to_date: priceData.to_date ? priceData.to_date.split("T")[0] : "",
+  //     });
+
+  //     setPreviewUrl(
+  //       priceData.image
+  //         ? `${BE_URL}/Images/SouPackage/SouPackageItineraryPackagePriceImages/${priceData.image}`
+  //         : ""
+  //     );
+  //     // Parse other_price if needed
+  //     let parsedOther = priceData.other_price;
+  //     if (typeof parsedOther === "string") {
+  //       try {
+  //         parsedOther = JSON.parse(parsedOther);
+  //       } catch {
+  //         parsedOther = [defaultOtherPrice()];
+  //       }
+  //     }
+  //     if (!Array.isArray(parsedOther) || parsedOther.length === 0)
+  //       parsedOther = [defaultOtherPrice()];
+  //     setOtherPrices(parsedOther);
+  //   } else {
+  //     navigate("/sou-package-itinerary-price");
+  //   }
+  // }, [priceData, navigate]);
+
   useEffect(() => {
     axios
       .get(`${BE_URL}/souPackageItineraryName`)
@@ -460,19 +502,12 @@ const SOUPackageItineraryPackagePriceUpdate = () => {
       });
 
     if (priceData) {
-      // setFormData({
-      //   sou_package_itinerary_id: priceData.sou_package_itinerary_id,
-      //   id: priceData.id,
-      //   package_start_price: priceData.package_start_price || "",
-      //   from_date: priceData.from_date ? priceData.from_date.split("T")[0] : "",
-      //   to_date: priceData.to_date ? priceData.to_date.split("T")[0] : "",
-      // });
       setFormData({
         sou_package_itinerary_id: priceData.sou_package_itinerary_id,
         id: priceData.id,
         package_start_price: priceData.package_start_price || "",
-        from_date: priceData.from_date ? priceData.from_date.split("T")[0] : "",
-        to_date: priceData.to_date ? priceData.to_date.split("T")[0] : "",
+        from_date: getInputDatePlusOne(priceData.from_date),
+        to_date: getInputDatePlusOne(priceData.to_date),
       });
 
       setPreviewUrl(
@@ -660,18 +695,6 @@ const SOUPackageItineraryPackagePriceUpdate = () => {
 
           {/* From Date */}
           <div>
-            {/* <BlueTextField
-              label="From Date"
-              name="from_date"
-              type="date"
-              value={formData.from_date}
-              onChange={handleInputChange}
-              fullWidth
-              required
-              InputLabelProps={{ shrink: true }}
-              error={errors.from_date}
-              helperText={errors.from_date ? "Please select from date" : ""}
-            /> */}
             <BlueTextField
               label="From Date"
               name="from_date"
@@ -803,5 +826,25 @@ const SOUPackageItineraryPackagePriceUpdate = () => {
     </div>
   );
 };
+
+// Add this utility function at the top (after your imports)
+function getInputDatePlusOne(dateString) {
+  if (!dateString) return "";
+  const datePart = dateString.slice(0, 10);
+  const [year, month, day] = datePart.split("-");
+  if (!year || !month || !day) return dateString;
+
+  // Create a date in UTC
+  const dateObj = new Date(
+    Date.UTC(Number(year), Number(month) - 1, Number(day))
+  );
+  dateObj.setUTCDate(dateObj.getUTCDate() + 1);
+
+  const newYear = dateObj.getUTCFullYear();
+  const newMonth = String(dateObj.getUTCMonth() + 1).padStart(2, "0");
+  const newDay = String(dateObj.getUTCDate()).padStart(2, "0");
+
+  return `${newYear}-${newMonth}-${newDay}`;
+}
 
 export default SOUPackageItineraryPackagePriceUpdate;

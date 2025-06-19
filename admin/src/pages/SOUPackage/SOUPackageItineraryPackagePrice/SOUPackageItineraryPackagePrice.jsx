@@ -489,12 +489,26 @@ const SOUPackageItineraryPackagePrice = () => {
     </div>
   );
 };
+
 function formatDisplayDate(dateString) {
   if (!dateString) return "-";
-  // Accepts either "YYYY-MM-DD" or "YYYY-MM-DDTHH:mm:ss.sssZ"
-  const datePart = dateString.split("T")[0];
+  const datePart = dateString.slice(0, 10); // "YYYY-MM-DD"
   const [year, month, day] = datePart.split("-");
-  return `${day}-${month}-${year}`;
+  if (!year || !month || !day) return dateString;
+
+  // Create Date object in UTC to avoid local timezone issues
+  const dateObj = new Date(
+    Date.UTC(Number(year), Number(month) - 1, Number(day))
+  );
+  // Add one day (in ms)
+  dateObj.setUTCDate(dateObj.getUTCDate() + 1);
+
+  // Get new day/month/year
+  const newDay = String(dateObj.getUTCDate()).padStart(2, "0");
+  const newMonth = String(dateObj.getUTCMonth() + 1).padStart(2, "0");
+  const newYear = dateObj.getUTCFullYear();
+
+  return `${newDay}-${newMonth}-${newYear}`;
 }
 
 export default SOUPackageItineraryPackagePrice;
