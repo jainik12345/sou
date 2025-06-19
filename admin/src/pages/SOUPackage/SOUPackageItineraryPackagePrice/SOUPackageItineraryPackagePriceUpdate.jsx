@@ -409,6 +409,46 @@ const SOUPackageItineraryPackagePriceUpdate = () => {
   const [success, setSuccess] = useState(false);
 
   // On mount: fetch options, set form
+  // useEffect(() => {
+  //   axios
+  //     .get(`${BE_URL}/souPackageItineraryName`)
+  //     .then((res) => {
+  //       if (res.data?.data) setItineraryOptions(res.data.data);
+  //     })
+  //     .catch((err) => {
+  //       console.error("Itinerary fetch failed:", err);
+  //     });
+
+  //   if (priceData) {
+  //     setFormData({
+  //       sou_package_itinerary_id: priceData.sou_package_itinerary_id,
+  //       id: priceData.id,
+  //       package_start_price: priceData.package_start_price || "",
+  //       from_date: priceData.from_date ? priceData.from_date.slice(0, 10) : "",
+  //       to_date: priceData.to_date ? priceData.to_date.slice(0, 10) : "",
+  //     });
+  //     setPreviewUrl(
+  //       priceData.image
+  //         ? `${BE_URL}/Images/SouPackage/SouPackageItineraryPackagePriceImages/${priceData.image}`
+  //         : ""
+  //     );
+  //     // Parse other_price if needed
+  //     let parsedOther = priceData.other_price;
+  //     if (typeof parsedOther === "string") {
+  //       try {
+  //         parsedOther = JSON.parse(parsedOther);
+  //       } catch {
+  //         parsedOther = [defaultOtherPrice()];
+  //       }
+  //     }
+  //     if (!Array.isArray(parsedOther) || parsedOther.length === 0)
+  //       parsedOther = [defaultOtherPrice()];
+  //     setOtherPrices(parsedOther);
+  //   } else {
+  //     navigate("/sou-package-itinerary-price");
+  //   }
+  // }, [priceData, navigate]);
+
   useEffect(() => {
     axios
       .get(`${BE_URL}/souPackageItineraryName`)
@@ -420,13 +460,21 @@ const SOUPackageItineraryPackagePriceUpdate = () => {
       });
 
     if (priceData) {
+      // setFormData({
+      //   sou_package_itinerary_id: priceData.sou_package_itinerary_id,
+      //   id: priceData.id,
+      //   package_start_price: priceData.package_start_price || "",
+      //   from_date: priceData.from_date ? priceData.from_date.split("T")[0] : "",
+      //   to_date: priceData.to_date ? priceData.to_date.split("T")[0] : "",
+      // });
       setFormData({
         sou_package_itinerary_id: priceData.sou_package_itinerary_id,
         id: priceData.id,
         package_start_price: priceData.package_start_price || "",
-        from_date: priceData.from_date ? priceData.from_date.slice(0, 10) : "",
-        to_date: priceData.to_date ? priceData.to_date.slice(0, 10) : "",
+        from_date: priceData.from_date ? priceData.from_date.split("T")[0] : "",
+        to_date: priceData.to_date ? priceData.to_date.split("T")[0] : "",
       });
+
       setPreviewUrl(
         priceData.image
           ? `${BE_URL}/Images/SouPackage/SouPackageItineraryPackagePriceImages/${priceData.image}`
@@ -612,6 +660,18 @@ const SOUPackageItineraryPackagePriceUpdate = () => {
 
           {/* From Date */}
           <div>
+            {/* <BlueTextField
+              label="From Date"
+              name="from_date"
+              type="date"
+              value={formData.from_date}
+              onChange={handleInputChange}
+              fullWidth
+              required
+              InputLabelProps={{ shrink: true }}
+              error={errors.from_date}
+              helperText={errors.from_date ? "Please select from date" : ""}
+            /> */}
             <BlueTextField
               label="From Date"
               name="from_date"

@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
 
 import "./PageLoader.css";
-import logo from "../../assets/images/sou-logo.png";
+import logo from "../../assets/images/preloader.svg";
 import { motion } from "framer-motion";
 
-const WELCOME_TEXT = "Welcome to Statue of Unity Web Site.";
+// const WELCOME_TEXT = "Welcome to Statue of Unity Web Site.";
 
 const letterVariants = {
   hidden: { opacity: 0, y: 30 },
@@ -39,7 +39,7 @@ const PageLoader = () => {
           animate={{ scale: [1, 1.08, 1], opacity: 1 }}
           transition={{ repeat: Infinity, duration: 2.2, ease: "easeInOut" }}
         />
-        <motion.h2
+        {/* <motion.h2
           className="welcome-text"
           style={{
             display: "flex",
@@ -59,7 +59,7 @@ const PageLoader = () => {
               {char}
             </motion.span>
           ))}
-        </motion.h2>
+        </motion.h2> */}
       </div>
     </motion.div>
   );

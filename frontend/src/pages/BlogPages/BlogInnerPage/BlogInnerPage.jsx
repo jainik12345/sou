@@ -1,7 +1,9 @@
-/* eslint-disable no-unused-vars */
+// /* eslint-disable no-unused-vars */
+
 // import React, { useEffect, useState } from "react";
 // import { NavLink, useParams, useNavigate } from "react-router-dom";
 // import { FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa";
+// import { motion, AnimatePresence } from "framer-motion";
 // import BE_URL from "../../../config";
 
 // function formatBlogDate(dateString) {
@@ -14,6 +16,15 @@
 //     day: "numeric",
 //   });
 // }
+
+// const fadeUp = {
+//   hidden: { opacity: 0, y: 40 },
+//   visible: (i = 1) => ({
+//     opacity: 1,
+//     y: 0,
+//     transition: { delay: i * 0.08, duration: 0.6, type: "spring" },
+//   }),
+// };
 
 // const BlogInnerPage = () => {
 //   const { BlogSlug } = useParams();
@@ -30,29 +41,22 @@
 //   const [archives, setArchives] = useState([]);
 //   const [prevNext, setPrevNext] = useState({ prev: null, next: null });
 
-//   // Fetch all blogs, categories, and build stats
 //   useEffect(() => {
 //     fetch(`${BE_URL}/blogDataDetails`)
 //       .then((res) => res.json())
 //       .then((result) => {
 //         const all = result.data || [];
 //         setAllBlogs(all);
-
-//         // Recent
 //         const sortedRecent = [...all].sort(
 //           (a, b) => new Date(b.date) - new Date(a.date)
 //         );
 //         setRecentBlogs(sortedRecent.slice(0, 5));
-
-//         // Category counts
 //         const catCounts = {};
 //         all.forEach((b) => {
 //           catCounts[b.blog_category_id] =
 //             (catCounts[b.blog_category_id] || 0) + 1;
 //         });
 //         setCategoryCounts(catCounts);
-
-//         // Archives
 //         const archiveMap = {};
 //         all.forEach((b) => {
 //           const d = new Date(b.date);
@@ -78,8 +82,6 @@
 //             return bm - am;
 //           });
 //         setArchives(archiveArr);
-
-//         // Prev/next
 //         const sortedByDate = [...all].sort(
 //           (a, b) => new Date(a.date) - new Date(b.date)
 //         );
@@ -97,15 +99,12 @@
 //       .then((result) => setCategories(result.data || []));
 //   }, [BlogSlug]);
 
-//   // Fetch this blog
 //   useEffect(() => {
 //     fetch(`${BE_URL}/blogDataDetails/data/${BlogSlug}`)
 //       .then((res) => res.json())
 //       .then((result) => {
 //         const b = result.data && result.data[0];
 //         setBlog(b);
-
-//         // fetch category name
 //         if (b && b.blog_category_id) {
 //           fetch(`${BE_URL}/blogcategoryName/${b.blog_category_id}`)
 //             .then((res) => res.json())
@@ -121,7 +120,6 @@
 //     setSearchQuery("");
 //   }, [BlogSlug]);
 
-//   // Blog content sections (solve [object Object] bug)
 //   let contentSections = [];
 //   if (blog && blog.data) {
 //     try {
@@ -167,7 +165,6 @@
 //     }
 //   }
 
-//   // Social share
 //   const SOCIALS = [
 //     {
 //       name: "Facebook",
@@ -190,7 +187,6 @@
 //     },
 //   ];
 
-//   // SEARCH: only filter by title, reset search bar after submit
 //   function handleSearch(e) {
 //     e.preventDefault();
 //     const q = searchQuery.trim().toLowerCase();
@@ -203,7 +199,7 @@
 //       (b) => b.title && b.title.toLowerCase().includes(q)
 //     );
 //     setSearchResults(found);
-//     setSearchQuery(""); // clear search bar after search
+//     setSearchQuery("");
 //   }
 
 //   function handleClearSearch() {
@@ -211,10 +207,10 @@
 //     setSearchQuery("");
 //   }
 
-//   function BlogCard({ blog }) {
+//   function BlogCard({ blog, index = 0 }) {
 //     return (
-//       <div
-//         className="flex bg-white rounded-lg shadow-lg overflow-hidden mb-10 cursor-pointer hover:shadow-xl transition"
+//       <motion.div
+//         className="flex flex-col bg-white rounded-lg shadow-lg overflow-hidden mb-10 cursor-pointer hover:shadow-xl transition"
 //         tabIndex={0}
 //         onClick={() => {
 //           if (String(blog.id) !== String(BlogSlug)) {
@@ -230,8 +226,13 @@
 //             }
 //           }
 //         }}
+//         initial="hidden"
+//         animate="visible"
+//         custom={index}
+//         variants={fadeUp}
+//         whileHover={{ boxShadow: "0 8px 32px rgba(0,0,0,0.14)" }}
 //       >
-//         <div className="w-[300px] min-w-[220px] h-[240px] overflow-hidden bg-gray-100 flex items-center">
+//         <div className="w-full h-[240px] overflow-hidden bg-gray-100 flex items-center">
 //           {blog.image && (
 //             <img
 //               src={`${BE_URL}/Images/Blog/BlogDataDetailsImages/${blog.image}`}
@@ -277,50 +278,70 @@
 //             </NavLink>
 //           </div>
 //         </div>
-//       </div>
+//       </motion.div>
 //     );
 //   }
 
+//   // Conditional wrapper for sidebar (prevents flicker)
+//   const SidebarWrapper = searchResults ? "div" : motion.div;
+
 //   return (
-//     <div className="bg-gradient-to-b from-blue-50 to-white py-12">
+//     <motion.div
+//       className="bg-gradient-to-b from-blue-50 to-white py-12"
+//       initial={{ opacity: 0 }}
+//       animate={{ opacity: 1 }}
+//       transition={{ duration: 0.6 }}
+//     >
 //       <div className="max-w-screen-xl mx-auto flex lg:flex-row flex-col gap-8">
 //         {/* Main Content */}
-//         <div className="lg:w-2/3 w-full">
-//           {/* If searching, show search results */}
+//         <motion.div
+//           className="lg:w-2/3 w-full"
+//           initial={{ x: -60, opacity: 0 }}
+//           animate={{ x: 0, opacity: 1 }}
+//           transition={{ duration: 0.7, type: "spring" }}
+//         >
 //           {searchResults ? (
 //             <>
-//               <h1 className="text-3xl font-bold mb-8">
+//               <motion.h1 className="text-3xl font-bold mb-8">
 //                 {searchResults.length === 0
 //                   ? "No results found."
 //                   : `Search Results (${searchResults.length})`}
-//               </h1>
+//               </motion.h1>
 //               {searchResults.length === 0 ? (
-//                 <div className="text-gray-500 p-12 text-center">
+//                 <motion.div className="text-gray-500 p-12 text-center">
 //                   No blog posts found.
-//                 </div>
+//                 </motion.div>
 //               ) : (
-//                 searchResults.map((b) => <BlogCard key={b.id} blog={b} />)
+//                 searchResults.map((b, i) => (
+//                   <BlogCard key={b.id} blog={b} index={i} />
+//                 ))
 //               )}
 //             </>
 //           ) : (
 //             blog && (
-//               <div className="rounded-xl shadow-xl bg-white overflow-hidden border border-gray-200 mb-5">
+//               <motion.div
+//                 className="rounded-xl shadow-xl bg-white overflow-hidden border border-gray-200 mb-5"
+//                 initial="hidden"
+//                 animate="visible"
+//               >
 //                 <div className="relative">
 //                   {blog.image ? (
-//                     <img
+//                     <motion.img
 //                       src={`${BE_URL}/Images/Blog/BlogDataDetailsImages/${blog.image}`}
 //                       alt={blog.title}
 //                       className="w-full object-cover h-100"
 //                     />
 //                   ) : null}
 //                   {category && (
-//                     <div className="absolute bottom-4 left-4 bg-yellow-500 text-white px-4 py-1 rounded shadow text-xs font-semibold">
+//                     <motion.div
+//                       className="absolute bottom-4 left-4 bg-yellow-500 text-white px-4 py-1 rounded shadow text-xs font-semibold"
+//                       transition={{ delay: 0.2 }}
+//                     >
 //                       {category}
-//                     </div>
+//                     </motion.div>
 //                   )}
 //                 </div>
 //                 <div className="px-8 py-6">
-//                   {/* Blog Meta */}
 //                   <div className="flex flex-wrap items-center text-gray-500 text-xs mb-6 gap-3">
 //                     <span className="flex items-center gap-1">
 //                       <svg className="w-4 h-4" viewBox="0 0 20 20">
@@ -358,16 +379,35 @@
 //                     <span>|</span>
 //                     <span>No Comments</span>
 //                   </div>
-//                   {/* Blog Title */}
-//                   <h1 className="text-3xl font-bold text-gray-900 mb-4 leading-tight">
+//                   <motion.h1
+//                     className="text-3xl font-bold text-gray-900 mb-4 leading-tight"
+//                     initial={{ opacity: 0, y: 20 }}
+//                     animate={{ opacity: 1, y: 0 }}
+//                     transition={{ delay: 0.1 }}
+//                   >
 //                     {blog.title}
-//                   </h1>
-//                   {/* Blog Description */}
-//                   <div className="text-gray-700 space-y-6">
+//                   </motion.h1>
+//                   <motion.div
+//                     className="text-gray-700 space-y-6"
+//                     initial="hidden"
+//                     animate="visible"
+//                     variants={{
+//                       hidden: { opacity: 0, y: 20 },
+//                       visible: {
+//                         opacity: 1,
+//                         y: 0,
+//                         transition: { delay: 0.15 },
+//                       },
+//                     }}
+//                   >
 //                     {blog.description && <p>{blog.description}</p>}
-//                     {/* Blog Content Sections */}
 //                     {contentSections.map((section, idx) => (
-//                       <div key={idx}>
+//                       <motion.div
+//                         key={idx}
+//                         initial={{ opacity: 0, y: 20 }}
+//                         animate={{ opacity: 1, y: 0 }}
+//                         transition={{ delay: 0.18 + idx * 0.1 }}
+//                       >
 //                         {section.heading ? (
 //                           <h2 className="font-bold text-2xl mt-6 mb-2">
 //                             {section.heading}
@@ -378,11 +418,15 @@
 //                             {section.content}
 //                           </div>
 //                         )}
-//                       </div>
+//                       </motion.div>
 //                     ))}
-//                   </div>
-//                   {/* Share Buttons */}
-//                   <div className="mt-8 flex items-center gap-4">
+//                   </motion.div>
+//                   <motion.div
+//                     className="mt-8 flex items-center gap-4"
+//                     initial={{ opacity: 0, y: 10 }}
+//                     animate={{ opacity: 1, y: 0 }}
+//                     transition={{ delay: 0.25 }}
+//                   >
 //                     <span className="font-semibold mr-2">Share:</span>
 //                     {SOCIALS.map((soc) => (
 //                       <a
@@ -397,8 +441,7 @@
 //                         {soc.icon}
 //                       </a>
 //                     ))}
-//                   </div>
-//                   {/* Prev/Next Navigation */}
+//                   </motion.div>
 //                   <hr className="my-8" />
 //                   <div className="flex justify-between items-center">
 //                     <div>
@@ -429,12 +472,19 @@
 //                     </div>
 //                   </div>
 //                 </div>
-//               </div>
+//               </motion.div>
 //             )
 //           )}
-//         </div>
-//         {/* Sidebar */}
-//         <div className="lg:w-1/3 w-full">
+//         </motion.div>
+//         {/* Sidebar -- always rendered, animation only when not searching */}
+//         <SidebarWrapper
+//           className="lg:w-1/3 w-full"
+//           {...(!searchResults && {
+//             initial: { x: 60, opacity: 0 },
+//             animate: { x: 0, opacity: 1 },
+//             transition: { duration: 0.7, type: "spring" },
+//           })}
+//         >
 //           <div className="flex flex-col gap-10 px-5 py-10 bg-white border border-gray-200 rounded-xl shadow-xl text-gray-900">
 //             {/* Search */}
 //             <div className="flex flex-col gap-3">
@@ -465,7 +515,6 @@
 //                   </svg>
 //                 </button>
 //               </form>
-//               {/* If searching, add a clear button */}
 //               {searchResults && (
 //                 <button
 //                   className="text-sm text-orange-500 mt-2 underline"
@@ -479,67 +528,139 @@
 //             <div>
 //               <h2 className="font-bold text-[1.5rem] mb-2">Recent Posts</h2>
 //               <div className="flex flex-col gap-3">
-//                 {recentBlogs.map((b) => (
-//                   <NavLink
-//                     to={`/blogs/${b.id}`}
-//                     className="hover:text-orange-500 text-gray-800 border-b border-gray-200 py-1"
-//                     key={b.id}
-//                     onClick={() => setSearchResults(null)}
-//                   >
-//                     {b.title}
-//                   </NavLink>
-//                 ))}
+//                 {recentBlogs.map((b, i) =>
+//                   searchResults ? (
+//                     <NavLink
+//                       to={`/blogs/${b.id}`}
+//                       className="hover:text-orange-500 text-gray-800 border-b border-gray-200 py-1"
+//                       key={b.id}
+//                       onClick={() => setSearchResults(null)}
+//                     >
+//                       {b.title}
+//                     </NavLink>
+//                   ) : (
+//                     <motion.div
+//                       key={b.id}
+//                       initial={{ opacity: 0, x: 12 }}
+//                       animate={{ opacity: 1, x: 0 }}
+//                       transition={{ delay: 0.1 + i * 0.07 }}
+//                     >
+//                       <NavLink
+//                         to={`/blogs/${b.id}`}
+//                         className="hover:text-orange-500 text-gray-800 border-b border-gray-200 py-1"
+//                         onClick={() => setSearchResults(null)}
+//                       >
+//                         {b.title}
+//                       </NavLink>
+//                     </motion.div>
+//                   )
+//                 )}
 //               </div>
 //             </div>
 //             {/* Categories */}
 //             <div>
 //               <h2 className="font-bold text-[1.5rem] mb-2">Categories</h2>
 //               <div className="flex flex-col gap-2">
-//                 {categories.map((cat) => (
-//                   <NavLink
-//                     to={`/blogs/category/${cat.id}`}
-//                     className="flex justify-between items-center hover:text-orange-500 text-gray-800"
-//                     key={cat.id}
-//                   >
-//                     {cat.blog_category_name}
-//                     <span className="text-orange-500 font-bold">
-//                       {categoryCounts[cat.id] || 0}
-//                     </span>
-//                   </NavLink>
-//                 ))}
+//                 {categories.map((cat, i) =>
+//                   searchResults ? (
+//                     <NavLink
+//                       to={`/blogs/category/${cat.id}`}
+//                       className="flex justify-between items-center hover:text-orange-500 text-gray-800"
+//                       key={cat.id}
+//                     >
+//                       {cat.blog_category_name}
+//                       <span className="text-orange-500 font-bold">
+//                         {categoryCounts[cat.id] || 0}
+//                       </span>
+//                     </NavLink>
+//                   ) : (
+//                     <motion.div
+//                       key={cat.id}
+//                       initial={{ opacity: 0, x: 18 }}
+//                       animate={{ opacity: 1, x: 0 }}
+//                       transition={{ delay: 0.15 + i * 0.06 }}
+//                     >
+//                       <NavLink
+//                         to={`/blogs/category/${cat.id}`}
+//                         className="flex justify-between items-center hover:text-orange-500 text-gray-800"
+//                       >
+//                         {cat.blog_category_name}
+//                         <span className="text-orange-500 font-bold">
+//                           {categoryCounts[cat.id] || 0}
+//                         </span>
+//                       </NavLink>
+//                     </motion.div>
+//                   )
+//                 )}
 //               </div>
 //             </div>
 //             {/* Archives */}
 //             <div>
 //               <h2 className="font-bold text-[1.5rem] mb-2">Archives</h2>
 //               <div className="flex flex-col gap-2">
-//                 {archives.map((a) => (
-//                   <NavLink
-//                     to={`/blogs/archive/${a.key}`}
-//                     className="flex justify-between hover:text-orange-500 text-gray-800"
-//                     key={a.key}
-//                   >
-//                     {a.label}{" "}
-//                     <span className="text-orange-500 font-bold">{a.count}</span>
-//                   </NavLink>
-//                 ))}
+//                 {archives.map((a, i) =>
+//                   searchResults ? (
+//                     <NavLink
+//                       to={`/blogs/archive/${a.key}`}
+//                       className="flex justify-between hover:text-orange-500 text-gray-800"
+//                       key={a.key}
+//                     >
+//                       {a.label}{" "}
+//                       <span className="text-orange-500 font-bold">
+//                         {a.count}
+//                       </span>
+//                     </NavLink>
+//                   ) : (
+//                     <motion.div
+//                       key={a.key}
+//                       initial={{ opacity: 0, x: 20 }}
+//                       animate={{ opacity: 1, x: 0 }}
+//                       transition={{ delay: 0.17 + i * 0.06 }}
+//                     >
+//                       <NavLink
+//                         to={`/blogs/archive/${a.key}`}
+//                         className="flex justify-between hover:text-orange-500 text-gray-800"
+//                       >
+//                         {a.label}{" "}
+//                         <span className="text-orange-500 font-bold">
+//                           {a.count}
+//                         </span>
+//                       </NavLink>
+//                     </motion.div>
+//                   )
+//                 )}
 //               </div>
 //             </div>
 //           </div>
-//         </div>
+//         </SidebarWrapper>
 //       </div>
-//     </div>
+//     </motion.div>
 //   );
 // };
 
 // export default BlogInnerPage;
 
-/** */
+/* */
+
+/* eslint-disable no-unused-vars */
+
 import React, { useEffect, useState } from "react";
 import { NavLink, useParams, useNavigate } from "react-router-dom";
 import { FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import BE_URL from "../../../config";
+
+// --- ADD THIS FUNCTION AT THE TOP ---
+function slugify(title = "") {
+  return title
+    .toString()
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, "") // remove non-alphanumeric chars
+    .replace(/\s+/g, "-") // spaces to dashes
+    .replace(/-+/g, "-"); // collapse multiple dashes
+}
+// -------------------------------------
 
 function formatBlogDate(dateString) {
   if (!dateString) return "";
@@ -617,37 +738,36 @@ const BlogInnerPage = () => {
             return bm - am;
           });
         setArchives(archiveArr);
+
+        // --- FIND BLOG BY SLUG ---
         const sortedByDate = [...all].sort(
           (a, b) => new Date(a.date) - new Date(b.date)
         );
         const idx = sortedByDate.findIndex(
-          (b) => String(b.id) === String(BlogSlug)
+          (b) => slugify(b.title) === BlogSlug
         );
         setPrevNext({
           prev: idx > 0 ? sortedByDate[idx - 1] : null,
           next: idx < sortedByDate.length - 1 ? sortedByDate[idx + 1] : null,
         });
-      });
 
-    fetch(`${BE_URL}/blogcategoryName`)
-      .then((res) => res.json())
-      .then((result) => setCategories(result.data || []));
-  }, [BlogSlug]);
+        // Find the blog for this slug
+        const foundBlog = all.find((b) => slugify(b.title) === BlogSlug);
+        setBlog(foundBlog || null);
 
-  useEffect(() => {
-    fetch(`${BE_URL}/blogDataDetails/data/${BlogSlug}`)
-      .then((res) => res.json())
-      .then((result) => {
-        const b = result.data && result.data[0];
-        setBlog(b);
-        if (b && b.blog_category_id) {
-          fetch(`${BE_URL}/blogcategoryName/${b.blog_category_id}`)
+        // Set category if found
+        if (foundBlog && foundBlog.blog_category_id) {
+          fetch(`${BE_URL}/blogcategoryName/${foundBlog.blog_category_id}`)
             .then((res) => res.json())
             .then((catData) => {
               setCategory(catData.data ? catData.data.blog_category_name : "");
             });
         }
       });
+
+    fetch(`${BE_URL}/blogcategoryName`)
+      .then((res) => res.json())
+      .then((result) => setCategories(result.data || []));
   }, [BlogSlug]);
 
   useEffect(() => {
@@ -742,22 +862,24 @@ const BlogInnerPage = () => {
     setSearchQuery("");
   }
 
+  // --- UPDATE BLOGCARD TO USE SLUG ---
   function BlogCard({ blog, index = 0 }) {
+    const blogSlug = slugify(blog.title);
     return (
       <motion.div
         className="flex flex-col bg-white rounded-lg shadow-lg overflow-hidden mb-10 cursor-pointer hover:shadow-xl transition"
         tabIndex={0}
         onClick={() => {
-          if (String(blog.id) !== String(BlogSlug)) {
+          if (blogSlug !== BlogSlug) {
             setSearchResults(null);
-            navigate(`/blogs/${blog.id}`);
+            navigate(`/blogs/${blogSlug}`);
           }
         }}
         onKeyPress={(e) => {
           if (e.key === "Enter") {
-            if (String(blog.id) !== String(BlogSlug)) {
+            if (blogSlug !== BlogSlug) {
               setSearchResults(null);
-              navigate(`/blogs/${blog.id}`);
+              navigate(`/blogs/${blogSlug}`);
             }
           }
         }}
@@ -802,7 +924,7 @@ const BlogInnerPage = () => {
           </div>
           <div>
             <NavLink
-              to={`/blogs/${blog.id}`}
+              to={`/blogs/${blogSlug}`}
               className="text-black font-semibold mt-2 inline-block hover:text-orange-500"
               onClick={(e) => {
                 e.stopPropagation();
@@ -985,7 +1107,7 @@ const BlogInnerPage = () => {
                           className="text-black font-semibold hover:text-orange-500 flex items-center gap-1"
                           onClick={() => {
                             setSearchResults(null);
-                            navigate(`/blogs/${prevNext.prev.id}`);
+                            navigate(`/blogs/${slugify(prevNext.prev.title)}`);
                           }}
                         >
                           &laquo; Previous Post
@@ -998,7 +1120,7 @@ const BlogInnerPage = () => {
                           className="text-black font-semibold hover:text-orange-500 flex items-center gap-1"
                           onClick={() => {
                             setSearchResults(null);
-                            navigate(`/blogs/${prevNext.next.id}`);
+                            navigate(`/blogs/${slugify(prevNext.next.title)}`);
                           }}
                         >
                           Newer Post &raquo;
@@ -1063,10 +1185,11 @@ const BlogInnerPage = () => {
             <div>
               <h2 className="font-bold text-[1.5rem] mb-2">Recent Posts</h2>
               <div className="flex flex-col gap-3">
-                {recentBlogs.map((b, i) =>
-                  searchResults ? (
+                {recentBlogs.map((b, i) => {
+                  const blogSlug = slugify(b.title);
+                  return searchResults ? (
                     <NavLink
-                      to={`/blogs/${b.id}`}
+                      to={`/blogs/${blogSlug}`}
                       className="hover:text-orange-500 text-gray-800 border-b border-gray-200 py-1"
                       key={b.id}
                       onClick={() => setSearchResults(null)}
@@ -1081,15 +1204,15 @@ const BlogInnerPage = () => {
                       transition={{ delay: 0.1 + i * 0.07 }}
                     >
                       <NavLink
-                        to={`/blogs/${b.id}`}
+                        to={`/blogs/${blogSlug}`}
                         className="hover:text-orange-500 text-gray-800 border-b border-gray-200 py-1"
                         onClick={() => setSearchResults(null)}
                       >
                         {b.title}
                       </NavLink>
                     </motion.div>
-                  )
-                )}
+                  );
+                })}
               </div>
             </div>
             {/* Categories */}

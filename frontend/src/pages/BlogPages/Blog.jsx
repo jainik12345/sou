@@ -8,6 +8,18 @@
 // import { LazyLoadImage } from "react-lazy-load-image-component";
 // import "react-lazy-load-image-component/src/effects/blur.css";
 
+// // Format date as "May 15, 2025"
+// function formatBlogDate(dateString) {
+//   if (!dateString) return "";
+//   const d = new Date(dateString);
+//   if (isNaN(d)) return dateString;
+//   return d.toLocaleString("en-US", {
+//     year: "numeric",
+//     month: "long",
+//     day: "numeric",
+//   });
+// }
+
 // export const Blog = () => {
 //   const [blogs, setBlogs] = useState([]);
 //   const [categories, setCategories] = useState([]);
@@ -69,7 +81,7 @@
 //                 viewport={{ once: true, amount: 0.3 }}
 //                 onClick={() => navigate(`/blogs/${val.id}`)}
 //                 whileHover={{ scale: 1.02 }}
-//                 whileTap={{ scale: 0.97 }}
+//                 transition={{ duration: 0.2 }}
 //               >
 //                 <div className="rounded-xl overflow-hidden bg-white shadow-md hover:shadow-lg transition-shadow duration-300">
 //                   <LazyLoadImage
@@ -91,7 +103,9 @@
 //                     <h3 className="text-lg font-semibold text-gray-800 line-clamp-2">
 //                       {val.title}
 //                     </h3>
-//                     <p className="text-sm text-gray-400 mt-2">{val.date}</p>
+//                     <p className="text-sm text-gray-400 mt-2">
+//                       {formatBlogDate(val.date)}
+//                     </p>
 //                   </div>
 //                 </div>
 //               </motion.div>
@@ -103,7 +117,7 @@
 //   );
 // };
 
-/** */
+/* */
 
 /* eslint-disable no-unused-vars */
 
@@ -114,6 +128,18 @@ import BE_URL from "../../config";
 import { motion } from "framer-motion";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
+
+// --- ADD THIS FUNCTION AT THE TOP OF YOUR FILE ---
+function slugify(title = "") {
+  return title
+    .toString()
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, "") // remove non-alphanumeric chars
+    .replace(/\s+/g, "-") // spaces to dashes
+    .replace(/-+/g, "-"); // collapse multiple dashes
+}
+// -------------------------------------------------
 
 // Format date as "May 15, 2025"
 function formatBlogDate(dateString) {
@@ -177,6 +203,8 @@ export const Blog = () => {
             const category = categories.find(
               (cat) => cat.id === val.blog_category_id
             );
+            // --- CREATE THE SLUG HERE ---
+            const slug = slugify(val.title);
 
             return (
               <motion.div
@@ -186,7 +214,8 @@ export const Blog = () => {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.3 }}
-                onClick={() => navigate(`/blogs/${val.id}`)}
+                // --- USE THE SLUG IN THE ROUTE ---
+                onClick={() => navigate(`/blogs/${slug}`)}
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.2 }}
               >

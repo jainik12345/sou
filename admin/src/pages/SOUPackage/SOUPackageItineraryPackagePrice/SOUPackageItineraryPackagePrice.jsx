@@ -408,7 +408,7 @@ const SOUPackageItineraryPackagePrice = () => {
                 <TableCell className="border-r">
                   {row.package_start_price || "-"}
                 </TableCell>
-                <TableCell className="border-r">
+                {/* <TableCell className="border-r">
                   {row.from_date
                     ? new Date(row.from_date).toLocaleDateString("en-CA")
                     : "-"}
@@ -417,7 +417,15 @@ const SOUPackageItineraryPackagePrice = () => {
                   {row.to_date
                     ? new Date(row.to_date).toLocaleDateString("en-CA")
                     : "-"}
+                </TableCell> */}
+
+                <TableCell className="border-r">
+                  {row.from_date ? formatDisplayDate(row.from_date) : "-"}
                 </TableCell>
+                <TableCell className="border-r">
+                  {row.to_date ? formatDisplayDate(row.to_date) : "-"}
+                </TableCell>
+
                 <TableCell className="border-r">
                   {(() => {
                     let other = row.other_price;
@@ -481,5 +489,12 @@ const SOUPackageItineraryPackagePrice = () => {
     </div>
   );
 };
+function formatDisplayDate(dateString) {
+  if (!dateString) return "-";
+  // Accepts either "YYYY-MM-DD" or "YYYY-MM-DDTHH:mm:ss.sssZ"
+  const datePart = dateString.split("T")[0];
+  const [year, month, day] = datePart.split("-");
+  return `${day}-${month}-${year}`;
+}
 
 export default SOUPackageItineraryPackagePrice;

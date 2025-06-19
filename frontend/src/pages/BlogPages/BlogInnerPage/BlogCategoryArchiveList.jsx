@@ -1,5 +1,6 @@
 // import React, { useEffect, useRef, useState } from "react";
 // import { useNavigate, useParams, NavLink } from "react-router-dom";
+// import { motion } from "framer-motion";
 // import BE_URL from "../../../config";
 
 // function formatBlogDate(dateString) {
@@ -12,6 +13,15 @@
 //     day: "numeric",
 //   });
 // }
+
+// const fadeUp = {
+//   hidden: { opacity: 0, y: 40 },
+//   visible: (i = 1) => ({
+//     opacity: 1,
+//     y: 0,
+//     transition: { delay: i * 0.08, duration: 0.6, type: "spring" },
+//   }),
+// };
 
 // const BlogCategoryArchiveList = () => {
 //   const navigate = useNavigate();
@@ -134,7 +144,6 @@
 //     const q = searchQuery.trim().toLowerCase();
 //     if (!q) {
 //       setSearchResults(null);
-//       // Don't clear searchQuery, so user keeps their text/cursor
 //       if (searchInputRef.current) {
 //         searchInputRef.current.focus();
 //       }
@@ -164,10 +173,18 @@
 //     }
 //   }, [searchQuery]);
 
-//   // Main blog listing card
-//   function BlogCard({ blog, category }) {
+//   // Disable all motion when searching
+//   const disableMotion = searchResults !== null || searchQuery !== "";
+
+//   const PageWrapper = disableMotion ? "div" : motion.div;
+//   const MainWrapper = disableMotion ? "div" : motion.div;
+//   const SidebarWrapper = disableMotion ? "div" : motion.div;
+//   const BlogCardWrapper = disableMotion ? "div" : motion.div;
+
+//   // Main blog listing card with conditional motion
+//   function BlogCard({ blog, category, index = 0 }) {
 //     return (
-//       <div
+//       <BlogCardWrapper
 //         className="flex bg-white rounded-lg shadow-lg overflow-hidden mb-10 cursor-pointer hover:shadow-xl transition"
 //         onClick={() => navigate(`/blogs/${blog.id}`)}
 //         tabIndex={0}
@@ -176,6 +193,13 @@
 //         }}
 //         role="button"
 //         aria-label={`Open blog post: ${blog.title}`}
+//         {...(!disableMotion && {
+//           initial: "hidden",
+//           animate: "visible",
+//           custom: index,
+//           variants: fadeUp,
+//           whileHover: { boxShadow: "0 8px 32px rgba(0,0,0,0.14)" },
+//         })}
 //       >
 //         <div className="w-[300px] min-w-[220px] h-[240px] overflow-hidden bg-gray-100 flex items-center">
 //           {blog.image && (
@@ -217,14 +241,21 @@
 //             </NavLink>
 //           </div>
 //         </div>
-//       </div>
+//       </BlogCardWrapper>
 //     );
 //   }
 
-//   // Sidebar UI
+//   // Sidebar UI with motion only when not searching
 //   function Sidebar() {
 //     return (
-//       <div className="flex flex-col gap-10 px-5 py-10 bg-white border border-gray-200 rounded-xl shadow-xl text-gray-900">
+//       <SidebarWrapper
+//         className="flex flex-col gap-10 px-5 py-10 bg-white border border-gray-200 rounded-xl shadow-xl text-gray-900"
+//         {...(!disableMotion && {
+//           initial: { x: 60, opacity: 0 },
+//           animate: { x: 0, opacity: 1 },
+//           transition: { duration: 0.7, type: "spring" },
+//         })}
+//       >
 //         {/* Search */}
 //         <div className="flex flex-col gap-3">
 //           <h2 className="font-semibold text-[1.2rem] text-orange-500">
@@ -239,7 +270,6 @@
 //               value={searchQuery}
 //               onChange={(e) => setSearchQuery(e.target.value)}
 //               onClick={() => {
-//                 // when clicking input, ensure cursor is set (default, but explicit here)
 //                 if (searchInputRef.current) {
 //                   const length = searchInputRef.current.value.length;
 //                   searchInputRef.current.setSelectionRange(length, length);
@@ -264,7 +294,6 @@
 //               </svg>
 //             </button>
 //           </form>
-//           {/* If searching, add a clear button */}
 //           {searchResults && (
 //             <button
 //               className="text-sm text-orange-500 mt-2 underline"
@@ -279,52 +308,85 @@
 //         <div>
 //           <h2 className="font-bold text-[1.5rem] mb-2">Recent Posts</h2>
 //           <div className="flex flex-col gap-3">
-//             {recentBlogs.map((b) => (
-//               <NavLink
-//                 key={b.id}
-//                 to={`/blogs/${b.id}`}
-//                 className="hover:text-orange-500 text-gray-800 border-b border-gray-200 py-1"
-//               >
-//                 {b.title}
-//               </NavLink>
-//             ))}
+//             {recentBlogs.map((b, i) => {
+//               const RecentWrapper = disableMotion ? "div" : motion.div;
+//               return (
+//                 <RecentWrapper
+//                   key={b.id}
+//                   {...(!disableMotion && {
+//                     initial: { opacity: 0, x: 12 },
+//                     animate: { opacity: 1, x: 0 },
+//                     transition: { delay: 0.1 + i * 0.07 },
+//                   })}
+//                 >
+//                   <NavLink
+//                     to={`/blogs/${b.id}`}
+//                     className="hover:text-orange-500 text-gray-800 border-b border-gray-200 py-1"
+//                   >
+//                     {b.title}
+//                   </NavLink>
+//                 </RecentWrapper>
+//               );
+//             })}
 //           </div>
 //         </div>
 //         {/* Categories */}
 //         <div>
 //           <h2 className="font-bold text-[1.5rem] mb-2">Categories</h2>
 //           <div className="flex flex-col gap-2">
-//             {categories.map((cat) => (
-//               <NavLink
-//                 to={`/blogs/category/${cat.id}`}
-//                 className="flex justify-between items-center hover:text-orange-500 text-gray-800"
-//                 key={cat.id}
-//               >
-//                 {cat.blog_category_name}
-//                 <span className="text-orange-500 font-bold">
-//                   {categoryCounts[cat.id] || 0}
-//                 </span>
-//               </NavLink>
-//             ))}
+//             {categories.map((cat, i) => {
+//               const CatWrapper = disableMotion ? "div" : motion.div;
+//               return (
+//                 <CatWrapper
+//                   key={cat.id}
+//                   {...(!disableMotion && {
+//                     initial: { opacity: 0, x: 18 },
+//                     animate: { opacity: 1, x: 0 },
+//                     transition: { delay: 0.15 + i * 0.06 },
+//                   })}
+//                 >
+//                   <NavLink
+//                     to={`/blogs/category/${cat.id}`}
+//                     className="flex justify-between items-center hover:text-orange-500 text-gray-800"
+//                   >
+//                     {cat.blog_category_name}
+//                     <span className="text-orange-500 font-bold">
+//                       {categoryCounts[cat.id] || 0}
+//                     </span>
+//                   </NavLink>
+//                 </CatWrapper>
+//               );
+//             })}
 //           </div>
 //         </div>
 //         {/* Archives */}
 //         <div>
 //           <h2 className="font-bold text-[1.5rem] mb-2">Archives</h2>
 //           <div className="flex flex-col gap-2">
-//             {archives.map((a) => (
-//               <NavLink
-//                 to={`/blogs/archive/${a.key}`}
-//                 className="flex justify-between hover:text-orange-500 text-gray-800"
-//                 key={a.key}
-//               >
-//                 {a.label}{" "}
-//                 <span className="text-orange-500 font-bold">{a.count}</span>
-//               </NavLink>
-//             ))}
+//             {archives.map((a, i) => {
+//               const ArchiveWrapper = disableMotion ? "div" : motion.div;
+//               return (
+//                 <ArchiveWrapper
+//                   key={a.key}
+//                   {...(!disableMotion && {
+//                     initial: { opacity: 0, x: 20 },
+//                     animate: { opacity: 1, x: 0 },
+//                     transition: { delay: 0.17 + i * 0.06 },
+//                   })}
+//                 >
+//                   <NavLink
+//                     to={`/blogs/archive/${a.key}`}
+//                     className="flex justify-between hover:text-orange-500 text-gray-800"
+//                   >
+//                     {a.label}{" "}
+//                     <span className="text-orange-500 font-bold">{a.count}</span>
+//                   </NavLink>
+//                 </ArchiveWrapper>
+//               );
+//             })}
 //           </div>
 //         </div>
-//       </div>
+//       </SidebarWrapper>
 //     );
 //   }
 
@@ -332,11 +394,25 @@
 //   let blogsToShow = searchResults ?? blogs;
 
 //   return (
-//     <div className="bg-gradient-to-b from-blue-50 to-white py-12">
+//     <PageWrapper
+//       className="bg-gradient-to-b from-blue-50 to-white py-12"
+//       {...(!disableMotion && {
+//         initial: { opacity: 0 },
+//         animate: { opacity: 1 },
+//         transition: { duration: 0.6 },
+//       })}
+//     >
 //       <div className="max-w-screen-xl mx-auto flex lg:flex-row flex-col gap-8">
 //         {/* Left: Blog Listing */}
-//         <div className="lg:w-2/3 w-full">
-//           <h1 className="text-3xl font-bold mb-8">
+//         <MainWrapper
+//           className="lg:w-2/3 w-full"
+//           {...(!disableMotion && {
+//             initial: { x: -60, opacity: 0 },
+//             animate: { x: 0, opacity: 1 },
+//             transition: { duration: 0.7, type: "spring" },
+//           })}
+//         >
+//           <div className="text-3xl font-bold mb-8">
 //             {searchResults !== null
 //               ? searchResults.length === 0
 //                 ? "No results found."
@@ -346,13 +422,13 @@
 //               : archiveMonth
 //               ? `Archive: ${categoryName}`
 //               : ""}
-//           </h1>
+//           </div>
 //           {blogsToShow.length === 0 ? (
 //             <div className="text-gray-500 p-12 text-center">
 //               No blog posts found.
 //             </div>
 //           ) : (
-//             blogsToShow.map((b) => (
+//             blogsToShow.map((b, i) => (
 //               <BlogCard
 //                 key={b.id}
 //                 blog={b}
@@ -360,28 +436,40 @@
 //                   categories.find((c) => c.id === b.blog_category_id)
 //                     ?.blog_category_name || ""
 //                 }
+//                 index={i}
 //               />
 //             ))
 //           )}
-//         </div>
-
+//         </MainWrapper>
 //         {/* Right: Sidebar */}
 //         <div className="lg:w-1/3 w-full">
 //           <Sidebar />
 //         </div>
 //       </div>
-//     </div>
+//     </PageWrapper>
 //   );
 // };
 
 // export default BlogCategoryArchiveList;
 
-/** */
+/* */
 
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams, NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
 import BE_URL from "../../../config";
+
+// ---- ADD THIS SLUGIFY FUNCTION AT THE TOP ----
+function slugify(title = "") {
+  return title
+    .toString()
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, "") // remove non-alphanumeric chars
+    .replace(/\s+/g, "-") // spaces to dashes
+    .replace(/-+/g, "-"); // collapse multiple dashes
+}
+// ----------------------------------------------
 
 function formatBlogDate(dateString) {
   if (!dateString) return "";
@@ -563,13 +651,14 @@ const BlogCategoryArchiveList = () => {
 
   // Main blog listing card with conditional motion
   function BlogCard({ blog, category, index = 0 }) {
+    const blogSlug = slugify(blog.title);
     return (
       <BlogCardWrapper
         className="flex bg-white rounded-lg shadow-lg overflow-hidden mb-10 cursor-pointer hover:shadow-xl transition"
-        onClick={() => navigate(`/blogs/${blog.id}`)}
+        onClick={() => navigate(`/blogs/${blogSlug}`)}
         tabIndex={0}
         onKeyDown={(e) => {
-          if (e.key === "Enter") navigate(`/blogs/${blog.id}`);
+          if (e.key === "Enter") navigate(`/blogs/${blogSlug}`);
         }}
         role="button"
         aria-label={`Open blog post: ${blog.title}`}
@@ -578,8 +667,7 @@ const BlogCategoryArchiveList = () => {
           animate: "visible",
           custom: index,
           variants: fadeUp,
-          whileHover: {  boxShadow: "0 8px 32px rgba(0,0,0,0.14)" },
-           
+          whileHover: { boxShadow: "0 8px 32px rgba(0,0,0,0.14)" },
         })}
       >
         <div className="w-[300px] min-w-[220px] h-[240px] overflow-hidden bg-gray-100 flex items-center">
@@ -614,7 +702,7 @@ const BlogCategoryArchiveList = () => {
           </div>
           <div>
             <NavLink
-              to={`/blogs/${blog.id}`}
+              to={`/blogs/${blogSlug}`}
               className="text-black font-semibold mt-2 inline-block hover:text-orange-500"
               onClick={(e) => e.stopPropagation()}
             >
@@ -691,6 +779,7 @@ const BlogCategoryArchiveList = () => {
           <div className="flex flex-col gap-3">
             {recentBlogs.map((b, i) => {
               const RecentWrapper = disableMotion ? "div" : motion.div;
+              const blogSlug = slugify(b.title);
               return (
                 <RecentWrapper
                   key={b.id}
@@ -701,7 +790,7 @@ const BlogCategoryArchiveList = () => {
                   })}
                 >
                   <NavLink
-                    to={`/blogs/${b.id}`}
+                    to={`/blogs/${blogSlug}`}
                     className="hover:text-orange-500 text-gray-800 border-b border-gray-200 py-1"
                   >
                     {b.title}
