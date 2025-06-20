@@ -20,7 +20,7 @@ export const Home = () => {
       <HomePageTestimonial />
       <HomePageSouInfo />
       <HomePageForm />
-      {/* <HomePageAchievements /> */}
+      <HomePageAchievements />
 
     </>
   );

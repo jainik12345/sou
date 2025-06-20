@@ -526,20 +526,20 @@ export const Footer = () => {
               Ashram Road - 380009
             </p>
             <a
-              href="https://wa.me/918347622244"
+              href="https://wa.me/917600230525"
               className="flex items-center text-gray-600 hover:text-orange-500 mb-2"
             >
               <i className="fa-solid fa-phone text-orange-400 mr-2"></i>
-              +91 8347622244
+              +91 7600230525
             </a>
             <a
-              href="https://mail.google.com/mail/?view=cm&fs=1&to=compassInfo@gmail.com"
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=bookings@thenarmadatentcity.com"
               className="flex text-[13px] lg:text-[16px] items-center text-gray-600 hover:text-orange-500 mb-2"
               target="_blank"
               rel="noopener noreferrer"
             >
               <i className="fa-solid fa-envelope text-orange-400 mr-2"></i>
-              compassInfo@gmail.com
+              bookings@thenarmadatentcity.com
             </a>
             <div className="flex gap-3 mt-3">
               <a

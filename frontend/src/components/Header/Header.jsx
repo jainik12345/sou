@@ -630,22 +630,22 @@ export const Header = () => {
               <ul className="flex flex-wrap gap-3 items-center">
                 <li>
                   <a
-                    href="https://wa.me/918347622244"
+                    href="https://wa.me/917600230525"
                     className="text-white font-semibold text-xs md:text-base flex items-center gap-1"
                   >
                     <i className="fa-solid fa-phone text-white"></i>
-                    +918347622244
+                    +917600230525
                   </a>
                 </li>
                 <li>
                   <a
-                    href="https://mail.google.com/mail/?view=cm&fs=1&to=compassInfo@gmail.com"
+                    href="https://mail.google.com/mail/?view=cm&fs=1&to=bookings@thenarmadatentcity.com"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-white font-semibold text-xs md:text-base flex items-center gap-1"
                   >
                     <i className="fa-solid fa-envelope text-white"></i>
-                    compassInfo@gmail.com
+                    bookings@thenarmadatentcity.com
                   </a>
                 </li>
                 <li>
@@ -996,18 +996,18 @@ export const Header = () => {
             {/* Mobile contact/social section */}
             <div className="border-t px-4 py-4 flex flex-col gap-2">
               <a
-                href="https://wa.me/918347622244"
+                href="https://wa.me/917600230525"
                 className="flex items-center gap-2 text-orange-color font-semibold text-sm"
               >
-                <i className="fa-solid fa-phone"></i> +918347622244
+                <i className="fa-solid fa-phone"></i> +917600230525
               </a>
               <a
-                href="https://mail.google.com/mail/?view=cm&fs=1&to=booking@aalpine.in"
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=bookings@thenarmadatentcity.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-orange-color font-semibold text-sm"
               >
-                <i className="fa-solid fa-envelope"></i> booking@aalpine.in
+                <i className="fa-solid fa-envelope"></i>bookings@thenarmadatentcity.com
               </a>
               <div className="flex gap-3 mt-1">
                 <a
